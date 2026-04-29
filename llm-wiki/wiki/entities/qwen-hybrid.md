@@ -1,0 +1,29 @@
+---
+tags: [model, local, ollama]
+updated: 2026-04-20
+sources: [local-setup]
+---
+# Qwen (Hybrid)
+
+> Модель Qwen-2.5, доступная как локально (Ollama), так и через облако (OpenRouter).
+
+## Конфигурация
+- **Локально**: MCP-сервер `@modelcontextprotocol/server-ollama`
+- **Облако**: MCP-сервер `openrouter` (настроен на DashScope Intl)
+- **Модель**: `qwen2.5`, `qwen3.6`
+
+## Преимущества перехода
+1. **Приватность**: Данные не покидают компьютер (при использовании Ollama).
+2. **Гибкость**: Использование официального API Alibaba DashScope для доступа к новейшим моделям (Qwen 3.6).
+3. **Безопасность**: Успешно обновлен официальный API-ключ (20.04.2026).
+
+## Как использовать в Antigravity
+1. **Для локальной работы**: запустить Ollama и выбрать модель.
+2. **Для облачной работы**: использовать MCP сервер `openrouter` (перенастроен на DashScope).
+
+## Связанные страницы
+- [[entities/alibaba-dashscope-official-qwen-api|entities/dashscope]] — Официальный провайдер.
+- [[entities/instrumenty|entities/tools]] — Общий список
+
+### Планы развития
+- Тестирование локальной Llama-3 для сравнения производительности.

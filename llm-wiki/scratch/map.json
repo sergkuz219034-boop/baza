@@ -1,0 +1,356 @@
+[
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\architecture.md",
+    "old_rel": "concepts/architecture.md",
+    "title": "🏗️ Архитектура LLM Wiki",
+    "new_rel": "concepts/arkhitektura-llm-wiki.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\compaction.md",
+    "old_rel": "concepts/compaction.md",
+    "title": "🗜️ Компакция — управление ростом wiki",
+    "new_rel": "concepts/kompaktsiya-upravlenie-rostom-wiki.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\double-monetization.md",
+    "old_rel": "concepts/double-monetization.md",
+    "title": "💰 Двойная монетизация в HR-арбитраже",
+    "new_rel": "concepts/dvoynaya-monetizatsiya-v-hr-arbitrazhe.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\humanizing-ai-text.md",
+    "old_rel": "concepts/humanizing-ai-text.md",
+    "title": "✍️ Гуманизация ИИ-текстов",
+    "new_rel": "concepts/gumanizatsiya-ii-tekstov.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\indexing.md",
+    "old_rel": "concepts/indexing.md",
+    "title": "🗂️ Индексирование и логирование",
+    "new_rel": "concepts/indeksirovanie-i-logirovanie.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\operations.md",
+    "old_rel": "concepts/operations.md",
+    "title": "⚙️ Операции",
+    "new_rel": "concepts/operatsii.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\rabota-ru-rules.md",
+    "old_rel": "concepts/rabota-ru-rules.md",
+    "title": "📚 Правила Работа.ру: Как создавать вакансии и избегать блокировок",
+    "new_rel": "concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\tilda-bypass.md",
+    "old_rel": "concepts/tilda-bypass.md",
+    "title": "🛡️ Технический протокол обхода модерации",
+    "new_rel": "concepts/tekhnicheskiy-protokol-obkhoda-moderatsii.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\vacancy-creation-rules.md",
+    "old_rel": "concepts/vacancy-creation-rules.md",
+    "title": "📝 Правила написания уникальных вакансий",
+    "new_rel": "concepts/pravila-napisaniya-unikalnykh-vakansiy.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\why-it-works.md",
+    "old_rel": "concepts/why-it-works.md",
+    "title": "🧠 Почему это работает",
+    "new_rel": "concepts/pochemu-eto-rabotaet.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\интенсивность-рынка.md",
+    "old_rel": "concepts/интенсивность-рынка.md",
+    "title": "Интенсивность рынка (Market Sophistication)",
+    "new_rel": "concepts/intensivnost-rynka-market-sophistication.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\инфостиль.md",
+    "old_rel": "concepts/инфостиль.md",
+    "title": "Инфостиль",
+    "new_rel": "concepts/infostil.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\канцелярит.md",
+    "old_rel": "concepts/канцелярит.md",
+    "title": "Канцелярит",
+    "new_rel": "concepts/kantselyarit.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\меритократия-идей.md",
+    "old_rel": "concepts/меритократия-идей.md",
+    "title": "Меритократия идей (Idea Meritocracy)",
+    "new_rel": "concepts/meritokratiya-idey-idea-meritocracy.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\призыв-к-действию.md",
+    "old_rel": "concepts/призыв-к-действию.md",
+    "title": "Призыв к действию (CTA)",
+    "new_rel": "concepts/prizyv-k-deystviyu-cta.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\продающий-заголовок.md",
+    "old_rel": "concepts/продающий-заголовок.md",
+    "title": "Продающий заголовок",
+    "new_rel": "concepts/prodayushchiy-zagolovok.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\сильные-глаголы.md",
+    "old_rel": "concepts/сильные-глаголы.md",
+    "title": "Сильные глаголы",
+    "new_rel": "concepts/silnye-glagoly.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\уровни-осведомленности.md",
+    "old_rel": "concepts/уровни-осведомленности.md",
+    "title": "Уровни осведомленности (Awareness Levels)",
+    "new_rel": "concepts/urovni-osvedomlennosti-awareness-levels.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\фактоид.md",
+    "old_rel": "concepts/фактоид.md",
+    "title": "Фактоид",
+    "new_rel": "concepts/faktoid.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\штампы.md",
+    "old_rel": "concepts/штампы.md",
+    "title": "Штампы",
+    "new_rel": "concepts/shtampy.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\элементы-сильного-текста.md",
+    "old_rel": "concepts/элементы-сильного-текста.md",
+    "title": "Элементы сильного текста",
+    "new_rel": "concepts/elementy-silnogo-teksta.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\concepts\\язык-выгоды.md",
+    "old_rel": "concepts/язык-выгоды.md",
+    "title": "Язык выгоды",
+    "new_rel": "concepts/yazyk-vygody.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\dashscope.md",
+    "old_rel": "entities/dashscope.md",
+    "title": "Alibaba DashScope (Official Qwen API)",
+    "new_rel": "entities/alibaba-dashscope-official-qwen-api.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\karpathy.md",
+    "old_rel": "entities/karpathy.md",
+    "title": "👤 Andrej Karpathy",
+    "new_rel": "entities/andrej-karpathy.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\obsidian.md",
+    "old_rel": "entities/obsidian.md",
+    "title": "🪨 Obsidian",
+    "new_rel": "entities/obsidian.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\qwen.md",
+    "old_rel": "entities/qwen.md",
+    "title": "Qwen (Hybrid)",
+    "new_rel": "entities/qwen-hybrid.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\tools.md",
+    "old_rel": "entities/tools.md",
+    "title": "🛠️ Инструменты",
+    "new_rel": "entities/instrumenty.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\entities\\vladimir-surgay.md",
+    "old_rel": "entities/vladimir-surgay.md",
+    "title": "👤 Владимир Сургай",
+    "new_rel": "entities/vladimir-surgay.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\antidetect-guides-synthesis.md",
+    "old_rel": "sources/antidetect-guides-synthesis.md",
+    "title": "Антидетект-браузеры: Технический синтез",
+    "new_rel": "sources/antidetekt-brauzery-tekhnicheskiy-sintez.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\classifieds-recruitment.md",
+    "old_rel": "sources/classifieds-recruitment.md",
+    "title": "📄 Источник: Classifieds Recruitment Playbook",
+    "new_rel": "sources/istochnik-classifieds-recruitment-playbook.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\dmitry-kot-copywriting.md",
+    "old_rel": "sources/dmitry-kot-copywriting.md",
+    "title": "Копирайтинг: как не съесть собаку (Дмитрий Кот)",
+    "new_rel": "sources/kopirayting-kak-ne-sest-sobaku-dmitriy-kot.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\eugene-schwartz-breakthrough-advertising.md",
+    "old_rel": "sources/eugene-schwartz-breakthrough-advertising.md",
+    "title": "Breakthrough Advertising (Eugene Schwartz)",
+    "new_rel": "sources/breakthrough-advertising-eugene-schwartz.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\hr-arbitrage-playbook.md",
+    "old_rel": "sources/hr-arbitrage-playbook.md",
+    "title": "📄 Источник: HR Arbitrage Playbook",
+    "new_rel": "sources/istochnik-hr-arbitrage-playbook.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\hr-traffic-architecture.md",
+    "old_rel": "sources/hr-traffic-architecture.md",
+    "title": "📄 Источник: HR Traffic Playbook 2.0",
+    "new_rel": "sources/istochnik-hr-traffic-playbook-20.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\karpathy-llm-wiki.md",
+    "old_rel": "sources/karpathy-llm-wiki.md",
+    "title": "📄 Источник: llm-wiki.md (Karpathy gist)",
+    "new_rel": "sources/istochnik-llm-wikimd-karpathy-gist.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\kornei-chukovsky-alive-as-life.md",
+    "old_rel": "sources/kornei-chukovsky-alive-as-life.md",
+    "title": "Живой как жизнь (Корней Чуковский)",
+    "new_rel": "sources/zhivoy-kak-zhizn-korney-chukovskiy.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\maxim-ilyahov-write-cut.md",
+    "old_rel": "sources/maxim-ilyahov-write-cut.md",
+    "title": "Пиши, сокращай (Максим Ильяхов)",
+    "new_rel": "sources/pishi-sokrashchay-maksim-ilyakhov.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\otdelka_plus_vacancy.md",
+    "old_rel": "sources/otdelka_plus_vacancy.md",
+    "title": "Оффер: Отделка+ (Мастера по ремонту)",
+    "new_rel": "sources/offer-otdelka-mastera-po-remontu.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\ray-dalio-principles.md",
+    "old_rel": "sources/ray-dalio-principles.md",
+    "title": "Принципы (Рэй Далио)",
+    "new_rel": "sources/printsipy-rey-dalio.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\roy-clark-50-writing-tools.md",
+    "old_rel": "sources/roy-clark-50-writing-tools.md",
+    "title": "50 приемов письма (Рой Питер Кларк)",
+    "new_rel": "sources/50-priemov-pisma-roy-piter-klark.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\surgay-anti-palevo.md",
+    "old_rel": "sources/surgay-anti-palevo.md",
+    "title": "📄 Источник: АНТИ-ПАЛЕВО (9 правил редактуры)",
+    "new_rel": "sources/istochnik-anti-palevo-9-pravil-redaktury.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-driver-expeditor.md",
+    "old_rel": "sources/vacancy-driver-expeditor.md",
+    "title": "📋 Вакансия: Водитель-экспедитор (финальная версия)",
+    "new_rel": "sources/vakansiya-voditel-ekspeditor-finalnaya-versiya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-finishing-worker-final.md",
+    "old_rel": "sources/vacancy-finishing-worker-final.md",
+    "title": "📋 Вакансия: Мастер по ремонту (финальная версия)",
+    "new_rel": "sources/vakansiya-master-po-remontu-finalnaya-versiya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-finishing-worker-v2.md",
+    "old_rel": "sources/vacancy-finishing-worker-v2.md",
+    "title": "📋 Вакансия: Отделочник / мастер-универсал (v2, финальная)",
+    "new_rel": "sources/vakansiya-otdelochnik-master-universal-v2-finalnaya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-finishing-worker.md",
+    "old_rel": "sources/vacancy-finishing-worker.md",
+    "title": "📋 Вакансия: Отделочник / мастер-универсал (финальная версия)",
+    "new_rel": "sources/vakansiya-otdelochnik-master-universal-finalnaya-versiya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-marketing-assistant.md",
+    "old_rel": "sources/vacancy-marketing-assistant.md",
+    "title": "📋 Вакансия: Начинающий маркетолог (финальная версия)",
+    "new_rel": "sources/vakansiya-nachinayushchiy-marketolog-finalnaya-versiya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-ozon-warehouse.md",
+    "old_rel": "sources/vacancy-ozon-warehouse.md",
+    "title": "Вакансия: Сотрудник склада (Ozon) — Оптимизированная версия",
+    "new_rel": "sources/vakansiya-sotrudnik-sklada-ozon-optimizirovannaya-versiya.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-picker-lavka.md",
+    "old_rel": "sources/vacancy-picker-lavka.md",
+    "title": "Вакансия: Сборщик заказов (Яндекс Лавка) [SAFE]",
+    "new_rel": "sources/vakansiya-sborshchik-zakazov-yandeks-lavka-safe.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-vkusvill-picker-v2.md",
+    "old_rel": "sources/vacancy-vkusvill-picker-v2.md",
+    "title": "Вакансия: Комплектовщик заказов (ВкусВилл) [Вариант 2 — SAFE]",
+    "new_rel": "sources/vakansiya-komplektovshchik-zakazov-vkusvill-variant-2-safe.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-vkusvill-picker.md",
+    "old_rel": "sources/vacancy-vkusvill-picker.md",
+    "title": "Вакансия: Сборщик заказов (ВкусВилл) [SAFE]",
+    "new_rel": "sources/vakansiya-sborshchik-zakazov-vkusvill-safe.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vacancy-yandex-auto-courier.md",
+    "old_rel": "sources/vacancy-yandex-auto-courier.md",
+    "title": "Вакансия: Водитель-курьер (Яндекс Еда, на личном авто) [SAFE]",
+    "new_rel": "sources/vakansiya-voditel-kurer-yandeks-eda-na-lichnom-avto-safe.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\vkusvill-picker-source.md",
+    "old_rel": "sources/vkusvill-picker-source.md",
+    "title": "Оффер: Сборщик заказов ВкусВилл",
+    "new_rel": "sources/offer-sborshchik-zakazov-vkusvill.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\sources\\yandex-food-car-courier.md",
+    "old_rel": "sources/yandex-food-car-courier.md",
+    "title": "Оффер: Автокурьер Яндекс Еда",
+    "new_rel": "sources/offer-avtokurer-yandeks-eda.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\ai-detection-deep-dive.md",
+    "old_rel": "synthesis/ai-detection-deep-dive.md",
+    "title": "🕵️ Глубокий разбор анти-детекции и ИИ-привычек",
+    "new_rel": "synthesis/glubokiy-razbor-anti-detektsii-i-ii-privychek.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\hr-arbitrage-system.md",
+    "old_rel": "synthesis/hr-arbitrage-system.md",
+    "title": "🏗️ Архитектура HR-арбитража: полная система",
+    "new_rel": "synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\index.md",
+    "old_rel": "synthesis/index.md",
+    "title": "🔬 Synthesis",
+    "new_rel": "synthesis/synthesis.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\job-boards-comparison.md",
+    "old_rel": "synthesis/job-boards-comparison.md",
+    "title": "📊 Сравнение площадок для HR-арбитража",
+    "new_rel": "synthesis/sravnenie-ploshchadok-dlya-hr-arbitrazha.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\standard-of-quality-vacancies.md",
+    "old_rel": "synthesis/standard-of-quality-vacancies.md",
+    "title": "Единый стандарт качества вакансий (SOP)",
+    "new_rel": "synthesis/edinyy-standart-kachestva-vakansiy-sop.md"
+  },
+  {
+    "old_abs": "c:\\Users\\Admin\\.gemini\\antigravity\\scratch\\llm-wiki\\wiki\\synthesis\\vacancy-writing-checklist.md",
+    "old_rel": "synthesis/vacancy-writing-checklist.md",
+    "title": "✅ SOP-чек-лист: Написание вакансии с нуля",
+    "new_rel": "synthesis/sop-chek-list-napisanie-vakansii-s-nulya.md"
+  }
+]

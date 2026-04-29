@@ -1,0 +1,9 @@
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+.obsidian/appearance.json
+.obsidian/core-plugins-migration.json
+*.tmp
+.DS_Store
+node_modules/
+.gemini/
