@@ -3,6 +3,8 @@
 .obsidian/graph.json
 .obsidian/appearance.json
 .obsidian/core-plugins-migration.json
+.stfolder/
+.trash/
 *.tmp
 .DS_Store
 node_modules/
