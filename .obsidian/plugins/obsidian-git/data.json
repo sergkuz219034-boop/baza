@@ -1,0 +1,12 @@
+{
+  "basePath": "",
+  "gitPath": "C:\\Program Files\\Git\\cmd\\git.exe",
+  "autoPullOnBoot": true,
+  "pullBeforePush": true,
+  "showStatusBar": true,
+  "showBranchStatusBar": true,
+  "refreshSourceControl": true,
+  "refreshSourceControlTimer": 7000,
+  "disablePush": false,
+  "syncMethod": "merge"
+}
