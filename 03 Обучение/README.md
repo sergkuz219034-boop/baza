@@ -10,3 +10,10 @@
 Правило:
 
 - если заметка нужна для роста компетенций, клади её сюда
+
+Что здесь уже лежит:
+
+- `Copywriting_Tips.md`
+- `Recruitment_Lessons.md`
+- `Management_Lessons.md`
+- `llm-wiki/`

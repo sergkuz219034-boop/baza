@@ -10,3 +10,13 @@
 Правило:
 
 - это не архив и не обучение, а рабочая библиотека вакансий
+
+Что здесь уже лежит:
+
+- `Vacancy_Matrix.md`
+- `Vacancy_Template.md`
+- `Job_Posting/`
+- `Offers/`
+- `Requirements/`
+- `Platform_Rules/`
+- `Imported_Documents/`

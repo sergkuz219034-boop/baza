@@ -1,5 +1,7 @@
 # Миграция базы ChatTG в единый vault
 
+> Обновление 2026-06-15: текущая активная структура базы больше не использует пути `01_Operations`, `03_Management`, `tasks` и `Wiki` в корне. Эти старые корни перенесены в `08 Архив/Legacy`, а рабочие материалы разложены по `02 Работа`, `06 План`, `07 Диалоги` и `99 Вакансии`.
+
 > **Дата**: 2026-04-27
 > **Статус**: Завершено
 > **Источник**: `C:\Users\Арт\Desktop\ChatTG`
@@ -17,13 +19,13 @@
 - Файл `ChatTG\Audit_Results.md` уже представлен в `Vakansi\03_Management\Audit_Results.md`.
 
 ## Карта соответствий
-- `ChatTG\Active_Chats` -> `[[01_Operations/Active_Chats/]]`
-- `ChatTG\Knowledge_Base\Scripts.md` -> `[[01_Operations/Knowledge_Base/Scripts]]`
-- `ChatTG\Knowledge_Base\Objections.md` -> `[[01_Operations/Knowledge_Base/Objections]]`
-- `ChatTG\Templates\Chat_Template.md` -> `[[99_System/Templates/Chat_Template]]`
-- `ChatTG\Audit_Results.md` -> `[[03_Management/Audit_Results]]`
-- `ChatTG\karina` -> `[[01_Operations/Exports/karina/export_results]]`
-- `ChatTG\Kristina` -> `[[01_Operations/Exports/Kristina/export_results]]`
+- `ChatTG\Active_Chats` -> `[[07 Диалоги/Active_Chats/Example_Candidate_01]]`
+- `ChatTG\Knowledge_Base\Scripts.md` -> `[[02 Работа/Knowledge_Base/Scripts]]`
+- `ChatTG\Knowledge_Base\Objections.md` -> `[[02 Работа/Knowledge_Base/Objections]]`
+- `ChatTG\Templates\Chat_Template.md` -> `[[07 Диалоги/Chat_Template]]`
+- `ChatTG\Audit_Results.md` -> `[[02 Работа/Audit_Results]]`
+- `ChatTG\karina` -> `[[08 Архив/Экспорты/ChatTG_karina]]`
+- `ChatTG\Kristina` -> `[[08 Архив/Экспорты/ChatTG_Kristina]]`
 
 ## Что оставлено за пределами миграции
 - `.obsidian` из `ChatTG` не переносится: рабочей конфигурацией vault остается `.obsidian` из `Vakansi`.

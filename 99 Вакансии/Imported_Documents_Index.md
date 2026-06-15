@@ -8,20 +8,20 @@ updated: 2026-06-08
 
 Эта заметка собирает внешние `.docx`, которые были добавлены в vault как источники для дальнейшей переработки.
 
-Важно: это именно импорт сырья. Внутри есть полезные офферы, заготовки и промпты, но часть фраз конфликтует с текущими правилами базы и модерации площадок. Перед переносом в рабочие вакансии сверяйтесь с [[Wiki/Platform_Rules/Rules_Index|Rules_Index]], [[Wiki/Offers/Offers_Index|Offers_Index]] и [[Wiki/Tips/Copywriting_Tips|Copywriting_Tips]].
+Важно: это именно импорт сырья. Внутри есть полезные офферы, заготовки и промпты, но часть фраз конфликтует с текущими правилами базы и модерации площадок. Перед переносом в рабочие вакансии сверяйтесь с [[99 Вакансии/Platform_Rules/Rules_Index|Rules_Index]], [[99 Вакансии/Offers/Offers_Index|Offers_Index]] и [[03 Обучение/Copywriting_Tips|Copywriting_Tips]].
 
 ## Что импортировано
 
-1. [[Wiki/Playbooks/Imported_Documents/Vacancies_Artem_Import|Вакансии (АРТЕМ)]]
+1. [[99 Вакансии/Imported_Documents/Vacancies_Artem_Import|Вакансии (АРТЕМ)]]
 - Большой архив текстов вакансий и черновиков.
 - По первым разделам видны офферы для удаленной поддержки, продуктового ритейла, доставки, зооритейла, сборки заказов, склада и монтажа.
 - В документе встречаются дубли и повторяющиеся версии одной и той же вакансии.
 
-2. [[Wiki/Playbooks/Imported_Documents/Vacancies_SerKuz_Import|Вакансии (Сер Куз)]]
+2. [[99 Вакансии/Imported_Documents/Vacancies_SerKuz_Import|Вакансии (Сер Куз)]]
 - Компактный набор вакансий и блоков для доставки и розницы.
 - Есть отдельные структурированные блоки по курьерке и администратору магазина.
 
-3. [[Wiki/Playbooks/Imported_Documents/Gem_Bot_Prompt_Import|Промт Gem-бота + объявления (общее)]]
+3. [[99 Вакансии/Imported_Documents/Gem_Bot_Prompt_Import|Промт Gem-бота + объявления (общее)]]
 - Мастер-промпт, антибан-заметки, SEO-подходы, режим генерации и режим аудита.
 - Полезен как источник идей по структуре и проверкам, но не как прямой стандарт без фильтрации.
 
@@ -43,4 +43,4 @@ updated: 2026-06-08
 
 1. Берите идеи и фактуру из импортов.
 2. Сверяйте каждую формулировку с текущими стандартами базы.
-3. Только после этого переносите материал в рабочие заметки в [[Wiki/Job_Posting|Job_Posting]], [[Wiki/Offers/Offers_Index|Offers_Index]] или [[Wiki/Requirements/Requirements_Index|Requirements_Index]].
+3. Только после этого переносите материал в рабочие заметки в [[99 Вакансии/Job_Posting|Job_Posting]], [[99 Вакансии/Offers/Offers_Index|Offers_Index]] или [[99 Вакансии/Requirements/Requirements_Index|Requirements_Index]].
