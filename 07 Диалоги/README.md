@@ -13,7 +13,7 @@
 
 Что здесь уже лежит:
 
-- `Active_Chats/`
-- `Dialogues/`
-- `Victoria/`
+- `Активные чаты/`
+- `Диалоги/`
+- `Виктория/`
 - `Chat_Template.md`

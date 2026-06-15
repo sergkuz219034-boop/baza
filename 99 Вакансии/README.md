@@ -15,8 +15,8 @@
 
 - `Vacancy_Matrix.md`
 - `Vacancy_Template.md`
-- `Job_Posting/`
-- `Offers/`
-- `Requirements/`
-- `Platform_Rules/`
-- `Imported_Documents/`
+- `Тексты вакансий/`
+- `Офферы/`
+- `Требования/`
+- `Правила площадок/`
+- `Импортированные документы/`

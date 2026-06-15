@@ -16,4 +16,4 @@
 - `Copywriting_Tips.md`
 - `Recruitment_Lessons.md`
 - `Management_Lessons.md`
-- `llm-wiki/`
+- `ЛЛМ и тексты/`
