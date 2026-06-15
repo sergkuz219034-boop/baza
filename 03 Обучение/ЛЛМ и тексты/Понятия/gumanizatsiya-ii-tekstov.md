@@ -74,8 +74,9 @@ sources: [surgay-anti-palevo.md, hr-traffic-architecture.md]
 
 ## Связанные страницы
 
-- [[sources/istochnik-anti-palevo-9-pravil-redaktury|Источник: АНТИ-ПАЛЕВО (9 правил редактуры)]]
-- [[sources/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0 (Content Factory)]]
-- [[concepts/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
-- [[entities/vladimir-surgay|Владимир Сургай — автор методики]]
-- [[concepts/operatsii|Операции: Ingest (как я это обработал)]]
+- [[Источники/istochnik-anti-palevo-9-pravil-redaktury|Источник: АНТИ-ПАЛЕВО (9 правил редактуры)]]
+- [[Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0 (Content Factory)]]
+- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
+- [[Сущности/vladimir-surgay|Владимир Сургай — автор методики]]
+- [[Понятия/operatsii|Операции: Ingest (как я это обработал)]]
+

@@ -16,4 +16,4 @@
 - `Copywriting_Tips.md`
 - `Recruitment_Lessons.md`
 - `Management_Lessons.md`
-- `ЛЛМ и тексты/`
+- `ЛЛМ и тексты/` — отдельный учебный блок по текстам, источникам и шаблонам мышления

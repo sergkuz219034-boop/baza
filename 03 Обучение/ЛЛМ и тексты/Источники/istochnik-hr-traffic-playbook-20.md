@@ -4,7 +4,7 @@ type: source
 tags: [source, hr, traffic, content-factory, surgay]
 created: 2026-04-16
 updated: 2026-04-16
-url: "raw/HR_Traffic_Playbook_2.0.pdf"
+url: "Сырье/HR_Traffic_Playbook_2.0.pdf"
 ---
 
 # 📄 Источник: HR Traffic Playbook 2.0
@@ -60,7 +60,8 @@ Sell-out = страховка. Когда CPA-сделка срывается, �
 
 ## Связанные страницы
 
-- [[concepts/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
-- [[concepts/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов (уникализация)]]
-- [[sources/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов (уникализация)]]
+- [[Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+

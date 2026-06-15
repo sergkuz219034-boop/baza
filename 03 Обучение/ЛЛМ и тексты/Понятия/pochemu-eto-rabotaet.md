@@ -92,6 +92,7 @@ Wiki — **компаундирующий актив**. Чем больше вл
 
 ## Связанные страницы
 
-- [[concepts/arkhitektura-llm-wiki|Архитектура: три слоя]]
-- [[concepts/operatsii|Операции: Ingest, Query, Lint]]
-- [[entities/andrej-karpathy|Andrej Karpathy — автор метода]]
+- [[Понятия/arkhitektura-llm-wiki|Архитектура: три слоя]]
+- [[Понятия/operatsii|Операции: Ingest, Query, Lint]]
+- [[Сущности/andrej-karpathy|Andrej Karpathy — автор метода]]
+

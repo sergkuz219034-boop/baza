@@ -29,7 +29,7 @@ sources: [karpathy-llm-wiki.md]
 2. При ingest — добавляет новые страницы в нужную категорию
 3. При lint — проверяет на orphan-страницы
 
-**Масштабируемость**: работает без embedding-based RAG до ~100 источников и ~сотен страниц. При росте — добавь [[entities/instrumenty|qmd]] для полнотекстового поиска.
+**Масштабируемость**: работает без embedding-based RAG до ~100 источников и ~сотен страниц. При росте — добавь [[Сущности/instrumenty|qmd]] для полнотекстового поиска.
 
 **Лимит**: ~200 строк. При превышении — группируй и сжимай.
 
@@ -98,6 +98,7 @@ grep "^## \[" log.md | grep "ingest"
 
 ## Связанные страницы
 
-- [[concepts/operatsii|Операции: Ingest, Query, Lint]]
-- [[concepts/kompaktsiya-upravlenie-rostom-wiki|Компакция wiki]]
-- [[entities/instrumenty|Инструменты: qmd для поиска]]
+- [[Понятия/operatsii|Операции: Ingest, Query, Lint]]
+- [[Понятия/kompaktsiya-upravlenie-rostom-wiki|Компакция wiki]]
+- [[Сущности/instrumenty|Инструменты: qmd для поиска]]
+

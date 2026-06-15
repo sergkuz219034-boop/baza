@@ -4,7 +4,7 @@ type: concept
 tags: [concept, hr, anti-fraud, moderation, technical]
 created: 2026-04-16
 updated: 2026-04-16
-sources: [sources/classifieds-recruitment.md, sources/hr-traffic-architecture.md]
+sources: [Источники/classifieds-recruitment.md, Источники/hr-traffic-architecture.md]
 ---
 
 # 🛡️ Технический протокол обхода модерации
@@ -67,7 +67,8 @@ sources: [sources/classifieds-recruitment.md, sources/hr-traffic-architecture.md
 
 ## Связанные страницы
 
-- [[sources/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
-- [[sources/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
-- [[concepts/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов (уникализация объявлений)]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
+- [[Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов (уникализация объявлений)]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+

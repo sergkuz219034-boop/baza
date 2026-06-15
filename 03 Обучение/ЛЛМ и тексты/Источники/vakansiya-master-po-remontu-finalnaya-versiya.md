@@ -74,7 +74,8 @@ version: 3
 
 ## Связанные страницы
 
-- [[sources/vakansiya-otdelochnik-master-universal-finalnaya-versiya|v1 (черновик)]]
-- [[sources/vakansiya-otdelochnik-master-universal-v2-finalnaya|v2 (расширенная)]]
-- [[standards/compliance-rules|Правила написания вакансий]]
-- [[sources/offer-otdelka-mastera-po-remontu|Оффер: Отделка+]]
+- [[Источники/vakansiya-otdelochnik-master-universal-finalnaya-versiya|v1 (черновик)]]
+- [[Источники/vakansiya-otdelochnik-master-universal-v2-finalnaya|v2 (расширенная)]]
+- [[Стандарты/compliance-rules|Правила написания вакансий]]
+- [[Источники/offer-otdelka-mastera-po-remontu|Оффер: Отделка+]]
+

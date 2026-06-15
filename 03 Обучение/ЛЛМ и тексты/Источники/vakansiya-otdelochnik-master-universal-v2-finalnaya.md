@@ -65,6 +65,7 @@ version: 2
 
 ## Связанные страницы
 
-- [[sources/vakansiya-otdelochnik-master-universal-finalnaya-versiya|Вакансия отделочника v1 (черновик)]]
-- [[standards/compliance-rules|Правила написания уникальных вакансий]]
-- [[sources/offer-otdelka-mastera-po-remontu|Оффер: Отделка+ (параметры лида)]]
+- [[Источники/vakansiya-otdelochnik-master-universal-finalnaya-versiya|Вакансия отделочника v1 (черновик)]]
+- [[Стандарты/compliance-rules|Правила написания уникальных вакансий]]
+- [[Источники/offer-otdelka-mastera-po-remontu|Оффер: Отделка+ (параметры лида)]]
+

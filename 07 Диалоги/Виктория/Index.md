@@ -1,6 +1,6 @@
 # Виктория - база знаний
 
-[🏠 На главную]([[..\Index]]) | [[Victoria_Rules]] | [[Vacancies]] | [[Links]] | [[Reply_Flow]]
+[[Index|На главную]] | [[Victoria_Rules|Правила]] | [[Vacancies|Вакансии]] | [[Links|Ссылки]] | [[Reply_Flow|Сценарий ответа]]
 
 Это рабочая база для Виктории в Telegram. Здесь собраны:
 

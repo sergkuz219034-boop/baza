@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, vkusvill, picker, safe, variant-2, rabota-ru]
 updated: 2026-04-21
-sources: [wiki/sources/vkusvill-picker-source.md, wiki/synthesis/vacancy-writing-checklist.md, wiki/concepts/vacancy-creation-rules.md]
+sources: [Источники/vkusvill-picker-source.md, Синтез/vacancy-writing-checklist.md, Понятия/vacancy-creation-rules.md]
 ---
 # Вакансия: Комплектовщик заказов (ВкусВилл) [Вариант 2 — SAFE]
 
@@ -51,6 +51,7 @@ sources: [wiki/sources/vkusvill-picker-source.md, wiki/synthesis/vacancy-writing
 ---
 
 ## Связанные страницы
-- [[standards/generator-sop|Мастер-чек-лист]]
-- [[sources/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
-- [[sources/vakansiya-sborshchik-zakazov-vkusvill-safe|Вариант 1 (Сборщик)]]
+- [[Стандарты/generator-sop|Мастер-чек-лист]]
+- [[Источники/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
+- [[Источники/vakansiya-sborshchik-zakazov-vkusvill-safe|Вариант 1 (Сборщик)]]
+

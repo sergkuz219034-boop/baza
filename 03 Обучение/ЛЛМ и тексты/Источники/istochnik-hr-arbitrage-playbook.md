@@ -4,7 +4,7 @@ type: source
 tags: [source, hr, arbitrage, monetization, surgay]
 created: 2026-04-16
 updated: 2026-04-16
-url: "raw/HR_Arbitrage_Playbook.pdf"
+url: "Сырье/HR_Arbitrage_Playbook.pdf"
 ---
 
 # 📄 Источник: HR Arbitrage Playbook
@@ -69,7 +69,8 @@ WhatsApp/Telegram-бот → авто-прогрев
 
 ## Связанные страницы
 
-- [[concepts/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
-- [[sources/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
-- [[entities/vladimir-surgay|Владимир Сургай]]
+- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
+- [[Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[Сущности/vladimir-surgay|Владимир Сургай]]
+

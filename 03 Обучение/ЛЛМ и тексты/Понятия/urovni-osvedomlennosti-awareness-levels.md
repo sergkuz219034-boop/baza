@@ -1,7 +1,7 @@
 ---
 tags: [marketing, psychology, strategy]
 updated: 2026-04-20
-sources: [wiki/sources/eugene-schwartz-breakthrough-advertising.md]
+sources: [Источники/eugene-schwartz-breakthrough-advertising.md]
 ---
 # Уровни осведомленности (Awareness Levels)
 
@@ -12,7 +12,7 @@ sources: [wiki/sources/eugene-schwartz-breakthrough-advertising.md]
 1.  **Самый осведомленный (Most Aware):** Знает вашу компанию и ждет момента откликнуться. 
     *   *Текст:* Скидка, бонус, «мы открыли вакансию, на которую ты ждал».
 2.  **Осведомленный о продукте (Product-Aware):** Знает, что вы нанимаете, но сравнивает условия.
-    *   *Текст:* Факты, цифры, сравнение с конкурентами ([[concepts/yazyk-vygody|язык-выгоды]]).
+    *   *Текст:* Факты, цифры, сравнение с конкурентами ([[Понятия/yazyk-vygody|язык-выгоды]]).
 3.  **Осведомленный о решении (Solution-Aware):** Хочет работать в арбитраже, но не знает, к кому пойти.
     *   *Текст:* Почему именно мы — лучший проводник в нишу.
 4.  **Осведомленный о проблеме (Problem-Aware):** Ненавидит свою текущую работу («завод», офис), но еще не знает об арбитраже.
@@ -26,5 +26,6 @@ sources: [wiki/sources/eugene-schwartz-breakthrough-advertising.md]
 *   **Реклама в соцсетях/FB** — это стадии 3-5.
 
 ## Связанные страницы
-- [[concepts/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — второй фактор успеха по Шварцу
-- [[concepts/prodayushchiy-zagolovok|продающий-заголовок]] — как адаптировать заголовок под стадию
+- [[Понятия/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — второй фактор успеха по Шварцу
+- [[Понятия/prodayushchiy-zagolovok|продающий-заголовок]] — как адаптировать заголовок под стадию
+

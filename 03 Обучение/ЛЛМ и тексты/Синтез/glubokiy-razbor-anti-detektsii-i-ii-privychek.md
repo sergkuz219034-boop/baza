@@ -4,7 +4,7 @@ type: synthesis
 tags: [synthesis, ai-detection, humanization, linguistic-analysis]
 created: 2026-04-16
 updated: 2026-04-16
-sources: [concepts/humanizing-ai-text.md, sources/surgay-anti-palevo.md]
+sources: [Понятия/humanizing-ai-text.md, Источники/surgay-anti-palevo.md]
 ---
 
 # 🕵️ Глубокий разбор анти-детекции и ИИ-привычек
@@ -56,6 +56,7 @@ sources: [concepts/humanizing-ai-text.md, sources/surgay-anti-palevo.md]
 
 ## Связанные страницы
 
-- [[concepts/gumanizatsiya-ii-tekstov|Концепция: Гуманизация текстов]]
-- [[sources/istochnik-anti-palevo-9-pravil-redaktury|Первоисточник: 9 правил (PDF)]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация текстов]]
+- [[Источники/istochnik-anti-palevo-9-pravil-redaktury|Первоисточник: 9 правил (PDF)]]
 - [[_index|Каталог Вики]]
+

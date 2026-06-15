@@ -1,7 +1,7 @@
 ---
 tags: [writing, energy]
 updated: 2026-04-20
-sources: [wiki/sources/roy-clark-50-writing-tools.md]
+sources: [Источники/roy-clark-50-writing-tools.md]
 ---
 # Сильные глаголы
 
@@ -22,5 +22,6 @@ sources: [wiki/sources/roy-clark-50-writing-tools.md]
 Сильные глаголы позволяют соискателю «примерить» на себя роль. Он видит не процесс, а результат и действие.
 
 ## Связанные страницы
-- [[concepts/kantselyarit|канцелярит]] — использование слабых глаголов
-- [[concepts/infostil|инфостиль]] — выбор точного слова
+- [[Понятия/kantselyarit|канцелярит]] — использование слабых глаголов
+- [[Понятия/infostil|инфостиль]] — выбор точного слова
+

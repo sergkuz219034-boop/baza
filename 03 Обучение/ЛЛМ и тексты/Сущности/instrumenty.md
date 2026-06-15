@@ -26,8 +26,8 @@ sources:
 
 Workflow:
 1. Открыл статью в браузере
-2. Нажал расширение → markdown сохранился в `raw/`
-3. Сказал LLM: «обработай новый файл в raw/»
+2. Нажал расширение → markdown сохранился в `Сырье/`
+3. Сказал LLM: «обработай новый файл в Сырье/»
 
 > Комбо с `Ctrl+Shift+D` (скачать вложения): текст + картинки сразу оседают локально.
 
@@ -62,7 +62,7 @@ qmd search "механизм внимания в трансформерах"
 
 Workflow:
 1. Задал LLM вопрос → получил хороший ответ
-2. LLM сохраняет как Marp-файл в `wiki/synthesis/`
+2. LLM сохраняет как Marp-файл в `Синтез/`
 3. Открываешь в Obsidian → готовые слайды
 
 ---
@@ -126,16 +126,17 @@ LLM может генерировать:
 
 ```mermaid
 graph LR
-    raw/ --> LLM
+    Сырье/ --> LLM
     LLM --> wiki/
     wiki/ --> Human
-    Human --> raw/
+    Human --> Сырье/
 ```
 
 ---
 
 ## Связанные страницы
 
-- [[entities/obsidian|Obsidian — основной IDE]]
-- [[concepts/operatsii|Операции: Query — форматы ответов]]
-- [[concepts/indeksirovanie-i-logirovanie|Индексирование: когда нужен qmd]]
+- [[Сущности/obsidian|Obsidian — основной IDE]]
+- [[Понятия/operatsii|Операции: Query — форматы ответов]]
+- [[Понятия/indeksirovanie-i-logirovanie|Индексирование: когда нужен qmd]]
+

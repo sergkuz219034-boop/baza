@@ -1,7 +1,7 @@
 ---
 tags: [copywriting, psychology]
 updated: 2026-04-20
-sources: [wiki/sources/dmitry-kot-copywriting.md]
+sources: [Источники/dmitry-kot-copywriting.md]
 ---
 # Язык выгоды
 
@@ -21,5 +21,6 @@ sources: [wiki/sources/dmitry-kot-copywriting.md]
 На каждое утверждение о компании задавайте вопрос: **"И что это даст кандидату?"**. Ответ на этот вопрос и есть текст вакансии.
 
 ## Связанные страницы
-- [[concepts/pochemu-eto-rabotaet|why-it-works]] — почему кандидаты откликаются
-- [[standards/compliance-rules|vacancy-creation-rules]] — применение выгод в структуре объявления
+- [[Понятия/pochemu-eto-rabotaet|why-it-works]] — почему кандидаты откликаются
+- [[Стандарты/compliance-rules|vacancy-creation-rules]] — применение выгод в структуре объявления
+

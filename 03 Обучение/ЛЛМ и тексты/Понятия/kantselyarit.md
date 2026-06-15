@@ -1,7 +1,7 @@
 ---
 tags: [writing, editing, warning]
 updated: 2026-04-20
-sources: [wiki/sources/kornei-chukovsky-alive-as-life.md]
+sources: [Источники/kornei-chukovsky-alive-as-life.md]
 ---
 # Канцелярит
 
@@ -19,5 +19,6 @@ sources: [wiki/sources/kornei-chukovsky-alive-as-life.md]
 - "В случае обнаружения неисправностей" → "Если что-то сломалось".
 
 ## Связанные страницы
-- [[concepts/infostil|инфостиль]] — метод борьбы с канцеляритом
-- [[concepts/gumanizatsiya-ii-tekstov|humanizing-ai-text]] — как сделать текст живым
+- [[Понятия/infostil|инфостиль]] — метод борьбы с канцеляритом
+- [[Понятия/gumanizatsiya-ii-tekstov|humanizing-ai-text]] — как сделать текст живым
+

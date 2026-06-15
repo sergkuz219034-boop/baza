@@ -1,7 +1,7 @@
 ---
 tags: [copywriting, conversion]
 updated: 2026-04-20
-sources: [wiki/sources/dmitry-kot-copywriting.md]
+sources: [Источники/dmitry-kot-copywriting.md]
 ---
 # Призыв к действию (CTA)
 
@@ -18,5 +18,6 @@ sources: [wiki/sources/dmitry-kot-copywriting.md]
 *   "Заполните короткую анкету по ссылке, это займет 2 минуты."
 
 ## Связанные страницы
-- [[concepts/prodayushchiy-zagolovok|продающий-заголовок]] — начало пути, CTA — конец
-- [[concepts/yazyk-vygody|язык-выгоды]] — почему соискатель должен нажать на кнопку
+- [[Понятия/prodayushchiy-zagolovok|продающий-заголовок]] — начало пути, CTA — конец
+- [[Понятия/yazyk-vygody|язык-выгоды]] — почему соискатель должен нажать на кнопку
+

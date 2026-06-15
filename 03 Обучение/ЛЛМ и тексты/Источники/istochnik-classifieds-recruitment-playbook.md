@@ -4,7 +4,7 @@ type: source
 tags: [source, hr, recruitment, classifieds, surgay]
 created: 2026-04-16
 updated: 2026-04-16
-url: "raw/Classifieds_Recruitment_Playbook.pdf"
+url: "Сырье/Classifieds_Recruitment_Playbook.pdf"
 ---
 
 # 📄 Источник: Classifieds Recruitment Playbook
@@ -59,7 +59,8 @@ CTR объявления определяют 3 элемента: заголов
 
 ## Связанные страницы
 
-- [[concepts/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
-- [[entities/vladimir-surgay|Владимир Сургай]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
+- [[Сущности/vladimir-surgay|Владимир Сургай]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
 - [[_index|Каталог Вики]]
+

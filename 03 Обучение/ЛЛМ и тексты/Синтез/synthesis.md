@@ -36,5 +36,6 @@ sources: [page1.md, page2.md]
 
 | Страница | Описание | Источники |
 |---|---|---|
-| [[synthesis/glubokiy-razbor-anti-detektsii-i-ii-privychek|Deep Dive: Анти-детекция]] | Глубокий разбор правил, новая аргументация и привычки ИИ | 2 |
-| [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура HR-арбитража]] | Полная система запуска: трафик → экономика → масштаб | 3 |
+| [[Синтез/glubokiy-razbor-anti-detektsii-i-ii-privychek|Deep Dive: Анти-детекция]] | Глубокий разбор правил, новая аргументация и привычки ИИ | 2 |
+| [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура HR-арбитража]] | Полная система запуска: трафик → экономика → масштаб | 3 |
+

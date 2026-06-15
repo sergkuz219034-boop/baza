@@ -1,7 +1,7 @@
 ---
 tags: [entity, service, ecosystem]
 updated: 2026-04-21
-sources: [wiki/sources/offer-yandex-smena.md]
+sources: [Источники/offer-yandex-smena.md]
 ---
 # Яндекс Смена
 
@@ -23,5 +23,6 @@ sources: [wiki/sources/offer-yandex-smena.md]
 - **Отсутствие обязательств**: Нет минимального количества смен в месяц.
 
 ## Связанные страницы
-- [[sources/offer-yandex-smena]] — параметры текущего оффера
+- [[Источники/offer-yandex-smena]] — параметры текущего оффера
 - [[Условия работы Яндекс Смена]] — подробности для кандидатов
+

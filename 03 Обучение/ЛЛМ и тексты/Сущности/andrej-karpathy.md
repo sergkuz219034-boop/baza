@@ -47,6 +47,7 @@ LLM вносит правки — Karpathy видит результат в ре
 
 ## Связанные страницы
 
-- [[sources/istochnik-llm-wikimd-karpathy-gist|Источник: llm-wiki.md (gist)]]
-- [[concepts/pochemu-eto-rabotaet|Почему это работает]]
-- [[concepts/arkhitektura-llm-wiki|Архитектура системы]]
+- [[Источники/istochnik-llm-wikimd-karpathy-gist|Источник: llm-wiki.md (gist)]]
+- [[Понятия/pochemu-eto-rabotaet|Почему это работает]]
+- [[Понятия/arkhitektura-llm-wiki|Архитектура системы]]
+

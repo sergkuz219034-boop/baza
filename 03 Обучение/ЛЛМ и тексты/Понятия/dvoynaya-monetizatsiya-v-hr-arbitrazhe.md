@@ -4,7 +4,7 @@ type: concept
 tags: [concept, hr, monetization, arbitrage, business-model]
 created: 2026-04-16
 updated: 2026-04-16
-sources: [sources/hr-arbitrage-playbook.md, sources/hr-traffic-architecture.md]
+sources: [Источники/hr-arbitrage-playbook.md, Источники/hr-traffic-architecture.md]
 ---
 
 # 💰 Двойная монетизация в HR-арбитраже
@@ -57,6 +57,7 @@ sources: [sources/hr-arbitrage-playbook.md, sources/hr-traffic-architecture.md]
 
 ## Связанные страницы
 
-- [[sources/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
-- [[sources/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
+- [[Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+

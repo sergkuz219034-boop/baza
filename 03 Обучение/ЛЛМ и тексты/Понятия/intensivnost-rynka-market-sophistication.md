@@ -1,7 +1,7 @@
 ---
 tags: [marketing, strategy]
 updated: 2026-04-20
-sources: [wiki/sources/eugene-schwartz-breakthrough-advertising.md]
+sources: [Источники/eugene-schwartz-breakthrough-advertising.md]
 ---
 # Интенсивность рынка (Market Sophistication)
 
@@ -21,5 +21,6 @@ sources: [wiki/sources/eugene-schwartz-breakthrough-advertising.md]
 Если твои вакансии на Авито не дают откликов — значит, ты пытаешься использовать методы Уровня 2 на рынке Уровня 3-4. **Смени оффер на Механизм.**
 
 ## Связанные страницы
-- [[concepts/urovni-osvedomlennosti-awareness-levels|уровни-осведомленности]] — как сочетать осведомленность и интенсивность
-- [[concepts/faktoid|фактоид]] — как доказывать уникальный механизм
+- [[Понятия/urovni-osvedomlennosti-awareness-levels|уровни-осведомленности]] — как сочетать осведомленность и интенсивность
+- [[Понятия/faktoid|фактоид]] — как доказывать уникальный механизм
+

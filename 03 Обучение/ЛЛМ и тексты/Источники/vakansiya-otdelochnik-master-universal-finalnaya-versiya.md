@@ -56,6 +56,7 @@ geo: "Москва и МО (до 20 км за МКАД)"
 
 ## Связанные страницы
 
-- [[standards/compliance-rules|Правила написания уникальных вакансий]]
-- [[sources/offer-otdelka-mastera-po-remontu|Оффер: Отделка+ (параметры лида)]]
-- [[concepts/gumanizatsiya-ii-tekstov|Гуманизация текстов — принципы уникализации]]
+- [[Стандарты/compliance-rules|Правила написания уникальных вакансий]]
+- [[Источники/offer-otdelka-mastera-po-remontu|Оффер: Отделка+ (параметры лида)]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация текстов — принципы уникализации]]
+

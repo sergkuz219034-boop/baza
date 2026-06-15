@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, courier, auto, safe]
 updated: 2026-04-21
-sources: [wiki/sources/offer-avtokurer-yandeks-eda.md, wiki/standards/generator-sop.md]
+sources: [Источники/offer-avtokurer-yandeks-eda.md, Стандарты/generator-sop.md]
 ---
 # Вакансия: Водитель-курьер (на личном авто) [ПРАВИЛЬНАЯ ВЕРСИЯ]
 
@@ -26,3 +26,4 @@ sources: [wiki/sources/offer-avtokurer-yandeks-eda.md, wiki/standards/generator-
 - Базовое знание города или умение пользоваться навигатором.
 
 Нажмите кнопку «Откликнуться» прямо сейчас! Перезвоним в течение 5 минут.
+

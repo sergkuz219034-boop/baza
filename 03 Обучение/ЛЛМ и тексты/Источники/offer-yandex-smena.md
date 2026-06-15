@@ -1,7 +1,7 @@
 ---
 tags: [offer, yandex, conditions]
 updated: 2026-04-21
-sources: [raw/yandex_smena/knowledge_base.md, raw/yandex_smena/podrabotka_conditions.md, raw/yandex_smena/income_details.md]
+sources: [Сырье/yandex_smena/knowledge_base.md, Сырье/yandex_smena/podrabotka_conditions.md, Сырье/yandex_smena/income_details.md]
 ---
 # Оффер: Яндекс Смена
 
@@ -34,4 +34,5 @@ sources: [raw/yandex_smena/knowledge_base.md, raw/yandex_smena/podrabotka_condit
 
 ## Связанные страницы
 - [[Условия работы Яндекс Смена]] — детальный разбор
-- [[entities/yandex-smena]] — о сервисе
+- [[Сущности/yandex-smena]] — о сервисе
+

@@ -22,8 +22,9 @@ sources: [local-setup]
 2. **Для облачной работы**: использовать MCP сервер `openrouter` (перенастроен на DashScope).
 
 ## Связанные страницы
-- [[entities/alibaba-dashscope-official-qwen-api|entities/dashscope]] — Официальный провайдер.
-- [[entities/instrumenty|entities/tools]] — Общий список
+- [[Сущности/alibaba-dashscope-official-qwen-api|Сущности/dashscope]] — Официальный провайдер.
+- [[Сущности/instrumenty|Сущности/tools]] — Общий список
 
 ### Планы развития
 - Тестирование локальной Llama-3 для сравнения производительности.
+

@@ -1,7 +1,7 @@
 ---
 tags: [concept, seo, keywords]
 updated: 2026-04-21
-sources: [raw/semantic_core.md]
+sources: [Сырье/semantic_core.md]
 ---
 # Семантическое ядро (Скрытый оффер)
 
@@ -32,6 +32,7 @@ sources: [raw/semantic_core.md]
 - **Партнер ритейл-сетей**
 
 ## Связанные страницы
-- [[standards/writing-principles]] — как вплетать ключи в текст
-- [[concepts/faktoid]] — какие цифры использовать (напр. 7600/день)
-- [[sources/offer-yandex-smena]] — параметры оффера
+- [[Стандарты/writing-principles]] — как вплетать ключи в текст
+- [[Понятия/faktoid]] — какие цифры использовать (напр. 7600/день)
+- [[Источники/offer-yandex-smena]] — параметры оффера
+

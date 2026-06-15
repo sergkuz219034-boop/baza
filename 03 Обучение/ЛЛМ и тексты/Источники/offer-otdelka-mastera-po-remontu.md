@@ -1,7 +1,7 @@
 ---
 tags: [offer, source, hr, renovation]
 updated: 2026-04-20
-sources: [raw/offers/otdelka_plus_vacancy.md]
+sources: [Сырье/offers/otdelka_plus_vacancy.md]
 ---
 # Оффер: Отделка+ (Мастера по ремонту)
 
@@ -23,7 +23,8 @@ sources: [raw/offers/otdelka_plus_vacancy.md]
 *   **Локация:** Подбор объектов именно в районе проживания кандидата — ключевой триггер (боль «далеко ехать»).
 
 ## Связанные страницы
-- [[sources/vakansiya-master-po-remontu-finalnaya-versiya|vacancy-finishing-worker-final]] — готовая вакансия на базе этого оффера
-- [[concepts/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — почему важна скорость прозвона
-- [[concepts/faktoid|фактоид]] — использование конкретики (5-7к руб, 10 минут)
-- [[concepts/dvoynaya-monetizatsiya-v-hr-arbitrazhe|double-monetization]] — контекст HR-арбитража
+- [[Источники/vakansiya-master-po-remontu-finalnaya-versiya|vacancy-finishing-worker-final]] — готовая вакансия на базе этого оффера
+- [[Понятия/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — почему важна скорость прозвона
+- [[Понятия/faktoid|фактоид]] — использование конкретики (5-7к руб, 10 минут)
+- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|double-monetization]] — контекст HR-арбитража
+

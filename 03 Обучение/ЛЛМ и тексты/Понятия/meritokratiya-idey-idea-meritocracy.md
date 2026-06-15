@@ -1,7 +1,7 @@
 ---
 tags: [strategy, development, psychology]
 updated: 2026-04-20
-sources: [wiki/sources/ray-dalio-principles.md]
+sources: [Источники/ray-dalio-principles.md]
 ---
 # Меритократия идей (Idea Meritocracy)
 
@@ -16,5 +16,6 @@ sources: [wiki/sources/ray-dalio-principles.md]
 3.  **Логирование ошибок:** Каждая ошибка (бан аккаунта, слив бюджета) заносится в Wiki. Мы не ищем виноватых, мы чиним «машину» бизнеса.
 
 ## Связанные страницы
-- [[concepts/operatsii|operations]] — как эта система ложится на работу с базой знаний
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|hr-arbitrage-system]] — системный взгляд на бизнес
+- [[Понятия/operatsii|operations]] — как эта система ложится на работу с базой знаний
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|hr-arbitrage-system]] — системный взгляд на бизнес
+

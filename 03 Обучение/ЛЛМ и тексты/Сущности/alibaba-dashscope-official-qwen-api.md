@@ -22,5 +22,6 @@ sources: [mcp_config.json, qwen-docs]
 Ключ успешно прошел проверку подлинности на международном эндпоинте DashScope. Если возникает ошибка `Model access denied`, необходимо активировать нужные модели в панели управления [Alibaba Cloud Model Studio](https://home.qwencloud.com/).
 
 ## Связанные страницы
-- [[entities/qwen-hybrid|entities/qwen]] — используемая модель.
-- [[synthesis/synthesis|index]] — главный индекс.
+- [[Сущности/qwen-hybrid|Сущности/qwen]] — используемая модель.
+- [[Синтез/synthesis|index]] — главный индекс.
+

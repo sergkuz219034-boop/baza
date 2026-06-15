@@ -4,7 +4,7 @@ type: synthesis
 tags: [synthesis, hr, arbitrage, traffic, monetization, classifieds]
 created: 2026-04-16
 updated: 2026-04-16
-sources: [sources/classifieds-recruitment.md, sources/hr-arbitrage-playbook.md, sources/hr-traffic-architecture.md]
+sources: [Источники/classifieds-recruitment.md, Источники/hr-arbitrage-playbook.md, Источники/hr-traffic-architecture.md]
 ---
 
 # 🏗️ Архитектура HR-арбитража: полная система
@@ -37,7 +37,7 @@ sources: [sources/classifieds-recruitment.md, sources/hr-arbitrage-playbook.md, 
 - Формула заголовка критична: **Должность + Выгода + Локация**.
 - Контент-антиспам: каждое объявление уникально через Content Factory.
 
-👉 Подробнее: [[sources/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+👉 Подробнее: [[Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
 
 ---
 
@@ -49,7 +49,7 @@ sources: [sources/classifieds-recruitment.md, sources/hr-arbitrage-playbook.md, 
 - Воронка: лэндинг → бот → звонок → передача → оплата.
 - 3+ касания с лидом ДО передачи работодателю — ×4 к конверсии.
 
-👉 Подробнее: [[sources/istochnik-hr-arbitrage-playbook|HR Arbitrage Playbook]]
+👉 Подробнее: [[Источники/istochnik-hr-arbitrage-playbook|HR Arbitrage Playbook]]
 
 ---
 
@@ -61,7 +61,7 @@ sources: [sources/classifieds-recruitment.md, sources/hr-arbitrage-playbook.md, 
 - SEO-сайт как долгосрочный актив с CPL в 10 раз ниже Авито.
 - Content Factory: ИИ-уникализация × ручная редактура = 50 объявлений из 1.
 
-👉 Подробнее: [[sources/istochnik-hr-traffic-playbook-20|HR Traffic Playbook 2.0]]
+👉 Подробнее: [[Источники/istochnik-hr-traffic-playbook-20|HR Traffic Playbook 2.0]]
 
 ---
 
@@ -90,7 +90,8 @@ sources: [sources/classifieds-recruitment.md, sources/hr-arbitrage-playbook.md, 
 
 ## Связи с другими концепциями вики
 
-- [[concepts/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
-- [[concepts/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Двойная монетизация]]
-- [[concepts/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов — применение в Content Factory]]
-- [[entities/vladimir-surgay|Владимир Сургай — автор всех трёх плейбуков]]
+- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
+- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Двойная монетизация]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов — применение в Content Factory]]
+- [[Сущности/vladimir-surgay|Владимир Сургай — автор всех трёх плейбуков]]
+

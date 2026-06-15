@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, vkusvill, picker, safe, rabota-ru]
 updated: 2026-04-20
-sources: [wiki/sources/vkusvill-picker-source.md, wiki/synthesis/vacancy-writing-checklist.md, wiki/concepts/rabota-ru-rules.md]
+sources: [Источники/vkusvill-picker-source.md, Синтез/vacancy-writing-checklist.md, Понятия/rabota-ru-rules.md]
 ---
 # Вакансия: Сборщик заказов (ВкусВилл) [SAFE]
 
@@ -42,14 +42,15 @@ sources: [wiki/sources/vkusvill-picker-source.md, wiki/synthesis/vacancy-writing
 | Пункт чек-листа | Реализация |
 |---|---|
 | **Уникальный Лид** | Фокус на метафоре «как для себя» + триггер чаевых (уникально для этой ниши). |
-| **[[concepts/faktoid|фактоид]]** | 134 000 руб, кэшбэк 15%, 30 000 за друга, чаевые. |
-| **[[concepts/silnye-glagoly|сильные-глаголы]]** | Собрать, Проверить, Сообщить, Подготовить. |
+| **[[Понятия/faktoid|фактоид]]** | 134 000 руб, кэшбэк 15%, 30 000 за друга, чаевые. |
+| **[[Понятия/silnye-glagoly|сильные-глаголы]]** | Собрать, Проверить, Сообщить, Подготовить. |
 | **Анти-бан** | Убраны упоминания «официального оформления» и ГПХ из текста (согласно правилам Работа.ру). |
 | **Архитектура** | Нарратив + Стандарт с упором на выгоду (WIIFM — What's In It For Me). |
 
 ---
 
 ## Связанные страницы
-- [[standards/generator-sop|Мастер-чек-лист]]
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила размещения
-- [[sources/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
+- [[Стандарты/generator-sop|Мастер-чек-лист]]
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила размещения
+- [[Источники/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
+

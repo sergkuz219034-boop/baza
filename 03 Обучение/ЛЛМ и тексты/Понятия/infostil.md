@@ -1,7 +1,7 @@
 ---
 tags: [writing, editing, strategy]
 updated: 2026-04-20
-sources: [wiki/sources/maxim-ilyahov-write-cut.md]
+sources: [Источники/maxim-ilyahov-write-cut.md]
 ---
 # Инфостиль
 
@@ -16,6 +16,7 @@ sources: [wiki/sources/maxim-ilyahov-write-cut.md]
 3. **Глаголы действия:** "Вы будете разрабатывать архитектуру" вместо "участие в процессах разработки".
 
 ## Связанные страницы
-- [[concepts/faktoid|фактоид]] — инструмент инфостиля для доказательства крутости
-- [[concepts/kantselyarit|канцелярит]] — то, с чем борется инфостиль
-- [[standards/compliance-rules|vacancy-creation-rules]] — как применять эти правила на практике
+- [[Понятия/faktoid|фактоид]] — инструмент инфостиля для доказательства крутости
+- [[Понятия/kantselyarit|канцелярит]] — то, с чем борется инфостиль
+- [[Стандарты/compliance-rules|vacancy-creation-rules]] — как применять эти правила на практике
+

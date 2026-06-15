@@ -29,5 +29,6 @@ updated: 2026-04-16
 
 ## Связи в wiki
 
-- [[sources/istochnik-anti-palevo-9-pravil-redaktury|Источник: АНТИ-ПАЛЕВО (9 правил редактуры)]]
-- [[concepts/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов]]
+- [[Источники/istochnik-anti-palevo-9-pravil-redaktury|Источник: АНТИ-ПАЛЕВО (9 правил редактуры)]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов]]
+

@@ -4,7 +4,7 @@ type: synthesis
 tags: [synthesis, job-boards, strategy, comparison]
 created: 2026-04-21
 updated: 2026-04-21
-sources: [concepts/rabota-ru-rules.md, classifieds-recruitment.md]
+sources: [Понятия/rabota-ru-rules.md, classifieds-recruitment.md]
 ---
 
 # 📊 Сравнение площадок для HR-арбитража
@@ -21,5 +21,6 @@ sources: [concepts/rabota-ru-rules.md, classifieds-recruitment.md]
 ---
 
 ## Связанные страницы
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|Правила Работа.ру]]
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура системы]]
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|Правила Работа.ру]]
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура системы]]
+

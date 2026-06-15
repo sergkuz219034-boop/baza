@@ -1,7 +1,7 @@
 ---
 tags: [concept, conditions, benefits]
 updated: 2026-04-21
-sources: [wiki/sources/offer-yandex-smena.md]
+sources: [Источники/offer-yandex-smena.md]
 ---
 # Условия работы Яндекс Смена
 
@@ -29,6 +29,7 @@ sources: [wiki/sources/offer-yandex-smena.md]
 - Миллионники (Екатеринбург, Новосибирск, Казань, Уфа, Ростов-на-Дону и др.)
 
 ## Связанные страницы
-- [[sources/offer-yandex-smena]] — параметры оффера
-- [[entities/yandex-smena]] — о сервисе
-- [[standards/writing-principles]] — как упаковать эти условия в текст
+- [[Источники/offer-yandex-smena]] — параметры оффера
+- [[Сущности/yandex-smena]] — о сервисе
+- [[Стандарты/writing-principles]] — как упаковать эти условия в текст
+

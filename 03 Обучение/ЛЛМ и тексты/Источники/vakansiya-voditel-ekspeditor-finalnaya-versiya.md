@@ -63,6 +63,7 @@ status: "published-ready"
 
 ## Связанные страницы
 
-- [[standards/compliance-rules|Правила написания уникальных вакансий]]
-- [[sources/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
-- [[concepts/tekhnicheskiy-protokol-obkhoda-moderatsii|Протокол обхода модерации]]
+- [[Стандарты/compliance-rules|Правила написания уникальных вакансий]]
+- [[Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Протокол обхода модерации]]
+

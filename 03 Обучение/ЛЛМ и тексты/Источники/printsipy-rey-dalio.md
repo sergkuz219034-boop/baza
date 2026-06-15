@@ -21,5 +21,6 @@ sources: [Ray Dalio - Principles]
 Все ошибки в арбитраже должны фиксироваться публично в `log.md`. Это позволяет «машине» обучаться и не повторять баны.
 
 ## Связанные страницы
-- [[concepts/meritokratiya-idey-idea-meritocracy|меритократия-идей]] — как внедрить систему оценки идей
-- [[synthesis/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура HR-арбитража]] — как спроектировать «машину» найма
+- [[Понятия/meritokratiya-idey-idea-meritocracy|меритократия-идей]] — как внедрить систему оценки идей
+- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура HR-арбитража]] — как спроектировать «машину» найма
+

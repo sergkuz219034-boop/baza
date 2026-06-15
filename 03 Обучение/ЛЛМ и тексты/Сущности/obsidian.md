@@ -39,8 +39,8 @@ LLM пишет wiki  →  Obsidian отображает  →  Человек ч�
 Obsidian нативно поддерживает внутренние ссылки формата `[[путь/к/файлу|Название]]`.
 LLM должен использовать **полный путь** в ссылках, чтобы избежать «ghost links» (ссылок, создающих пустые файлы в корне).
 
-✅ Правильно: `[[concepts/arkhitektura-llm-wiki|Архитектура]]`
-❌ Неправильно: `[[concepts/arkhitektura-llm-wiki|architecture]]` (может создать ghost-файл)
+✅ Правильно: `[[Понятия/arkhitektura-llm-wiki|Архитектура]]`
+❌ Неправильно: `[[Понятия/arkhitektura-llm-wiki|architecture]]` (может создать ghost-файл)
 
 ---
 
@@ -61,7 +61,7 @@ LLM должен использовать **полный путь** в ссыл�
 Без этого граф превращается в шум из сотен нерелевантных узлов.
 
 ### Путь для вложений (изображения)
-`Settings → Files and links → Attachment folder path = raw/assets/`
+`Settings → Files and links → Attachment folder path = Сырье/Ресурсы/`
 
 ### Горячая клавиша для скачивания вложений
 `Settings → Hotkeys → "Download attachments for current file"` → назначь `Ctrl+Shift+D`
@@ -74,7 +74,7 @@ LLM должен использовать **полный путь** в ссыл�
 
 | Плагин | Назначение |
 |---|---|
-| **Obsidian Web Clipper** | Конвертирует веб-статьи в markdown одним кликом → в `raw/` |
+| **Obsidian Web Clipper** | Конвертирует веб-статьи в markdown одним кликом → в `Сырье/` |
 | **Marp** | Генерация слайд-деков прямо из wiki-контента |
 | **Dataview** | Динамические таблицы и списки из YAML frontmatter страниц |
 
@@ -90,6 +90,7 @@ LLM должен использовать **полный путь** в ссыл�
 
 ## Связанные страницы
 
-- [[concepts/arkhitektura-llm-wiki|Архитектура: три слоя]]
-- [[entities/instrumenty|Инструменты: qmd, Marp, Dataview]]
-- [[concepts/kompaktsiya-upravlenie-rostom-wiki|Компакция: настройка Obsidian]]
+- [[Понятия/arkhitektura-llm-wiki|Архитектура: три слоя]]
+- [[Сущности/instrumenty|Инструменты: qmd, Marp, Dataview]]
+- [[Понятия/kompaktsiya-upravlenie-rostom-wiki|Компакция: настройка Obsidian]]
+

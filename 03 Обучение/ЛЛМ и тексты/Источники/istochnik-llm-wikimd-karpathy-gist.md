@@ -29,7 +29,7 @@ url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
 
 1. **Wiki vs RAG**: wiki — компаундирующий артефакт. Перекрёстные ссылки уже есть, противоречия уже помечены, синтез уже встроен.
 
-2. **Три слоя**: `raw/` (источники, неизменяемые) → `wiki/` (LLM пишет) → schema (CLAUDE.md, правила).
+2. **Три слоя**: `Сырье/` (источники, неизменяемые) → `wiki/` (LLM пишет) → schema (CLAUDE.md, правила).
 
 3. **Три операции**: Ingest (добавить источник), Query (задать вопрос), Lint (проверить здоровье).
 
@@ -91,9 +91,10 @@ url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
 
 ## Связанные страницы
 
-- [[concepts/arkhitektura-llm-wiki|Архитектура: три слоя]]
-- [[concepts/operatsii|Операции: Ingest, Query, Lint]]
-- [[concepts/pochemu-eto-rabotaet|Почему это работает]]
-- [[entities/andrej-karpathy|Andrej Karpathy]]
-- [[entities/obsidian|Obsidian]]
-- [[entities/instrumenty|Инструменты экосистемы]]
+- [[Понятия/arkhitektura-llm-wiki|Архитектура: три слоя]]
+- [[Понятия/operatsii|Операции: Ingest, Query, Lint]]
+- [[Понятия/pochemu-eto-rabotaet|Почему это работает]]
+- [[Сущности/andrej-karpathy|Andrej Karpathy]]
+- [[Сущности/obsidian|Obsidian]]
+- [[Сущности/instrumenty|Инструменты экосистемы]]
+

@@ -1,7 +1,7 @@
 ---
 tags: [copywriting, attention]
 updated: 2026-04-20
-sources: [wiki/sources/dmitry-kot-copywriting.md]
+sources: [Источники/dmitry-kot-copywriting.md]
 ---
 # Продающий заголовок
 
@@ -19,5 +19,6 @@ sources: [wiki/sources/dmitry-kot-copywriting.md]
 - Капслок и лишние знаки (бан со стороны модерации площадок).
 
 ## Связанные страницы
-- [[concepts/yazyk-vygody|язык-выгоды]] — база для создания заголовка
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — ограничения площадок на заголовки
+- [[Понятия/yazyk-vygody|язык-выгоды]] — база для создания заголовка
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — ограничения площадок на заголовки
+

@@ -1,7 +1,7 @@
 ---
 tags: [concept, competitors, benchmarks]
 updated: 2026-04-21
-sources: [raw/competitors_analysis.md]
+sources: [Сырье/competitors_analysis.md]
 ---
 # Анализ конкурентов: Рынок подработки (Daily Pay)
 
@@ -27,4 +27,5 @@ sources: [raw/competitors_analysis.md]
 ## Связанные страницы
 - [[Условия работы Яндекс Смена]] — наши показатели
 - [[semanticheskoe-yadro-smena]] — как нас ищут
-- [[concepts/urovni-osvedomlennosti-awareness-levels]] — как подавать материал
+- [[Понятия/urovni-osvedomlennosti-awareness-levels]] — как подавать материал
+

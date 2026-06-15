@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, ozon, warehouse, moscow, safe, rabota-ru, optimization]
 updated: 2026-04-20
-sources: [web-research, wiki/synthesis/standard-of-quality-vacancies.md, wiki/concepts/rabota-ru-rules.md, wiki/concepts/tilda-bypass.md]
+sources: [web-research, Синтез/standard-of-quality-vacancies.md, Понятия/rabota-ru-rules.md, Понятия/tilda-bypass.md]
 ---
 # Вакансия: Сотрудник склада (Ozon) — Оптимизированная версия
 
@@ -49,6 +49,7 @@ sources: [web-research, wiki/synthesis/standard-of-quality-vacancies.md, wiki/co
 ---
 
 ## Связанные страницы
-- [[concepts/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — протокол уникализации и прогрева
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — почему заголовок составлен именно так
-- [[standards/writing-principles|SOP: Стандарт качества]] — применение правил Кларка и Ильяхова
+- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — протокол уникализации и прогрева
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — почему заголовок составлен именно так
+- [[Стандарты/writing-principles|SOP: Стандарт качества]] — применение правил Кларка и Ильяхова
+

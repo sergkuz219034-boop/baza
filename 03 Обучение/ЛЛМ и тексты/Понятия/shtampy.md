@@ -1,7 +1,7 @@
 ---
 tags: [writing, editing]
 updated: 2026-04-20
-sources: [wiki/sources/kornei-chukovsky-alive-as-life.md, wiki/sources/maxim-ilyahov-write-cut.md]
+sources: [Источники/kornei-chukovsky-alive-as-life.md, Источники/maxim-ilyahov-write-cut.md]
 ---
 # Штампы
 
@@ -18,10 +18,11 @@ sources: [wiki/sources/kornei-chukovsky-alive-as-life.md, wiki/sources/maxim-ily
 Глаз соискателя "замыливается". Когда он видит штамп, он подсознательно считает вакансию скучной и "как у всех". Это снижает количество откликов от качественных кандидатов.
 
 ## Чем заменить
-Заменяйте штамп конкретикой ([[concepts/faktoid|фактоид]]):
+Заменяйте штамп конкретикой ([[Понятия/faktoid|фактоид]]):
 - "Дружный коллектив" → "Средний возраст в команде 26 лет, играем в настолки по пятницам."
 - "Динамичное развитие" → "За прошлый год мы выросли с 5 до 40 человек."
 
 ## Связанные страницы
-- [[concepts/faktoid|фактоид]] — лекарство от штампов
-- [[concepts/kantselyarit|канцелярит]] — родственное явление
+- [[Понятия/faktoid|фактоид]] — лекарство от штампов
+- [[Понятия/kantselyarit|канцелярит]] — родственное явление
+

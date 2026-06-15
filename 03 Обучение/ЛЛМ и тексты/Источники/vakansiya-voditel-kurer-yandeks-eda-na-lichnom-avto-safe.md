@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, yandex, courier, safe, rabota-ru]
 updated: 2026-04-20
-sources: [wiki/sources/yandex-food-car-courier.md, wiki/concepts/rabota-ru-rules.md, wiki/synthesis/standard-of-quality-vacancies.md]
+sources: [Источники/yandex-food-car-courier.md, Понятия/rabota-ru-rules.md, Синтез/standard-of-quality-vacancies.md]
 ---
 # Вакансия: Водитель-курьер (Яндекс Еда, на личном авто) [SAFE]
 
@@ -42,15 +42,16 @@ sources: [wiki/sources/yandex-food-car-courier.md, wiki/concepts/rabota-ru-rules
 
 | Техника | Описание |
 |---|---|
-| **[[concepts/silnye-glagoly|сильные-глаголы]]** | «Забирать», «Привозить», «Получать» — четкий фокус на действии. |
-| **[[concepts/faktoid|фактоид]]** | «До 275 000 руб», «10 кг», «50% скидки» — убедительность через цифры. |
+| **[[Понятия/silnye-glagoly|сильные-глаголы]]** | «Забирать», «Привозить», «Получать» — четкий фокус на действии. |
+| **[[Понятия/faktoid|фактоид]]** | «До 275 000 руб», «10 кг», «50% скидки» — убедительность через цифры. |
 | **Анти-бан** | Убраны упоминания ГПХ/Самозанятости. Нет условий в заголовке. |
 | **Уникальный Лид** | Текст начинается с фокуса на быстром получении денег и удобстве приложения. |
-| **[[concepts/elementy-silnogo-teksta#конец-предложения|конец-предложения]]** | Акценты на «уже на следующий день», «за счет компании», «сегодня». |
+| **[[Понятия/elementy-silnogo-teksta#конец-предложения|конец-предложения]]** | Акценты на «уже на следующий день», «за счет компании», «сегодня». |
 
 ---
 
 ## Связанные страницы
-- [[standards/writing-principles|SOP: Стандарт качества]]
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила размещения
-- [[sources/offer-avtokurer-yandeks-eda|yandex-food-car-courier]] — исходные данные оффера
+- [[Стандарты/writing-principles|SOP: Стандарт качества]]
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила размещения
+- [[Источники/offer-avtokurer-yandeks-eda|yandex-food-car-courier]] — исходные данные оффера
+

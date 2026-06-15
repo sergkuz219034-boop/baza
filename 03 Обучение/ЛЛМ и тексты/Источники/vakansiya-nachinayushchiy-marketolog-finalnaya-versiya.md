@@ -63,6 +63,7 @@ status: "published-ready"
 
 ## Связанные страницы
 
-- [[standards/compliance-rules|Правила написания уникальных вакансий]]
-- [[concepts/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов]]
-- [[sources/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+- [[Стандарты/compliance-rules|Правила написания уникальных вакансий]]
+- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов]]
+- [[Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+

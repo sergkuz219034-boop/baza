@@ -1,7 +1,7 @@
 ---
 tags: [source, vacancy, picker, yandex-lavka, safe, rabota-ru]
 updated: 2026-04-20
-sources: [web-research, wiki/synthesis/vacancy-writing-checklist.md, wiki/concepts/rabota-ru-rules.md]
+sources: [web-research, Синтез/vacancy-writing-checklist.md, Понятия/rabota-ru-rules.md]
 ---
 # Вакансия: Сборщик заказов (Яндекс Лавка) [SAFE]
 
@@ -53,6 +53,7 @@ sources: [web-research, wiki/synthesis/vacancy-writing-checklist.md, wiki/concep
 ---
 
 ## Связанные страницы
-- [[standards/generator-sop|Мастер-чек-лист]]
-- [[concepts/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила площадки
-- [[concepts/silnye-glagoly|сильные-глаголы]] — использованы при описании задач
+- [[Стандарты/generator-sop|Мастер-чек-лист]]
+- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила площадки
+- [[Понятия/silnye-glagoly|сильные-глаголы]] — использованы при описании задач
+

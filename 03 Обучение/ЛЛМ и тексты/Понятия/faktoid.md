@@ -1,7 +1,7 @@
 ---
 tags: [writing, evidence]
 updated: 2026-04-20
-sources: [wiki/sources/maxim-ilyahov-write-cut.md]
+sources: [Источники/maxim-ilyahov-write-cut.md]
 ---
 # Фактоид
 
@@ -19,5 +19,6 @@ sources: [wiki/sources/maxim-ilyahov-write-cut.md]
 Используйте фактоиды в блоках "О нас" и "Что мы предлагаем". Чем больше цифр и имен, тем выше доверие.
 
 ## Связанные страницы
-- [[concepts/infostil|инфостиль]] — философия использования фактов
-- [[concepts/elementy-silnogo-teksta#конкретные-цифры|конкретные-цифры]] — как работать с числовыми данными
+- [[Понятия/infostil|инфостиль]] — философия использования фактов
+- [[Понятия/elementy-silnogo-teksta#конкретные-цифры|конкретные-цифры]] — как работать с числовыми данными
+
