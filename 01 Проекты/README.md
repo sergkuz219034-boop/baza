@@ -17,5 +17,6 @@
 ## Роль этого раздела
 
 - это не главный вход vault;
-- для разработки и дебага сначала открывать [[Project Wiki/README|Project Wiki]];
-- `01 Проекты` использовать как project source-layer.
+- это не основная wiki vault;
+- для разработки и дебага всегда открывать [[Project Wiki/README|Project Wiki]];
+- `01 Проекты` использовать только как project source/archive layer.
