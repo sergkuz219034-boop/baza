@@ -3,10 +3,11 @@
 ## Текущее состояние
 
 - `baza` остаётся Obsidian-vault, а не source repo приложения;
-- live `TrafficHub` repo на `2026-06-16`:
+- live `TrafficHub` repo на `2026-06-17`:
   - `HEAD = a8f0be217fc7f23b8af6dead50b9968c9620cea1`
   - worktree clean
 - host contour вокруг `TrafficHub` уже вычищен от `freellmapi`, `hermes-webui`, `searxng-local`, `amnezia-xray` и `TrafficHub_backup_archive`.
+- product contour на live healthy: `autolead_server_bot`, `traffichub_worker`, `traffichub_postgres`, `traffichub_redis`, `traffichub_account_manager`, `traffichub_license_*`, `traffichub_caddy`, `mfo_api`.
 - active Autolead runtime migration по live-коду уже ушла дальше первых четырёх шагов:
   - PostgreSQL backend включён для `logs`, `delivery`, `leads`, `autofit`, `invites`, `control_sync`;
   - `docker-compose.yml` по умолчанию держит:
@@ -26,6 +27,7 @@
 
 ## Фактический этап миграции
 
+- структурная миграция wiki в схему `00_Главная ... 10_Материалы` фактически завершена;
 - основной active runtime Autolead уже PostgreSQL-first;
 - `traffic_hub` product DB на live тоже уже PostgreSQL-first;
 - `control_store` на live тоже уже PostgreSQL-first, хотя `control.db` как legacy artefact всё ещё существует;
@@ -33,6 +35,9 @@
 - следующий инженерный этап уже не “перенести `autofit`/`invites`/`control_sync`”, а:
   - проверить и сузить remaining SQLite surface;
   - решить, что оставлять как compatibility layer, а что можно удалить из active runtime contract.
+- следующий wiki-этап:
+  - синхронно поддерживать канон с кодом и runtime;
+  - переводить новые расследования в [[06_Отладка/Рецепт отладки|контур отладки]] и подтверждённые знания в профильные разделы.
 - сводная backend-матрица и ссылки на все подтверждения: [[00_Главная/Дашборд|Дашборд]]
 
 ## Roadmap по знаниям
