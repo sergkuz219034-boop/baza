@@ -34,6 +34,7 @@
 - следующий инженерный этап уже не “перенести `autofit`/`invites`/`control_sync`”, а:
   - проверить и сузить remaining SQLite surface;
   - решить, что оставлять как compatibility layer, а что можно удалить из active runtime contract.
+- детальный live-аудит хвостов: [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-17 Remaining SQLite surface после PostgreSQL-first runtime]]
 
 ## Roadmap по знаниям
 
