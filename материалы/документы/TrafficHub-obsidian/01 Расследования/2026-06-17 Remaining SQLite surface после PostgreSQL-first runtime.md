@@ -98,11 +98,18 @@ Remaining SQLite surface по факту:
 
 - `tests/test_database.py` проверяет SQLite fixture path
 - `tests/test_leads_router.py` использует прямой SQLite connect
-- `services/stats_service.py` и часть util-path остаются завязаны на local SQLite db path
+- `services/stats_service.py` остаётся завязан на SQLite path только для части postback-метрик из `traffic_hub` БД
 
-### 5. Отдельный legacy/control contour
+### 5. Hybrid read/metrics path
+
+- `utils/runtime_repository.py` уже умеет PostgreSQL read path для owner leads/history/summary
+- но сам модуль всё ещё содержит SQLite branch как read fallback
+- это не отдельная незавершённая миграция таблиц, а ещё не вычищенная dual-path реализация
+
+### 6. Отдельный legacy/control contour
 
 - `utils/control_store.py` использует `control.db` и hybrid control-store path
+- `CONTROL_PG_LEGACY_IMPORT` управляет legacy import behaviour
 - это отдельная зона и не должна смешиваться с active Autolead runtime migration
 
 ## Вывод
@@ -120,6 +127,7 @@ Remaining SQLite surface по факту:
 1. классифицировать каждый remaining SQLite path как:
    - production fallback
    - test-only
+   - hybrid read/metrics path
    - schema compatibility
    - legacy contour
 2. решить, какие из них можно удалить из active runtime contract;

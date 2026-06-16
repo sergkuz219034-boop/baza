@@ -31,6 +31,7 @@
   - fallback/test backend;
   - schema init для legacy-совместимости;
   - часть maintenance и локальных util-path;
+- `control_store` при этом остаётся отдельным legacy/hybrid storage-контуром и не должен использоваться как shorthand-объяснение для всего runtime;
 - следующий инженерный этап уже не “перенести `autofit`/`invites`/`control_sync`”, а:
   - проверить и сузить remaining SQLite surface;
   - решить, что оставлять как compatibility layer, а что можно удалить из active runtime contract.
