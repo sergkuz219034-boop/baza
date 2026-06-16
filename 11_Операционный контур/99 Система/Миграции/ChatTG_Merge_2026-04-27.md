@@ -18,13 +18,13 @@
 - Файл `ChatTG\Audit_Results.md` встроен в `02 Работа\Audit_Results.md`.
 
 ## Карта соответствий
-- `ChatTG\Active_Chats` -> `[[07 Диалоги/Активные чаты/Example_Candidate_01]]`
-- `ChatTG\Knowledge_Base\Scripts.md` -> `[[02 Работа/База знаний/Scripts]]`
-- `ChatTG\Knowledge_Base\Objections.md` -> `[[02 Работа/База знаний/Objections]]`
-- `ChatTG\Templates\Chat_Template.md` -> `[[07 Диалоги/Chat_Template]]`
-- `ChatTG\Audit_Results.md` -> `[[02 Работа/Audit_Results]]`
-- `ChatTG\karina` -> `[[08 Архив/Экспорты/Экспорт ChatTG Карина.zip]]`
-- `ChatTG\Kristina` -> `[[08 Архив/Экспорты/Экспорт ChatTG Кристина.zip]]`
+- `ChatTG\Active_Chats` -> `[[11_Операционный контур/07 Диалоги/Активные чаты/Example_Candidate_01]]`
+- `ChatTG\Knowledge_Base\Scripts.md` -> `[[11_Операционный контур/02 Работа/База знаний/Scripts]]`
+- `ChatTG\Knowledge_Base\Objections.md` -> `[[11_Операционный контур/02 Работа/База знаний/Objections]]`
+- `ChatTG\Templates\Chat_Template.md` -> `[[11_Операционный контур/07 Диалоги/Chat_Template]]`
+- `ChatTG\Audit_Results.md` -> `[[11_Операционный контур/02 Работа/Audit_Results]]`
+- `ChatTG\karina` -> `[[11_Операционный контур/08 Архив/Экспорты/Экспорт ChatTG Карина.zip]]`
+- `ChatTG\Kristina` -> `[[11_Операционный контур/08 Архив/Экспорты/Экспорт ChatTG Кристина.zip]]`
 
 ## Что оставлено за пределами миграции
 - `.obsidian` из `ChatTG` не переносится: рабочей конфигурацией vault остается `.obsidian` активной базы.
