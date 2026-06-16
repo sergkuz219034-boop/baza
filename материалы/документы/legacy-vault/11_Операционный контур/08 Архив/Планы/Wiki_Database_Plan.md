@@ -2,7 +2,7 @@
 
 - [x] 1. Create Obsidian Vault structure in `C:\Users\Арт\Desktop\Vakansi\Wiki` (folders: `Dialogues`, `Platform_Rules`, `Offers`, `Job_Posting`).
 - [x] 2. Create foundational Wiki files (e.g., `Job_Posting_Template.md`, `Platform_Rules.md`, `Offers.md`).
-- [x] 3. Set up a system of Obsidian links (e.g., ``[[ExampleLink]]``) and properties to connect dialogues, rules, and offers with the job posting draft.
+- [x] 3. Set up a system of Obsidian links (e.g., `[[...]]`) and properties to connect dialogues, rules, and offers with the job posting draft.
 - [x] 4. Draft the initial Job Posting (Vacancy) and record our dialogue context.
 - [x] 5. Set up `tasks/lessons.md` for tracking lessons as per global rules.
 
