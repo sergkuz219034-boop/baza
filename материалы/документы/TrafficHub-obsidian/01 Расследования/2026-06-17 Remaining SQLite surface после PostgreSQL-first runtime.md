@@ -132,3 +132,39 @@ Remaining SQLite surface по факту:
    - legacy contour
 2. решить, какие из них можно удалить из active runtime contract;
 3. отдельно задокументировать границу между Autolead runtime migration и `control_store` migration.
+
+## Текущая приоритизация cleanup
+
+### P1. Неявный active runtime fallback
+
+- `utils/database.py`
+- `utils/runtime_store_schema.py`
+- `utils/runtime_store_maintenance.py`
+
+Почему first:
+- эти модули ближе всего к production runtime contract и сильнее всего искажают mental model системы.
+
+### P2. Hybrid read/metrics
+
+- `utils/runtime_repository.py`
+- `services/stats_service.py`
+
+Почему second:
+- код уже умеет PostgreSQL path, но оставляет dual-path чтение и тем самым усложняет интерпретацию dashboard/history/metrics.
+
+### P3. Separate control contour
+
+- `utils/control_store.py`
+
+Почему отдельно:
+- модуль уже умеет `backend=postgres`, но сохраняет `control.db` и `CONTROL_PG_LEGACY_IMPORT` compatibility path;
+- это отдельный migration stream, который не надо смешивать с cleanup active Autolead runtime.
+
+### P4. Test-only
+
+- `tests/test_database.py`
+- `tests/test_leads_router.py`
+- sqlite fixtures в `tests/test_traffic_*`
+
+Почему last:
+- production-risk низкий; проблема в основном в восприятии и поддержке, а не в live runtime behaviour.
