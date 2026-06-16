@@ -15,3 +15,8 @@
 ## Ограничение
 
 Если в старых заметках websocket или access-path описан как чистый Basic-auth flow, это считать устаревшим описанием.
+
+## Дополнительные источники
+
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/04 Сущности/Auth и Access|Auth и Access]]
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]

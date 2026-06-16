@@ -23,3 +23,10 @@
 - весь этот непроектный слой теперь вынесен в [[11_Операционный контур/README|11_Операционный контур]].
 - полный imported engineering archive теперь лежит внутри `baza`:
   - [[Project Wiki/raw/docs/TrafficHub-obsidian/README|TrafficHub-obsidian]]
+
+## Навигационный контракт
+
+- `Project Wiki` = короткий канон для входа, архитектуры, дебага и runtime-triage;
+- `Project Wiki/raw/docs/TrafficHub-obsidian` = полный импорт инженерного архива без потери старых расследований;
+- `01 Проекты/ТрафикХаб` = промежуточный source-layer с project notes;
+- `11_Операционный контур` = все заметки, не являющиеся каноном разработки `TrafficHub`.

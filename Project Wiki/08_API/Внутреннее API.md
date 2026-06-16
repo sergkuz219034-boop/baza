@@ -45,3 +45,10 @@
 
 - [[01 Проекты/ТрафикХаб/Контур проекта]]
 - [[01 Проекты/ТрафикХаб/Точки входа]]
+
+## Полный API-архив
+
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/03-API/Overview|Legacy API overview]]
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/03-API/Endpoints|Legacy API endpoints]]
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]
+- [[Project Wiki/raw/docs/TrafficHub-obsidian/03-API/WebSocket|Legacy API websocket]]
