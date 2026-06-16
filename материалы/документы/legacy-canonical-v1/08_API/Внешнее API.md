@@ -18,5 +18,5 @@
 
 ## Дополнительные источники
 
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Auth и Access|Auth и Access]]
-- [[raw/docs/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Auth и Access|Auth и Access]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]

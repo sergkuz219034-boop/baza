@@ -67,8 +67,8 @@ sources: [Источники/classifieds-recruitment.md, Источники/hr-t
 
 ## Связанные страницы
 
-- [[Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
-- [[Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
-- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов (уникализация объявлений)]]
-- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов (уникализация объявлений)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
 

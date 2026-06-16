@@ -2,8 +2,8 @@
 
 Полный импорт расследований хранится в:
 
-- [[raw/docs/TrafficHub-obsidian/README|TrafficHub-obsidian README]]
-- [[raw/docs/TrafficHub-obsidian/01 Расследования/2026-06-07 Ничего не работает|Ничего не работает]]
+- [[материалы/документы/TrafficHub-obsidian/README|TrafficHub-obsidian README]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-07 Ничего не работает|Ничего не работает]]
 
 ## Что внутри
 

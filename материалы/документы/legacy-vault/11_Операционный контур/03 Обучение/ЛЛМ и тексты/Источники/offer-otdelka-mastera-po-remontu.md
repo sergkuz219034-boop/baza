@@ -23,8 +23,8 @@ sources: [Сырье/offers/otdelka_plus_vacancy.md]
 *   **Локация:** Подбор объектов именно в районе проживания кандидата — ключевой триггер (боль «далеко ехать»).
 
 ## Связанные страницы
-- [[Источники/vakansiya-master-po-remontu-finalnaya-versiya|vacancy-finishing-worker-final]] — готовая вакансия на базе этого оффера
-- [[Понятия/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — почему важна скорость прозвона
-- [[Понятия/faktoid|фактоид]] — использование конкретики (5-7к руб, 10 минут)
-- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|double-monetization]] — контекст HR-арбитража
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/vakansiya-master-po-remontu-finalnaya-versiya|vacancy-finishing-worker-final]] — готовая вакансия на базе этого оффера
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/intensivnost-rynka-market-sophistication|интенсивность-рынка]] — почему важна скорость прозвона
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/faktoid|фактоид]] — использование конкретики (5-7к руб, 10 минут)
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|double-monetization]] — контекст HR-арбитража
 

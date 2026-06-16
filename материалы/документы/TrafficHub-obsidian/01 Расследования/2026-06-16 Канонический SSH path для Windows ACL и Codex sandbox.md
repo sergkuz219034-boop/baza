@@ -47,6 +47,6 @@ ssh -i C:\Users\sergk\OneDrive\Desktop\traffichubserver\.codex_ssh\codex_login_e
 
 ## Следующий шаг
 
-- держать актуальную инструкцию в [[server-ssh-access]];
+- держать актуальную инструкцию в [[материалы/документы/TrafficHub-obsidian/server-ssh-access|server-ssh-access]];
 - при каждом onboarding нового разработчика сначала проверять именно его local SSH path и ACL;
 - не пытаться "чинить сервер", пока не подтверждён локальный smoke `echo ok && whoami && hostname`.

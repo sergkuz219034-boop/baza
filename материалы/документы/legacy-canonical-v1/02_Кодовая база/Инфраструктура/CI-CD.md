@@ -29,5 +29,5 @@
 
 ## Глубокие ссылки
 
-- [[raw/docs/TrafficHub-obsidian/06-Deployment/Windows|Windows setup]]
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Windows|Windows setup]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]

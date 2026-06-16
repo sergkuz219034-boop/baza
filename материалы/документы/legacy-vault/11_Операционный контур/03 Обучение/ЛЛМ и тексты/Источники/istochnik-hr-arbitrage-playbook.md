@@ -69,8 +69,8 @@ WhatsApp/Telegram-бот → авто-прогрев
 
 ## Связанные страницы
 
-- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
-- [[Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
-- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
-- [[Сущности/vladimir-surgay|Владимир Сургай]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-classifieds-recruitment-playbook|Источник: Classifieds Recruitment Playbook]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Сущности/vladimir-surgay|Владимир Сургай]]
 

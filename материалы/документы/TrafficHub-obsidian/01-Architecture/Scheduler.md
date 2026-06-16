@@ -22,5 +22,5 @@
 
 ## Связанное
 
-- [[01-Architecture/Overview|Архитектура]]
-- [[05-Configuration/Config|Конфигурация]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/Overview|Архитектура]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Config|Конфигурация]]

@@ -41,4 +41,4 @@
 - [[DataFlow]]
 - [[Scheduler]]
 - [[Scoring]]
-- [[04-Database/Schema|Схема БД]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/Schema|Схема БД]]

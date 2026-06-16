@@ -62,6 +62,6 @@
 
 ## См. также
 
-- [[03 Плейбуки/Jobs и Worker]]
-- [[04 Сущности/Job Queue]]
-- [[05 Решения/Очередь задач через Redis и worker]]
+- [[материалы/документы/TrafficHub-obsidian/03 Плейбуки/Jobs и Worker]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Job Queue]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/Очередь задач через Redis и worker]]

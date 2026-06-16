@@ -75,5 +75,5 @@
 
 ## См. также
 
-- [[03 Плейбуки/Jobs и Worker]]
-- [[04 Сущности/Job Queue]]
+- [[материалы/документы/TrafficHub-obsidian/03 Плейбуки/Jobs и Worker]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Job Queue]]

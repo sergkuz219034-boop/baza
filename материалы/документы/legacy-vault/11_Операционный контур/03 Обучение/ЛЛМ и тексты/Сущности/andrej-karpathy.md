@@ -47,7 +47,7 @@ LLM вносит правки — Karpathy видит результат в ре
 
 ## Связанные страницы
 
-- [[Источники/istochnik-llm-wikimd-karpathy-gist|Источник: llm-wiki.md (gist)]]
-- [[Понятия/pochemu-eto-rabotaet|Почему это работает]]
-- [[Понятия/arkhitektura-llm-wiki|Архитектура системы]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-llm-wikimd-karpathy-gist|Источник: llm-wiki.md (gist)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/pochemu-eto-rabotaet|Почему это работает]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/arkhitektura-llm-wiki|Архитектура системы]]
 

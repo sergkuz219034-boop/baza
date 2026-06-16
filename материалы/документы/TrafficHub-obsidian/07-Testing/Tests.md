@@ -52,6 +52,6 @@ pytest
 
 ## Связанное
 
-- [[06-Deployment/Docker|Docker]]
-- [[03-API/Auth|Авторизация]]
-- [[01 Расследования/2026-06-16 Pytest снова встроен в autolead_server_bot runtime image]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Docker|Docker]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Авторизация]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-16 Pytest снова встроен в autolead_server_bot runtime image]]

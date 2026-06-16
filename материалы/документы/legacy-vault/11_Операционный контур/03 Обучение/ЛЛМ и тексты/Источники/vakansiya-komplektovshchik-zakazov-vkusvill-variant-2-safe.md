@@ -51,7 +51,7 @@ sources: [Источники/vkusvill-picker-source.md, Синтез/vacancy-wri
 ---
 
 ## Связанные страницы
-- [[Стандарты/generator-sop|Мастер-чек-лист]]
-- [[Источники/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
-- [[Источники/vakansiya-sborshchik-zakazov-vkusvill-safe|Вариант 1 (Сборщик)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Стандарты/generator-sop|Мастер-чек-лист]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/offer-sborshchik-zakazov-vkusvill|vkusvill-picker-source]] — исходные данные
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/vakansiya-sborshchik-zakazov-vkusvill-safe|Вариант 1 (Сборщик)]]
 

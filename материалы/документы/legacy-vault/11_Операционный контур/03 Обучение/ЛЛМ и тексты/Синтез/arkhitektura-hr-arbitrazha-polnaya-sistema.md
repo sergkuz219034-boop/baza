@@ -37,7 +37,7 @@ sources: [Источники/classifieds-recruitment.md, Источники/hr-a
 - Формула заголовка критична: **Должность + Выгода + Локация**.
 - Контент-антиспам: каждое объявление уникально через Content Factory.
 
-👉 Подробнее: [[Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+👉 Подробнее: [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
 
 ---
 
@@ -49,7 +49,7 @@ sources: [Источники/classifieds-recruitment.md, Источники/hr-a
 - Воронка: лэндинг → бот → звонок → передача → оплата.
 - 3+ касания с лидом ДО передачи работодателю — ×4 к конверсии.
 
-👉 Подробнее: [[Источники/istochnik-hr-arbitrage-playbook|HR Arbitrage Playbook]]
+👉 Подробнее: [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-arbitrage-playbook|HR Arbitrage Playbook]]
 
 ---
 
@@ -61,7 +61,7 @@ sources: [Источники/classifieds-recruitment.md, Источники/hr-a
 - SEO-сайт как долгосрочный актив с CPL в 10 раз ниже Авито.
 - Content Factory: ИИ-уникализация × ручная редактура = 50 объявлений из 1.
 
-👉 Подробнее: [[Источники/istochnik-hr-traffic-playbook-20|HR Traffic Playbook 2.0]]
+👉 Подробнее: [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-traffic-playbook-20|HR Traffic Playbook 2.0]]
 
 ---
 
@@ -90,8 +90,8 @@ sources: [Источники/classifieds-recruitment.md, Источники/hr-a
 
 ## Связи с другими концепциями вики
 
-- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
-- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Двойная монетизация]]
-- [[Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов — применение в Content Factory]]
-- [[Сущности/vladimir-surgay|Владимир Сургай — автор всех трёх плейбуков]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Технический протокол обхода модерации]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Двойная монетизация]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/gumanizatsiya-ii-tekstov|Гуманизация ИИ-текстов — применение в Content Factory]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Сущности/vladimir-surgay|Владимир Сургай — автор всех трёх плейбуков]]
 

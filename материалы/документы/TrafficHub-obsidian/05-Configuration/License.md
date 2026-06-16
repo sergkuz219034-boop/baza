@@ -41,7 +41,7 @@ flowchart LR
 
 ## Связанное
 
-- [[04-Database/control|control.db]]
-- [[03-API/Auth|Авторизация]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/control|control.db]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Авторизация]]
 - [[2026-06-12 LicenseKeygen UI и иконка]]
 - [[2026-06-12 LicenseKeygen и activation flow]]

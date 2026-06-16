@@ -56,7 +56,7 @@ sources: [Понятия/humanizing-ai-text.md, Источники/surgay-anti-p
 
 ## Связанные страницы
 
-- [[Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация текстов]]
-- [[Источники/istochnik-anti-palevo-9-pravil-redaktury|Первоисточник: 9 правил (PDF)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация текстов]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-anti-palevo-9-pravil-redaktury|Первоисточник: 9 правил (PDF)]]
 - [[_index|Каталог Вики]]
 

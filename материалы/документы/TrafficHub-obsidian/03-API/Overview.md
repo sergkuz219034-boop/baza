@@ -26,10 +26,10 @@ http://localhost:8080
 
 ## Авторизация
 
-См. [[03-API/Auth|Auth]]
+См. [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Auth]]
 
 ## Связанное
 
-- [[03-API/Auth|Авторизация]]
-- [[03-API/Endpoints|Эндпоинты]]
-- [[03-API/WebSocket|WebSocket]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Авторизация]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Endpoints|Эндпоинты]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/WebSocket|WebSocket]]

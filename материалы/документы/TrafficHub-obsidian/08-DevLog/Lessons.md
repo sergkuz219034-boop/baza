@@ -21,6 +21,6 @@
 
 ## Связанное
 
-- [[02-Modules/SuperJob|SuperJob Scraper]]
-- [[02-Modules/VbivBot|Playwright Vbiv Bot]]
-- [[04-Database/Schema|Схема БД]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/SuperJob|SuperJob Scraper]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/VbivBot|Playwright Vbiv Bot]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/Schema|Схема БД]]

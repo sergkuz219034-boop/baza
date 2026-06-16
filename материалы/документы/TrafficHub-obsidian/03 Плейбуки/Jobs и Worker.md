@@ -186,8 +186,8 @@
 ## Отдельно про `Воксис` / `leadsu`
 
 - На `2026-06-14` подтверждены два разных класса дефектов:
-  - blank DOM перед submit: [[01 Расследования/2026-06-14 Leadsu blank DOM before submit on Voxys]]
-  - ложный `submit not found` на непустом DOM: [[01 Расследования/2026-06-14 Leadsu false submit not found on non-blank Voxys DOM]]
+  - blank DOM перед submit: [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Leadsu blank DOM before submit on Voxys]]
+  - ложный `submit not found` на непустом DOM: [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Leadsu false submit not found on non-blank Voxys DOM]]
 - На `2026-06-15` подтвержден ещё один runtime path:
   - success popup реально появлялся, но общий `success_selector` мог не сработать, если видимым был не `first` match комбинированного селектора;
   - landing `pxl.leads.su` через proxy оставался intermittent и требовал отдельного retry budget для `leadsu`.
@@ -204,7 +204,7 @@
   3. применён ли hotfix `modules/platforms/leadsu.py` в source tree и контейнере;
   4. применён ли runtime fix `modules/platforms/base.py` для any-visible success selector;
   5. не идёт ли `pxl.leads.su -> voxys-rabota.ru` через proxy, хотя должен идти direct;
-  6. сверить с [[01 Расследования/2026-06-15 Voxys leadsu success selector и intermittent goto timeout]].
+  6. сверить с [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Voxys leadsu success selector и intermittent goto timeout]].
 
 ### 3. Worker упал или не забрал задачу
 
@@ -273,11 +273,11 @@
 
 ## См. также
 
-- [[01 Расследования/2026-06-07 Ничего не работает]]
-- [[01 Расследования/2026-06-11 Autolead owner-scoped jobs и UI-логи]]
-- [[01 Расследования/2026-06-12 Realtime статус задачи в live-логе]]
-- [[01 Расследования/2026-06-14 Heartbeat статус задачи мигал как transient spinner]]
-- [[01 Расследования/2026-06-14 Frontend затирал ts у структурированных log messages]]
-- [[01 Расследования/2026-06-14 Stop request lag и stop-сигнал без ⛔]]
-- [[04 Сущности/Job Queue]]
-- [[05 Решения/Очередь задач через Redis и worker]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-07 Ничего не работает]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-11 Autolead owner-scoped jobs и UI-логи]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-12 Realtime статус задачи в live-логе]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Heartbeat статус задачи мигал как transient spinner]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Frontend затирал ts у структурированных log messages]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Stop request lag и stop-сигнал без ⛔]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Job Queue]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/Очередь задач через Redis и worker]]

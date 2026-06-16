@@ -21,6 +21,6 @@ Mermaid-диаграммы схем каждого файла — в соотв�
 
 ## Связанное
 
-- [[04-Database/autolead|autolead.db]]
-- [[04-Database/control|control.db]]
-- [[04-Database/traffic|traffic_dashboard.db]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/autolead|autolead.db]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/control|control.db]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/traffic|traffic_dashboard.db]]

@@ -86,6 +86,6 @@
 
 ## См. также
 
-- [[04 Сущности/Google Sheets]]
-- [[01 Расследования/2026-06-15 Google Sheets insertion-by-date вместо append в конец]]
-- [[05 Решения/Autolead user settings и ownership]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Google Sheets]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Google Sheets insertion-by-date вместо append в конец]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/Autolead user settings и ownership]]

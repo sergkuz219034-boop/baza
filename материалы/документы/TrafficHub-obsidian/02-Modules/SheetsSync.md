@@ -76,5 +76,5 @@ Google Sheets не принимает ячейку больше 50 000 симв�
 
 ## Связанное
 
-- [[01-Architecture/DataFlow|Data Flow]]
-- [[04-Database/autolead|autolead.db]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/DataFlow|Data Flow]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/autolead|autolead.db]]

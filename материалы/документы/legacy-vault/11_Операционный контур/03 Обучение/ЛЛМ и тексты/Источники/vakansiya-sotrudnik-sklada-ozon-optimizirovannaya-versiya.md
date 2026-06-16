@@ -49,7 +49,7 @@ sources: [web-research, Синтез/standard-of-quality-vacancies.md, Поня�
 ---
 
 ## Связанные страницы
-- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — протокол уникализации и прогрева
-- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — почему заголовок составлен именно так
-- [[Стандарты/writing-principles|SOP: Стандарт качества]] — применение правил Кларка и Ильяхова
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — протокол уникализации и прогрева
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — почему заголовок составлен именно так
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Стандарты/writing-principles|SOP: Стандарт качества]] — применение правил Кларка и Ильяхова
 

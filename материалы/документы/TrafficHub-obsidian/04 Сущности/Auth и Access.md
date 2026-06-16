@@ -6,7 +6,7 @@
 - live code `api/autolead_access.py`
 - live code `api/server.py`
 - live code `config/settings.py`
-- расследование [[01 Расследования/2026-06-11 Live server sync и расхождения compose-access]]
+- расследование [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-11 Live server sync и расхождения compose-access]]
 
 ## Аутентификация
 

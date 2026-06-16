@@ -23,5 +23,5 @@ sources: [official-docs, web-synthesis]
 ## Связанные страницы
 - antidetect-setup — пошаговая настройка профиля (в разработке)
 - classifieds-warmup — как использовать эти браузеры для прогрева (в разработке)
-- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — технический контекст обхода модерации
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|tilda-bypass]] — технический контекст обхода модерации
 

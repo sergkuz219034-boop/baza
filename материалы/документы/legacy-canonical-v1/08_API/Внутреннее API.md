@@ -43,12 +43,12 @@
 
 ## Источник
 
-- [[raw/legacy-vault/01 Проекты/ТрафикХаб/Контур проекта]]
-- [[raw/legacy-vault/01 Проекты/ТрафикХаб/Точки входа]]
+- [[материалы/документы/legacy-vault/01 Проекты/ТрафикХаб/Контур проекта]]
+- [[материалы/документы/legacy-vault/01 Проекты/ТрафикХаб/Точки входа]]
 
 ## Полный API-архив
 
-- [[raw/docs/TrafficHub-obsidian/03-API/Overview|Legacy API overview]]
-- [[raw/docs/TrafficHub-obsidian/03-API/Endpoints|Legacy API endpoints]]
-- [[raw/docs/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]
-- [[raw/docs/TrafficHub-obsidian/03-API/WebSocket|Legacy API websocket]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Overview|Legacy API overview]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Endpoints|Legacy API endpoints]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Legacy API auth]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/WebSocket|Legacy API websocket]]

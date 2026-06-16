@@ -52,6 +52,6 @@ CREATE TABLE campaign_history (
 
 ## Связанное
 
-- [[05-Configuration/License|Лицензирование]]
-- [[03-API/Auth|Авторизация]]
-- [[04-Database/Schema|Схема БД]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/License|Лицензирование]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Auth|Авторизация]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/Schema|Схема БД]]

@@ -77,6 +77,6 @@
 
 ## См. также
 
-- [[02 Архитектура/Структура репозитория]]
-- [[05 Решения/PostgreSQL control store]]
-- [[05 Решения/Не делать big-bang миграцию SQLite в PostgreSQL]]
+- [[материалы/документы/TrafficHub-obsidian/02 Архитектура/Структура репозитория]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/PostgreSQL control store]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/Не делать big-bang миграцию SQLite в PostgreSQL]]

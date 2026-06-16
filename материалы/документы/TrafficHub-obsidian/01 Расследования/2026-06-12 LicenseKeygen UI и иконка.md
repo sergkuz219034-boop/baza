@@ -5,7 +5,7 @@
 - У формы не был задан `Icon`; в `LicenseKeygen.csproj` отсутствует `ApplicationIcon`, в коде формы тоже не было `Icon`.
 
 ## Зона системы
-- Standalone WinForms-клиент генерации лицензий: [[05-Configuration/License|Лицензирование]].
+- Standalone WinForms-клиент генерации лицензий: [[материалы/документы/TrafficHub-obsidian/05-Configuration/License|Лицензирование]].
 - Исходники: `LicenseKeygen.cs`, `LicenseKeygen.csproj`, `build_licensekeygen.ps1`.
 
 ## Гипотеза

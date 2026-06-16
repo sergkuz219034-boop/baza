@@ -69,5 +69,5 @@
 
 ## См. также
 
-- [[04 Сущности/Google Sheets]]
-- [[03 Плейбуки/Jobs и Worker]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Google Sheets]]
+- [[материалы/документы/TrafficHub-obsidian/03 Плейбуки/Jobs и Worker]]

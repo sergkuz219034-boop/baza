@@ -31,5 +31,5 @@ tools\windows_installer\build_setup.ps1
 
 ## Связанное
 
-- [[06-Deployment/Docker|Docker]]
-- [[06-Deployment/AccountManager|AccountManager]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Docker|Docker]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/AccountManager|AccountManager]]

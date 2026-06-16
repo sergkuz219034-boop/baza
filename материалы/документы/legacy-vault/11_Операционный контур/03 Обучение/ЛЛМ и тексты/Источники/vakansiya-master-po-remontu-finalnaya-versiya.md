@@ -74,8 +74,8 @@ version: 3
 
 ## Связанные страницы
 
-- [[Источники/vakansiya-otdelochnik-master-universal-finalnaya-versiya|v1 (черновик)]]
-- [[Источники/vakansiya-otdelochnik-master-universal-v2-finalnaya|v2 (расширенная)]]
-- [[Стандарты/compliance-rules|Правила написания вакансий]]
-- [[Источники/offer-otdelka-mastera-po-remontu|Оффер: Отделка+]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/vakansiya-otdelochnik-master-universal-finalnaya-versiya|v1 (черновик)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/vakansiya-otdelochnik-master-universal-v2-finalnaya|v2 (расширенная)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Стандарты/compliance-rules|Правила написания вакансий]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/offer-otdelka-mastera-po-remontu|Оффер: Отделка+]]
 

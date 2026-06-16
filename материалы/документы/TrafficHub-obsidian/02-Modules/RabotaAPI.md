@@ -25,5 +25,5 @@
 
 ## Связанное
 
-- [[01-Architecture/DataFlow|Data Flow]]
-- [[05-Configuration/Config|Конфигурация]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/DataFlow|Data Flow]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Config|Конфигурация]]

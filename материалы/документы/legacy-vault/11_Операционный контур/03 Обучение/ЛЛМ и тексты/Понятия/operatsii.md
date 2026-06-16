@@ -90,7 +90,7 @@ sources: [karpathy-llm-wiki.md]
 
 ## Связанные страницы
 
-- [[Понятия/arkhitektura-llm-wiki|Архитектура: три слоя]]
-- [[Понятия/indeksirovanie-i-logirovanie|Индексирование и логирование]]
-- [[Понятия/kompaktsiya-upravlenie-rostom-wiki|Компакция: управление ростом]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/arkhitektura-llm-wiki|Архитектура: три слоя]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/indeksirovanie-i-logirovanie|Индексирование и логирование]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/kompaktsiya-upravlenie-rostom-wiki|Компакция: управление ростом]]
 

@@ -36,4 +36,4 @@ docker compose up -d
 
 ## Связанное
 
-- [[06-Deployment/Docker|Docker]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Docker|Docker]]

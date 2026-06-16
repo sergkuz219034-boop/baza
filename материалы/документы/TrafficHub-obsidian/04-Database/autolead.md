@@ -94,5 +94,5 @@ CREATE TABLE autofit_seen (
 
 ## Связанное
 
-- [[01-Architecture/DataFlow|Data Flow]]
-- [[01-Architecture/Scoring|Скоринг]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/DataFlow|Data Flow]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/Scoring|Скоринг]]

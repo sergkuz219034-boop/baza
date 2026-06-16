@@ -117,10 +117,10 @@ Google Sheets в Autolead используются как два разных us
 
 ## См. также
 
-- [[01 Расследования/2026-06-12 Порядок дат в Google Sheets]]
-- [[01 Расследования/2026-06-15 Send/backlog больше не фильтруется повторно по периоду]]
-- [[01 Расследования/2026-06-15 Google Sheets insertion-by-date вместо append в конец]]
-- [[01 Расследования/2026-06-16 Worker image drift и queue workbook fallback в legacy spreadsheet]]
-- [[01 Расследования/2026-06-15 Резюме кандидата добавлено только в основную Google Sheets таблицу]]
-- [[01 Расследования/2026-06-15 Runtime restart-loop после rebuild был вызван missing import threading]]
-- [[05 Решения/Autolead user settings и ownership]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-12 Порядок дат в Google Sheets]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Send/backlog больше не фильтруется повторно по периоду]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Google Sheets insertion-by-date вместо append в конец]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-16 Worker image drift и queue workbook fallback в legacy spreadsheet]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Резюме кандидата добавлено только в основную Google Sheets таблицу]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Runtime restart-loop после rebuild был вызван missing import threading]]
+- [[материалы/документы/TrafficHub-obsidian/05 Решения/Autolead user settings и ownership]]

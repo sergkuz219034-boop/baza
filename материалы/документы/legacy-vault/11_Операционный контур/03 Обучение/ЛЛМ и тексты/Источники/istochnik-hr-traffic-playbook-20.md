@@ -60,8 +60,8 @@ Sell-out = страховка. Когда CPA-сделка срывается, �
 
 ## Связанные страницы
 
-- [[Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
-- [[Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов (уникализация)]]
-- [[Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
-- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/dvoynaya-monetizatsiya-v-hr-arbitrazhe|Концепция: Двойная монетизация]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/gumanizatsiya-ii-tekstov|Концепция: Гуманизация ИИ-текстов (уникализация)]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
 

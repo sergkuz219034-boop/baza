@@ -34,7 +34,7 @@ flowchart LR
 
 ## Связанное
 
-- [[01-Architecture/Overview|Архитектура]]
-- [[02-Modules/RabotaAPI|Rabota.ru API]]
-- [[02-Modules/SheetsSync|Google Sheets]]
-- [[02-Modules/VbivBot|Playwright Vbiv Bot]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/Overview|Архитектура]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/RabotaAPI|Rabota.ru API]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/SheetsSync|Google Sheets]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/VbivBot|Playwright Vbiv Bot]]

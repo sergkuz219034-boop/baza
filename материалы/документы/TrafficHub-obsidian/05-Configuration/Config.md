@@ -37,5 +37,5 @@ Cloud имеет приоритет для некоторых полей.
 
 ## Связанное
 
-- [[05-Configuration/Offers|Offer Mapping]]
-- [[05-Configuration/License|Лицензирование]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Offers|Offer Mapping]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/License|Лицензирование]]

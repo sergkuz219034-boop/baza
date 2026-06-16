@@ -24,7 +24,7 @@
 
 ## Глубокие ссылки
 
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]
-- [[raw/docs/TrafficHub-obsidian/06-Deployment/Docker|Legacy Docker note]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Docker|Legacy Docker note]]
 
-- [[raw/legacy-vault/01 Проекты/ТрафикХаб/Сервисы и контейнеры]]
+- [[материалы/документы/legacy-vault/01 Проекты/ТрафикХаб/Сервисы и контейнеры]]

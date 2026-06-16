@@ -31,5 +31,5 @@ sequenceDiagram
 
 ## Связанное
 
-- [[03-API/Overview|API Overview]]
-- [[06-Deployment/Docker|Docker]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Overview|API Overview]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Docker|Docker]]

@@ -4,7 +4,7 @@
 
 - Эта заметка фиксирует состояние до live SSH sync `2026-06-11`.
 - После подключения к серверу локальный `artifacts/remote_sync/docker-compose.yml` был переснят с live compose.
-- Актуальный server-side итог см. в [[01 Расследования/2026-06-11 Live server sync и расхождения compose-access]].
+- Актуальный server-side итог см. в [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-11 Live server sync и расхождения compose-access]].
 
 ## Симптом
 

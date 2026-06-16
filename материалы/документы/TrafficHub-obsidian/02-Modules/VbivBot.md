@@ -61,8 +61,8 @@
 
 ## Связанное
 
-- [[01-Architecture/DataFlow|Data Flow]]
-- [[05-Configuration/Offers|Offer Mapping]]
-- [[01 Расследования/2026-06-15 Platform fallback, disabled offer status и live debug прогон офферов]]
-- [[01 Расследования/2026-06-15 Voxys leadsu success selector и intermittent goto timeout]]
-- [[01 Расследования/2026-06-16 Онекта Tilda hidden successbox и отдельный browser на оффер]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/DataFlow|Data Flow]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Offers|Offer Mapping]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Platform fallback, disabled offer status и live debug прогон офферов]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Voxys leadsu success selector и intermittent goto timeout]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-16 Онекта Tilda hidden successbox и отдельный browser на оффер]]

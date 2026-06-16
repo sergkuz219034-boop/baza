@@ -57,7 +57,7 @@ sources: [Источники/hr-arbitrage-playbook.md, Источники/hr-tra
 
 ## Связанные страницы
 
-- [[Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
-- [[Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
-- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-arbitrage-playbook|Источник: HR Arbitrage Playbook]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-hr-traffic-playbook-20|Источник: HR Traffic Playbook 2.0]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Синтез: Архитектура HR-арбитража]]
 

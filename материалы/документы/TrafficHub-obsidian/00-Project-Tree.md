@@ -201,9 +201,9 @@ TrafficHub/
 
 ## 6. См. также
 
-- [[02 Архитектура/00 Обзор]]
-- [[04 Сущности/Контейнеры и сервисы]]
-- [[04 Сущности/Control Store]]
-- [[04 Сущности/Job Queue]]
-- [[04 Сущности/Auth и Access]]
-- [[01 Расследования/2026-06-11 Live server sync и расхождения compose-access]]
+- [[материалы/документы/TrafficHub-obsidian/02 Архитектура/00 Обзор]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Control Store]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Job Queue]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Auth и Access]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-11 Live server sync и расхождения compose-access]]

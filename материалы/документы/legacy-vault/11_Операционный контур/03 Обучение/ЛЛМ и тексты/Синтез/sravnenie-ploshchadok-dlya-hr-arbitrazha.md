@@ -21,6 +21,6 @@ sources: [Понятия/rabota-ru-rules.md, classifieds-recruitment.md]
 ---
 
 ## Связанные страницы
-- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|Правила Работа.ру]]
-- [[Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура системы]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|Правила Работа.ру]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Синтез/arkhitektura-hr-arbitrazha-polnaya-sistema|Архитектура системы]]
 

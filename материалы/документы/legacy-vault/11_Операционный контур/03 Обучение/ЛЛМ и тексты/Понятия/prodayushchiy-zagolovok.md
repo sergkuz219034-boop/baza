@@ -19,6 +19,6 @@ sources: [Источники/dmitry-kot-copywriting.md]
 - Капслок и лишние знаки (бан со стороны модерации площадок).
 
 ## Связанные страницы
-- [[Понятия/yazyk-vygody|язык-выгоды]] — база для создания заголовка
-- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — ограничения площадок на заголовки
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/yazyk-vygody|язык-выгоды]] — база для создания заголовка
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — ограничения площадок на заголовки
 

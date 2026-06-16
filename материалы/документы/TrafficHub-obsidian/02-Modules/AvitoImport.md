@@ -15,5 +15,5 @@
 
 ## Связанное
 
-- [[01-Architecture/DataFlow|Data Flow]]
-- [[03-API/Endpoints|API Endpoints]]
+- [[материалы/документы/TrafficHub-obsidian/01-Architecture/DataFlow|Data Flow]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Endpoints|API Endpoints]]

@@ -74,4 +74,4 @@
   - stop/progress/state продолжают идти через Redis;
   - owner-scoped app logs подтверждены на runtime для `debug-worker-a` и `debug-worker-b`.
 - Актуальное follow-up расследование:
-  - [[01 Расследования/2026-06-14 Worker переведён на subprocess-per-owner и разрешил multi-owner parallel]]
+  - [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-14 Worker переведён на subprocess-per-owner и разрешил multi-owner parallel]]

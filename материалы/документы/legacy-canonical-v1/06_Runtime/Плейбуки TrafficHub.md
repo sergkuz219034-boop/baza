@@ -2,13 +2,13 @@
 
 Полный импорт runtime/playbook материалов:
 
-- [[raw/docs/TrafficHub-obsidian/03 Плейбуки/Jobs и Worker|Jobs и Worker]]
+- [[материалы/документы/TrafficHub-obsidian/03 Плейбуки/Jobs и Worker|Jobs и Worker]]
 
 Дополнительные runtime-сущности в imported archive:
 
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Хранилища и runtime артефакты|Хранилища и runtime артефакты]]
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]
-- [[raw/docs/TrafficHub-obsidian/04 Сущности/Job Queue|Job Queue]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Хранилища и runtime артефакты|Хранилища и runtime артефакты]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Контейнеры и сервисы|Контейнеры и сервисы]]
+- [[материалы/документы/TrafficHub-obsidian/04 Сущности/Job Queue|Job Queue]]
 
 ## Роль страницы
 

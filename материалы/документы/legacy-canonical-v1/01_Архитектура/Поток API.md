@@ -35,6 +35,6 @@
 
 ## Глубокие ссылки
 
-- [[08_API/Внутреннее API|Внутреннее API]]
-- [[raw/docs/TrafficHub-obsidian/03-API/Overview|Legacy API overview]]
-- [[raw/docs/TrafficHub-obsidian/03-API/Endpoints|Legacy API endpoints]]
+- [[материалы/документы/legacy-canonical-v1/08_API/Внутреннее API|Внутреннее API]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Overview|Legacy API overview]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/Endpoints|Legacy API endpoints]]

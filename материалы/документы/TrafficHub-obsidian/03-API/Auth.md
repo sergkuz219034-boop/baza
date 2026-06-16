@@ -29,5 +29,5 @@ graph LR
 
 ## Связанное
 
-- [[05-Configuration/Config|Конфигурация]]
-- [[04-Database/control|control.db]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Config|Конфигурация]]
+- [[материалы/документы/TrafficHub-obsidian/04-Database/control|control.db]]

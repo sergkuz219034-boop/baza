@@ -22,5 +22,5 @@
 
 ## Связанное
 
-- [[08-DevLog/Lessons|Уроки разработки]]
-- [[05-Configuration/Config|Конфигурация]]
+- [[материалы/документы/TrafficHub-obsidian/08-DevLog/Lessons|Уроки разработки]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Config|Конфигурация]]

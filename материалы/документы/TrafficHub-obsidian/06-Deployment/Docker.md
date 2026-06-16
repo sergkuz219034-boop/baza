@@ -38,5 +38,5 @@ docker compose up -d
 
 ## Связанное
 
-- [[06-Deployment/Windows|Windows Setup]]
-- [[03-API/WebSocket|WebSocket]]
+- [[материалы/документы/TrafficHub-obsidian/06-Deployment/Windows|Windows Setup]]
+- [[материалы/документы/TrafficHub-obsidian/03-API/WebSocket|WebSocket]]

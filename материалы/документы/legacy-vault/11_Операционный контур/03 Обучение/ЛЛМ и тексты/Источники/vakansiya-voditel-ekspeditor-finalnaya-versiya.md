@@ -63,7 +63,7 @@ status: "published-ready"
 
 ## Связанные страницы
 
-- [[Стандарты/compliance-rules|Правила написания уникальных вакансий]]
-- [[Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
-- [[Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Протокол обхода модерации]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Стандарты/compliance-rules|Правила написания уникальных вакансий]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Источники/istochnik-classifieds-recruitment-playbook|Classifieds Recruitment Playbook]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/tekhnicheskiy-protokol-obkhoda-moderatsii|Протокол обхода модерации]]
 

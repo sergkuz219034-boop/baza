@@ -53,7 +53,7 @@ sources: [web-research, Синтез/vacancy-writing-checklist.md, Поняти�
 ---
 
 ## Связанные страницы
-- [[Стандарты/generator-sop|Мастер-чек-лист]]
-- [[Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила площадки
-- [[Понятия/silnye-glagoly|сильные-глаголы]] — использованы при описании задач
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Стандарты/generator-sop|Мастер-чек-лист]]
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/pravila-rabotaru-kak-sozdavat-vakansii-i-izbegat-blokirovok|rabota-ru-rules]] — правила площадки
+- [[материалы/документы/legacy-vault/11_Операционный контур/03 Обучение/ЛЛМ и тексты/Понятия/silnye-glagoly|сильные-глаголы]] — использованы при описании задач
 

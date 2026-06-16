@@ -38,6 +38,6 @@ Live runtime читает локальные офферы из user-scoped `offe
 
 ## Related
 
-- [[05-Configuration/Config|Config]]
-- [[02-Modules/VbivBot|Playwright Vbiv Bot]]
-- [[01 Расследования/2026-06-15 Platform fallback, disabled offer status и live debug прогон офферов]]
+- [[материалы/документы/TrafficHub-obsidian/05-Configuration/Config|Config]]
+- [[материалы/документы/TrafficHub-obsidian/02-Modules/VbivBot|Playwright Vbiv Bot]]
+- [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-15 Platform fallback, disabled offer status и live debug прогон офферов]]
