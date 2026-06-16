@@ -28,6 +28,19 @@
 - `/api/avito`
 - `/api/control`
 
+## Access contract
+
+- browser session опирается на cookie `traffichub_session`;
+- basic auth fallback допустим для HTTP-path без session;
+- websocket path (`/ws/log`, `/ws/status`) требует session principal и не является полноценным Basic-auth контуром;
+- helper `check_ws_basic_token()` исторически назван неудачно: фактически он не даёт отдельного token-auth для websocket.
+
+## Account Manager bridge
+
+- `GET /api/account-manager/token` доступен аутентифицированному пользователю;
+- bridge выдаёт HS256 JWT с `sub`, `username`, `role`, `iat`, `exp`;
+- окончательные role restrictions остаются внутри самого Account Manager.
+
 ## Источник
 
 - [[01 Проекты/ТрафикХаб/Контур проекта]]
