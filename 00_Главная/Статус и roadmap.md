@@ -29,19 +29,11 @@
 - основной active runtime Autolead уже PostgreSQL-first;
 - `traffic_hub` product DB на live тоже уже PostgreSQL-first;
 - `control_store` на live тоже уже PostgreSQL-first, хотя `control.db` как legacy artefact всё ещё существует;
-- SQLite остаётся в коде как:
-  - fallback/test backend;
-  - schema init для legacy-совместимости;
-  - часть maintenance и локальных util-path;
-- `control_store` при этом остаётся отдельным legacy/hybrid storage-контуром и не должен использоваться как shorthand-объяснение для всего runtime;
+- SQLite остаётся в коде как fallback / compatibility / test surface, а не как основной live backend;
 - следующий инженерный этап уже не “перенести `autofit`/`invites`/`control_sync`”, а:
   - проверить и сузить remaining SQLite surface;
   - решить, что оставлять как compatibility layer, а что можно удалить из active runtime contract.
-- детальный live-аудит хвостов: [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-17 Remaining SQLite surface после PostgreSQL-first runtime]]
-- backend summary:
-  - [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-17 Live product DB backend for stats_service]]
-  - [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-17 Live control_store backend]]
-  - [[материалы/документы/TrafficHub-obsidian/01 Расследования/2026-06-17 Test-only SQLite surface]]
+- сводная backend-матрица и ссылки на все подтверждения: [[00_Главная/Дашборд|Дашборд]]
 
 ## Roadmap по знаниям
 
