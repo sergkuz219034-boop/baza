@@ -1,6 +1,0 @@
-# Lessons Learned
-
-- **Lesson 1 (2026-04-18)**: "Standard/Template" descriptions in job postings are not acceptable. Even for traditional platforms like работа.ру, the text must be engaging, unique, and clearly stand out from the gray mass of typical accounting vacancies. Rule to self: always write non-cliché introductions that hook the candidate immediately.
-- **Lesson 2 (2026-04-18)**: For platforms like Работа.ру, the tone must remain serious. Avoid overly emotional or colloquial text ("хаос", "пожарная команда"). Keep blocks concise and strictly adhere to a 5-block structure using bullet points for readability.
-- **Lesson 3 (2026-04-18)**: Avoid over-engineering job requirements. Too complex requirements filter out capable candidates holding impostor syndrome. Extract complex requirements and simplify them to the bare minimum needed for Day 1. Always modularize sections (like Requirements) in Obsidian to improve reusability across different job posts.
-- **Lesson 4 (2026-04-18)**: **STRICT RULE**: Never mention age requirements in a job posting (it violates local laws and repels candidates). Additionally, avoid the bureaucratic word "наличие" (presence of) when describing what a candidate needs; rephrase it dynamically (e.g. "потребуется инструмент").

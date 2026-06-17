@@ -72,7 +72,7 @@
   - `compose snapshot`;
   - `server snapshot 2026-06-04`;
   - `гипотеза`.
-- `[[00-Project-Tree]]` нельзя трактовать как фактическое локальное дерево файлов; это реконструированная карта server repo.
+- `[[материалы/документы/TrafficHub-obsidian/00-Project-Tree|00-Project-Tree]]` нельзя трактовать как фактическое локальное дерево файлов; это реконструированная карта server repo.
 - Утверждения про `worker` / `redis` / `postgres` остаются валидными только как last confirmed runtime snapshot, пока не получен новый live-срез.
 
 ## Следующий шаг
