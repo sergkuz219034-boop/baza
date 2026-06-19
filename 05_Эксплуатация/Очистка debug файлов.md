@@ -41,3 +41,9 @@ docker compose up -d --build autolead_bot
 ```
 
 Простой `docker restart autolead_server_bot` не применит изменения исходников.
+
+Если менялась логика полного цикла или строк рабочих логов, дополнительно пересобрать worker:
+
+```bash
+docker compose up -d --build worker
+```
