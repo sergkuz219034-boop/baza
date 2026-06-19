@@ -60,6 +60,30 @@ Root cause был не только в данных `alex`, а в общем cod
 - `app_id/app_secret` присутствуют в runtime;
 - его owner-scoped pending/processed bindings сохранены.
 
+Повторная live-проверка 2026-06-19 показала второй системный дефект того же слоя:
+
+- часть user-profile могла хранить чужой `autolead_owner_username` или вообще не хранить его;
+- sparse profile исправлялся в runtime только частично, но не пересохранялся обратно в `control_user_app_configs`;
+- из-за этого старые или повреждённые owner-scoped профили могли снова всплывать после следующих сохранений и reload.
+
+Дополнительный фикс в `TrafficHub` commit `d3dee1a`:
+
+- добавлен `_normalize_user_profile_identity(profile, username)`;
+- `_load_user_config_profile()` теперь принудительно нормализует `autolead_owner_username` под текущего пользователя;
+- после merge/default/self-heal профиль пересохраняется обратно в `control_user_app_configs`, если runtime его исправил;
+- это делает repair постоянным для текущих и будущих пользователей, а не только для текущего процесса.
+
+Live-верификация после deploy `d3dee1a`:
+
+- `docker exec autolead_server_bot pytest -q tests/test_config_merge.py tests/test_leads_service_sheets_flow.py tests/test_sheets_queues.py tests/test_vbiv_offer_matching.py`
+- результат: `35 passed`
+- active user profiles в `control_store` после forced reload:
+  - `admin -> owner=admin`
+  - `alex -> owner=alex`
+  - `artem -> owner=artem`
+  - `kursmerkusheva@gmail.com -> owner=kursmerkusheva@gmail.com`
+  - `dev -> owner отсутствует, pending/processed sheets не заданы, operational contour не настроен`
+
 ## Вывод
 
 Проблема была системной: sparse user-profile без fallback-наследования мог сделать "пустого" пользователя даже при живом backend и валидных owner bindings.
@@ -68,7 +92,8 @@ Root cause был не только в данных `alex`, а в общем cod
 
 - owner-profile наследует рабочие operational defaults из базового конфига;
 - пустые Google Sheets override-поля не должны затирать fallback без необходимости;
-- проблема закрыта не только для `alex`, а для любого user со sparse profile.
+- owner identity в user-profile самовосстанавливается и записывается обратно в `control_store`;
+- проблема закрыта не только для `alex`, а для любого текущего и будущего user со sparse profile, если у него вообще есть валидно заведённый owner-scoped контур.
 
 ## Следующий шаг
 
