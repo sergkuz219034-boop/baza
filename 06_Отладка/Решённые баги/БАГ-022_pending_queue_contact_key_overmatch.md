@@ -1,0 +1,54 @@
+# БАГ-022: pending-очередь массово маркировалась по contact-key вместо точной строки
+
+## Симптом
+
+У части пользователей после последних фиксов строка:
+
+- `Отработанная таблица: +0, статусов в pending: N`
+
+могла внезапно показывать тысячи строк, хотя реально в pending-очереди было значительно меньше лидов.
+
+## Зона системы
+
+- `modules/sheets_sync.py`
+- `mark_pending_leads_processed()`
+- pending Google Sheets queue `Все лиды`
+
+## Гипотеза
+
+Маркировка pending-строк использовала точный `_sheet_row`, но одновременно строила fallback-индекс по телефону/email даже для тех результатов, где `_sheet_row` уже известен. Если в pending были дубли по телефону/email, один `lead_result` мог разметить не только свою строку, а весь кластер дублей.
+
+## Проверка
+
+- В коде `mark_pending_leads_processed()` до фикса каждый `result` попадал и в `result_by_row`, и в `result_by_key`.
+- При обходе pending-листа строка без прямого попадания в `result_by_row` всё равно могла совпасть по `phone/email` через `result_by_key`.
+- Это открывало путь к массовому ложному `touched_rows`, хотя отправка реально происходила только по части строк.
+
+## Наблюдение
+
+Root cause был в смешении двух разных режимов сопоставления:
+
+- точная привязка к строке очереди через `_sheet_row`;
+- fallback по `phone/email`, нужный только для сценариев без `_sheet_row`.
+
+Фикс:
+
+- если у `lead_result` есть валидный `_sheet_row`, он больше не попадает в `result_by_key`;
+- fallback по `phone/email` остаётся только для результатов без `_sheet_row`.
+
+Добавлены regression tests:
+
+- `test_mark_pending_leads_processed_prefers_explicit_sheet_row_over_contact_key_duplicates`
+- `test_mark_pending_leads_processed_uses_contact_key_fallback_when_sheet_row_missing`
+
+## Вывод
+
+Проблема была не в UI и не в самой Google Sheets интеграции, а в логике owner-queue reconciliation. После фикса pending-статусы должны проставляться только в реально обработанные строки, даже если в очереди есть повторяющиеся телефоны или email.
+
+## Следующий шаг
+
+- при повторении симптома сначала сравнивать:
+  - реальный размер `load_pending_leads_for_send()`;
+  - число `lead_results`;
+  - число `touched_rows` в `mark_pending_leads_processed()`;
+- отдельно держать под наблюдением очереди с массовыми дублями по одному номеру.
