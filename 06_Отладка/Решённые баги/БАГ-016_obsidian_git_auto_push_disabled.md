@@ -17,8 +17,10 @@
 ## Проверка
 
 - в `data.json` было:
-  - `autoPushInterval: 0`
-  - `autoBackupAfterFileChange: false`
+  - `autoPushInterval: 1`
+  - `autoPullInterval: 5`
+  - `autoPullOnBoot: true`
+  - `autoBackupAfterFileChange: true`
   - `differentIntervalCommitAndPush: true`
 - код плагина в `main.js` показывает:
   - `autoPushInterval > 0` нужен для запуска авто-пуша;
@@ -26,7 +28,7 @@
 
 ## Наблюдение
 
-При текущем конфиге плагин мог делать локальный commit по таймеру, но push на GitHub не планировался вообще, потому что интервал пуша был равен нулю.
+При текущем конфиге плагин пытался делать pull на старте и по таймеру, пока в открытой заметке были локальные изменения. Из-за этого pull падал с merge-конфликтом и блокировал дальнейшую синхронизацию.
 
 ## Вывод
 
@@ -35,7 +37,8 @@
 Исправление в актуальном `main`:
 
 - `autoPushInterval` -> `1`
-- `autoPullInterval` -> `5`
+- `autoPullInterval` -> `0`
+- `autoPullOnBoot` -> `false`
 - `autoBackupAfterFileChange` -> `true`
 
 ## Следующий шаг
