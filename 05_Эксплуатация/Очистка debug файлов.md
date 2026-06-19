@@ -30,6 +30,8 @@
 
 Блок `Системная информация`, GitHub update controls и управление данными доступны только admin. Admin-only элементы скрыты по умолчанию на CSS уровне и раскрываются frontend'ом только после подтверждения роли `admin`.
 
+Settings export/import controls тоже считаются admin-only и стартуют с HTML `hidden`, чтобы обычный `user` не видел их при загрузке страницы.
+
 ## Deployment note
 
 Код dashboard и API находится внутри Docker image. После изменения `dashboard/index.html` или `api/routers/settings_maintenance.py` нужен rebuild:
