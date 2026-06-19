@@ -1,0 +1,38 @@
+# БАГ-005 Дублирование stop-логов в dashboard
+
+## Симптом
+В терминале dashboard при остановке полного цикла появлялись две строки за одну операцию:
+
+- `⛔ Полный цикл остановка`
+- `⛔ Полный цикл остановлен`
+
+Перед строкой дополнительно рисовался красный круглый marker, поэтому визуально получалось `красный круг + ⛔`.
+
+## Зона системы
+- `api/server.py` — websocket relay job events в `_job_event_log_payload`.
+- `dashboard/app.js` — `syncRealtimeJobSpinner`, `renderLogLine`.
+- `dashboard/style.css` — marker логов `.log-marker`.
+
+## Гипотеза
+Дублирование создаётся двумя независимыми потоками:
+
+- backend пишет log payload для `job_stop_requested`;
+- frontend на status `stopping` синтезирует spinner-log `остановка`.
+
+Красный круг появляется потому, что `⛔` классифицируется как `ERROR`, а `.log-line.ERROR .log-marker` рисует красный marker.
+
+## Проверка
+Код подтвердил гипотезу:
+
+- `api/server.py` до правки возвращал отдельный payload для `job_stop_requested`;
+- `dashboard/app.js` до правки включал `stopping` в `syncRealtimeJobSpinner`;
+- `renderLogLine` всегда рисовал пустой круглый `.log-marker`, независимо от текста.
+
+## Наблюдение
+Финальная строка `job_stop` достаточна для пользователя. Промежуточная `остановка` не несёт отдельного полезного знания и засоряет терминал.
+
+## Вывод
+Каноничное поведение: одна строка на остановку задачи, с emoji-marker `⛔` вместо красного круга.
+
+## Следующий шаг
+Проверять новые log/status события через два источника: backend websocket event relay и frontend status polling, чтобы не вводить повторную синтетическую строку.
