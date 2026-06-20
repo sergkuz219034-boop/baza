@@ -46,6 +46,15 @@ Live-проверка после выкладки:
 - `docker exec autolead_server_bot pytest -q tests/test_leadsu_blank_recovery.py tests/test_sheets_queues.py`
 - результат: `26 passed`
 
+Runtime-аудит 2026-06-21:
+
+- product HEAD: `7bfc53694`;
+- свежих `debug_Воксис_*` после `2026-06-20 12:26 MSK` нет;
+- свежих `Воксис / кнопка submit / leadsu blank` строк в контейнерных логах после деплоя нет;
+- в `autolead_retry_queue` были две старые истёкшие строки `admin / Воксис` с `retry_count=3`, `max_retries=3`;
+- эти строки не были активной очередью, но были удалены cleanup-запросом;
+- после cleanup active retry queue по всем пользователям: `0`.
+
 ## Вывод
 
 Root cause был в нестабильном runtime-состоянии страницы оффера, а не только в DOM-селекторе submit. После фикса `leadsu` имеет второй recovery-контур: `reload` -> повторный `goto(target_url)`.
