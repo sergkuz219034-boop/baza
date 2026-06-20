@@ -53,3 +53,6 @@
 
 ### Дополнительный фикс
 Мерцание строки `Полный цикл выполняется` было frontend-регрессией: `dashboard/app.js::syncRealtimeJobSpinner` удалял `.log-spinner` на каждом status update и тут же создавал его заново. Исправлено на in-place обновление: spinner удаляется только при выходе из статусов `queued/running`.
+
+### Поведение времени цикла
+Для live spinner-строки слева показывается длительность текущей задачи в формате `HH:MM:SS`, а не время последнего status update. Источник: `dashboard/app.js::jobCycleDurationTimestamp`, для `running` используется `started_at`, для `queued` используется `queued_at`.
