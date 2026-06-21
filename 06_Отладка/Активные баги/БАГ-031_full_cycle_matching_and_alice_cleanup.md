@@ -7,6 +7,7 @@
 - `/login` на live падал 500 с `render_dashboard_index() missing 1 required positional argument: dashboard_dir`.
 - После тестовых прогонов `alice` появилась повторно в live PostgreSQL.
 - Строки основной таблицы с `Номер=нету` схлопывались дедупликацией в одну строку и не закрывались статусом.
+- VkusVill (`leadsu/vkusvill`) периодически падал как `форма не подтверждена после отправки`; по debug HTML видимая форма оставляла `input[name="CITY"]` пустым.
 
 ## Зона системы
 
@@ -17,6 +18,7 @@
 - `services/leads_service.py` — дедупликация перед `run_sender()`.
 - `tests/conftest.py` — cleanup тестовых identities при pytest.
 - `modules/sheets_sync.py` — запись статусов основной таблицы по `_sheet_row`.
+- `modules/platforms/lovko.py` — заполнение формы VkusVill и закрепление hidden-полей города перед submit.
 
 ## Гипотеза
 
@@ -25,6 +27,7 @@
 - У `alex` в настройках были чужие/admin `vacancy_id=54257329`, поэтому matching не мог сработать на его собственных строках.
 - Повторная `alice` создавалась не пользователем, а тестами, которые в контейнере видели live `DATABASE_URL`.
 - Дедупликация считала `нету` реальным телефоном, поэтому сотни строк без телефона становились одним "дублем".
+- У VkusVill JS сайта после клика по городу выставлял `REGION_ID/REGION_NAME`, но очищал hidden `CITY`; визуально город был `г. Москва`, а submit-валидация всё равно считала поле пустым.
 
 ## Проверка
 
@@ -59,6 +62,25 @@
   - `alex`: `pending_total=412`, все с телефоном;
   - `kursmerkusheva@gmail.com`: `pending_total=195`, все с телефоном;
   - `sergkuz2190`: runtime не готов, нет настроенных таблиц/service account.
+- VkusVill debug HTML `2026-06-21`:
+  - форма содержит `.js-request-city-input-name` со значением `г. Москва`;
+  - `REGION_ID=3872`, `REGION_NAME=Москва и область`;
+  - `input[name="CITY"]` оставался пустым и блок `.js-request-city-input` имел `_error` с текстом `Укажите город трудоустройства`.
+- После фикса `modules/platforms/lovko.py`:
+  - город выбирается только из `.js-request-city-items button.js-request-city-item`, а не из верхнего калькулятора страницы;
+  - `CITY/REGION_ID/REGION_NAME/REGION_SUBDOMAIN` проставляются во все matching hidden inputs;
+  - перед submit ставится lock на `input[name="CITY"]`, чтобы JS сайта не перезаписал значение пустотой;
+  - пустой landing VkusVill возвращает `leadsu/vkusvill: landing пустой после повторной загрузки`, это transient и не permanent form-failure.
+- Проверка VkusVill smoke на live для `alex`: один pending-лид `Вера Иванова`, оффер `ВкусВилл`, результат `sent=1`, `errors=0`, `Оффер ВкусВилл успешно заполнен!`.
+- Full pytest в контейнере после фикса: `300 passed, 43 skipped`.
+- Rebuilt-container targeted pytest после deploy: `38 passed`.
+- Product commit/deploy: `4833afa15 fix: stabilize vkusvill form city submit`; `origin/main` совпал с server HEAD, `autolead_bot` и `worker` пересозданы, `/api/health` OK.
+- Аудит пользователей после deploy:
+  - `admin`: таблицы и service account есть, active offers `Воксис`, `Онекта`, pending `0`;
+  - `artem`: таблицы и service account есть, active offers `Воксис`, `Онекта`, pending `0`;
+  - `alex`: таблицы и service account есть, active offers `Дикси`, `X5`, `Воксис`, `Онекта`, `ВкусВилл`, `Onecta #2`, pending `409`, все с телефонами;
+  - `kursmerkusheva@gmail.com`: таблицы и service account есть, active offers `Воксис`, pending `193`, все с телефонами;
+  - `sergkuz2190`: не готов к full-cycle, нет таблиц/service account/offers.
 
 ## Наблюдение
 
@@ -69,9 +91,11 @@
 - Safe full-cycle для `alex` был остановлен вручную как тестовый зависший процесс; run `60` помечен `interrupted`, `sent=0`, `errors=0`.
 - Коммиты product repo:
   - `57f5ed37e` — `fix: prevent test identities and no-phone dedupe leaks`;
-  - `e4aacfd0b` — `fix: use clear russian sheet log labels`.
-- После `e4aacfd0b` live `/api/health` OK, `autolead_bot` и `worker` healthy.
-- GitHub remote `main` совпал с server HEAD `e4aacfd0b`; checks с сервера не прочитаны, потому что `gh` не установлен.
+  - `e4aacfd0b` — `fix: use clear russian sheet log labels`;
+  - `dd3a7e3bd` — `fix: treat blank leadsu landings as transient`;
+  - `4833afa15` — `fix: stabilize vkusvill form city submit`.
+- После `4833afa15` live `/api/health` OK, `autolead_bot` и `worker` healthy.
+- GitHub remote `main` совпал с server HEAD `4833afa15`; checks с сервера не прочитаны, потому что `gh` не установлен.
 
 ## Вывод
 
@@ -81,10 +105,11 @@
 - Root cause по повторной `alice`: pytest запускался внутри контейнера с live PostgreSQL `DATABASE_URL`; тестовая identity из auth/migration tests попадала в live tables. Защита: `tests/conftest.py` чистит known test identities до и после pytest.
 - Root cause по no-phone строкам: placeholder `нету` участвовал в phone-dedupe как настоящий телефон. Исправление: dedupe применяется только к реальным телефонам, placeholders не считаются ключом.
 - Пользовательский термин `pending` в логах заменён на "основная таблица"; `processed` описывается как "отработанная таблица".
-- Полная цель ещё не закрыта: `kursmerkusheva@gmail.com` имеет 195 реальных телефонных строк на `Воксис`; боевой прогон будет создавать реальные отправки и должен выполняться отдельно под техработами с контролем логов и последующей очисткой тестовой истории.
+- Root cause по VkusVill: автоматизация выбирала/синхронизировала не тот city-state. Страница имеет верхний калькулятор города и форму отклика; hidden `CITY` формы отклика очищался JS сайта перед submit. Исправление: выбор city item ограничен формой отклика, hidden city fields синхронизируются во всех формах и `CITY` защищается от очистки непосредственно перед submit.
+- Массовая реальная отправка по `alex`/`kursmerkusheva@gmail.com` не запускалась: у них остались реальные строки с телефонами, такой прогон создаёт боевые заявки. Проверка выполнена controlled smoke.
 
 ## Следующий шаг
 
 1. Не запускать массовую реальную отправку по `alex`/`kursmerkusheva@gmail.com` без контролируемого окна: у них остались только строки с телефонами.
-2. Проверить боевую отправку на ограниченном объёме через `admin`/`artem`, как разрешённый smoke-контур.
-3. После всех live-run очистить тестовые логи пользователей и отключить техработы только после проверки.
+2. Если нужен полный боевой прогон, запускать его под техработами и заранее согласовать объём, потому что это реальные заявки.
+3. `sergkuz2190` нужно сначала донастроить: таблицы, service account, active offers.
