@@ -84,6 +84,9 @@
 - Maintenance mode виден users, но не должен блокировать admins.
 - Live container `/app` должен соответствовать `origin/main`, а не старому mutable слою.
 - GitHub checks должны быть зелёными после push.
+- Любой tenant-scoped write в `traffic_hub` обязан явно передавать `tenant_id` и, где есть owner model, `owner_username`.
+- Если баг виден у `artem`, `alex` или другого user, считать его общесистемным, пока код/runtime не доказал обратное.
+- Если full suite green, но live logs показывают DB constraint error, доверять live DB/runtime и добавлять недостающий regression test.
 
 ## Стандарт фикса
 
