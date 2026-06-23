@@ -87,15 +87,14 @@
 
 ## Следующий шаг
 
-1. Исправить `google_sheets` нормализацию: убрать принудительную перезапись `pending_sheet_name/processed_sheet_name`.
-2. Развести queue worksheet semantics: `pending` и `processed` должны быть независимыми и документированными.
-3. Ужесточить `_scheduler_run_enabled()`:
-   - не считать default `google_sheets.enabled=true` достаточным;
-   - требовать реальный runtime-path: offers, invite/responses/autofit или валидный queue-binding.
-4. Переделать settings export/import в owner-scoped механизм:
-   - export только в контексте текущего пользователя;
-   - import без удаления чужих shared-secret файлов;
-   - отдельный admin-only global backup делать явным отдельным endpoint.
-5. Добить live cleanup:
+1. Завершено 2026-06-23: settings export/import переведён в owner-scoped режим.
+   - `api/routers/settings.py` теперь экспортирует bundle только для текущего пользователя.
+   - import больше не пишет в общий `secrets/` и не удаляет чужие secret-файлы.
+   - `api/routers/settings_bundle.py` собирает секреты из user auth cloud-профиля и пишет только `service_account__{username}.json`.
+2. Завершено 2026-06-23: `_scheduler_run_enabled()` ужесточён.
+   - default `google_sheets.enabled=true` больше не считается достаточным;
+   - нужен реальный sheet binding (`pending_spreadsheet_id`, `processed_spreadsheet_id` или `spreadsheet_id`) либо активный runtime-path через offers/Rabota.
+3. Отдельно проверить и решить, нужно ли менять жёсткую модель queue worksheet names (`Все лиды`) или это осознанный контракт.
+4. Добить live cleanup:
    - убрать или вынести `standalone_content_bot` из основного compose-контура;
    - вернуть clean server repo перед следующими крупными изменениями.
