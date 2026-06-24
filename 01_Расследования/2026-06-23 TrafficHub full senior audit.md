@@ -3,7 +3,7 @@
 ## Статус
 
 - Тип: доказательный Senior-аудит live-контура.
-- Режим: product code не менялся.
+- Режим: 2026-06-23 аудит без изменения product-кода; 2026-06-24 переведено в режим исправления P1/P2.
 - Источник истины: `/root/TrafficHub`, containers, PostgreSQL, Redis, live logs, tests, API/runtime.
 - Техработы: включены в runtime container: `maintenance_mode=True`, `maintenance_message="Тех работы"`.
 
@@ -54,6 +54,7 @@
 - Test gap: `tests/test_integrations_sync.py` проверяет `log.raw_data["source"]`, но не проверяет `log.tenant_id`; SQLite fixture не ловит live `NOT NULL`.
 - Risk: sync Leads.su/Lovko может ломаться для любого пользователя с партнёрскими интеграциями.
 - Fix plan: добавить `tenant_id` и `owner_username` в `_import_network_conversions`; добавить regression test на tenant/owner в `PostbackLog`; прогнать PostgreSQL-like или explicit assertion.
+- Fix 2026-06-24: закрыто commit `3f42f069b`. `PostbackLog` теперь создаётся с `tenant_id` и `owner_username`; `tests/test_integrations_sync.py` проверяет tenant/owner для `Conversion`, `FinancialRecord`, `PostbackLog`.
 
 ### P1/P2: role drift между license-store и embedded TrafficHub DB
 
@@ -63,6 +64,7 @@
 - Files: `traffic_hub/authz.py::ensure_license_user`, auth/session paths.
 - Risk: если роль меняется в license contour, stale role в embedded DB может сохраняться до reauth/ensure-path.
 - Fix plan: сделать синхронизацию роли обязательной на каждом защищённом запросе или добавить migration/repair job; добавить тест `license role downgrade updates users.role`.
+- Fix 2026-06-24: live drift `Artem` исправлен (`control_license_users=user`, `users=user`). Код `ensure_license_user()` уже синхронизировал роль; добавлен regression `tests/test_traffic_authz_role_sync.py`.
 
 ### P2: `/account-manager/` unauth возвращает `500`
 
@@ -71,6 +73,7 @@
 - Root cause: в `api/server.py` локальный wrapper `_account_manager_public_target(path, query)` конфликтует с импортированным helper signature; root/proxy routes вызывают его с `base_url, path, query`.
 - Risk: не auth bypass, но внешний route даёт 500 вместо корректного redirect/401, ломает UX и мониторинг.
 - Fix plan: исправить вызовы или имя wrapper; добавить test на `/account-manager/` и `/account-manager/{path}`.
+- Fix 2026-06-24: закрыто commit `3f42f069b`. `/account-manager/` live smoke возвращает `302 Location: https://am.traffic-hubcrm.ru/`; добавлен `tests/test_account_manager_proxy_routes.py`.
 
 ### P2: model/nullability drift
 
@@ -78,6 +81,7 @@
 - Migration: `0009_tenant_scope.py` сделал backfill и `ALTER COLUMN tenant_id SET NOT NULL`.
 - Risk: разработчик читает модель и думает, что `tenant_id` можно не передавать; это уже привело к P1.
 - Fix plan: привести SQLAlchemy models к live constraints; добавить тест, запрещающий создание tenant-scoped entities без tenant.
+- Fix 2026-06-24: закрыто commit `3f42f069b`. 11 tenant-scoped моделей переведены на `tenant_id nullable=False`; добавлен `tests/test_tenant_model_constraints.py`.
 
 ### P2: God modules и высокая связность
 
@@ -167,8 +171,8 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 
 ## Выпускать ли в продакшен сейчас
 
-Для закрытого controlled use с техработами/мониторингом — можно продолжать ограниченно. Для спокойного широкого production — нет, сначала закрыть P1/P2: partner sync tenant crash, AccountManager route 500, role drift, model/schema mismatch.
+Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit, deprecation debt и Redis runtime hygiene.
 
 ## Следующий шаг
 
-Перевести задачу из режима аудита в режим исправления: начать с P1 `traffic_hub/api/routers/integrations.py::_import_network_conversions`, затем AccountManager route, затем role sync. После каждого fix: tests, commit, push, GitHub checks, deploy, runtime health, wiki update.
+После закрытия P1/P2: дождаться GitHub checks для `3f42f069b`, затем отдельно планировать P2/P3 maintenance без смешивания с production bugs.
