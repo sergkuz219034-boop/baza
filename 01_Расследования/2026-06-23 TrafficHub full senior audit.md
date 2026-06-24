@@ -108,6 +108,7 @@
 - Main groups: Pydantic V2 `class Config`, Starlette/FastAPI/httpx TestClient warnings, passlib `crypt`.
 - Risk: обновление зависимостей может сломать тесты/validation без изменения бизнес-кода.
 - Fix plan: отдельная maintenance задача, не смешивать с production bugs.
+- Fix 2026-06-24: частично закрыто commit `7a6ea8cb7`. TrafficHub Pydantic models/settings переведены на `ConfigDict`/`SettingsConfigDict`; targeted test run после деплоя: `28 passed, 2 warnings`. Оставшиеся warnings внешние: `FastAPI/TestClient` и `passlib crypt`.
 
 ### P3: Redis runtime hygiene
 
@@ -144,7 +145,7 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 | P2 | SQLAlchemy models say nullable while DB says NOT NULL | `traffic_hub/models/database.py`, live information_schema | Align model constraints. |
 | P2 | High coupling in large modules | file sizes above | Extract by boundary after P1 fixes. |
 | P2/P3 | Unknown hot SQL patterns | scans + existing indexes | Add query-level evidence before optimizing. |
-| P3 | Deprecation warnings | `pytest` warnings | Dependency maintenance pass. |
+| P3 | Deprecation warnings | `pytest` warnings | Pydantic часть закрыта `7a6ea8cb7`; внешние FastAPI/passlib warnings оставить отдельной dependency maintenance задачей. |
 | P3 | Redis job state keys без TTL | live Redis `traffic_hub:jobs:progress:*`, `traffic_hub:jobs:state:*` с `ttl=-1` | Закрыто `e4818e56a`: TTL + cleanup stale debug/test keys. |
 
 ## Roadmap
@@ -173,8 +174,8 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 
 ## Выпускать ли в продакшен сейчас
 
-Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; Redis runtime hygiene закрыт commit `e4818e56a`. Остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit и deprecation debt.
+Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; Redis runtime hygiene закрыт commit `e4818e56a`; Pydantic deprecation debt закрыт commit `7a6ea8cb7`. Остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit и внешним dependency warnings.
 
 ## Следующий шаг
 
-После закрытия P1/P2 и Redis hygiene: отдельно планировать P2/P3 maintenance без смешивания с production bugs. Следующие кандидаты: query-level SQL telemetry (`pg_stat_statements`) и dependency warning pass.
+После закрытия P1/P2, Redis hygiene и Pydantic warnings: отдельно планировать P2/P3 maintenance без смешивания с production bugs. Следующие кандидаты: query-level SQL telemetry (`pg_stat_statements`), разрезание крупных модулей и внешние dependency warnings.
