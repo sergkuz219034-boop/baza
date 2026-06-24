@@ -21,8 +21,19 @@ Persistent append-only журнал событий job поверх текуще
 ## Endpoint
 `GET /api/jobs/timeline?limit=&job_id=`
 
+Дополнительно для admin:
+
+`GET /api/jobs/timeline?owner=artem&limit=30`
+
 ## Ownership
-Обычный пользователь видит только свои job-события. Это важно для multi-tenant isolation и расследований чужих логов.
+Обычный пользователь видит только свои job-события, даже если передаст `owner` другого пользователя. Admin может передать `owner` явно и смотреть timeline нужного профиля.
+
+## UI
+В admin-only системной секции dashboard есть блок `История задач`:
+
+- пустой owner = текущий пользователь;
+- заполненный owner работает только для admin;
+- выводятся последние события, статус, команда, сообщение и ошибка.
 
 ## Почему не только Redis
 Redis хранит быстрый текущий state. Для расследования зависших и завершённых job нужна persistent история после refresh/restart API.
@@ -32,8 +43,9 @@ Redis хранит быстрый текущий state. Для расследо�
 - `/root/TrafficHub/utils/runtime_store_pg_jobs.py`
 - `/root/TrafficHub/utils/database.py`
 - `/root/TrafficHub/api/routers/jobs.py`
+- `/root/TrafficHub/dashboard/index.html`
+- `/root/TrafficHub/dashboard/app.js`
 
 ## Связанные заметки
 - [[Runtime database]]
 - [[Runtime Inspector]]
-

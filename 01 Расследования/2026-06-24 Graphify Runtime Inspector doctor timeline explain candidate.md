@@ -14,9 +14,10 @@ Server-first runtime `/root/TrafficHub`: `api/routers/system.py`, `api/routers/j
 - `/usr/local/bin/python -> /usr/bin/python3` создан, команда `python` доступна.
 - `tools/remote_exec.py` пишет uploaded scripts байтами UTF-8 и выводит stdout/stderr как UTF-8.
 - `./tools/doctor.py --json` выполняется на сервере.
-- `docker compose exec -T autolead_bot ... pytest ...` прошёл: 13 passed.
+- `docker compose exec -T autolead_bot ... pytest ...` прошёл: 15 passed.
 - `/api/health` вернул `status=ok`.
 - commit `74ff3fd8d` запушен в GitHub `sergkuz219034-boop/TrafficHub`.
+- commit `70b761e12` добил UI Job Timeline, admin owner-filter и исправил mojibake в серверном README.
 
 ## Наблюдение
 `graphify` установлен локально и построил граф по `remote_files`: 1908 nodes, 6055 edges. На сервере `graphify` не установлен; `doctor.py` помечает это как warning, не как critical, потому что Graphify используется как локальная навигационная карта, а не runtime dependency.
@@ -26,9 +27,9 @@ Server-first runtime `/root/TrafficHub`: `api/routers/system.py`, `api/routers/j
 - admin-only `/api/system/runtime-inspector`;
 - CLI `tools/doctor.py`;
 - persistent `autolead_job_events`;
-- owner-scoped `/api/jobs/timeline`;
+- owner-scoped `/api/jobs/timeline` с admin owner-filter;
+- admin-only UI-блок `История задач`;
 - owner-scoped `/api/leads/{lead_id}/explain`.
 
 ## Следующий шаг
-Подключить Job Timeline и Explain Candidate в UI, если потребуется визуальная диагностика без ручного вызова API.
-
+Если потребуется дальнейшее ускорение разбора кандидатов, подключить `Explain Candidate` в UI рядом с таблицей лидов. Backend endpoint уже есть и owner-scoped.

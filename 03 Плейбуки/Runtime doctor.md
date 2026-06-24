@@ -28,8 +28,16 @@
 ## Важное ограничение
 `graphify` может отсутствовать на сервере. Это warning, потому что Graphify используется локально по snapshot, а не как runtime dependency.
 
+## Проверенный статус
+На live-сервере после commit `70b761e12`:
+
+- `API health` — OK;
+- PostgreSQL runtime-хранилища — OK;
+- job queue — OK;
+- `python` и `python3` доступны;
+- warning остаётся только по отсутствующему server-side `graphify`.
+
 ## Связанные заметки
 - [[Graphify architecture scan]]
 - [[Runtime Inspector]]
 - [[Remote ops tools]]
-
