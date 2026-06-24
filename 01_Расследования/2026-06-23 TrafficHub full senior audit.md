@@ -3,7 +3,7 @@
 ## Статус
 
 - Тип: доказательный Senior-аудит live-контура.
-- Режим: 2026-06-23 аудит без изменения product-кода; 2026-06-24 переведено в режим исправления P1/P2.
+- Режим: 2026-06-23 аудит без изменения product-кода; 2026-06-24 переведено в режим исправления P1/P2 и подтверждённого P3 Redis hygiene.
 - Источник истины: `/root/TrafficHub`, containers, PostgreSQL, Redis, live logs, tests, API/runtime.
 - Техработы: включены в runtime container: `maintenance_mode=True`, `maintenance_message="Тех работы"`.
 
@@ -114,6 +114,7 @@
 - Evidence active job owners empty, но Redis содержит stale progress/state keys для `debug-worker-*`, `test-vbiv-owner`, `debuglogs`, `artem2`, `artemka` и старых owners.
 - Risk: UI/status confusion при неправильном чтении stale state.
 - Fix plan: добавить TTL/cleanup для debug/test progress keys; не удалять вручную без понимания owner state.
+- Fix 2026-06-24: закрыто commit `e4818e56a`. `utils/state.py` задаёт TTL для `traffic_hub:jobs:progress:*` и stop-флагов, `traffic_hub/services/job_queue.py` задаёт TTL для `traffic_hub:jobs:state:*`; stale debug/test Redis-ключи удалены на live-сервере, реальные пользовательские ключи оставлены с TTL 7 дней. Regression: `tests/test_state.py`, `tests/test_job_queue_transition.py`.
 
 ## Вывод
 
@@ -144,6 +145,7 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 | P2 | High coupling in large modules | file sizes above | Extract by boundary after P1 fixes. |
 | P2/P3 | Unknown hot SQL patterns | scans + existing indexes | Add query-level evidence before optimizing. |
 | P3 | Deprecation warnings | `pytest` warnings | Dependency maintenance pass. |
+| P3 | Redis job state keys без TTL | live Redis `traffic_hub:jobs:progress:*`, `traffic_hub:jobs:state:*` с `ttl=-1` | Закрыто `e4818e56a`: TTL + cleanup stale debug/test keys. |
 
 ## Roadmap
 
@@ -159,7 +161,7 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 
 - Align SQLAlchemy model nullability with migrations.
 - Add tenant/owner invariant tests for every tenant-scoped entity.
-- Add debug cleanup/TTL for stale Redis progress keys.
+- Redis cleanup/TTL закрыт commit `e4818e56a`; дальше следить, чтобы новые Redis job keys не создавались без TTL.
 - Split AccountManager proxy tests from dashboard navigation tests.
 
 ### Крупные изменения
@@ -171,8 +173,8 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 
 ## Выпускать ли в продакшен сейчас
 
-Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit, deprecation debt и Redis runtime hygiene.
+Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; Redis runtime hygiene закрыт commit `e4818e56a`. Остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit и deprecation debt.
 
 ## Следующий шаг
 
-После закрытия P1/P2: дождаться GitHub checks для `3f42f069b`, затем отдельно планировать P2/P3 maintenance без смешивания с production bugs.
+После закрытия P1/P2 и Redis hygiene: отдельно планировать P2/P3 maintenance без смешивания с production bugs. Следующие кандидаты: query-level SQL telemetry (`pg_stat_statements`) и dependency warning pass.
