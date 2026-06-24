@@ -101,6 +101,7 @@
 - Indexes уже есть на `lower(login)` для control tables и owner/time для logs.
 - Risk: проблема может быть не в отсутствии индекса, а в query pattern, polling и частоте обращений.
 - Fix plan: включить `pg_stat_statements` или targeted query logging; оптимизировать только подтверждённые hot SQL.
+- Fix 2026-06-24: закрыт шаг "добавить query-level evidence" commit `631f14506`. PostgreSQL запускается с `shared_preload_libraries=pg_stat_statements`, extension создан в live DB. Первичная выборка после рестарта содержит startup/init queries; дальнейшая оптимизация должна ждать нагрузки и смотреть `pg_stat_statements`, а не только `pg_stat_user_tables.seq_scan`.
 
 ### P3: deprecation debt
 
@@ -144,7 +145,7 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 | P2 | `/account-manager/` 500 | `api/server.py:1317` TypeError | Fix wrapper/call signature + tests. |
 | P2 | SQLAlchemy models say nullable while DB says NOT NULL | `traffic_hub/models/database.py`, live information_schema | Align model constraints. |
 | P2 | High coupling in large modules | file sizes above | Extract by boundary after P1 fixes. |
-| P2/P3 | Unknown hot SQL patterns | scans + existing indexes | Add query-level evidence before optimizing. |
+| P2/P3 | Unknown hot SQL patterns | scans + existing indexes | Query-level telemetry включена `631f14506`; следующий шаг — собрать нагрузку и оптимизировать только подтверждённые запросы. |
 | P3 | Deprecation warnings | `pytest` warnings | Pydantic часть закрыта `7a6ea8cb7`; внешние FastAPI/passlib warnings оставить отдельной dependency maintenance задачей. |
 | P3 | Redis job state keys без TTL | live Redis `traffic_hub:jobs:progress:*`, `traffic_hub:jobs:state:*` с `ttl=-1` | Закрыто `e4818e56a`: TTL + cleanup stale debug/test keys. |
 
@@ -174,8 +175,8 @@ TrafficHub не выглядит сломанным целиком: runtime heal
 
 ## Выпускать ли в продакшен сейчас
 
-Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; Redis runtime hygiene закрыт commit `e4818e56a`; Pydantic deprecation debt закрыт commit `7a6ea8cb7`. Остаются P2/P3 задачи по декомпозиции крупных модулей, query-level performance audit и внешним dependency warnings.
+Для закрытого controlled use можно продолжать. P1/P2 из этого audit закрыты и запушены в `TrafficHub` commit `3f42f069b`; Redis runtime hygiene закрыт commit `e4818e56a`; Pydantic deprecation debt закрыт commit `7a6ea8cb7`; query-level SQL telemetry включена commit `631f14506`. Остаются P2/P3 задачи по декомпозиции крупных модулей, сбору SQL-статистики под реальной нагрузкой и внешним dependency warnings.
 
 ## Следующий шаг
 
-После закрытия P1/P2, Redis hygiene и Pydantic warnings: отдельно планировать P2/P3 maintenance без смешивания с production bugs. Следующие кандидаты: query-level SQL telemetry (`pg_stat_statements`), разрезание крупных модулей и внешние dependency warnings.
+После закрытия P1/P2, Redis hygiene, Pydantic warnings и включения SQL telemetry: отдельно планировать P2/P3 maintenance без смешивания с production bugs. Следующие кандидаты: разрезание крупных модулей, сбор `pg_stat_statements` после рабочей нагрузки и внешние dependency warnings.
