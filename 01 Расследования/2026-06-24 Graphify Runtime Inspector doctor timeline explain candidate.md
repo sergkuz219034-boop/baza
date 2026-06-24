@@ -18,6 +18,7 @@ Server-first runtime `/root/TrafficHub`: `api/routers/system.py`, `api/routers/j
 - `/api/health` вернул `status=ok`.
 - commit `74ff3fd8d` запушен в GitHub `sergkuz219034-boop/TrafficHub`.
 - commit `70b761e12` добил UI Job Timeline, admin owner-filter и исправил mojibake в серверном README.
+- commit `dad9bde3b` перенёс `Инспектор runtime` и `История задач` из `Настройки` в `Admin панель`.
 
 ## Наблюдение
 `graphify` установлен локально и построил граф по `remote_files`: 1908 nodes, 6055 edges. На сервере `graphify` не установлен; `doctor.py` помечает это как warning, не как critical, потому что Graphify используется как локальная навигационная карта, а не runtime dependency.
