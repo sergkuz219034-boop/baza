@@ -22,7 +22,8 @@
 - `client_id`
 - `client_secret`
 - `redirect_uri`
-- `access_token`
+- `access_token` — только user OAuth token для `GET /resumes`
+- `app_access_token` — отдельный token приложения (`client_credentials`), не должен подменять user token
 - `refresh_token`
 - `enabled` — включает сбор резюме Зарплата.ру в общем workflow вкладки `Обзор`.
 - `enable_form_fill` — разрешает ли лидам Зарплата.ру попадать в общую очередь заполнения анкет.
@@ -61,6 +62,12 @@
 9. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
 10. Если `enable_form_fill=false`, строки получают `Статус = заполнение выключено`; общий sender берёт только строки с пустым статусом, поэтому такие лиды не заполняются.
 
+## Логи во вкладке Обзор
+
+- Подтверждено кодом: при запуске через `traffic_hub/services/job_runner.py` stdout Zarplata-модуля перенаправляется в owner-scoped runtime log через `_OwnerLogStream`.
+- Подтверждено кодом: `dashboard/app.js -> isVisibleLogMessage()` не скрывает строки `Зарплата.ру`, поэтому они должны быть видны в `Обзор`.
+- Практический смысл: отдельной вкладке не нужен свой особый лог-контур; Zarplata использует общий pipeline `Обзор`.
+
 ## Почему запуск через Обзор
 
 Вкладки источников (`Зарплата.ру`, `SuperJob`, Rabota.ru-настройки) не должны конкурировать с основными рабочими кнопками. Каноническая точка запуска для оператора — `Обзор`: `Выгрузка`, `Рассылка`, `Полный цикл`. Это снижает риск двойного запуска и делает логику одинаковой для источников.
@@ -69,11 +76,13 @@
 
 - Контакты зависят от прав токена и ответа API Зарплата.ру.
 - Negotiations/приглашения пока не реализованы.
-- App-token через `client_credentials` может быть недостаточен для контактных данных; тогда нужен employer OAuth token через `authorization_code`.
+- `app_access_token` через `client_credentials` не подходит для поиска резюме, если API требует user OAuth token. Для `GET /resumes` нужен токен, полученный через `authorization_code`.
+- Legacy-runtime уже ломался из-за смешения `app token` и `user token` в одном поле; после фикса эти поля разделены, а старые `APPL...` токены автоматически мигрируются из `access_token` в `app_access_token`.
 - Если `enable_form_fill=false`, уже выгруженные строки не попадут в заполнение, пока их статус в Google Sheets не будет очищен вручную или повторной логикой.
 
 ## Связанные заметки
 
 - [[2026-06-22 Zarplata.ru независимый модуль и отключение TrafficHub для user]]
 - [[2026-06-23 Zarplata.ru workflow через Обзор и переключатели]]
+- [[2026-06-25 Zarplata.ru app token ломал поиск резюме]]
 - [[Отключение embedded TrafficHub для user]]

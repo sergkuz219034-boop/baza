@@ -6,7 +6,7 @@
 
 ## Зона системы
 
-- `api/routers/system.py`
+- `api/routers/settings.py`
 - `dashboard/index.html`
 - `dashboard/app.js`
 - `dashboard/style.css`
@@ -20,17 +20,18 @@
 
 - Проверена модель `load_config()` / `save_config()` в `services/leads_service.py`.
 - При активном `bind_current_username(...)` обычный `save_config()` пишет в `control_user_app_configs`, а не в общий локальный `config.json`.
-- Для глобального флага добавлен отдельный endpoint в `system`-роутер, который читает `load_config_local()` и сохраняет через `save_config()` без user-bind контекста.
+- Для глобального флага используется отдельный endpoint `/api/settings/maintenance-mode`, который сохраняет значение без user-scoped override.
 
 ## Наблюдение
 
 Реализация сделана так:
 
-- `GET /api/system/maintenance` возвращает глобальный state;
-- `PATCH /api/system/maintenance` доступен только admin;
+- `GET /api/settings/maintenance-mode` возвращает глобальный state;
+- `PATCH /api/settings/maintenance-mode` доступен только admin;
 - в `Admin панели` появился тумблер сохранения режима;
 - у всех `user` поверх dashboard показывается fullscreen overlay `Тех работы`;
 - admin overlay не блокирует.
+- с `2026-06-24` текст баннера больше не редактируется ни в UI, ни через API: backend принудительно хранит только `Тех работы`.
 
 ## Вывод
 

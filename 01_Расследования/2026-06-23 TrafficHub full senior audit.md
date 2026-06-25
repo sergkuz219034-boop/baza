@@ -49,7 +49,7 @@
 - Evidence: live log `autolead_server_bot`: `null value in column "tenant_id" of relation "postback_logs" violates not-null constraint`.
 - Affected user in log: `artem`.
 - File: `traffic_hub/api/routers/integrations.py::_import_network_conversions`.
-- Cause: `PostbackLog(...)` создаётся без `tenant_id=tenant_id` и `owner_username=username`.
+- Follow-up 2026-06-24: текущий код `/root/TrafficHub` уже содержит `tenant_id=tenant_id` и `owner_username=username` в `PostbackLog(...)`; старый live log остаётся полезным symptom, но confirmed cause для текущего HEAD больше не актуален.
 - Counterexample: `traffic_hub/api/routers/postbacks.py::_handle_postback` уже пишет `tenant_id=integration.tenant_id` и `owner_username=...`.
 - Test gap: `tests/test_integrations_sync.py` проверяет `log.raw_data["source"]`, но не проверяет `log.tenant_id`; SQLite fixture не ловит live `NOT NULL`.
 - Risk: sync Leads.su/Lovko может ломаться для любого пользователя с партнёрскими интеграциями.
@@ -82,6 +82,27 @@
 - Risk: разработчик читает модель и думает, что `tenant_id` можно не передавать; это уже привело к P1.
 - Fix plan: привести SQLAlchemy models к live constraints; добавить тест, запрещающий создание tenant-scoped entities без tenant.
 - Fix 2026-06-24: закрыто commit `3f42f069b`. 11 tenant-scoped моделей переведены на `tenant_id nullable=False`; добавлен `tests/test_tenant_model_constraints.py`.
+
+### Follow-up 2026-06-24: tenant-write bugs fixed
+
+- Product commit: `79c79dbab`.
+- Fixed files:
+  - `traffic_hub/api/routers/funnels.py::create_funnel` теперь пишет `tenant_id=tenant_id_for(current_user)`;
+  - `traffic_hub/api/routers/tracking.py::track_offer_click` теперь переносит `tenant_id=offer.tenant_id` в созданный `Lead`.
+- Test evidence:
+  - `docker exec autolead_server_bot pytest -q` -> `329 passed, 43 skipped`;
+  - `tests/test_traffic_tenant_isolation.py` переведён на tenant-aware seed;
+  - targeted tenant/dashboard tests -> green.
+
+### Follow-up 2026-06-24: dashboard mojibake fixed
+
+- Symptom: на вкладках `TrafficHub` отображались строки вида `Рџ...`, `Рћ...`, `вЂ...`.
+- Cause: hardcoded HTML/JS строки были уже сохранены в mojibake в `dashboard/index.html` и `dashboard/app.js`; это не БД и не API.
+- Fixed files:
+  - `dashboard/index.html`
+  - `dashboard/app.js`
+  - `tests/test_dashboard_encoding.py`
+- Test evidence: regression scan запрещает типовые mojibake markers в dashboard files.
 
 ### P2: God modules и высокая связность
 
