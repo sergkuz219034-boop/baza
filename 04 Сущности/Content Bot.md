@@ -48,3 +48,8 @@
 ## Связанные заметки
 - [[2026-06-25 content-bot генерация постов вакансий и Telegram admin]]
 - [[Content Bot deploy and debug]]
+## Миграции SQLite
+`CREATE TABLE IF NOT EXISTS` не обновляет существующие таблицы. Для изменений схемы используется idempotent helper `_ensure_column()` в `standalone_content_bot/app.py`. Это обязательно для live-БД `/data/bot.sqlite3`, где уже есть legacy-таблицы.
+
+См. [[2026-06-25 content-bot кнопки не работают после расширения]].
+
