@@ -62,6 +62,8 @@
 9. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
 10. Если `enable_form_fill=false`, строки получают `Статус = заполнение выключено`; общий sender берёт только строки с пустым статусом, поэтому такие лиды не заполняются.
 
+Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
+
 ## Логи во вкладке Обзор
 
 - Подтверждено кодом: при запуске через `traffic_hub/services/job_runner.py` stdout Zarplata-модуля перенаправляется в owner-scoped runtime log через `_OwnerLogStream`.
@@ -78,6 +80,7 @@
 - Negotiations/приглашения пока не реализованы.
 - `app_access_token` через `client_credentials` не подходит для поиска резюме, если API требует user OAuth token. Для `GET /resumes` нужен токен, полученный через `authorization_code`.
 - Legacy-runtime уже ломался из-за смешения `app token` и `user token` в одном поле; после фикса эти поля разделены, а старые `APPL...` токены автоматически мигрируются из `access_token` в `app_access_token`.
+- На live-профиле `Artem` 2026-06-25 подтверждено: app-token даёт `403 user_auth_expected` на `/resumes`; реальная выгрузка невозможна до получения user OAuth token работодателя.
 - Если `enable_form_fill=false`, уже выгруженные строки не попадут в заполнение, пока их статус в Google Sheets не будет очищен вручную или повторной логикой.
 
 ## Связанные заметки
