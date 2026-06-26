@@ -13,7 +13,9 @@
 - HTTP-клиент AI: `httpx`.
 - DB layer: `aiosqlite`.
 - AI provider: `OpenRouter`, env `OPENROUTER_API_KEY`, model `OPENROUTER_MODEL`.
-- Target channel берётся из `TARGET_CHAT_ID`.
+- Target channel по умолчанию берётся из `TARGET_CHAT_ID`.
+- С `3fd3f611b` каналы публикации user-scoped: таблица `channels` имеет `user_id`, активный канал хранится ключом `active_channel_id:<telegram_user_id>`.
+- Автопостинг настраивается отдельно от добавления канала: канал добавляется по `@username`/`-100...`, тематика и часы задаются через меню `⚡ Автопостинг`.
 
 ## Команды
 - `/start` — старт и главное меню.
@@ -36,6 +38,7 @@
 - `access_rules` — задел под лимиты и тарифы.
 - `events` — технические события бота.
 - `posts` — legacy-таблица, оставлена для совместимости.
+- `channels` — каналы публикации, owner-scoped по `user_id`, с полями `topic`, `schedule_times`, `schedule_minutes`.
 
 ## Почему пока standalone
 Текущий TrafficHub уже перегружен Autolead/AccountManager/CRM-контурами. Для content-bot выбран отдельный контейнер и SQLite, чтобы не смешивать Telegram polling и основной web-runtime. Это снижает риск регрессий в TrafficHub.
@@ -44,6 +47,7 @@
 - Web-админка пока не реализована как отдельный интерфейс; минимальная админка находится в Telegram.
 - `app.py` стал крупным файлом. Это допустимо для быстрого восстановления продукта, но требует последующего split.
 - AI-ключ OpenRouter остаётся обязательным для полноценной генерации. Если ключ пустой, бот выдаёт fallback-шаблон.
+- Глобальный toggle автопостинга остаётся общим, но выбор активного канала уже user-scoped.
 
 ## Связанные заметки
 - [[2026-06-25 content-bot генерация постов вакансий и Telegram admin]]
@@ -52,4 +56,3 @@
 `CREATE TABLE IF NOT EXISTS` не обновляет существующие таблицы. Для изменений схемы используется idempotent helper `_ensure_column()` в `standalone_content_bot/app.py`. Это обязательно для live-БД `/data/bot.sqlite3`, где уже есть legacy-таблицы.
 
 См. [[2026-06-25 content-bot кнопки не работают после расширения]].
-

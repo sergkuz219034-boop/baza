@@ -28,6 +28,7 @@ UI и API унаследовали Пампаду от token-based интегр�
 - Backend больше не берёт `pampadu_api_token` из runtime settings.
 - Публичный статус Пампаду теперь `configured`, если есть postback token.
 - Live container `traffichub_app` пересобран и проверен как healthy.
+- Server repo зафиксирован commit `3fd3f611b`.
 
 ## Следующий шаг
-Если нужно зафиксировать server repo в GitHub, сначала отделить текущие чужие незавершённые изменения в `traffic_hub/api/routers/integrations.py` и `standalone_content_bot/app.py` от этой правки.
+Если Пампаду снова покажет credential input, первый check — `CRM_NETWORK_META.pampadu.credential` в `dashboard/app.js`: ожидается `postback_only`.
