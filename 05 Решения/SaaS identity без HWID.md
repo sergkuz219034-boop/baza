@@ -17,7 +17,7 @@ TrafficHub работает как серверный SaaS: один live-сер
 - В `control_license_users.hwid` пишется пустое значение.
 - Auth payload сохраняется в user-scoped хранилище через `save_user_auth(login, auth)`.
 - Startup sync секретов по server `HWID` отключён.
-- Legacy HWID helpers оставлены только как compatibility no-op boundary до отдельной migration cleanup.
+- Legacy HWID helpers оставлены только как compatibility no-op boundary до отдельной migration cleanup; legacy cloud hooks в `utils/license.py` также no-op.
 
 ## Последствия
 
