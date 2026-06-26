@@ -91,3 +91,91 @@
    - OAuth callback
    - WebSocket logs/status
 
+## Выполнено 2026-06-26
+
+### Симптом
+
+DNS A-записи для нового домена были добавлены, но live runtime всё ещё держал старый домен `traffic-hubcrm.ru` как основной.
+
+### Зона системы
+
+- `/root/TrafficHub/.env`
+- `/root/TrafficHub/deploy/Caddyfile`
+- `/root/TrafficHub/docker-compose.yml`
+- `/root/TrafficHub/dashboard/app.js`
+- `/root/TrafficHub/modules/zarplata_api.py`
+- `/root/TrafficHub/traffic_hub/config/settings.py`
+
+### Гипотеза
+
+Если просто переключить новый домен без alias, можно потерять доступ по старому `traffic-hubcrm.ru`. Нужен dual-domain режим: `.pro` как primary, `.ru` как fallback.
+
+### Проверка
+
+DNS:
+
+- `traffic-hub.pro -> 150.241.70.31`
+- `www.traffic-hub.pro -> 150.241.70.31`
+- `am.traffic-hub.pro -> 150.241.70.31`
+- `auth.traffic-hub.pro -> 150.241.70.31`
+
+Runtime:
+
+- `.env` переведён на `traffic-hub.pro`;
+- `.env` сохраняет alias:
+  - `PUBLIC_DOMAIN_ALT=traffic-hubcrm.ru`
+  - `LICENSE_AUTH_DOMAIN_ALT=auth.traffic-hubcrm.ru`
+  - `ACCOUNT_MANAGER_DOMAIN_ALT=am.traffic-hubcrm.ru`
+  - `ACCOUNT_MANAGER_CORS_ORIGINS=https://am.traffic-hub.pro,https://am.traffic-hubcrm.ru`
+- Caddy принимает оба auth-домена;
+- Account Manager UI выбирает `am.traffic-hub.pro` для нового домена и `am.traffic-hubcrm.ru` для старого;
+- default callback Зарплата.ру переведён на `https://traffic-hub.pro/auth/callback`.
+
+### Наблюдение
+
+После пересборки и recreate контейнеров:
+
+- `traffichub_app` healthy;
+- `traffichub_worker` healthy;
+- `traffichub_license_auth` healthy;
+- `traffichub_license_server` healthy;
+- `traffichub_account_manager` healthy;
+- `traffichub_caddy` running.
+
+Внешние проверки без `-k`:
+
+- `https://traffic-hub.pro/api/health` -> `200`, `status=ok`;
+- `https://traffic-hub.pro/` -> HTML TrafficHub;
+- `https://www.traffic-hub.pro/` -> HTML TrafficHub;
+- `https://auth.traffic-hub.pro/health` -> `{"status":"ok"}`;
+- `https://traffic-hubcrm.ru/api/health` -> `200`, `status=ok`;
+- `https://auth.traffic-hubcrm.ru/health` -> `{"status":"ok"}`;
+- `https://am.traffic-hub.pro/` и `https://am.traffic-hubcrm.ru/` -> `401 Unauthorized`, ожидаемо из-за Basic/Auth boundary.
+
+### Вывод
+
+Перенос выполнен без потери старого домена:
+
+- primary domain: `traffic-hub.pro`;
+- old public fallback: `traffic-hubcrm.ru`;
+- Account Manager primary: `am.traffic-hub.pro`;
+- Account Manager fallback: `am.traffic-hubcrm.ru`;
+- Auth primary: `auth.traffic-hub.pro`;
+- Auth fallback: `auth.traffic-hubcrm.ru`.
+
+### Следующий шаг
+
+Внешние интеграции, где callback URL задаётся вручную в кабинетах партнёров, нужно постепенно перевести на `https://traffic-hub.pro/auth/callback`. Старый callback `https://traffic-hubcrm.ru/auth/callback` остаётся рабочим на период совместимости.
+
+### Фикс
+
+Product commit: `0597d59f2` `feat: make traffic-hub.pro primary domain`.
+
+Проверка:
+
+- `python -m pytest -q tests/test_traffic_auth_external.py tests/test_account_manager_access.py tests/test_proxy_config.py tests/test_vbiv_bot_navigation.py tests/test_vbiv_bot_runtime_errors.py` -> `16 passed`;
+- `docker compose config` -> ok;
+- `docker compose --profile public config` -> ok;
+- `caddy validate --config /etc/caddy/Caddyfile` -> valid;
+- `/api/health` -> `status=ok`;
+- GitHub checks на `0597d59f2`: `validate`, `windows-launcher`, `build-and-push` -> `success`.
