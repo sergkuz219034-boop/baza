@@ -79,11 +79,20 @@ Synthetic smoke через `run_campaign()` меняет Redis progress в `util
 
 Результат: `10 passed`.
 
+Повторная live-проверка `2026-06-27`:
+
+- последний `admin` full-cycle `2026-06-26 21:00:30..21:03:36`: `leads_found=22`, `sent=4`, `skipped=1`, `errors=1`;
+- единственная ошибка этого запуска — старый transient Lovko timeout по `Ozon`, сохранённый в `autolead_retry_queue` как повторяемая попытка, а не `leadsu` form-failure;
+- дальнейшие run logs по `alex` и `kursmerkusheva@gmail.com` после этих фиксов завершались без ошибок (`errors=0`);
+- `traffic-hub.pro/api/health` и `traffic-hubcrm.ru/api/health` возвращают `status=ok`.
+
 ## Вывод
 
 Кодовая логика на commit `bd859c6` подтверждена тестами и synthetic smoke: все 6 офферов `admin` участвуют в matching и формируют `lead_results` с offer-status.
 
 Live full-cycle ещё нельзя считать полностью доказанным без нового controlled run после deploy `d7b11cf8`. Текущий live-run покрывает только `Воксис`, потому что такие вакансии лежат в основной таблице. Ошибка `Воксис` имеет подтверждённую frontend-form/AJAX первопричину и закрыта кодовым recovery на уровне `send2.php`, но требует runtime-подтверждения на следующей реальной обработке Воксис.
+
+На `2026-06-27` новых `Воксис/leadsu` ошибок в свежем окне логов не найдено. Оставшийся хвост в очереди относится к Lovko timeout, а не к `Воксис`.
 
 ## Следующий шаг
 

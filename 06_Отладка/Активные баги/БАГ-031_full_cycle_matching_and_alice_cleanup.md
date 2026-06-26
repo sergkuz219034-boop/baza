@@ -85,6 +85,7 @@
 ## Наблюдение
 
 - `alice` удалена из `tenant_memberships`, `users`, `control_license_users`, `control_user_app_configs`, `control_user_app_auth`; backup сохранён на сервере `data/backups/alice_cleanup_20260621_121518.json`.
+- Повторная live-проверка `2026-06-27`: `users where lower(username)='alice' = 0`, `control_license_users where lower(login/client)='alice' = 0`.
 - `alex` owner-scoped config исправлен: офферы привязаны к `54272116`, `54283461` и `vacancy_names=[Оператор текстовой поддержки маркетплейса]`.
 - Активная retry queue после проверок пустая.
 - Safe full-cycle для `admin` завершился `ok`, `sent=0`, `skipped=1`, `errors=0`.
@@ -96,6 +97,11 @@
   - `4833afa15` — `fix: stabilize vkusvill form city submit`.
 - После `4833afa15` live `/api/health` OK, `autolead_bot` и `worker` healthy.
 - GitHub remote `main` совпал с server HEAD `4833afa15`; checks с сервера не прочитаны, потому что `gh` не установлен.
+- Повторная live-проверка `2026-06-27` после доменного/infra фикса:
+  - `users`: `Artem`, `admin`, `alex`, `kursmerkusheva@gmail.com`, `sergkuz2190`; `alice` отсутствует;
+  - `control_license_users`: те же 5 login без `alice`;
+  - retry queue содержит 2 старые transient-записи Lovko timeout без успешной истории: `admin/Ozon` и `artem/Я еда`; они не удалены, чтобы не потерять повторную попытку по боевым лидам;
+  - последние успешные full-cycle логи: `alex` завершился `sent=18 errors=0`, `kursmerkusheva@gmail.com` завершился `errors=0`.
 
 ## Вывод
 
@@ -107,6 +113,7 @@
 - Пользовательский термин `pending` в логах заменён на "основная таблица"; `processed` описывается как "отработанная таблица".
 - Root cause по VkusVill: автоматизация выбирала/синхронизировала не тот city-state. Страница имеет верхний калькулятор города и форму отклика; hidden `CITY` формы отклика очищался JS сайта перед submit. Исправление: выбор city item ограничен формой отклика, hidden city fields синхронизируются во всех формах и `CITY` защищается от очистки непосредственно перед submit.
 - Массовая реальная отправка по `alex`/`kursmerkusheva@gmail.com` не запускалась: у них остались реальные строки с телефонами, такой прогон создаёт боевые заявки. Проверка выполнена controlled smoke.
+- На `2026-06-27` подтверждено: баг с `alice` не воспроизводится, свежие run logs не показывают новых matching/no-phone/VkusVill regression. Оставшиеся retry-записи — старые transient Lovko timeouts, а не повторное создание `alice` и не permanent form-failure.
 
 ## Следующий шаг
 
