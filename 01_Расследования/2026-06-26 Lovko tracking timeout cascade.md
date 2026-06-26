@@ -67,3 +67,58 @@ Live:
 - `worker` healthy;
 - `/api/health` возвращает `status=ok`;
 - local HEAD и remote HEAD: `c87e2afa2`.
+
+## Уточнение 2026-06-26: regression в CI
+
+### Симптом
+
+После расширения slow-route правила GitHub Actions `CI / validate` упал на тесте `tests/test_vbiv_bot_navigation.py::test_slow_lovko_route_does_not_mark_generic_lovko_offer_slow`.
+
+### Зона системы
+
+- `modules/vbiv_bot.py`
+- `_is_slow_lovko_route(offer_name, current_url)`
+- GitHub Actions `CI / validate`
+
+### Гипотеза
+
+Правило `tracking.lovko.pro`/`lovko.pro` стало слишком широким: оно переводило в slow-mode все Lovko-ссылки, включая обычный offer URL `offer_id=34`, хотя slow-mode нужен только для коротких tracking links и подтверждённых проблемных маршрутов.
+
+### Проверка
+
+Подтверждено тестами:
+
+- `https://tracking.lovko.pro/fjk03d` должен оставаться slow-route;
+- `https://tracking.lovko.pro/click?pid=4161&offer_id=22&sub1=1` должен оставаться slow-route для Ozon;
+- `https://tracking.lovko.pro/click?pid=4161&offer_id=34&sub1=1` не должен считаться slow-route для обычного Lovko-оффера.
+
+### Наблюдение
+
+Первичный фикс был правильным по цели, но слишком грубым по условию домена. Домен Lovko сам по себе не является достаточным признаком slow-route.
+
+### Вывод
+
+Для Lovko нельзя включать slow-mode по всему домену. Текущее подтверждённое правило:
+
+- short tracking link без `offer_id=` — slow-route;
+- `offer_id=22` или название `Ozon` — slow-route;
+- `Самокат`, `jobs-samokat.ru`, `logystpartner.ru` — slow-route;
+- остальные Lovko offer URLs — обычный режим, пока runtime не докажет обратное.
+
+### Следующий шаг
+
+Если появится новый нестабильный Lovko offer, добавлять точечный признак и тест, а не расширять правило на весь `lovko.pro`.
+
+### Фикс
+
+Product commits:
+
+- `8ff851694` `fix: narrow lovko slow route detection`
+- `c7affc26e` `ci: provide hermes dummy auth for compose validation`
+
+Проверка:
+
+- host: `python -m pytest -q tests/test_vbiv_bot_navigation.py tests/test_vbiv_bot_runtime_errors.py` → `6 passed`;
+- container after rebuild: `docker exec traffichub_app python -m pytest -q tests/test_vbiv_bot_navigation.py tests/test_vbiv_bot_runtime_errors.py` → `6 passed`;
+- live `/api/health` → `status=ok`;
+- GitHub check-runs на `c7affc26e`: `validate`, `windows-launcher`, `build-and-push` → `success`.
