@@ -180,6 +180,76 @@ Product commit: `0597d59f2` `feat: make traffic-hub.pro primary domain`.
 - `/api/health` -> `status=ok`;
 - GitHub checks на `0597d59f2`: `validate`, `windows-launcher`, `build-and-push` -> `success`.
 
+## Полный перенос со старым доменом как notice 2026-06-28
+
+### Симптом
+
+Нужно завершить перенос: `traffic-hub.pro` должен быть основным рабочим доменом, а старый `traffic-hubcrm.ru` должен показывать пользователям окно с новой кликабельной ссылкой.
+
+### Зона системы
+
+- `/root/TrafficHub/deploy/Caddyfile`
+- `/root/TrafficHub/.env`
+- контейнер `traffichub_caddy`
+- домены:
+  - `traffic-hub.pro`
+  - `www.traffic-hub.pro`
+  - `traffic-hubcrm.ru`
+  - `am.traffic-hubcrm.ru`
+  - `auth.traffic-hubcrm.ru`
+
+### Гипотеза
+
+Если старый домен остаётся в том же Caddy site block, он продолжит обслуживать приложение как alias. Для полного переноса надо отделить legacy domains в отдельный Caddy block и вернуть статическое migration notice.
+
+### Проверка
+
+- `docker run --rm -v "$PWD/deploy/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile`
+- `docker compose up -d --force-recreate caddy`
+- `curl https://traffic-hub.pro/api/health`
+- `curl https://www.traffic-hub.pro/api/health`
+- `curl https://traffic-hubcrm.ru/`
+- `curl https://traffic-hubcrm.ru/api/health`
+- `curl https://am.traffic-hubcrm.ru/`
+- `curl https://auth.traffic-hubcrm.ru/health`
+- `curl https://am.traffic-hub.pro/`
+- `curl https://auth.traffic-hub.pro/health`
+
+### Наблюдение
+
+- Новый домен обслуживает приложение:
+  - `https://traffic-hub.pro/api/health` -> `200`, `status=ok`;
+  - `https://www.traffic-hub.pro/api/health` -> `200`, `status=ok`;
+  - `https://traffic-hub.pro/` возвращает HTML TrafficHub, а не migration notice.
+- Старые домены больше не проксируют приложение:
+  - `https://traffic-hubcrm.ru/` показывает HTML `TrafficHub переехал`;
+  - `https://traffic-hubcrm.ru/api/health` тоже показывает notice, а не backend health;
+  - `https://am.traffic-hubcrm.ru/` показывает notice;
+  - `https://auth.traffic-hubcrm.ru/health` показывает notice.
+- Notice содержит кликабельную ссылку `https://traffic-hub.pro/` и meta-refresh через 30 секунд.
+- Новый Account Manager остался рабочим:
+  - `https://am.traffic-hub.pro/` -> `401 Unauthorized`, ожидаемо для protected entry.
+- Новый auth остался рабочим:
+  - `https://auth.traffic-hub.pro/health` -> `{"status":"ok"}`.
+
+### Вывод
+
+Полный перенос выполнен на уровне reverse proxy:
+
+- рабочий UI/API: `traffic-hub.pro`;
+- рабочий `www`: `www.traffic-hub.pro`;
+- рабочий Account Manager: `am.traffic-hub.pro`;
+- рабочий auth: `auth.traffic-hub.pro`;
+- старые домены `traffic-hubcrm.ru`, `am.traffic-hubcrm.ru`, `auth.traffic-hubcrm.ru` больше не являются рабочими alias и показывают migration notice.
+
+### Следующий шаг
+
+Проверить, что внешние кабинеты партнёров используют новый callback `https://traffic-hub.pro/auth/callback`. Если где-то ещё указан `traffic-hubcrm.ru`, запрос попадёт в notice, а не в рабочий API.
+
+### Фикс
+
+Product commit: `d5896807e` `feat: show migration notice on legacy domains`.
+
 ## Проверка RU-доступности 2026-06-28
 
 ### Симптом
