@@ -20,18 +20,22 @@
 
 ## Быстрый маршрут
 
-1. Определить тип задачи: UI, API, worker, auth, deploy, БД, интеграция, wiki, GitHub checks.
-2. Оценить риск: безопасная проверка, локальная правка UI, runtime/deploy, destructive/data-affecting.
-3. Прочитать релевантные страницы wiki до правки кода.
-4. Проверить код и runtime-факты, не доверять старым заметкам без подтверждения.
-5. Воспроизвести симптом на минимальном контуре: `admin` и `artem`, если пользователь не указал других.
-6. Исправить первопричину, а не симптом в UI.
-7. Проверить, что фикс действует для всех users/owners, а не только для `admin`.
-8. Запушить в GitHub и дождаться успешных checks.
-9. Деплоить live только из `/root/TrafficHub`, подтянутого с `origin/main`.
-10. Проверить live health и наличие нужного кода внутри контейнера `/app`.
-11. Выполнить post-deploy smoke по затронутым ролям и owners.
-12. Обновить wiki и синхронизировать `baza`.
+Каноническая форма: `Classify → Stabilize → Observe → Localize → Fix → Prove → Ship → Document → Review`.
+
+1. `Classify`: определить тип задачи: UI, API, worker, auth, deploy, БД, интеграция, wiki, GitHub checks.
+2. `Classify`: оценить риск: безопасная проверка, локальная правка UI, runtime/deploy, destructive/data-affecting.
+3. `Stabilize`: если проблема user-facing или data-risk, сначала снизить вред: техработы, toggle, stop worker, disable offer/scheduler.
+4. `Observe`: прочитать релевантные страницы wiki до правки кода.
+5. `Observe`: проверить код и runtime-факты, не доверять старым заметкам без подтверждения.
+6. `Localize`: воспроизвести симптом на минимальном контуре: `admin` и `artem`, если пользователь не указал других.
+7. `Fix`: исправить первопричину, а не симптом в UI.
+8. `Prove`: проверить, что фикс действует для всех users/owners, а не только для `admin`.
+9. `Ship`: запушить в GitHub и дождаться успешных checks.
+10. `Ship`: деплоить live только из `/root/TrafficHub`, подтянутого с `origin/main`.
+11. `Prove`: проверить live health и наличие нужного кода внутри контейнера `/app`.
+12. `Prove`: выполнить post-deploy smoke по затронутым ролям и owners.
+13. `Document`: обновить wiki и синхронизировать `baza`.
+14. `Review`: если ошибка повторялась, добавить guardrail: regression test, static check, smoke script или runbook check.
 
 ## Риск-классификация перед работой
 
