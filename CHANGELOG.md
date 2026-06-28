@@ -2,6 +2,7 @@
 
 # 2026-06-29
 
+- Исправлен формат ссылок Rabota.ru в Google Sheets: для откликов поле `Резюме` теперь выгружается как `/resume-search/{resume_id}/?source=response&vacancy_id={vacancy_id}&response_id={response_id}`. Старый `/resume/{resume_id}` оставлен только как fallback при отсутствии контекста отклика.
 - Исправлен live-баг Зарплата.ру: старый config мог хранить `enabled=true` вместе с `enable_form_fill=false`, из-за чего новые лиды выгружались в Google Sheets со статусом `заполнение выключено` и не попадали в заполнение анкет. Backend теперь нормализует один UI-переключатель как `сбор + заполнение`, live config `admin` мигрирован, добавлены regression-тесты.
 - Зафиксировано расследование по сбою смены пароля license account в TrafficHub admin panel: root cause был в слишком строгой backend-валидации коротких рабочих паролей и скрытой ошибке на frontend.
 - Обновлена сущность [[License layer]]: правило пароля теперь описано как минимум 4 символа с запретом служебных placeholders/masks.
