@@ -13,6 +13,7 @@
 - API: `api/routers/settings_license_accounts.py`
 - License layer: `utils/license.py`
 - Runtime DB: PostgreSQL таблицы license/auth пользователей
+- GitHub commit: `5052df50b` (`Fix admin license password updates`)
 - Связанные заметки: [[License layer]], [[Runtime database]]
 
 ## Текущая гипотеза
