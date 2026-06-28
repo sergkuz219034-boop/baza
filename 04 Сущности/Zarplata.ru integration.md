@@ -22,11 +22,11 @@
 - `client_id`
 - `client_secret`
 - `redirect_uri`
-- `access_token` — только user OAuth token для `GET /resumes`
-- `app_access_token` — отдельный token приложения (`client_credentials`), не должен подменять user token
+- `access_token` — user OAuth token для `GET /resumes`.
+- `app_access_token` — отдельный token приложения через `client_credentials`; не должен подменять user token.
 - `refresh_token`
 - `enabled` — включает сбор резюме Зарплата.ру в общем workflow вкладки `Обзор`.
-- `enable_form_fill` — разрешает ли лидам Зарплата.ру попадать в общую очередь заполнения анкет.
+- `enable_form_fill` — legacy/внутренний флаг допуска лидов Зарплата.ру к общей очереди заполнения анкет. В текущем UI отдельного переключателя нет: один тумблер `Режим Зарплата.ру` означает и сбор, и заполнение.
 - `query`
 - `area`
 - `per_page`
@@ -60,7 +60,8 @@
 7. `normalize_resume()` приводит запись к колонкам Autolead.
 8. `save_leads()` сохраняет лиды в БД.
 9. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
-10. Если `enable_form_fill=false`, строки получают `Статус = заполнение выключено`; общий sender берёт только строки с пустым статусом, поэтому такие лиды не заполняются.
+10. Backend нормализует старые настройки: если `enabled=true`, то импорт считается разрешённым для заполнения, даже если в legacy config остался `enable_form_fill=false`.
+11. Старый статус `Статус = заполнение выключено` считается legacy/dead-state для уже выгруженных строк. Новые строки при включённом источнике не должны получать этот статус.
 
 Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
 
@@ -81,11 +82,13 @@
 - `app_access_token` через `client_credentials` не подходит для поиска резюме, если API требует user OAuth token. Для `GET /resumes` нужен токен, полученный через `authorization_code`.
 - Legacy-runtime уже ломался из-за смешения `app token` и `user token` в одном поле; после фикса эти поля разделены, а старые `APPL...` токены автоматически мигрируются из `access_token` в `app_access_token`.
 - На live-профиле `Artem` 2026-06-25 подтверждено: app-token даёт `403 user_auth_expected` на `/resumes`; реальная выгрузка невозможна до получения user OAuth token работодателя.
-- Если `enable_form_fill=false`, уже выгруженные строки не попадут в заполнение, пока их статус в Google Sheets не будет очищен вручную или повторной логикой.
+- Старые строки, уже выгруженные до фикса со статусом `заполнение выключено`, не попадут в заполнение, пока их статус в Google Sheets не будет очищен вручную или отдельной миграцией по конкретной вкладке.
+- Если в owner-scoped config снова появится `enabled=true` вместе с `enable_form_fill=false`, `/api/settings/zarplata` должен нормализовать это состояние при следующем сохранении.
 
 ## Связанные заметки
 
 - [[2026-06-22 Zarplata.ru независимый модуль и отключение TrafficHub для user]]
 - [[2026-06-23 Zarplata.ru workflow через Обзор и переключатели]]
 - [[2026-06-25 Zarplata.ru app token ломал поиск резюме]]
+- [[2026-06-29 Zarplata form fill disabled status]]
 - [[Отключение embedded TrafficHub для user]]

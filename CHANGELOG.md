@@ -2,8 +2,12 @@
 
 # 2026-06-29
 
+- Исправлен live-баг Зарплата.ру: старый config мог хранить `enabled=true` вместе с `enable_form_fill=false`, из-за чего новые лиды выгружались в Google Sheets со статусом `заполнение выключено` и не попадали в заполнение анкет. Backend теперь нормализует один UI-переключатель как `сбор + заполнение`, live config `admin` мигрирован, добавлены regression-тесты.
 - Зафиксировано расследование по сбою смены пароля license account в TrafficHub admin panel: root cause был в слишком строгой backend-валидации коротких рабочих паролей и скрытой ошибке на frontend.
 - Обновлена сущность [[License layer]]: правило пароля теперь описано как минимум 4 символа с запретом служебных placeholders/masks.
+- Исправлено live-удаление обзорных Telegram-аккаунтов в `AccountManager`: экран `Подключенные аккаунты` удаляет generic `accounts` через `/api/accounts/{id}`, поэтому backend теперь сначала отвязывает связанные `RequestLog` / `ContentSource` / `PostingTarget` / `PostingTask` / `ContentLog`, а для `platform="tg"` дополнительно останавливает живой профиль перед delete.
+- Исправлен frontend live `AccountManager/dashboard/app.js`: кнопка удаления аккаунта теперь показывает success/error toast вместо молчаливого провала.
+- На live-сервере пересобран и перезапущен контейнер `traffichub_account_manager`; health после рестарта зелёный.
 - Исправлено удаление Google-аккаунта в `AccountManager`: перед `DELETE /api/google/accounts/{id}` backend теперь удаляет зависимые `social_accounts`, чтобы операция не падала на FK и не выглядела как "аккаунт не удаляется".
 - Добавлены wiki-заметка расследования и сущностная заметка по зависимостям `google_accounts -> social_accounts`.
 
