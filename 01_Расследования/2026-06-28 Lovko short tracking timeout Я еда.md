@@ -23,7 +23,11 @@
 ## Проверка
 
 - Проверены owner configs через `utils.control_store`.
-- Для `admin`, `artem`, `alex` browser form proxy резолвится в Playwright proxy:
+- Browser form proxy резолвится в Playwright proxy только если включён один из явных toggles:
+  - `rabota_ru.proxy_enabled=True` + `rabota_ru.proxy_url`;
+  - или `vbiv.form_proxy_enabled=True` + `vbiv.form_proxy_url`.
+- После фикса `786f38443` сохранённый `rabota_ru.proxy_url` при `rabota_ru.proxy_enabled=False` не используется браузерными анкетами.
+- Для users с включённым toggle Playwright proxy:
   - server: `http://217.29.62.68:8000`;
   - credentials присутствуют.
 - `curl -I https://tracking.lovko.pro/fik03d` с сервера быстро возвращает `302 Location` на `https://you-courier.ru/vse-goroda-bn/...`.
@@ -35,15 +39,17 @@
 - Проблема не в отсутствии proxy.
 - Проблема в том, что Chromium может зависать на коротком Lovko tracking URL до перехода по `302`.
 - Финальный landing может требовать proxy: без proxy `you-courier.ru` из контейнера тоже таймаутит, через proxy открывается.
+- При этом proxy не должен включаться только фактом сохранённого `proxy_url`; нужен включённый toggle.
 
 ## Вывод
 
 - Для коротких Lovko tracking links нужен preflight: получить первый `Location` лёгким HTTP-запросом и передать браузеру финальный landing URL.
-- Сам browser fill всё равно должен идти через Playwright proxy.
+- Сам browser fill должен идти через Playwright proxy только при включённом proxy-toggle.
 
 ## Исправление
 
 - Product commit: `c69420503 fix: preflight lovko short tracking redirects`.
+- Product commit: `786f38443 fix: respect proxy toggle for browser forms`.
 - Добавлено:
   - `_is_lovko_short_tracking_url()`;
   - `_resolve_lovko_tracking_redirect()`;
@@ -62,12 +68,12 @@
 - Container tests: `14 passed`.
 - Smoke:
   - `fik03d` резолвится в финальный `you-courier.ru` URL;
-  - финальный URL открывается в Chromium через Playwright proxy;
+  - финальный URL открывается в Chromium через Playwright proxy при включённом toggle;
   - `maintenance_mode=False`.
 
 ## Следующий шаг
 
 - Если Lovko short tracking снова даёт timeout, сначала проверять:
   - есть ли `302 Location` у tracking URL;
-  - открывается ли final landing через Playwright proxy;
-  - не отключён ли `vbiv.form_proxy_enabled`.
+  - включён ли `rabota_ru.proxy_enabled` или `vbiv.form_proxy_enabled`;
+  - открывается ли final landing через Playwright proxy, если proxy включён.
