@@ -29,6 +29,27 @@
 
 Fallback `https://www.rabota.ru/resume/{resume_id}` допустим только если для отклика не хватает `vacancy_id` или `response_id`. Новые выгрузки после server commit `898a9a91c` используют новый формат; старые строки в Google Sheets не переписываются автоматически.
 
+## Excel / CSV import-export
+
+Подтверждено server commit `a04351895`: `api/routers/leads.py` расширен форматами `.xlsx` и `.csv`.
+
+- `GET /api/leads/export.xlsx` выгружает owner-scoped лиды текущего пользователя в Excel workbook `leads.xlsx`.
+- `POST /api/leads/import` принимает `.xlsx` и `.csv`, нормализует русские/английские заголовки и сохраняет лиды в локальную базу текущего пользователя.
+- Импорт использует `require_autolead_access` и `bind_current_username`, поэтому не должен смешивать лиды разных пользователей.
+- Импорт не пишет строки напрямую в Google Sheets и не запускает рассылку. Это сделано намеренно: загрузка файла меняет только локальную базу, а отправка остаётся отдельным управляемым действием.
+
+Поддерживаемые смысловые поля импорта:
+
+- `ФИО` / `Имя` / `full_name`
+- `Телефон` / `Номер` / `phone`
+- `Email` / `Почта`
+- `Вакансия`
+- `Город`
+- `Пол`
+- `Дата`
+- `Возраст`
+- `Дата рождения`
+
 ## Входы
 
 - user config
@@ -61,3 +82,4 @@ Fallback `https://www.rabota.ru/resume/{resume_id}` допустим тольк�
 ## Связанные расследования
 
 - [[2026-06-29 Rabota response resume link format]]
+- [[2026-06-29 Leads Excel import export]]

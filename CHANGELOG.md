@@ -2,6 +2,7 @@
 
 # 2026-06-29
 
+- Добавлены загрузка и выгрузка лидов в Excel/CSV: `GET /api/leads/export.xlsx`, `POST /api/leads/import`, UI-кнопки в базе лидов, regression-тесты. Серверный commit: `a04351895`.
 - Разобрана причина старой Google Sheets таблицы `10tCmh8Z...`: ID хранился в legacy-поле `admin.google_sheets.spreadsheet_id`; поле очищено на live, рабочие `pending/processed` ID не менялись.
 - Исправлен порядок полного цикла: Rabota.ru сначала собирает и выгружает лиды в Google Sheets, затем запускается Зарплата.ру, после чего общий sender обрабатывает единую pending-очередь обоих источников. Серверный commit: `d2c4c0256`.
 - Усилен owner-guard Зарплата.ру: выгрузка запускается только когда у текущего пользователя включён `enabled`, заполнены `client_id/client_secret` и есть user OAuth `access_token`. App-token-only или частично настроенные профили не запускают импорт и не выгружают резюме.
