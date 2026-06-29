@@ -55,13 +55,16 @@
 2. Backend сохраняет данные в owner-scoped `zarplata_ru`.
 3. Пользователь запускает `Выгрузка` или `Полный цикл` во вкладке `Обзор`.
 4. `traffic_hub/services/job_runner.py` проверяет owner readiness через `_zarplata_ready_for_owner()`.
-5. Если `enabled=true`, заполнены `client_id/client_secret` и есть user OAuth `access_token`, worker вызывает `modules.zarplata_api.run_zarplata_import()` до основного Rabota.ru flow.
-6. API `/resumes` возвращает резюме.
-7. `normalize_resume()` приводит запись к колонкам Autolead.
-8. `save_leads()` сохраняет лиды в БД.
-9. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
-10. Backend нормализует старые настройки: если `enabled=true`, то импорт считается разрешённым для заполнения, даже если в legacy config остался `enable_form_fill=false`.
-11. Старый статус `Статус = заполнение выключено` считается legacy/dead-state для уже выгруженных строк. Новые строки при включённом источнике не должны получать этот статус.
+5. В команде `Полный цикл` `services/leads_service.py::run_full_cycle()` сначала выполняет Rabota.ru: сбор и выгрузку в Google Sheets.
+6. Если `enabled=true`, заполнены `client_id/client_secret` и есть user OAuth `access_token`, `run_full_cycle()` вызывает `modules.zarplata_api.run_zarplata_import()` сразу после выгрузки Rabota.ru и до общей рассылки.
+7. Лиды Зарплата.ру выгружаются в ту же pending-таблицу Google Sheets, что и Rabota.ru, без отдельной рассылки.
+8. Фаза рассылки загружает общую pending-очередь из Google Sheets и обрабатывает вместе лиды Rabota.ru и Зарплата.ру.
+9. API `/resumes` возвращает резюме.
+10. `normalize_resume()` приводит запись к колонкам Autolead.
+11. `save_leads()` сохраняет лиды в БД.
+12. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
+13. Backend нормализует старые настройки: если `enabled=true`, то импорт считается разрешённым для заполнения, даже если в legacy config остался `enable_form_fill=false`.
+14. Старый статус `Статус = заполнение выключено` считается legacy/dead-state для уже выгруженных строк. Новые строки при включённом источнике не должны получать этот статус.
 
 Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
 
@@ -73,6 +76,12 @@
 
 - в `traffic_hub/services/job_runner.py` для команд `upload`, `run`, `automode`;
 - в `modules/zarplata_api.py` для прямого запуска, где отсутствие `client_id/client_secret` возвращает `reason=missing_app_credentials`.
+
+После commit `d2c4c0256` канон порядка такой:
+
+`Rabota.ru сбор -> Rabota.ru Google Sheets -> Зарплата.ру Google Sheets -> общая рассылка из pending-таблицы`
+
+Причина: рассылка должна быть единой для обоих источников. Если Зарплата.ру запускается до Rabota.ru или отдельной веткой, общий sender может не увидеть свежие строки обоих источников в одном проходе.
 
 ## Логи во вкладке Обзор
 
@@ -101,4 +110,5 @@
 - [[2026-06-25 Zarplata.ru app token ломал поиск резюме]]
 - [[2026-06-29 Zarplata form fill disabled status]]
 - [[2026-06-29 Zarplata owner readiness guard]]
+- [[2026-06-29 Unified Rabota and Zarplata dispatch order]]
 - [[Отключение embedded TrafficHub для user]]
