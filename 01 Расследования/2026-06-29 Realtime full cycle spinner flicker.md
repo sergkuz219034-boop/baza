@@ -100,3 +100,21 @@ Health контейнера:
 - `/api/health` вернул `{"status":"ok","version":"1.2","app":"TrafficHub"}`.
 
 Вывод: подтверждённые источники мигания `Полный цикл: выполняется` закрыты на уровне frontend repaint, log snapshot clear и websocket reconnect snapshot. Остаточный риск — только визуальная проверка в браузере на следующем полном цикле после обновления страницы.
+
+## Поведенческая регрессия 2026-06-29
+
+Дополнительно выполнена Node-проверка на живом `/root/TrafficHub/dashboard/app.js` с минимальной DOM-моделью. Смоделирован сценарий, который раньше вызывал мигание:
+
+1. `syncRealtimeJobSpinner(running)`;
+2. `clearLocalLog({ preserveRealtimeStatus: true })`;
+3. краткий `syncRealtimeJobSpinner(idle)`;
+4. повторный `syncRealtimeJobSpinner(running)`.
+
+Результат:
+
+- `stableSameNode=true` — DOM-узел `#realtime-job-spinner` остался тем же самым;
+- `removeCount=0` — строка не удалялась;
+- `pendingTimers=0` — таймер отложенного удаления отменился после возврата `running`;
+- новый spinner subtree не создавался после первого render.
+
+Вывод: зафиксирована не только структура кода, но и поведение против основного race-condition сценария `running -> snapshot/status gap -> running`.
