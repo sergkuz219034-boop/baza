@@ -119,6 +119,28 @@ Health контейнера:
 
 Вывод: зафиксирована не только структура кода, но и поведение против основного race-condition сценария `running -> snapshot/status gap -> running`.
 
+## Headless Chrome проверка 2026-06-29
+
+Через SSH-туннель открыт реальный TrafficHub dashboard (`http://127.0.0.1:18080/`) в headless Chrome. Через DevTools Protocol дождались загрузки `app.js` и выполнили тот же сценарий уже в настоящей странице:
+
+- `syncRealtimeJobSpinner(running)`;
+- `clearLocalLog({ preserveRealtimeStatus: true })`;
+- краткий `syncRealtimeJobSpinner(idle)`;
+- повторный `syncRealtimeJobSpinner(running)`.
+
+Результат браузерной проверки:
+
+- `ok=true`;
+- `sameAfterClear=true`;
+- `sameAfterIdle=true`;
+- `sameAfterReturn=true`;
+- `removes=0`;
+- `spinnerCount=1`;
+- итоговый текст строки: `Полный цикл выполняется`;
+- класс строки: `log-line INFO log-spinner`.
+
+Вывод: на реальной странице подтверждено, что основной сценарий мигания больше не удаляет и не пересоздаёт строку `Полный цикл выполняется`.
+
 ## Зависание вида "ничего не происходит" 2026-06-29
 
 ### Симптом
