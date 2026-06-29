@@ -83,3 +83,20 @@ Backend:
   - `noTickerCallInSpinner=True`
   - `preserveRealtimeStatus=True`
   - `softSnapshotClear=True`
+
+## Финальная проверка 2026-06-29
+
+Повторная контейнерная проверка после деплоя показала, что старый локальный repaint-механизм удалён полностью:
+
+- в `/app/dashboard/app.js` больше нет `realtimeSpinnerTimer`;
+- в `/app/dashboard/app.js` больше нет `ensureRealtimeSpinnerTicker()`;
+- внутри `syncRealtimeJobSpinner()` больше нет `setInterval`;
+- неактивный статус больше не удаляет строку мгновенно, а идёт через `scheduleRealtimeSpinnerRemoval()`;
+- `loadLogSnapshot()` использует `clearLocalLog({ preserveRealtimeStatus: true })`;
+- `/app/api/ws_manager.py` при owner-scoped reconnect сначала отдаёт `job_queue.get_job_status(owner)`, а `_last_status` использует только как fallback.
+
+Health контейнера:
+
+- `/api/health` вернул `{"status":"ok","version":"1.2","app":"TrafficHub"}`.
+
+Вывод: подтверждённые источники мигания `Полный цикл: выполняется` закрыты на уровне frontend repaint, log snapshot clear и websocket reconnect snapshot. Остаточный риск — только визуальная проверка в браузере на следующем полном цикле после обновления страницы.
