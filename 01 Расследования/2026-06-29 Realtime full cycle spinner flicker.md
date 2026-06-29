@@ -48,3 +48,38 @@
 
 - Проверить на реальном `Полный цикл`, что строка больше не мигает визуально.
 - Если симптом повторится, следующая зона — серверный источник `/api/jobs/status` и порядок публикации событий в `ws/status`.
+
+## Дополнительная проверка 2026-06-29
+
+Симптом повторился после первого grace-period фикса. Повторная проверка live-кода показала ещё три источника визуального мигания:
+
+1. `loadLogSnapshot()` вызывал `clearLocalLog()` и полностью чистил `#log-body` при фоновой загрузке истории.
+2. `clearLocalLog()` сбрасывал `LAST_JOB_STATUS` и останавливал realtime ticker даже для фонового snapshot reload.
+3. `syncRealtimeJobSpinner()` запускал секундный ticker, который сам перерисовывал timestamp строки каждую секунду.
+
+Также на сервере `api/ws_manager.py::connect_status()` сначала мог отдавать `_last_status`, а только потом fallback на `job_queue.get_job_status(owner)`. При reconnect это оставляло окно для устаревшего snapshot.
+
+## Дополнительное решение 2026-06-29
+
+Фронтенд:
+
+- `loadLogSnapshot()` теперь вызывает `clearLocalLog({ preserveRealtimeStatus: true })`.
+- `clearLocalLog()` получил режим сохранения realtime-строки: чистит исторические строки, но не удаляет `#realtime-job-spinner`.
+- При preserve-режиме `LAST_JOB_STATUS` не сбрасывается.
+- `syncRealtimeJobSpinner()` больше не запускает секундный ticker, поэтому строка `Полный цикл: выполняется` не перерисовывается сама по себе каждую секунду.
+
+Backend:
+
+- `api/ws_manager.py::connect_status()` теперь сначала отправляет `job_queue.get_job_status(owner)` для owner-scoped подключения.
+- `_last_status` оставлен только как fallback, если актуальный owner status недоступен.
+
+Проверка:
+
+- `node --check` для обновлённого `dashboard/app.js` прошёл.
+- `py_compile` для обновлённого `api/ws_manager.py` прошёл через `/tmp/ws_manager.pyc`.
+- Файлы подложены в `traffichub_app`.
+- `api/health` внутри контейнера вернул `status=ok`.
+- Контейнерная проверка подтвердила:
+  - `noTickerCallInSpinner=True`
+  - `preserveRealtimeStatus=True`
+  - `softSnapshotClear=True`
