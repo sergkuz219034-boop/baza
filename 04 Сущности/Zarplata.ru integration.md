@@ -54,8 +54,8 @@
 1. Пользователь сохраняет настройки во вкладке `Зарплата.ру`.
 2. Backend сохраняет данные в owner-scoped `zarplata_ru`.
 3. Пользователь запускает `Выгрузка` или `Полный цикл` во вкладке `Обзор`.
-4. `traffic_hub/services/job_runner.py` проверяет `zarplata_ru.enabled`.
-5. Если сбор включён, worker вызывает `modules.zarplata_api.run_zarplata_import()` до основного Rabota.ru flow.
+4. `traffic_hub/services/job_runner.py` проверяет owner readiness через `_zarplata_ready_for_owner()`.
+5. Если `enabled=true`, заполнены `client_id/client_secret` и есть user OAuth `access_token`, worker вызывает `modules.zarplata_api.run_zarplata_import()` до основного Rabota.ru flow.
 6. API `/resumes` возвращает резюме.
 7. `normalize_resume()` приводит запись к колонкам Autolead.
 8. `save_leads()` сохраняет лиды в БД.
@@ -64,6 +64,15 @@
 11. Старый статус `Статус = заполнение выключено` считается legacy/dead-state для уже выгруженных строк. Новые строки при включённом источнике не должны получать этот статус.
 
 Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
+
+После commit `d8e0206f4` канон запуска жёстче:
+
+`ready = enabled && client_id && client_secret && access_token`
+
+Это правило применяется:
+
+- в `traffic_hub/services/job_runner.py` для команд `upload`, `run`, `automode`;
+- в `modules/zarplata_api.py` для прямого запуска, где отсутствие `client_id/client_secret` возвращает `reason=missing_app_credentials`.
 
 ## Логи во вкладке Обзор
 
@@ -91,4 +100,5 @@
 - [[2026-06-23 Zarplata.ru workflow через Обзор и переключатели]]
 - [[2026-06-25 Zarplata.ru app token ломал поиск резюме]]
 - [[2026-06-29 Zarplata form fill disabled status]]
+- [[2026-06-29 Zarplata owner readiness guard]]
 - [[Отключение embedded TrafficHub для user]]

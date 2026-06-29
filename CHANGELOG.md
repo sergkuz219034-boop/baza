@@ -2,6 +2,7 @@
 
 # 2026-06-29
 
+- Усилен owner-guard Зарплата.ру: выгрузка запускается только когда у текущего пользователя включён `enabled`, заполнены `client_id/client_secret` и есть user OAuth `access_token`. App-token-only или частично настроенные профили не запускают импорт и не выгружают резюме.
 - Исправлен формат ссылок Rabota.ru в Google Sheets: для откликов поле `Резюме` теперь выгружается как `/resume-search/{resume_id}/?source=response&vacancy_id={vacancy_id}&response_id={response_id}`. Старый `/resume/{resume_id}` оставлен только как fallback при отсутствии контекста отклика.
 - Исправлен live-баг Зарплата.ру: старый config мог хранить `enabled=true` вместе с `enable_form_fill=false`, из-за чего новые лиды выгружались в Google Sheets со статусом `заполнение выключено` и не попадали в заполнение анкет. Backend теперь нормализует один UI-переключатель как `сбор + заполнение`, live config `admin` мигрирован, добавлены regression-тесты.
 - Зафиксировано расследование по сбою смены пароля license account в TrafficHub admin panel: root cause был в слишком строгой backend-валидации коротких рабочих паролей и скрытой ошибке на frontend.
