@@ -2,6 +2,7 @@
 
 # 2026-06-29
 
+- Разобрана причина старой Google Sheets таблицы `10tCmh8Z...`: ID хранился в legacy-поле `admin.google_sheets.spreadsheet_id`; поле очищено на live, рабочие `pending/processed` ID не менялись.
 - Исправлен порядок полного цикла: Rabota.ru сначала собирает и выгружает лиды в Google Sheets, затем запускается Зарплата.ру, после чего общий sender обрабатывает единую pending-очередь обоих источников. Серверный commit: `d2c4c0256`.
 - Усилен owner-guard Зарплата.ру: выгрузка запускается только когда у текущего пользователя включён `enabled`, заполнены `client_id/client_secret` и есть user OAuth `access_token`. App-token-only или частично настроенные профили не запускают импорт и не выгружают резюме.
 - Исправлен формат ссылок Rabota.ru в Google Sheets: для откликов поле `Резюме` теперь выгружается как `/resume-search/{resume_id}/?source=response&vacancy_id={vacancy_id}&response_id={response_id}`. Старый `/resume/{resume_id}` оставлен только как fallback при отсутствии контекста отклика.
