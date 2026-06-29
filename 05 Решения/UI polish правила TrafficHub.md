@@ -55,3 +55,12 @@ Skill `make-interfaces-feel-better` установлен локально в Tra
 - пересобраны `autolead_bot` и `account_manager`;
 - контейнеры `traffichub_app` и `traffichub_account_manager` поднялись `healthy`.
 
+Повторный аудит 2026-06-30 по `make-interfaces-feel-better`:
+
+- проверены `dashboard/style.css`, `dashboard/app.js`, `AccountManager/dashboard/style.css`;
+- найден конфликт каскада: позднее правило `.table-wrap table { table-layout: fixed; }` перебивало админскую таблицу `admin-license-table`;
+- исправлено в `/root/TrafficHub/dashboard/style.css`: fixed layout теперь применяется только к обычным `.table-wrap`, но не к `.admin-license-accounts`;
+- админская таблица получила `table-layout: auto`, `min-width: 0` и адаптивные ширины колонок через `clamp(...)`, чтобы не появлялся внутренний горизонтальный скролл и строки не "уезжали";
+- для финального слоя кнопок явно заданы `transition-duration: 0.16s` и `transition-timing-function: ease`;
+- `transition: all` и `will-change: all` в `dashboard`/`AccountManager/dashboard` не найдены;
+- `traffichub_app` пересобран, live `/style.css` содержит новые правила, `/api/health` вернул `status=ok`.
