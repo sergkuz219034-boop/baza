@@ -172,3 +172,36 @@ Root cause:
 Product commit: `3b3317f7d`.
 
 Канон деплоя form-fill hotfix: если меняется `modules/platforms/*` или `modules/vbiv_bot.py`, проверять и синхронизировать не только `traffichub_app`, но и `traffichub_worker`.
+
+## Повтор 2026-06-30 14:36: неполная синхронизация hotfix
+
+Пользовательский скрин показал, что после предыдущих фиксов в live всё ещё были:
+
+- `Zarplata.ru API вернул 400: you can't look up more than 2000 items`;
+- `samokat: форма submit не найдена`;
+- `samokat: форма submit не найдена` классифицировалась как permanent form-failure.
+
+Проверка live-контейнеров:
+
+- `traffichub_app` содержал `RESUME_SEARCH_DEPTH_LIMIT` и `truncated_by_api_limit`;
+- `traffichub_worker` не содержал `RESUME_SEARCH_DEPTH_LIMIT`;
+- именно `traffichub_worker` выполняет job/run path, поэтому Зарплата.ру продолжала падать старым кодом;
+- Samokat уже имел helper `_is_samokat_transient_without_form`, но fallback `form_not_found` возвращал новый текст `samokat: форма submit не найдена`, который не был явно protected как retryable.
+
+Фикс:
+
+- актуальный `modules/zarplata_api.py` и `tests/test_zarplata_api.py` синхронизированы в оба контейнера;
+- `modules/platforms/lovko.py` теперь возвращает `samokat: landing пустой или форма не найдена` вместо `samokat: форма submit не найдена`;
+- `tests/test_leadsu_blank_recovery.py` проверяет, что этот Samokat missing-form case не permanent;
+- `traffichub_app` и `traffichub_worker` перезапущены одновременно.
+
+Проверка:
+
+- в `traffichub_app`: `tests/test_zarplata_api.py`, `tests/test_platform_routing.py`, `tests/test_vbiv_bot_navigation.py`, `tests/test_leadsu_blank_recovery.py` -> `42 passed`;
+- в `traffichub_worker`: тот же набор -> `42 passed`;
+- оба контейнера содержат `RESUME_SEARCH_DEPTH_LIMIT`, `truncated_by_api_limit`, `_is_samokat_transient_without_form`, `landing пустой или форма не найдена`;
+- `/api/health` вернул `status=ok`.
+
+Product commit: `59f7a906a`.
+
+Вывод: причина повтора была не в отсутствии правки в git, а в неполной доставке hotfix в исполняющий `traffichub_worker`. Для runtime form-fill/import фиксов обязательна проверка маркеров кода внутри обоих контейнеров.
