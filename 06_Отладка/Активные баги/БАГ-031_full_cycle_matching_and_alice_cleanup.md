@@ -86,6 +86,10 @@
 
 - `alice` удалена из `tenant_memberships`, `users`, `control_license_users`, `control_user_app_configs`, `control_user_app_auth`; backup сохранён на сервере `data/backups/alice_cleanup_20260621_121518.json`.
 - Повторная live-проверка `2026-06-27`: `users where lower(username)='alice' = 0`, `control_license_users where lower(login/client)='alice' = 0`.
+- Повторная live-проверка `2026-06-30`: `alice` отсутствует в `users` и `control_license_users`.
+- Дополнительно найден test leakage `test_user`: 1 строка в `control_user_app_configs` и 4 строки в `autolead_leads` без рабочего аккаунта.
+- После commit `6a483516c` test cleanup покрывает `alice` и `test_user`, включая owner-scoped runtime tables.
+- Live cleanup `2026-06-30`: `test_user` удалён из `control_user_app_configs` и `autolead_leads`, backup сохранён в `audit_test_identity_cleanup_20260630`.
 - `alex` owner-scoped config исправлен: офферы привязаны к `54272116`, `54283461` и `vacancy_names=[Оператор текстовой поддержки маркетплейса]`.
 - Активная retry queue после проверок пустая.
 - Safe full-cycle для `admin` завершился `ok`, `sent=0`, `skipped=1`, `errors=0`.
@@ -114,6 +118,11 @@
 - Root cause по VkusVill: автоматизация выбирала/синхронизировала не тот city-state. Страница имеет верхний калькулятор города и форму отклика; hidden `CITY` формы отклика очищался JS сайта перед submit. Исправление: выбор city item ограничен формой отклика, hidden city fields синхронизируются во всех формах и `CITY` защищается от очистки непосредственно перед submit.
 - Массовая реальная отправка по `alex`/`kursmerkusheva@gmail.com` не запускалась: у них остались реальные строки с телефонами, такой прогон создаёт боевые заявки. Проверка выполнена controlled smoke.
 - На `2026-06-27` подтверждено: баг с `alice` не воспроизводится, свежие run logs не показывают новых matching/no-phone/VkusVill regression. Оставшиеся retry-записи — старые transient Lovko timeouts, а не повторное создание `alice` и не permanent form-failure.
+- На `2026-06-30` подтверждено: `alice` и `test_user` отсутствуют в live users/license/runtime хвостах. Retry queue пустая.
+
+### Ссылки
+
+- [[01 Расследования/2026-06-30 test_user cleanup leakage]]
 
 ## Следующий шаг
 
