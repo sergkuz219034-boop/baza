@@ -64,3 +64,18 @@ Frontend на каждом poll удалял DOM-строку spinner-лога �
 - Live deploy: `traffichub_app` пересоздан, `/api/health` вернул `status=ok`, публичный `/app.js` содержит `line.dataset.renderKey`.
 
 Связанное расследование: [[01_Расследования/2026-06-30 Dashboard full-cycle spinner heartbeat]].
+
+## Дополнение 2026-06-30: Rabota loading spinner
+
+После стабилизации `Полный цикл выполняется` в UI стал заметен другой transient source: `⠋ Загрузка откликов: 100...`.
+
+Это не `syncRealtimeJobSpinner()`, а legacy console-spinner из `modules/rabota_api.py::_spin()`. В non-TTY worker/runtime он печатал обычные строки, а `utils/runtime_logging.py::is_ui_relevant_log()` явно пропускал `⠋ Загрузка ...` в dashboard.
+
+Фикс product commit `cf12e5062`:
+
+- Rabota spinner теперь печатается только в TTY;
+- legacy `⠋/⠙/.../✓ Загрузка откликов|автоподбора` отбрасываются UI-фильтром;
+- добавлен regression test в `tests/test_runtime_logging.py`;
+- live пересозданы `traffichub_app` и `traffichub_worker`.
+
+Связанное расследование: [[01_Расследования/2026-06-30 Rabota loading spinner in dashboard logs]].
