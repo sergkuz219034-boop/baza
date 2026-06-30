@@ -5,6 +5,7 @@
 - Исправлена неполная выгрузка Зарплата.ру: импорт теперь объединяет `/resumes`, `/resumes?only_in_responses=true` и резюме из коллекций `/negotiations` по активным вакансиям работодателя; collection-запросы не ограничиваются `status=active`.
 - Добавлены промежуточные stdout-события прогресса Зарплата.ру, чтобы dashboard не выглядел зависшим во время долгого обхода API.
 - Добавлены regression-тесты `tests/test_zarplata_api.py` на `only_in_responses`, отсутствие `status` в `/negotiations` и импорт резюме из collection items.
+- Исправлена вечная строка `Полный цикл выполняется` после очистки логов/пустой очереди: dashboard теперь сразу удаляет realtime spinner при `status=idle` без `job_id`. Серверный commit: `1b3030124`.
 
 # 2026-06-29
 

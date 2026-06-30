@@ -79,3 +79,27 @@ Frontend на каждом poll удалял DOM-строку spinner-лога �
 - live пересозданы `traffichub_app` и `traffichub_worker`.
 
 Связанное расследование: [[01_Расследования/2026-06-30 Rabota loading spinner in dashboard logs]].
+
+## Дополнение 2026-06-30: stale active row после очистки логов
+
+### Симптом
+
+Dashboard показывал строку `Полный цикл выполняется` больше 3 минут, хотя серверная очередь уже была пустой.
+
+### Проверка
+
+- Live `job_queue.list_active_owners()` вернул пустой список.
+- `docker logs traffichub_app` показал очистку `autolead_app_log` в 12:44:56.
+- `/api/jobs/status` в таком состоянии возвращает `idle` без `job_id` и без `finished_at`.
+- `dashboard/app.js::isConfirmedRealtimeTerminal()` до фикса не считал такой `idle` подтверждённым терминальным состоянием, если в `LAST_ACTIVE_JOB_STATUS` ещё лежала старая active job.
+
+### Вывод
+
+Root cause был во frontend guardrail: UI требовал `finished_at` для удаления active spinner, но после очистки логов/рестарта/пустой очереди канонический сигнал завершения может быть просто `status=idle` без `job_id`.
+
+### Фикс
+
+- Product commit `1b3030124`: `syncRealtimeJobSpinner()` сразу удаляет spinner при `status=idle` и пустом `job_id`.
+- `isConfirmedRealtimeTerminal()` считает `idle` без `job_id` подтверждённым терминальным состоянием.
+- Regression test: `tests/test_dashboard_realtime_spinner.py::test_idle_status_without_job_id_removes_stale_spinner_immediately`.
+- Live deploy: `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
