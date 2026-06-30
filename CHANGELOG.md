@@ -11,6 +11,7 @@
 - Исправлена ошибка Зарплата.ру `you can't look up more than 2000 items`: `/resumes` больше не запрашивает страницы глубже API depth limit, полный цикл продолжает работу и добирает отклики через `/negotiations`. Серверный commit: `860adb539`.
 - Исправлен повтор Самокат-ошибки из-за drift между `traffichub_app` и `traffichub_worker`: form-fill hotfix синхронизирован в оба контейнера, LFID/blank/chrome-error без формы теперь transient, а не permanent submit failure. Серверный commit: `3b3317f7d`.
 - Устранён повтор из-за неполной доставки hotfix в worker: `zarplata_api.py` и Samokat missing-form fallback синхронизированы в `traffichub_app` и `traffichub_worker`, оба контейнера прошли одинаковый набор targeted tests. Серверный commit: `59f7a906a`.
+- Сокращён UI-лог Зарплата.ру до короткого итога; transient landing-ошибки офферов теперь идут как warning/retry, а не красный permanent error. Серверный commit: `94e2f428f`.
 
 # 2026-06-29
 

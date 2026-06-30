@@ -205,3 +205,10 @@ Product commit: `3b3317f7d`.
 Product commit: `59f7a906a`.
 
 Вывод: причина повтора была не в отсутствии правки в git, а в неполной доставке hotfix в исполняющий `traffichub_worker`. Для runtime form-fill/import фиксов обязательна проверка маркеров кода внутри обоих контейнеров.
+
+## Лог-шум 2026-06-30
+
+- Зарплата.ру теперь пишет в UI только старт и короткий итог: `найдено / отклики / в Sheets добавлено`.
+- Детальные строки `page_size`, вакансии `N/M`, collections/pages и предупреждение про API depth limit убраны из UI.
+- Transient landing/form-missing ошибки офферов больше не логируются как `ERROR`; они идут как `WARNING` и попадают в retry.
+- Product commit: `94e2f428f`.
