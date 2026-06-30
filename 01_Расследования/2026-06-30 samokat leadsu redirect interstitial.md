@@ -55,3 +55,48 @@
 
 - При следующем прогоне `alex` проверить, что Samokat пишет transient/retry, а не permanent `кнопка submit не найдена`.
 - Если Samokat больше не нужен, выключить offer в UI, чтобы не тратить время цикла на недоступную партнёрку.
+
+## Новая анкета Самокат 2026-06-30
+
+Пользователь передал актуальный HTML формы `work.jobs-samokat.ru` / Leadssu.
+
+Подтверждённая структура новой анкеты:
+
+- `form[action="/?utm_source=leadssu..."]`, без `#vacancy_form`;
+- скрытые поля `sessid`, `PARAMS_HASH`, `user_post=Курьер`;
+- ФИО: `input[name="user_name"]`;
+- город: `input[name="user_city"]` + кастомный список `.form-list-item`;
+- телефон: `input[name="user_phone"]`;
+- пол: `input[name="user_gender"]` + `.form-list-item` (`Мужской`, `Женский`);
+- возраст: `input[name="user_age"]`;
+- транспорт: `input[name="user_courier_type"]` + `.form-list-item` (`Пеший`, `Вело`, `Мото`);
+- state: `input[name="user_state"]`;
+- submit — скрытый `input[type="submit"]`, кнопка `button#send_form` отсутствует.
+
+Причина нового сбоя отличается от предыдущего LFID/interstitial случая: redirect уже может доходить до формы, но generic `modules/platforms/leadsu.py` искал старые поля `#lname/#fname/#phone`, `#vacancy_form` и `#send_form`.
+
+Live-исправление в `/root/TrafficHub/modules/platforms/leadsu.py`:
+
+- добавлен fallback на единое поле ФИО `user_name`;
+- город, пол и тип транспорта выбираются через `.form-list-item`;
+- телефон поддерживает `user_phone`;
+- возраст поддерживает `user_age`;
+- `user_state` заполняется городом;
+- direct submit теперь берёт `form[action]`, а не только `#vacancy_form/send2.php`;
+- submit finder видит скрытый `form input[type="submit"]`.
+
+Проверка:
+
+- `python -m py_compile /app/modules/platforms/leadsu.py` в контейнере прошёл;
+- Playwright DOM-test на переданном HTML подтвердил `FormData`:
+  - `user_name=Иванов Иван`;
+  - `user_city=Москва`;
+  - `user_phone=+7 (999) 111-22-33`;
+  - `user_gender=Мужской`;
+  - `user_age=25`;
+  - `user_courier_type=Пеший`;
+  - `user_state=Москва`;
+  - `hasForm=true`, `hasSubmit=true`.
+- `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
+
+Следующий runtime-шаг: на ближайшем заполнении Самоката проверить уже партнёрский submit/response. Текущая проверка доказывает заполнение новой DOM-структуры, но не отправляла боевую заявку.
