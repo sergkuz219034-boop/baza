@@ -40,3 +40,27 @@ Frontend на каждом poll удалял DOM-строку spinner-лога �
 
 - Проверить, что аналогичная схема не используется в других transient UI-виджетах dashboard.
 - При следующем UI-рефакторинге вынести spinner-status в отдельный stateful renderer без прямого `querySelector('.log-spinner')`.
+
+## Дополнение 2026-06-30
+
+### Симптом
+
+Пользователь сообщил, что `Полный цикл выполняется` всё ещё мигает после предыдущего фикса.
+
+### Проверка
+
+- Live `/root/TrafficHub/dashboard/app.js` и контейнерный `/app/dashboard/app.js` уже содержали in-place renderer `updateRealtimeSpinnerLine()`.
+- `api/server.py::_push_status_loop` подтверждён как источник status heartbeat каждые 2 секунды.
+- Остаточный эффект создавался не пересозданием строки, а перезаписью `.log-ts`: `jobCycleDurationTimestamp()` менял `HH:MM:SS`, хотя `status/command/job_id/msg` не менялись.
+
+### Вывод
+
+Канон уточнён: одинаковый heartbeat не должен менять DOM вообще. Duration/timestamp не входит в ключ перерендера spinner-строки.
+
+### Фикс
+
+- Product commit `50aa653da`: `dashboard/app.js::updateRealtimeSpinnerLine` сравнивает `line.dataset.renderKey`; ключ строится из `status`, `command`, `job_id` и `msg`, без timestamp.
+- Regression test: `tests/test_dashboard_realtime_spinner.py` проверяет, что render key исключает duration timestamp и блокирует повторный rewrite той же DOM-строки.
+- Live deploy: `traffichub_app` пересоздан, `/api/health` вернул `status=ok`, публичный `/app.js` содержит `line.dataset.renderKey`.
+
+Связанное расследование: [[01_Расследования/2026-06-30 Dashboard full-cycle spinner heartbeat]].
