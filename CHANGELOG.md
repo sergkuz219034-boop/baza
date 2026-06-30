@@ -7,6 +7,7 @@
 - Добавлены regression-тесты `tests/test_zarplata_api.py` на `only_in_responses`, отсутствие `status` в `/negotiations` и импорт резюме из collection items.
 - Исправлена вечная строка `Полный цикл выполняется` после очистки логов/пустой очереди: dashboard теперь сразу удаляет realtime spinner при `status=idle` без `job_id`. Серверный commit: `1b3030124`.
 - Исправлена “тишина” на фазе `Сбор лидов с Rabota.ru`: добавлены видимые business-progress строки по началу загрузки откликов и постраничному прогрессу. Серверный commit: `c52019bd4`.
+- Исправлена новая анкета Самокат в фактическом runtime path `SamokatLeadsuPlatform`: скрытая `button.btn_form` больше не считается отсутствующей кнопкой, форма отправляется через JS `requestSubmit/submit`. Серверный commit: `0b2518036`.
 
 # 2026-06-29
 

@@ -100,3 +100,39 @@ Live-исправление в `/root/TrafficHub/modules/platforms/leadsu.py`:
 - `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
 
 Следующий runtime-шаг: на ближайшем заполнении Самоката проверить уже партнёрский submit/response. Текущая проверка доказывает заполнение новой DOM-структуры, но не отправляла боевую заявку.
+
+## Повторный сбой 2026-06-30: скрытая кнопка submit в SamokatLeadsuPlatform
+
+Пользовательский лог `autolead (10).log` подтвердил повторяемую ошибку:
+
+- `Ошибка Самокат [...]: samokat: кнопка submit не найдена`;
+- retry queue пропускалась, потому что ошибка считалась permanent form-failure.
+
+Причина: предыдущее исправление было сделано в generic `modules/platforms/leadsu.py`, но фактический routing для `jobs-samokat.ru` выбирает `modules/platforms/lovko.py::SamokatLeadsuPlatform`.
+
+Подтверждённая runtime-структура из нового HTML:
+
+- форма есть: `form[action="/?utm_source=leadssu..."]`;
+- submit-кнопка есть: `button[type="submit"][name="submitButton"].btn_form`;
+- контейнер кнопки скрыт через `style="display: none"`;
+- `_first_visible(page, "button.btn_form", ...)` не возвращал кнопку, потому что она невидимая.
+
+Root cause: для новой анкеты Самоката наличие невидимой submit-кнопки не означает отсутствие формы. Нужно отправлять саму форму через JS, если видимого submit-клика нет.
+
+Фикс product commit `0b2518036`:
+
+- добавлен helper `modules/platforms/lovko.py::_submit_samokat_jobs_form()`;
+- если видимой кнопки нет, но `form` существует, используется JS fallback:
+  - `button.btn_form` / `button[type=submit]` / `input[type=submit]`;
+  - `form.requestSubmit(btn)` если доступен;
+  - fallback `form.submit()`;
+- tracking/interstitial без формы по-прежнему возвращает `landing пустой или redirect не дошёл до формы`, а не permanent submit failure;
+- regression test `tests/test_platform_routing.py::test_samokat_hidden_submit_button_uses_form_submit_fallback` закрепляет скрытую кнопку.
+
+Проверка:
+
+- `python -m pytest -q tests/test_platform_routing.py tests/test_vbiv_bot_navigation.py` -> `14 passed`;
+- `traffichub_app` перезапущен;
+- `/api/health` вернул `status=ok`.
+
+Вывод: анкета была адаптирована не до конца, потому что был исправлен generic Leads.su path, а live Самокат использует отдельный `SamokatLeadsuPlatform`. Канон: для `jobs-samokat.ru` править и тестировать именно `modules/platforms/lovko.py`.
