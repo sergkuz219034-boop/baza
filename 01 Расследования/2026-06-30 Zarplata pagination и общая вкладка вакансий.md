@@ -24,6 +24,7 @@
 
 - Проверен OpenAPI spec `https://api.zarplata.ru/openapi/specification/zarplata`.
 - Для `GET /resumes` подтверждены параметры `page`, `per_page`, ответные поля `pages`, `found` и фильтр `only_in_responses`.
+- Для `GET /resumes` подтверждён API-лимит глубины выдачи: нельзя смотреть больше 2000 элементов через `page/per_page`.
 - Для активных вакансий работодателя подтверждён endpoint `GET /employers/{employer_id}/vacancies/active`.
 - Для `GET /negotiations` подтверждён workflow работодателя: сначала получить коллекции откликов/приглашений по `vacancy_id`, затем пройти URL коллекций и достать вложенные `resume` из элементов коллекции.
 - Live runtime 2026-06-30: активных owner jobs в очереди не было, хотя UI-скрин показывал строку `Полный цикл выполняется`; это указывает на stale UI-состояние/прошлый job event, а не на реально зависшую задачу.
@@ -34,6 +35,7 @@
 - `per_page` был ограничен `50`, хотя для `/resumes` spec допускает `100`.
 - `/api/offers/vacancies` возвращал только Rabota.ru.
 - До повторного фикса `import_resumes()` после пагинации всё ещё нормализовал только результаты `/resumes`.
+- После добавления полного обхода `/resumes` код доверял `pages` из API и пытался запросить страницу 20 при `per_page=100`, что даёт `400: you can't look up more than 2000 items in the list`.
 - `modules/zarplata_api.py::get_active_vacancies()` уже умел получать активные вакансии работодателя, но импорт лидов не использовал их для обхода `/negotiations`.
 - Фильтр `status=active` для `GET /negotiations` не подходит для требования “все лиды”, потому что отбрасывает неактивные коллекции откликов/приглашений.
 - В логах импорта не было детального прогресса по откликам, поэтому длинный API-обход выглядел как зависание.
@@ -45,9 +47,11 @@
 - Root cause повторной неполноты: импорт опирался только на `/resumes` и не забирал вложенные резюме из коллекций откликов/приглашений.
 - Повторное исправление: `import_resumes()` теперь объединяет три источника: обычный `GET /resumes`, `GET /resumes?only_in_responses=true`, `GET /negotiations?vacancy_id=...` по активным вакансиям работодателя с обходом collection URL и извлечением `item.resume`.
 - `GET /negotiations` больше не ограничивается `status=active`.
+- `ZarplataClient.search_all_resumes()` теперь ограничивает общий поиск глубиной API: максимум `floor(2000 / per_page)` страниц. При `per_page=100` это страницы `0..19`; страница `20` больше не запрашивается.
+- Если общий поиск обрезан API-лимитом, результат получает `truncated_by_api_limit=true`, а UI пишет предупреждение. Это не считается падением полного цикла, потому что отклики/приглашения добираются отдельным `/negotiations` контуром.
 - В stdout добавлены промежуточные строки прогресса: поиск резюме, поиск откликов/приглашений, количество активных вакансий, текущая вакансия `N/M`, итог по items/collections/pages.
-- Regression tests: `tests/test_zarplata_api.py` проверяет `only_in_responses`, отсутствие `status` в `/negotiations` и импорт резюме из collection items.
-- Product commit: `e9a5e7c85`.
+- Regression tests: `tests/test_zarplata_api.py` проверяет `only_in_responses`, отсутствие `status` в `/negotiations`, импорт резюме из collection items и остановку до API depth limit.
+- Product commits: `e9a5e7c85`, `860adb539`.
 - Вкладка переименована в `Вакансии`.
 - `/api/offers/vacancies` теперь агрегирует Rabota.ru и Zarplata.ru, а UI показывает `source_label`.
 - Массовые приглашения в этой вкладке остаются только для Rabota.ru; Zarplata.ru карточки read-only.
