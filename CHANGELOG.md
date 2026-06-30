@@ -9,6 +9,7 @@
 - Исправлена “тишина” на фазе `Сбор лидов с Rabota.ru`: добавлены видимые business-progress строки по началу загрузки откликов и постраничному прогрессу. Серверный commit: `c52019bd4`.
 - Исправлена новая анкета Самокат в фактическом runtime path `SamokatLeadsuPlatform`: скрытая `button.btn_form` больше не считается отсутствующей кнопкой, форма отправляется через JS `requestSubmit/submit`. Серверный commit: `0b2518036`.
 - Исправлена ошибка Зарплата.ру `you can't look up more than 2000 items`: `/resumes` больше не запрашивает страницы глубже API depth limit, полный цикл продолжает работу и добирает отклики через `/negotiations`. Серверный commit: `860adb539`.
+- Исправлен повтор Самокат-ошибки из-за drift между `traffichub_app` и `traffichub_worker`: form-fill hotfix синхронизирован в оба контейнера, LFID/blank/chrome-error без формы теперь transient, а не permanent submit failure. Серверный commit: `3b3317f7d`.
 
 # 2026-06-29
 

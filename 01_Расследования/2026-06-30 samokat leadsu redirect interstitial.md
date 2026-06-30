@@ -136,3 +136,39 @@ Root cause: для новой анкеты Самоката наличие не�
 - `/api/health` вернул `status=ok`.
 
 Вывод: анкета была адаптирована не до конца, потому что был исправлен generic Leads.su path, а live Самокат использует отдельный `SamokatLeadsuPlatform`. Канон: для `jobs-samokat.ru` править и тестировать именно `modules/platforms/lovko.py`.
+
+## Повтор 2026-06-30: app/worker drift и LFID без формы
+
+Пользователь передал актуальную партнёрскую ссылку:
+
+- `https://pxl.leads.su/click/60880f268e2bfd53b46780749f5703a3?erid=2W5zFJk9Uak`
+
+Проверка показала две независимые причины повторения:
+
+- `traffichub_app` уже содержал `_submit_samokat_jobs_form()`;
+- `traffichub_worker` всё ещё содержал старый код с `return FillResult.fail("samokat: кнопка submit не найдена")`;
+- браузерная проверка ссылки 10 секунд оставалась на `pxl.leads.su`, а после остановки навигации получила `chrome-error://chromewebdata/`, `forms=0`, `buttons=0`.
+
+Root cause:
+
+- hotfix был разложен только в `traffichub_app`, но фактическая рассылка/заполнение выполняется `traffichub_worker`;
+- для LFID/redirect/chrome-error без формы Самокат не должен возвращать permanent submit failure.
+
+Фикс:
+
+- `lovko.py` и тесты синхронизированы в оба контейнера: `traffichub_app` и `traffichub_worker`;
+- оба контейнера перезапущены;
+- добавлен helper `modules/platforms/lovko.py::_is_samokat_transient_without_form()`;
+- `pxl.leads.su`, `clientctx.su`, `chrome-error://...` и пустой body без формы классифицируются как transient `landing пустой`, а не permanent `кнопка submit не найдена`;
+- regression test `tests/test_platform_routing.py::test_samokat_blank_or_chrome_error_without_form_is_transient`.
+
+Проверка:
+
+- в `traffichub_app`: `tests/test_platform_routing.py tests/test_vbiv_bot_navigation.py` -> `15 passed`;
+- в `traffichub_worker`: `tests/test_platform_routing.py tests/test_vbiv_bot_navigation.py` -> `15 passed`;
+- оба контейнера содержат `_is_samokat_transient_without_form`, `_submit_samokat_jobs_form`, `requestSubmit`;
+- `/api/health` вернул `status=ok`.
+
+Product commit: `3b3317f7d`.
+
+Канон деплоя form-fill hotfix: если меняется `modules/platforms/*` или `modules/vbiv_bot.py`, проверять и синхронизировать не только `traffichub_app`, но и `traffichub_worker`.
