@@ -1,5 +1,7 @@
 # БАГ-031: full-cycle sheets matching и мусорный owner alice
 
+Статус: resolved на 2026-06-30.
+
 ## Симптом
 
 - В активных users появился `alice`, которого владелец проекта не создавал.
@@ -121,6 +123,12 @@
 - На `2026-06-30` подтверждено: `alice` и `test_user` отсутствуют в live users/license/runtime хвостах. Retry queue пустая.
 - На `2026-06-30` дополнительно найден и исправлен общий lifecycle-баг: `alex` имел две строки `autolead_run_log status=running` после force-kill job, хотя Redis уже был `idle`. Исправлено в worker lifecycle commit `6c26c5eb0`, финальная live-проверка `status='running' or finished_at is null` вернула `0 rows`.
 - На `2026-06-30` отдельно проверен свежий хвост `Самокат: кнопка submit не найдена` у `alex`: debug HTML не содержал формы и был LFID/redirect interstitial. Исправлено в commit `c47e0ac96`: такой случай теперь transient `landing пустой или redirect не дошёл до формы`, а не permanent form-failure.
+- Финальная live-проверка 2026-06-30:
+  - `autolead_run_log` dangling rows: `0`;
+  - `autolead_retry_queue`: `0`;
+  - `users/control_license_users`: только `admin`, `alex`, `artem`, `kursmerkusheva@gmail.com`, `sergkuz2190`;
+  - `alice/test_user`: `0` во всех проверенных runtime tables;
+  - свежие error-like логи за 36 часов после деплоя не содержат новых повторов этого класса.
 
 ### Ссылки
 
