@@ -119,10 +119,12 @@
 - Массовая реальная отправка по `alex`/`kursmerkusheva@gmail.com` не запускалась: у них остались реальные строки с телефонами, такой прогон создаёт боевые заявки. Проверка выполнена controlled smoke.
 - На `2026-06-27` подтверждено: баг с `alice` не воспроизводится, свежие run logs не показывают новых matching/no-phone/VkusVill regression. Оставшиеся retry-записи — старые transient Lovko timeouts, а не повторное создание `alice` и не permanent form-failure.
 - На `2026-06-30` подтверждено: `alice` и `test_user` отсутствуют в live users/license/runtime хвостах. Retry queue пустая.
+- На `2026-06-30` дополнительно найден и исправлен общий lifecycle-баг: `alex` имел две строки `autolead_run_log status=running` после force-kill job, хотя Redis уже был `idle`. Исправлено в worker lifecycle commit `6c26c5eb0`, финальная live-проверка `status='running' or finished_at is null` вернула `0 rows`.
 
 ### Ссылки
 
 - [[01 Расследования/2026-06-30 test_user cleanup leakage]]
+- [[01 Расследования/2026-06-30 alex run_log stuck running after stop]]
 
 ## Следующий шаг
 
