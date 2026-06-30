@@ -2,6 +2,8 @@
 
 # 2026-06-30
 
+- Для профиля `artem` на live-сервере подтверждён owner-scoped Rabota.ru proxy: `proxy_enabled=true`, `proxy_url=http://uE0D08:LZCcvM@217.29.62.68:8000`; другие пользователи не изменялись.
+- Content Bot: перед публикацией поста удаляются ссылочные плейсхолдеры из текста (`[вставьте ссылку]`, `[ваша ссылка]`, `ваша_ссылка_здесь`, `example.com`), а ссылка остаётся только в inline-кнопке `Перейти на сайт -> https://hrcadry.pro`. Серверный commit: `4d07384c4`.
 - Исправлена неполная выгрузка Зарплата.ру: импорт теперь объединяет `/resumes`, `/resumes?only_in_responses=true` и резюме из коллекций `/negotiations` по активным вакансиям работодателя; collection-запросы не ограничиваются `status=active`.
 - Добавлены промежуточные stdout-события прогресса Зарплата.ру, чтобы dashboard не выглядел зависшим во время долгого обхода API.
 - Добавлены regression-тесты `tests/test_zarplata_api.py` на `only_in_responses`, отсутствие `status` в `/negotiations` и импорт резюме из collection items.
