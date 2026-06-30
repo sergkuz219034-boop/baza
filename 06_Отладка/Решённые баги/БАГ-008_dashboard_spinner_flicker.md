@@ -103,3 +103,28 @@ Root cause был во frontend guardrail: UI требовал `finished_at` д�
 - `isConfirmedRealtimeTerminal()` считает `idle` без `job_id` подтверждённым терминальным состоянием.
 - Regression test: `tests/test_dashboard_realtime_spinner.py::test_idle_status_without_job_id_removes_stale_spinner_immediately`.
 - Live deploy: `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
+
+## Дополнение 2026-06-30: фаза Rabota.ru была без видимого прогресса
+
+### Симптом
+
+На свежем запуске строка `Полный цикл выполняется` оставалась единственной видимой строкой после `Фаза 1: Сбор лидов с Rabota.ru`.
+
+### Проверка
+
+- Live queue после снимка уже была пустой, то есть это не вечная backend-блокировка.
+- `services/leads_service.py::run_scraper()` печатал техническую строку `Сбор лидов: период=...`, но `utils/runtime_logging.py` намеренно скрывает её из UI.
+- `modules/rabota_api.py::get_responses()` печатал `[API] Отклики ...`, но `[API]` также скрывается из UI.
+- Старый transient spinner `Загрузка откликов` уже был правильно отключён для non-TTY, поэтому во время долгого API-обхода не оставалось видимых пользовательских событий.
+
+### Вывод
+
+Root cause был не в зависании job-spinner, а в отсутствии видимых business-progress строк внутри фазы Rabota.ru. Dashboard показывал только общий active job, потому что все реальные промежуточные строки либо были техническими, либо специально отфильтрованными.
+
+### Фикс
+
+- Product commit `c52019bd4`: `run_scraper()` пишет видимое событие `Rabota.ru: начинаю загрузку откликов`.
+- `RabotaRuClient.get_responses()` пишет throttled progress `Rabota.ru: отклики загружены: N (offset=..., страница=...)`.
+- Прогресс не возвращает старый transient spinner: строка печатается максимум раз в 10 секунд для полных страниц и обязательно на финальной странице.
+- Regression test: `tests/test_runtime_logging.py::test_is_ui_relevant_log_keeps_rabota_business_progress`.
+- Live deploy: `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
