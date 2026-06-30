@@ -29,6 +29,14 @@
 - `api/routers/offers.py::invite_bulk`
 - `utils/runtime_store_pg_invites.py`
 
+`autolead_platform_invite_history` — owner-scoped история приглашений для платформ, где одного телефона недостаточно как ключа. Для Zarplata.ru используется:
+
+- `platform=zarplata`;
+- `invite_key=resume:{resume_id}:vacancy:{vacancy_id}`;
+- `phone` хранится как диагностическое поле, но уникальность задаётся через `owner_username + platform + invite_key`.
+
+Причина: один и тот же кандидат может быть связан с разными вакансиями, а Zarplata API требует пару `resume_id + vacancy_id` для `POST /negotiations/phone_interview`.
+
 ## Входы
 
 - leads service

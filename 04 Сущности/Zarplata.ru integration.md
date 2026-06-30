@@ -27,6 +27,7 @@
 - `refresh_token`
 - `enabled` — включает сбор резюме Зарплата.ру в общем workflow вкладки `Обзор`.
 - `enable_form_fill` — legacy/внутренний флаг допуска лидов Зарплата.ру к общей очереди заполнения анкет. В текущем UI отдельного переключателя нет: один тумблер `Режим Зарплата.ру` означает и сбор, и заполнение.
+- `enable_auto_invite` — включает автоприглашения через официальный API Зарплата.ру. Это отдельный флаг от Rabota `enable_auto_invite`.
 - `query`
 - `area`
 - `per_page`
@@ -48,6 +49,7 @@
 - `POST https://api.zarplata.ru/token`
 - `GET https://api.zarplata.ru/me`
 - `GET https://api.zarplata.ru/resumes`
+- `POST https://api.zarplata.ru/negotiations/phone_interview` — приглашение соискателя на вакансию.
 
 ## Поток данных
 
@@ -65,6 +67,9 @@
 12. `upload_to_sheets()` выгружает лиды в уже настроенную Google Sheets.
 13. Backend нормализует старые настройки: если `enabled=true`, то импорт считается разрешённым для заполнения, даже если в legacy config остался `enable_form_fill=false`.
 14. Старый статус `Статус = заполнение выключено` считается legacy/dead-state для уже выгруженных строк. Новые строки при включённом источнике не должны получать этот статус.
+15. Если `zarplata_ru.enable_auto_invite=true`, общий sender в `modules/vbiv_bot.py` для лидов `_source_type=zarplata` вызывает `ZarplataClient.invite_applicant()`.
+16. Для приглашения используются `resume_id` из `_source_id` / `_raw_data.external_resume_id` и `vacancy_id` из `_zarplata_vacancy_id`.
+17. История Zarplata-приглашений хранится отдельно от Rabota: `autolead_platform_invite_history`, ключ `platform=zarplata + resume_id + vacancy_id`.
 
 Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
 
@@ -96,7 +101,7 @@
 ## Ограничения
 
 - Контакты зависят от прав токена и ответа API Зарплата.ру.
-- Negotiations/приглашения пока не реализованы.
+- Автоприглашения реализованы через `POST /negotiations/phone_interview`, но live-успех зависит от прав конкретного user OAuth token. API может вернуть `403`, если нет доступа к вакансии, резюме или платному employer API действию.
 - `app_access_token` через `client_credentials` не подходит для поиска резюме, если API требует user OAuth token. Для `GET /resumes` нужен токен, полученный через `authorization_code`.
 - Legacy-runtime уже ломался из-за смешения `app token` и `user token` в одном поле; после фикса эти поля разделены, а старые `APPL...` токены автоматически мигрируются из `access_token` в `app_access_token`.
 - На live-профиле `Artem` 2026-06-25 подтверждено: app-token даёт `403 user_auth_expected` на `/resumes`; реальная выгрузка невозможна до получения user OAuth token работодателя.
@@ -111,4 +116,5 @@
 - [[2026-06-29 Zarplata form fill disabled status]]
 - [[2026-06-29 Zarplata owner readiness guard]]
 - [[2026-06-29 Unified Rabota and Zarplata dispatch order]]
+- [[2026-06-30 возможность автоприглашений Zarplata.ru]]
 - [[Отключение embedded TrafficHub для user]]
