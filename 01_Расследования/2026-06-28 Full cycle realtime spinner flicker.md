@@ -56,3 +56,28 @@
 
 - Для любых будущих live-status строк не использовать `appendLog()` как источник истины UI-состояния.
 - Исторический лог и realtime status должны быть разными слоями.
+
+## Повтор 2026-07-01
+
+### Симптом
+
+- Пользователь снова видит, что строка полного цикла "моргает".
+
+### Проверка
+
+- Live frontend-код на `dbe7a30a6` сохранил DOM-fix: `syncRealtimeJobSpinner()` не вызывает `appendLog()`, `#realtime-job-spinner` существует.
+- `autolead_job_events` для admin показывали нормальный порядок job state: `queued -> running -> stopping/idle`, без чередования `idle/running` внутри одного запуска.
+- В `dashboard/style.css` у `.log-line.log-spinner .log-marker` были CSS-анимации `logPulse` и `logRipple`, меняющие opacity/scale каждые 1.2 секунды.
+
+### Вывод
+
+- Это не откат старого DOM-багa.
+- Моргание 2026-07-01 было визуальной CSS-анимацией маркера активной строки.
+
+### Исправление
+
+- Product commit: `5d0bf98fa Stop realtime spinner marker blinking`.
+- У `.log-line.log-spinner .log-marker` выставлено `animation: none`.
+- `logPulse` и `logRipple` удалены.
+- Regression test: `tests/test_dashboard_realtime_spinner.py::test_realtime_spinner_marker_is_not_animated`.
+- Live HTTP-проверка `https://traffic-hub.pro/style.css` подтверждает отсутствие `logPulse/logRipple` и наличие `animation: none`.
