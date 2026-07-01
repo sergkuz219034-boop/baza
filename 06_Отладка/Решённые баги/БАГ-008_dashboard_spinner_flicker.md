@@ -128,3 +128,26 @@ Root cause был не в зависании job-spinner, а в отсутств
 - Прогресс не возвращает старый transient spinner: строка печатается максимум раз в 10 секунд для полных страниц и обязательно на финальной странице.
 - Regression test: `tests/test_runtime_logging.py::test_is_ui_relevant_log_keeps_rabota_business_progress`.
 - Live deploy: `traffichub_app` перезапущен, `/api/health` вернул `status=ok`.
+
+## Коррекция 2026-07-01: постраничный progress Rabota.ru скрыт из dashboard
+
+### Симптом
+
+После предыдущего фикса в dashboard снова стали видны старые строки процесса выгрузки Rabota.ru: `начинаю загрузку откликов`, `отклики загружены: N (offset=..., страница=...)`, `Уникальных откликов: ...`.
+
+### Проверка
+
+- `modules/rabota_api.py::get_responses()` печатал постраничный progress.
+- `utils/runtime_logging.py` пропускал весь prefix `[i] Rabota.ru:` и substring `Уникальных откликов:`.
+- `tests/test_runtime_logging.py` закреплял старое поведение как ожидаемое.
+
+### Вывод
+
+Предыдущий канон был неверным: постраничный API progress не является пользовательским business event. Он создаёт шум в terminal и воспринимается как возврат старого статуса выгрузки.
+
+### Фикс
+
+- Product commit `40716404c`: backend и frontend фильтруют эти строки.
+- `tests/test_runtime_logging.py` теперь требует `False` для старых progress-строк.
+- Live deploy: пересозданы `traffichub_app` и `traffichub_worker`; `/api/health` вернул `status=ok`.
+- Связанное расследование: [[01_Расследования/2026-07-01 Rabota response page progress old logs]].
