@@ -56,10 +56,19 @@
   - создано 7 недостающих `financial_records`;
   - очищено 598 подозрительных свежих `sent` из `autolead_send_history` по Lovko-офферам `Ozon`, `Onecta #2`, `Я еда`, чтобы они могли пройти заново уже со строгой проверкой.
 
+Дополнительное ужесточение после повторного расхождения `sent` vs конверсии ПП:
+
+- Product commit: `190abe7b3 fix: require explicit lovko form confirmation`.
+- Причина: после удаления правила `redirect = success` стандартный Lovko/Ozon/Onecta path всё ещё мог считать success по общему body/content, generic modal и видимой `[data-fancybox-close]`. Эти признаки не доказывают, что партнёрка приняла анкету.
+- `modules/platforms/lovko.py::_wait_lovko_success()` теперь принимает успех только по явному `.thanks-modal`/dialog с новым success text или alert/dialog success. Пустой popup-shell и общий текст страницы больше не создают `send_history=sent`.
+- Регрессия закрыта тестом `tests/test_lovko_success_detection.py`.
+
 ## Проверка
 
 - `python3 -m pytest -q` на live repo: `433 passed, 43 skipped`.
+- Для `190abe7b3`: `python3 -m pytest -q` на live repo: `439 passed, 43 skipped`.
 - GitHub Actions для `39e72fa2b`: `CI` success, `Build and Push Docker Image` success.
+- GitHub Actions для `190abe7b3`: `CI` success, `Build and Push Docker Image` success.
 - Live deploy:
   - `docker compose up -d --build autolead_bot worker`;
   - `/api/health` вернул `{"status":"ok","version":"1.2","app":"TrafficHub"}`;

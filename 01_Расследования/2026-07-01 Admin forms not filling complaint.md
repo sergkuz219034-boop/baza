@@ -18,15 +18,13 @@
 
 ## Гипотеза
 
-После строгого фикса success detection анкеты могут реально отправляться, но:
+Первичная гипотеза про остановленный job была неполной. Скрин партнёрки показывает дневные конверсии, где `конверсия = успешное заполнение анкеты`. Значит локальный `autolead_send_history.status='sent'` нельзя считать доказательством заполнения, если партнёрка не видит соответствующую конверсию.
 
-- job останавливается до завершения;
-- отдельный оффер падает в retry;
-- партнёрская аналитика ещё не синхронизировала конверсии или не прислала оплаченные postbacks.
+Рабочая гипотеза после уточнения пользователя: Lovko/Ozon/Onecta success detection всё ещё был слишком мягким и мог записывать `sent` по UI-признакам, которые не доказывают принятие анкеты партнёркой.
 
 ## Проверка
 
-- Live HEAD: `7e9488a63`.
+- Live HEAD до нового фикса: `c247fed81`.
 - За `2026-07-01` в `autolead_send_history` по `admin` после свежего строгого фикса:
   - `Onecta #2`: `5` строк `sent`, `21:06:48` - `21:11:39`;
   - `Ozon`: `4` строки `sent`, `21:07:14` - `21:10:38`.
@@ -41,20 +39,47 @@
   - retry_count `1..3`.
 - За `2026-07-01` в `conversions` нет строк по admin.
 - В `postback_logs` по admin за день есть Voxys `pending/rejected` с `payout=0`, но нет оплаченных конверсий.
+- Runtime proxy check из `traffichub_app` под owner `admin`:
+  - `_playwright_proxy_from_config()` возвращает `http://217.29.62.68:8000`;
+  - HTTP и Playwright egress через proxy показывают IP `217.29.62.68`, geo `RU/Moscow`.
+- Code check `modules/platforms/lovko.py` на `c247fed81`:
+  - `_wait_lovko_success()` уже не принимал обычный redirect за success;
+  - но всё ещё принимал body/content/modals с общими success words и даже видимую `[data-fancybox-close]` как `ok`;
+  - это могло давать ложный `sent`, если сайт показал popup-shell/общий текст, но партнёрка не зарегистрировала заявку.
 
 ## Наблюдение
 
-Факт runtime не подтверждает "ничего не заполняется": свежий запуск успел заполнить `9` форм, но был остановлен на 10-й форме. Отдельная подтверждённая проблема — `Самокат` не доходит до формы и остаётся в retry.
+Факт runtime не подтверждает старый вывод "9 форм точно заполнены". Он подтверждает только, что бот записал `9` локальных `sent`. После уточнения пользователя и сверки со скрином ПП это недостаточно: партнёрская конверсия является внешним подтверждением принятой анкеты.
 
-Скрин партнёрки показывает клики/конверсии ПП, а не напрямую `autolead_send_history`. После commit `39e72fa2b` редирект больше не считается успехом без явного подтверждения формы, поэтому количество локальных `sent` должно быть меньше старого ложного числа.
+Отдельная подтверждённая проблема — `Самокат` не доходит до формы и остаётся в retry. Но текущий фикс касается только ложного success для стандартных Lovko/Ozon/Onecta.
+
+Скрин партнёрки показывает клики/конверсии ПП, а не напрямую `autolead_send_history`. После commit `39e72fa2b` редирект больше не считается успехом без явного подтверждения формы. После commit `190abe7b3` Lovko/Ozon/Onecta также не считают success по общему body/content и пустым popup-shell.
 
 ## Вывод
 
-На момент проверки главная причина последнего "не заполняет" — остановленный job, а не общий отказ form-fill. `Ozon` и `Onecta #2` заполнялись. `Самокат` требует отдельного расследования по landing/form detection.
+Причина повторного расхождения `успешно заполнен` vs конверсии ПП — недостаточно строгий Lovko success detection: локальный `sent` мог появляться без доказанного принятия анкеты партнёркой.
+
+Исправление:
+
+- Product commit: `190abe7b3 fix: require explicit lovko form confirmation`.
+- `modules/platforms/lovko.py::_wait_lovko_success()`:
+  - больше не принимает body/content с общими success words как `ok`;
+  - больше не принимает один видимый `[data-fancybox-close]` как `ok`;
+  - принимает success только по явному `.thanks-modal`/dialog с новым success text или alert/dialog success;
+  - duplicate по явному modal/dialog сохраняется.
+- Добавлен тест `tests/test_lovko_success_detection.py`.
+
+Проверка:
+
+- `python3 -m pytest -q tests/test_lovko_success_detection.py tests/test_platform_success_detection.py tests/test_proxy_config.py`: `15 passed`.
+- `python3 -m pytest -q`: `439 passed, 43 skipped`.
+- GitHub checks для `190abe7b3`: `CI` success, `Build and Push Docker Image` success.
+- Live deploy: `docker compose up -d --build autolead_bot worker`.
+- Runtime: `traffichub_app` и `traffichub_worker` healthy; `/api/health` ok.
 
 ## Следующий шаг
 
-1. Дать полному циклу доработать без stop, затем сравнить:
+1. Дать полному циклу доработать без stop уже после `190abe7b3`, затем сравнить:
    - `autolead_send_history`;
    - `postback_logs`;
    - `conversions`;
