@@ -57,3 +57,26 @@ Runtime 2026-07-01:
 ## Следующий шаг
 
 Если нужно повторно залить такой файл как новые лиды, нельзя просто импортировать тот же файл: нужно либо очистить/архивировать старые `admin/source_type=excel` строки в `autolead_leads`, либо изменить бизнес-ключ импорта. Перед чисткой обязателен backup PostgreSQL и понимание, что эти строки уже участвуют в UI-истории и matching.
+
+## Дополнение 2026-07-01: результат импорта разделён на local DB и Google Sheets
+
+### Симптом
+
+Старая строка UI показывала только `Импортировано в базу` и `дублей/уже были`, из-за чего пользователь видел `0` и считал, что файл не попал в Google Sheets.
+
+### Проверка
+
+- `api/routers/leads.py::import_leads_file()` уже вызывал `upload_sheets(config, leads)` даже если `save_leads(leads)` вернул `0`.
+- `dashboard/app.js::importLeadsFile()` не показывал `uploaded_to_sheets` и `sheets_duplicates_or_existing`.
+
+### Вывод
+
+Фактическая логика уже смотрела в Google Sheets через `upload_sheets()`, но UI скрывал этот слой. Пользовательский контракт был неверным: локальный дубль не должен визуально перекрывать результат проверки Google Sheets.
+
+### Фикс
+
+- Product commit `4adba7a4a`: API возвращает отдельные поля `local_duplicates_or_existing`, `google_sheets_duplicates_or_existing`, `google_sheets_checked`.
+- UI показывает две части:
+  - `локальная база: +N, уже были M`;
+  - `Google Sheets: +A, уже были B`.
+- Regression test закрепляет сценарий: локальная база вернула `0`, но Google Sheets получил и добавил строку.
