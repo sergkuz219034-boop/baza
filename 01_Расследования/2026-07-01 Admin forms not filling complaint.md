@@ -86,3 +86,34 @@
    - партнёрскую аналитику.
 2. Если `Самокат` нужен в активной рассылке, открыть отдельный incident по `samokat: landing пустой или форма не найдена` со свежим debug HTML/screenshot.
 3. Не возвращать слабое правило `redirect = success`: оно уже давало ложные "успешно заполнен" без конверсий.
+
+## Дополнение 2026-07-01: smoke-test admin offers
+
+Симптом: пользователь попросил взять admin offer links и вручную прогнать каждый активный оффер на одном лиде.
+
+Проверка:
+
+- Active admin offers:
+  - `Onecta #2`: `https://tracking.lovko.pro/L6eTlM`;
+  - `Я еда`: `https://tracking.lovko.pro/fik03d`;
+  - `Ozon`: `https://tracking.lovko.pro/3xaBLJ`;
+  - `Самокат`: `http://work.jobs-samokat.ru/click?pid=4161&offer_id=133&sub1=1`.
+- Runtime proxy для browser form-fill: `http://217.29.62.68:8000`; `api.ipify.org` внутри Playwright показывал `217.29.62.68`.
+- Найдено: Lovko tracking preflight в `modules/vbiv_bot.py` мог идти через server-side `requests` до запуска Chromium. При включённом proxy это обходило browser proxy для click/tracking.
+- Исправлено:
+  - `55745fbb1 fix: route lovko tracking through form proxy` — при `form_proxy` tracking URL открывается Chromium через proxy.
+  - `d596c7f5e fix: fill lovko residence address fields` и `54af44d1b fix: wait for lovko residence city suggestions` — `place_of_residence` выбирает Dadata city suggestion, а не пишет произвольное значение.
+  - `ad26ccbb4 fix: choose ozon moscow region city fallback` — Ozon для Москвы использует fallback query `МО`, потому что dropdown отдаёт склады `МО, Домодедово`, `МО, Жуковский`, `МО, Подольск`, а не `Москва`.
+
+Наблюдение после deploy:
+
+- `Onecta #2`: smoke ok, proxy IP `217.29.62.68`.
+- `Я еда`: smoke ok, proxy IP `217.29.62.68`.
+- `Ozon`: smoke ok после Ozon fallback `МО`, proxy IP `217.29.62.68`.
+- `Самокат`: не form-fill bug в текущем коде; target уводит на `disabled.html`, результат `samokat: landing пустой или форма не найдена`.
+
+Вывод:
+
+- Основной proxy/IP баг был не в Chromium proxy, а в server-side Lovko tracking preflight.
+- Основной form-fill баг для Onecta/Ozon был в city/dropdown validation.
+- `Самокат` требует отдельного решения по офферу/ссылке: текущая ссылка отключена на стороне landing.
