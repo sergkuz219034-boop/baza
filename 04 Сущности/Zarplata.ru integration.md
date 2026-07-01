@@ -71,6 +71,13 @@
 16. Для приглашения используются `resume_id` из `_source_id` / `_raw_data.external_resume_id` и `vacancy_id` из `_zarplata_vacancy_id`.
 17. История Zarplata-приглашений хранится отдельно от Rabota: `autolead_platform_invite_history`, ключ `platform=zarplata + resume_id + vacancy_id`.
 
+После commit `ba15d7a59` добавлено обязательное правило качества лида Зарплата.ру:
+
+- `modules/zarplata_api.py::import_resumes()` сохраняет и выгружает только записи, у которых есть телефон или email.
+- Search-result записи без контактов считаются техническим шумом API и учитываются только в счётчике `no_contact_skipped`.
+- `modules/zarplata_api.py::normalize_resume()` больше не ставит текущую дату всем найденным резюме. Дата берётся из `response_date`, `created_at`, `updated_at`, `published_at`, `modified_at` или из `_zarplata_negotiation.created_at/updated_at`; текущая дата используется только как fallback.
+- Это правило введено после расследования [[2026-07-01 Zarplata contactless rows dated today]], где Google Sheets получил `2600+` строк с датой выгрузки `01.07.2026` и пустыми контактами.
+
 Если `enabled=true`, но `access_token` пустой, `run_zarplata_import()` после commit `75a1a619c` не падает исключением и не останавливает общий цикл. Он пишет в рабочий лог, что пользовательский OAuth token не подключён, возвращает `reason=no_access_token` и пропускает выгрузку.
 
 После commit `d8e0206f4` канон запуска жёстче:
@@ -107,6 +114,7 @@
 - На live-профиле `Artem` 2026-06-25 подтверждено: app-token даёт `403 user_auth_expected` на `/resumes`; реальная выгрузка невозможна до получения user OAuth token работодателя.
 - Старые строки, уже выгруженные до фикса со статусом `заполнение выключено`, не попадут в заполнение, пока их статус в Google Sheets не будет очищен вручную или отдельной миграцией по конкретной вкладке.
 - Если в owner-scoped config снова появится `enabled=true` вместе с `enable_form_fill=false`, `/api/settings/zarplata` должен нормализовать это состояние при следующем сохранении.
+- Уже записанные в Google Sheets contactless строки не удаляются кодовым фиксом автоматически. Их нужно чистить отдельной подтверждённой операцией по конкретному листу и критериям, чтобы не удалить реальные лиды.
 
 ## Связанные заметки
 
@@ -117,4 +125,5 @@
 - [[2026-06-29 Zarplata owner readiness guard]]
 - [[2026-06-29 Unified Rabota and Zarplata dispatch order]]
 - [[2026-06-30 возможность автоприглашений Zarplata.ru]]
+- [[2026-07-01 Zarplata contactless rows dated today]]
 - [[Отключение embedded TrafficHub для user]]
