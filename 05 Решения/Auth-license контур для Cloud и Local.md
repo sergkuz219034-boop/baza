@@ -16,6 +16,13 @@ TrafficHub больше нельзя описывать только как се
 - `auth.traffic-hub.pro` проксируется в `license_auth`;
 - `license_server` не публикуется как UI, но остаётся внутренним license API / local-download кандидатом.
 
+Роли сервисов подтверждены кодом:
+
+- `license_auth/app.py` обслуживает `/login`, `/token`, `/health`, проверяет логин/пароль через `utils.license.validate_user` и выпускает JWT;
+- `license_server/app.py` обслуживает `/keys/create`, `/keys/validate/{key}`, `/keys/revoke`, `/health`, создаёт signed activation keys и защищён `LICENSE_API_KEY`;
+- `api/routers/system.py` содержит packaged Windows update flow: `TrafficHub.exe` + `update.exe`;
+- `tools/windows_installer/build_setup.ps1` собирает `TrafficHub.exe`, `update.exe`, `ActivateLicense.exe`, `AccountManager.exe` и optional `LicenseKeygen.exe`.
+
 ## Решение
 
 - Считать TrafficHub двухконтурным продуктом: `Cloud/SaaS` + `Local/download`.
@@ -28,9 +35,9 @@ TrafficHub больше нельзя описывать только как се
 - Cleanup-задачи больше не имеют права удалять license-контур “по ощущению”.
 - Любое удаление `license_server`, `utils.license`, `TrafficHub.exe` или `update.exe` требует отдельного ADR.
 - Production cloud можно упрощать без потери local/download сценария.
+- До end-to-end проверки Windows artifact flow текущий split безопаснее, чем merge/delete.
 
 ## Альтернативы
 
 - Удалить `license_server` как legacy: отклонено до аудита local/download, потому что риск сломать activation/update flow выше выигрыша от удаления.
 - Слить `license_auth` и `license_server`: возможно позже, но только после карты endpoints и совместимости с локальной версией.
-

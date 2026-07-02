@@ -32,6 +32,12 @@ TrafficHub фактически двухконтурный:
 - `Cloud/SaaS`: Docker/Caddy/PostgreSQL/Redis/app/worker/AccountManager/content bot/license_auth.
 - `Local/download`: локальный запуск, `TrafficHub.exe`, `update.exe`, localhost callback, activation/license.
 
+Дополнительный audit показал, что `license_auth` и `license_server` не являются дублями:
+
+- `license_auth` — public login/JWT gateway (`/login`, `/token`);
+- `license_server` — internal signed license-key API (`/keys/create`, `/keys/validate/{key}`, `/keys/revoke`);
+- local/download build действительно собирает `TrafficHub.exe`, `update.exe`, `ActivateLicense.exe`, `AccountManager.exe` и optional `LicenseKeygen.exe`.
+
 ## Вывод
 
 `license_auth` и `license_server` не удалять и не переименовывать без отдельного ADR. Оптимизация допустима на уровне build/image/healthcheck, но не через удаление local/download возможностей.
@@ -40,3 +46,4 @@ TrafficHub фактически двухконтурный:
 
 Отдельно провести auth/license/download audit: endpoints, `TrafficHub.exe`, `update.exe`, `/api/system/update`, `utils.license`, activation/register flow и совместимость local callback.
 
+Audit частично выполнен и зафиксирован в product docs `docs/auth-license-download-audit.md`. Открытым остаётся end-to-end тест Windows artifact flow и решение, остаётся ли `license_server` cloud-service, local/download-only service или объединяется с `license_auth`.
