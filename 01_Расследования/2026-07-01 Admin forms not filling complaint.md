@@ -147,3 +147,37 @@
 
 - После deploy проверять runtime внутри `traffichub_app`: admin form proxy должен показывать `217.29.62.68`, `RU`, `Moscow`.
 - Для `Самокат` не менять статус оффера в рамках proxy guard; если он нужен в работе, открывать отдельное расследование по текущему `disabled.html`.
+
+## Дополнение 2026-07-03: submit = filled для Lovko/Leadsu
+
+Симптом: пользователь уточнил, что ожидание подтверждения партнёрки было временным debug-режимом. Для рабочего полного цикла `Lovko` и `Leadsu` не должны требовать внешнюю конверсию/thanks-modal как условие локального статуса. Нужен realtime-статус: открыли форму, заполнили поля, нажали submit, нет явной ошибки валидации/disabled => анкета считается заполненной.
+
+Проверка:
+
+- `modules/platforms/lovko.py` после submit возвращал `FillResult.fail("форма не подтверждена после отправки")`, если `_wait_lovko_success()` не увидел явный success.
+- `modules/platforms/leadsu.py` после обычного submit делал direct-submit recovery и тоже мог вернуть fail по отсутствию внешнего подтверждения.
+- `modules/vbiv_bot.py` уже печатал строку лида перед офферами, но строка конкретного оффера была только `Заполняем: {offer_name}` без ФИО/телефона.
+- `dashboard/app.js` уже держит одну стабильную spinner-строку `REALTIME_SPINNER_ID` и считает формы через `forms_done/forms_total`; CSS до фикса запрещал анимацию marker.
+
+Наблюдение:
+
+- Для realtime UI важно не пересоздавать строку статуса, иначе возвращается старое мигание. Анимацию можно давать только внутреннему marker/pseudo-element.
+- `disabled.html` у `Самокат` не является ошибкой submit-контракта: лендинг не отдаёт форму.
+
+Вывод:
+
+- Product commit: `c36762fb5 fix: treat form submit as filled status`.
+- `Lovko`, `Leadsu` и `Leadsu/Vkusvill` теперь после submit без явной ошибки/invalid/disabled возвращают `FillResult.ok()`, даже если партнёрка не показала явный success.
+- `duplicate`, `disabled.html` и явная invalid-form ошибка остаются отдельными статусами.
+- Строка оффера в полном цикле теперь печатает ФИО и телефон: `Заполняем: {offer} | {name} ({phone})`.
+- `dashboard/style.css` добавил мягкую анимацию `realtimeSpinnerDotPulse` только для `.log-marker::after`; строка spinner остаётся стабильной.
+- Полный pytest: `461 passed, 43 skipped`.
+- Live deploy: `autolead_bot` и `worker` пересобраны, `/api/health` ok.
+- Admin smoke по всем 9 offer_mapping:
+  - ok: `Дикси`, `X5`, `Воксис`, `Онекта`, `ВкусВилл`, `Onecta #2`, `Я еда`, `Ozon`;
+  - fail: `Самокат` => `http://work.jobs-samokat.ru/disabled.html`, форма не найдена.
+
+Следующий шаг:
+
+- Для `Самокат` нужна новая рабочая ссылка/оффер у партнёрки; код не должен сам выключать оффер в настройках.
+- При следующем полном цикле контролировать UI: одна строка `Полный цикл: выполняется (x/y)`, пульсирует только кружок, лог-строка не должна пропадать между polling/live events.
