@@ -117,3 +117,33 @@
 - Основной proxy/IP баг был не в Chromium proxy, а в server-side Lovko tracking preflight.
 - Основной form-fill баг для Onecta/Ozon был в city/dropdown validation.
 - `Самокат` требует отдельного решения по офферу/ссылке: текущая ссылка отключена на стороне landing.
+
+## Дополнение 2026-07-03: RU form proxy guard
+
+Симптом: пользователь уточнил, что домен без VPN не открывается, а лиды плохо отрабатываются через немецкий IP. Требование: выполнить шаги по proxy-защите, но `Самокат` не убирать и не выключать.
+
+Проверка:
+
+- Code path заполнения анкет общий для всех пользователей: `modules/vbiv_bot.py::run_campaign()`.
+- Proxy для browser form-fill берётся из `modules/vbiv_bot.py::_playwright_proxy_from_config()`.
+- До нового guard код логировал наличие proxy, но не блокировал запуск, если browser egress фактически не RU.
+- `Самокат` в этом изменении не отключается и не удаляется из `offer_mapping`; существующая проблема `disabled.html` остаётся отдельным runtime-фактом партнёрской ссылки.
+
+Наблюдение:
+
+- Проверка IP должна выполняться именно через Chromium page, а не через server-side `requests`, потому что партнёрские click/form действия выполняет браузер.
+- Если proxy включён, но не распарсен или geo-check показывает не `RU`, продолжать цикл нельзя: иначе снова появятся клики/попытки с неправильного IP и ложное ощущение “заполнено”.
+
+Вывод:
+
+- Добавлен общий preflight guard в `modules/vbiv_bot.py`: перед формами Chromium через настроенный form proxy открывает geo endpoint и принимает запуск только при `countryCode == RU`.
+- Если proxy включён в настройках, но не распознан, заполнение анкет останавливается до обработки лидов.
+- Если proxy отвечает как не-RU, заполнение анкет останавливается до submit и не создаёт `send_history=sent`.
+- Регрессия покрыта `tests/test_proxy_config.py`: RU egress принимается, DE egress отклоняется, JSON из body парсится устойчиво.
+- Product commits: `e33d9d85e`, `3405b58d7`.
+- Live runtime после deploy подтвердил admin browser egress: `217.29.62.68`, `RU`, `Moscow`.
+
+Следующий шаг:
+
+- После deploy проверять runtime внутри `traffichub_app`: admin form proxy должен показывать `217.29.62.68`, `RU`, `Moscow`.
+- Для `Самокат` не менять статус оффера в рамках proxy guard; если он нужен в работе, открывать отдельное расследование по текущему `disabled.html`.

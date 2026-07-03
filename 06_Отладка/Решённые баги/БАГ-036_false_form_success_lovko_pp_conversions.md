@@ -63,10 +63,24 @@
 - `modules/platforms/lovko.py::_wait_lovko_success()` теперь принимает успех только по явному `.thanks-modal`/dialog с новым success text или alert/dialog success. Пустой popup-shell и общий текст страницы больше не создают `send_history=sent`.
 - Регрессия закрыта тестом `tests/test_lovko_success_detection.py`.
 
+Дополнительная защита от неправильного IP при заполнении:
+
+- Product commits:
+  - `e33d9d85e fix: require ru form proxy for autofill`;
+  - `3405b58d7 fix: avoid escaped fallback in proxy guard`.
+- Причина: пользователь указал, что офферы плохо отрабатываются через немецкий IP; наличие proxy в настройках само по себе не доказывает, что Chromium реально выходит через RU.
+- `modules/vbiv_bot.py::run_campaign()` перед формами выполняет browser-based RU preflight через настроенный `form_proxy`.
+- `_verify_ru_form_proxy_or_raise()` открывает geo endpoint именно в Playwright page и требует `countryCode == RU`.
+- Если proxy включён, но не распознан, или browser egress не RU, цикл заполнения останавливается до submit и не пишет `send_history=sent`.
+- `Самокат` этим guard не выключается и не удаляется; его `disabled.html` остаётся отдельной проблемой оффера/лендинга.
+- Регрессия закрыта `tests/test_proxy_config.py`.
+
 ## Проверка
 
 - `python3 -m pytest -q` на live repo: `433 passed, 43 skipped`.
 - Для `190abe7b3`: `python3 -m pytest -q` на live repo: `439 passed, 43 skipped`.
+- Для RU form proxy guard: `python3 -m pytest -q` на live repo: `461 passed, 43 skipped`.
+- Live deploy для `3405b58d7`: `docker compose up -d --build autolead_bot worker`; `/api/health` ok; `traffichub_app` и `traffichub_worker` healthy; container smoke для admin form proxy показал `217.29.62.68`, `RU`, `Moscow`.
 - GitHub Actions для `39e72fa2b`: `CI` success, `Build and Push Docker Image` success.
 - GitHub Actions для `190abe7b3`: `CI` success, `Build and Push Docker Image` success.
 - Live deploy:
