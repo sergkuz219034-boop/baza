@@ -29,10 +29,16 @@ TrafficHub показывает не подтверждённые партнёр
   - `Онекта`: `platform=leadsu`, enabled, `target_url=https://pxl.leads.su/...`.
   - `Onecta #2`: `platform=lovko`, disabled.
   - `Ozon`: `platform=lovko`, enabled.
+- Manual smoke `2026-07-03`:
+  - Через live `run_sender()` отправлен один тестовый лид `admin / Онекта` с телефоном `9001607332`.
+  - TrafficHub до дополнительного фикса записал `autolead_send_history.status='sent'`, `fill_time_ms=42115`.
+  - Lead.su API по connected offer `Onecta HR [sale]`, `offer_id=10963`, после повторной проверки не показал свежую conversion; по этому offer_id были только старые rejected-записи `2026-06-29` и `2026-07-02`.
+  - Тестовая запись удалена из `autolead_send_history`, чтобы не искажать dashboard.
 - Code facts:
   - `get_owned_summary()` считал `processed_today` и `offers_today` из `autolead_send_history WHERE status='sent'`.
   - `/traffic-api/settings/integrations/leadsu/sync` вызывал `_sync_network(... username=...)` без `tenant_id`, в отличие от Lovko sync.
   - `LeadsuPlatform` передавал в `_wait_success()` слабые popup-shell селекторы `.fancybox-content`, `.fancybox-slide--current`, `[data-fancybox-close]`, которые общий `_wait_success()` принимал как `ok` без проверки текста.
+  - `modules/platforms/__init__.py` дополнительно маршрутизировал `platform=leadsu` + `Онекта` в `TildaPlatform`; этот путь принимал Tilda success-popup как `FillResult.ok()` и создавал ложный `sent`.
 
 ## Наблюдение
 
@@ -44,11 +50,13 @@ Root cause состоит из двух частей:
 
 - метрика `Офферы сегодня` в Autolead является internal send-history, а не partner-confirmed conversions;
 - Lead.su generic form path мог создавать ложные `sent`, потому что popup-shell считался успехом без явного success text или partner response.
+- Onecta была отдельным false-positive path: из-за спец-роутинга в `TildaPlatform` она обходила более строгую Lead.su-проверку и засчитывала popup как заполнение.
 
 ## Исправление
 
 - Product commit `ff0098114`: `sync_leadsu` теперь передаёт `tenant_id=tenant_id_for(current_user)` в `_sync_network`; добавлен тест `test_sync_leadsu_endpoint_passes_current_tenant`.
 - Product commit `87eb74095`: generic Lead.su больше не принимает popup-shell selector как доказательство успеха; если явного success нет, код доходит до direct-submit recovery и проверяет ответ партнёрской формы. Добавлен тест `test_leadsu_does_not_treat_popup_shell_as_success`.
+- Product commit `185206758`: удалён спец-роутинг `leadsu + Онекта -> TildaPlatform`; Onecta теперь идёт через `LeadsuPlatform` и не попадает в `sent`, если партнёрская форма не подтверждена.
 
 ## Проверка после исправления
 
@@ -63,6 +71,10 @@ Root cause состоит из двух частей:
   - `traffichub_app` and `traffichub_worker` healthy;
   - `https://traffic-hub.pro/api/health` -> `status=ok`;
   - container `/app/modules/platforms/leadsu.py` содержит marker `Popup shells alone are not proof`.
+- Manual smoke после `185206758`:
+  - Тестовый лид `admin / Онекта / 9001617435` завершился `sent=0`, `errors=1`, `status=error`, причина `leadsu: форма не подтверждена после отправки`.
+  - В `autolead_send_history` для тестовых телефонов пусто; retry-запись удалена.
+  - Live container `/app/modules/platforms/__init__.py` больше не содержит ветку `leadsu + онекта -> tilda`.
 
 ## Следующий шаг
 
