@@ -14,8 +14,15 @@
 - DB layer: `aiosqlite`.
 - AI provider: `OpenRouter`, env `OPENROUTER_API_KEY`, model `OPENROUTER_MODEL`.
 - Target channel по умолчанию берётся из `TARGET_CHAT_ID`.
+- Доступ к боту на live ограничен allowlist-моделью:
+  - `allowed_user_ids` читается из `ALLOWED_USER_IDS`/`CONTENT_BOT_ALLOWED_USER_IDS`;
+  - при отсутствии отдельного allowlist используется fallback на `ADMIN_IDS`;
+  - посторонние `user_id` переводятся runtime-слоем в `status=blocked`.
 - С `3fd3f611b` каналы публикации user-scoped: таблица `channels` имеет `user_id`, активный канал хранится ключом `active_channel_id:<telegram_user_id>`.
 - Автопостинг настраивается отдельно от добавления канала: канал добавляется по `@username`/`-100...`, тематика и часы задаются через меню `⚡ Автопостинг`.
+- С `2026-07-03` текст `Автопостинг` приведён к реальной логике:
+  - scheduler публикует только по расписанию и тематике активного канала;
+  - ручные черновики после генерации не публикуются автоматически и требуют явного подтверждения.
 - С `95c39bd6a` все публикации постов отправляются с обязательной inline-кнопкой:
   - текст по умолчанию: `Перейти на сайт`;
   - ссылка по умолчанию: `https://hrcadry.pro`;
@@ -41,6 +48,13 @@
   - режим `новый пост` или `рерайт`;
   - выбор глубины контекста `3 / 5 / 8 сообщений`;
   - `source_mode` и `source_message_limit` сохраняются в generation payload.
+- С `2026-07-02` source-messages перед preview/generation дополнительно очищаются:
+  - удаляются flood/slowmode/moderation notices;
+  - вырезаются zero-width символы и пустой шум;
+  - используется oversampling source-messages перед финальным `target_limit`.
+- С `2026-07-03` vacancy generation терпимее к payload-shape drift:
+  - `vacancy_user_prompt()` использует `role`;
+  - если `role` пустой, берётся fallback `topic`, чтобы генерация не теряла тему.
 
 ## Команды
 - `/start` — старт и главное меню.
@@ -77,7 +91,6 @@
 - `Telethon`-source UX уже различает `чаты` и `каналы`, но отдельного фильтра по типу источника в Telegram-меню пока нет.
 - `Telethon`-source UX уже даёт фильтр `чаты/каналы`, но paging по большим спискам источников пока отсутствует.
 - `Telethon`-source UX уже даёт paging, но current implementation всё ещё limit-based, не cursor-based.
-- `Telethon`-preview пока не очищает source-messages от системного шума автоматически; если первые сообщения чата — это flood/mute/moderation notices, они могут попасть в LLM context.
 - Если у активного канала пустые `topic` и `schedule_times`, планировщик не публикует посты даже при включённом глобальном `autopost_enabled`.
 - Очистка ссылочных плейсхолдеров является защитным слоем после LLM. Промпт всё равно запрещает писать URL/placeholder в тексте, но runtime-фильтр нужен, потому что модель может нарушить инструкцию.
 - Anti-repeat пока heuristic-based, не embedding-based:
