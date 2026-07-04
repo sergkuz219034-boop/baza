@@ -57,24 +57,44 @@ Root cause состоит из двух частей:
 - Product commit `ff0098114`: `sync_leadsu` теперь передаёт `tenant_id=tenant_id_for(current_user)` в `_sync_network`; добавлен тест `test_sync_leadsu_endpoint_passes_current_tenant`.
 - Product commit `87eb74095`: generic Lead.su больше не принимает popup-shell selector как доказательство успеха; если явного success нет, код доходит до direct-submit recovery и проверяет ответ партнёрской формы. Добавлен тест `test_leadsu_does_not_treat_popup_shell_as_success`.
 - Product commit `185206758`: удалён спец-роутинг `leadsu + Онекта -> TildaPlatform`; Onecta теперь идёт через `LeadsuPlatform` и не попадает в `sent`, если партнёрская форма не подтверждена.
+- Product decision `2026-07-04`: пункт про обязательное подтверждение партнёркой из `185206758` устарел. Для Lovko и LeadSU канон теперь такой: партнёрка не обязана возвращать явное подтверждение; локальный успех = submit прошёл без явной ошибки, дубля, disabled-страницы или невалидной формы. Это подтверждено текущими `modules/platforms/leadsu.py` и `modules/platforms/lovko.py`.
+- Product commit `1ab56c867`: Samokat/Lovko disabled-page (`disabled.html`, title/body `Disabled`) классифицируется как `offer_disabled`, а disabled/permanent form failure не попадает в retry queue.
 
 ## Проверка после исправления
 
 - Targeted tests:
   - `tests/test_integrations_sync.py tests/test_integrations_partner_api.py tests/test_traffic_tenant_isolation.py -q` -> `20 passed`.
   - `tests/test_leadsu_blank_recovery.py tests/test_platform_success_detection.py tests/test_platform_routing.py tests/test_integrations_sync.py -q` -> `35 passed`.
+  - `tests/test_dashboard_realtime_spinner.py tests/test_leadsu_blank_recovery.py tests/test_lovko_success_detection.py tests/test_platform_routing.py tests/test_vbiv_bot_runtime_errors.py tests/test_vbiv_bot_navigation.py -q` -> `54 passed`.
 - GitHub Actions:
   - `ff0098114`: `CI` success, `Build and Push Docker Image` success.
   - `87eb74095`: `CI` success, `Build and Push Docker Image` success.
+  - `1ab56c867`: проверить через `gh` с авторизацией; на live-сервере `gh` отсутствует, GitHub status API без auth вернул `404`.
 - Live deploy:
   - rebuilt/recreated `autolead_bot` and `worker`;
   - `traffichub_app` and `traffichub_worker` healthy;
   - `https://traffic-hub.pro/api/health` -> `status=ok`;
   - container `/app/modules/platforms/leadsu.py` содержит marker `Popup shells alone are not proof`.
+  - после `1ab56c867` live `/api/health` -> `status=ok`, `control.backend=postgres`, `control.ok=true`.
 - Manual smoke после `185206758`:
   - Тестовый лид `admin / Онекта / 9001617435` завершился `sent=0`, `errors=1`, `status=error`, причина `leadsu: форма не подтверждена после отправки`.
   - В `autolead_send_history` для тестовых телефонов пусто; retry-запись удалена.
   - Live container `/app/modules/platforms/__init__.py` больше не содержит ветку `leadsu + онекта -> tilda`.
+- Manual smoke `2026-07-04` по всем admin-офферам, включая inactive, через live `run_campaign()` с временной in-memory конфигурацией:
+  - `Дикси` inactive/Lovko -> `sent`.
+  - `X5` inactive/Lovko -> `sent`.
+  - `Воксис` active/LeadSU -> `sent`.
+  - `Онекта` active/LeadSU -> `sent`; логика LeadSU: нет явного partner success, но submit завершился без видимой ошибки, поэтому форма считается заполненной.
+  - `ВкусВилл` inactive, фактически LeadSU URL при Lovko-config -> `sent`; локальный успех по отсутствию явной ошибки.
+  - `Onecta #2` inactive/Lovko -> `sent`.
+  - `Я еда` active/Lovko -> `sent` после снятия vacancy binding в smoke-конфиге.
+  - `Ozon` active/Lovko -> `sent`.
+  - `Самокат` active/LeadSU tracking -> partner disabled-page; после `1ab56c867` результат `offer_disabled`, причина `samokat: оффер отключен на стороне партнёрки (disabled.html)`, retry queue пропущена.
+  - Все smoke-телефоны очищены из `autolead_send_history` и `autolead_retry_queue`.
+- Realtime full-cycle UI:
+  - `utils/state.py` хранит `current_lead`, `forms_total`, `forms_done`.
+  - `modules/vbiv_bot.py` перед каждым оффером пишет `current_lead = "ФИО (телефон)"`, увеличивает `forms_done` после успешной анкеты.
+  - `dashboard/app.js` отображает стабильную строку `ФИО (телефон) | анкеты: X/Y`; DOM-node spinner не пересоздаётся, анимация висит только на marker-dot.
 
 ## Следующий шаг
 
