@@ -1,5 +1,11 @@
 # Changelog
 
+# 2026-07-09
+
+- В `AccountManager` исправлен системный Telethon-bug для legacy Telegram `tdata`: `services/content_parser.py` больше не создаёт новый UUID `.session` на каждый check/read, а использует стабильный `legacy_account_{id}.session` с per-account lock и cleanup старых session-артефактов.
+- Для `AuthKeyDuplicatedError` добавлено явное сообщение восстановления: текущий `tdata/session` уже инвалидирован Telegram и требует reimport новой авторизованной `tdata`.
+- Добавлены regression-тесты `tests/test_account_manager_telethon_session_files.py` на стабильный session path, cleanup старых UUID-session и user-facing duplicated-key message.
+
 # 2026-07-01
 
 - Подтверждён root cause массовых строк Зарплата.ру в Google Sheets за `01.07.2026`: `normalize_resume()` ставил текущую дату выгрузки, а `import_resumes()` пропускал search-result записи без телефона/email. На сервере исправлено в commit `ba15d7a59`, CHANGELOG-кодировка поправлена в `dbe7a30a6`; добавлено расследование и обновлена сущность [[Zarplata.ru integration]].

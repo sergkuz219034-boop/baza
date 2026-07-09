@@ -45,6 +45,13 @@ Content bot polling работает через scheduler job `content-bot-updat
 
 На `2026-06-28` для live `tdata` подтверждён рабочий backend `opentele2`. Старый `opentele` на текущих `tdata` падал с `No account has been loaded`.
 
+На `2026-07-09` подтверждён ещё один runtime-инвариант для legacy `tdata` контура:
+
+- один `accounts.platform='tg'` аккаунт должен использовать один стабильный Telethon session file `legacy_account_{id}.session`;
+- параллельный доступ к одному legacy account сериализуется в `services/content_parser.py`;
+- старые временные `legacy_account_{id}_{uuid}.session` больше не должны генерироваться;
+- `AuthKeyDuplicatedError` означает уже инвалидированный Telegram auth key, а не временный сетевой сбой. Для такого аккаунта нужен fresh `tdata` reimport.
+
 ## Ограничения
 
 - Telegram `getUpdates` допускает только одного активного poller для bot token. Если другой процесс или webhook уже владеет обновлениями, Telegram возвращает `409 Conflict`.
@@ -70,3 +77,4 @@ Scheduler не должен создавать параллельные poller i
 - [[2026-06-20 AccountManager content bot unfinished changes]]
 - [[AccountManager Telegram polling conflict]]
 - [[2026-06-28 AccountManager tdata Telethon live contour]]
+- [[2026-07-09 AccountManager Telethon session invalidated by multi-IP reuse]]
