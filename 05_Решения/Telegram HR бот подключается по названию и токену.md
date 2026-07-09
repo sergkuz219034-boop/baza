@@ -12,9 +12,11 @@
 
 - Пользователь вводит только название и Telegram bot token.
 - AccountManager генерирует уникальный внутренний secret.
-- AccountManager регистрирует `https://traffic-hubcrm.ru/traffic-api/hr/webhooks/telegram` через Telegram `setWebhook`.
+- AccountManager регистрирует публичный HR endpoint через Telegram `setWebhook`.
+- URL webhook строится из live `PUBLIC_BASE_URL`; канонический домен — `https://traffic-hub.pro`.
 - Telegram передаёт secret в `X-Telegram-Bot-Api-Secret-Token`.
 - Привязка создаётся только после успешного ответа Telegram API.
+- Повторное сохранение того же token в пределах tenant/owner обновляет существующую привязку.
 
 ## Последствия
 
@@ -22,6 +24,7 @@
 - Вакансия выбирается динамически из активных вакансий.
 - Ротация токена через редактирование повторно регистрирует webhook.
 - Secret остаётся в БД и не показывается в форме.
+- Старый домен нельзя использовать для webhook: HTML-заглушка отвечает HTTP 200 и маскирует потерю событий.
 
 ## Альтернативы
 
