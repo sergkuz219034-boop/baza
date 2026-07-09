@@ -4,6 +4,7 @@
 
 1. HR-бот повторно спрашивал город после ответов `москва`, `Москва`, `Челяба`.
 2. Бот, подключённый в Telegram через «Автоматизацию чатов» аккаунта Виктории, не отвечал в личных чатах.
+3. После включения Business update ответ на сообщение из чата Виктории ушёл от имени самого бота, а не от имени аккаунта Виктории.
 
 ## Зона системы
 
@@ -25,6 +26,7 @@
 - Worker Виктории получил `AuthKeyDuplicatedError` пользовательской сессии и перешёл в режим обычного бота.
 - Основной webhook разбирал только `message`/`edited_message`, но не `business_message`.
 - Добавлены тесты контекстного ответа города и Business delivery.
+- 2026-07-09 21:32 live runtime подтвердил `business_message` от пользователя `934602871`: сообщение пришло через Business-контур, но `sendMessage` ушёл без `business_connection_id`, потому что `parse_channel_payload()` читал идентификатор с верхнего уровня update.
 
 ## Наблюдение
 
@@ -36,7 +38,8 @@ Telegram Business передаёт сообщение в `business_message` и �
 - Webhook принимает `business_message` и `edited_business_message`.
 - `business_connection_id` сохраняется в состоянии кандидата и используется для ответов и follow-up.
 - `setWebhook` явно включает Business update-типы.
-- Тесты проходят; commits `4504e99c0`, `9636fc4e8`; CI и Docker build зелёные; live-контейнеры healthy.
+- Для Telegram Bot API `business_connection_id` нужно читать из `business_message.business_connection_id`; верхнеуровневый fallback оставлен только для совместимости с тестовыми/legacy payload.
+- Тесты проходят; commits `4504e99c0`, `9636fc4e8`, `3560f5bda`; live-контейнеры healthy.
 
 ## Следующий шаг
 
