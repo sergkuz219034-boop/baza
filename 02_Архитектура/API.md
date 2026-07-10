@@ -17,6 +17,10 @@
 ## Что важно
 
 - auth-модель гибридная: session cookie + fallback API auth;
+- роли legacy dashboard подтверждены по коду 2026-07-10: `operator`, `user`, `admin`;
+- `operator` — минимальная рабочая роль: может открыть owner-scoped экран лидов, но не должен запускать Autolead jobs, менять настройки, офферы, техработы, system actions, TrafficHub CRM или AccountManager;
+- `user` — обычная рабочая роль с доступом к Autolead настройкам/офферам/jobs в рамках своего owner-context;
+- `admin` — административная роль, включая управление аккаунтами, aliases, maintenance и системные действия;
 - `/api/account-manager/token` является bridge endpoint, а не конечной точкой role gating;
 - `/ws/log` и `/ws/status` авторизуются через websocket session/token access и закрываются `1008`, если principal/access не прошёл проверку;
 - `/ws/log` отдаёт snapshot последних owner-scoped логов при подключении;
