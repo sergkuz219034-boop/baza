@@ -50,20 +50,34 @@
 - Первый запуск требует заранее установленный Python; launcher рекомендует Python 3.12 x64, создаёт `.venv`, устанавливает `requirements.txt` и Playwright Chromium через интернет.
 - Полный end-to-end smoke на чистой Windows VM не автоматизирован и в рамках проверки не подтверждён.
 
+Дополнение `2026-07-10`:
+
+- Product commit `e122a5290` добавил release-based updater для установленной Windows-копии без `.git`.
+- Backend теперь отдаёт portable payload через `/download/TrafficHub-windows-x64.zip`; endpoint выбирает generic `TrafficHub-windows-x64.zip` или свежий `TrafficHub-*-windows-x64.zip` в `data/releases`.
+- Product commit `0aa20b897` исправил startup regression: `traffic_hub.migrations.run_migrations()` снова является async-контрактом и корректно ожидается из `traffic_hub/app.py`.
+- GitHub Actions для `e122a5290` и `0aa20b897` зелёные: `CI` и `Build and Push Docker Image`.
+- Release tag `1.27` собран workflow `Build and Release Windows App` из commit `0aa20b897`.
+- Live `data/releases` обновлён:
+  - `SetupTrafficHub.exe`, `1 934 848` bytes, SHA-256 `ca06cb9ad4ba7238f913f9e40589284e6d835b7202984028d31ad4cdd09c81be`;
+  - `TrafficHub-1.27-windows-x64.zip`, `1 886 605` bytes, SHA-256 `90385e35182b5e84853659b663d348de827532c8e6a6387a52eb201e3715f5fb`;
+  - `TrafficHub-windows-x64.zip` указывает на тот же payload.
+- Публичные endpoints `https://traffic-hub.pro/download/SetupTrafficHub.exe` и `https://traffic-hub.pro/download/TrafficHub-windows-x64.zip` возвращают `200`.
+- Zip payload `1.27`: `720` файлов, обязательные `TrafficHub.exe`, `update.exe`, `ActivateLicense.exe`, `AccountManager.exe`, `main.py`, `requirements.txt` присутствуют; `.git`, `.env`, `data`, `secrets`, БД и логи отсутствуют.
+- Новый `SetupTrafficHub.exe` всё ещё `NotSigned` по Authenticode.
+
 ## Вывод
 
-Текущий setup пригоден для внутреннего контролируемого теста, но не готов как актуальный production-релиз для пользователей.
+После `2026-07-10` setup пригоден для внутреннего контролируемого теста как актуальный `1.27`, но ещё не готов как публичный production-релиз для пользователей.
 
-Оценка готовности: `55–60%`.
+Оценка готовности после `1.27`: `70–75%`.
 
-Блокеры выпуска:
+Оставшиеся блокеры публичного выпуска:
 
-1. Собрать новый tag из текущего `main`.
-2. Определить рабочую модель обновления release-копии без `.git`: скачивание подписанного release/payload, а не `git fetch`.
-3. Добавить Authenticode-подпись и timestamp.
-4. Провести clean Windows VM smoke: install → first setup → activation → login → local dashboard → Playwright → restart → update → uninstall/upgrade.
-5. Добавить release smoke в GitHub Actions или отдельный Windows test harness.
+1. Добавить Authenticode-подпись и timestamp.
+2. Провести clean Windows VM smoke: install → first setup → activation → login → local dashboard → Playwright → restart → update → uninstall/upgrade.
+3. Добавить release smoke в GitHub Actions или отдельный Windows test harness.
+4. Убрать риск dirty-context deploy: live rebuild должен идти из clean `git archive HEAD`, а не из грязного `/root/TrafficHub`.
 
 ## Следующий шаг
 
-Сначала исправить release updater и добавить автоматический smoke установленного payload. После этого выпустить новый tag и заменить runtime-копию `data/releases/SetupTrafficHub.exe`.
+Сначала пройти clean Windows VM smoke для `1.27` и добавить подпись. После этого закрепить clean-archive deploy как стандартный playbook для live rebuild.
