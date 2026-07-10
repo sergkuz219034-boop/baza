@@ -37,4 +37,4 @@
 
 Добавить реальные API-загрузчики для KPI, кандидатов и вкладок, затем проверить UI smoke в браузере. После публикации DNS проверить HTTPS и сертификат поддомена.
 
-Подтверждение: product commit `e28db2dab`, GitHub Actions `success`, live rebuild выполнен.
+Подтверждение: product commit `04ee98be7`, GitHub Actions `success`, live rebuild выполнен; wiki commit `34429b1` синхронизирован в `baza`.
