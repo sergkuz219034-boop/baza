@@ -116,39 +116,46 @@
 - GitHub CI для commit завершился успешно.
 - После recreate `traffichub_app` публичная страница содержит новые labels и `tabular-nums`, старые значения `184`, `82`, `27`, `14` отсутствуют.
 
-## P0: подмена роли и логина при входе оператора 2026-07-11
+## P0: захват аккаунта через регистрацию оператора 2026-07-11
 
 ### Симптом
 
-`POST /auth/operator-login` принимал любой подписанный ключ. После проверки маршрут сам переписывал роль на `operator` и использовал `username` из формы вместо подписанного login.
+`POST /auth/operator-login` мог создать операторский доступ небезопасно: ключ проверялся, но регистрация шла через путь, который мог перезаписать существующую учётную запись. В худшем сценарии владелец действующего ключа мог указать чужой логин, получить новый пароль и изменить роль/активность существующего пользователя.
 
 ### Зона системы
 
 - `api/server.py::operator_login`
 - `api/server.py::_apply_activate_license_key`
+- `utils/control_store.py::create_user`
+- `license_server/schema.sql::license_short_keys`
 - `dashboard/operator.html`
 
 ### Проверка
 
-- Подписанный `user`-ключ в live ранее мог дойти до активации оператора.
-- Поля `username` и `telegram` были частью request body, хотя Telegram сервером не хранился и не проверялся.
+- `api/server.py::_apply_activate_license_key` раньше использовал `control_store.upsert_user()`.
+- `utils/control_store.upsert_user()` по `ON CONFLICT` обновляет существующего пользователя, включая hash пароля, роль и активность.
+- Operator UI передаёт `name`, `telegram`, `activation_key`; логин оператора создаётся из `name` через `_transliterate_name()`.
 
 ### Исправление
 
 - Только payload с `role=operator` допускается к операторскому входу.
-- Login берётся только из подписанного payload; форма больше не принимает name/Telegram.
-- Pydantic-схема запрещает лишние поля (`extra="forbid"`).
-- Активация использует уже проверенный payload, без повторного разрешения `TH3`.
-- Добавлена кнопка `Выйти`, вызывающая `POST /auth/logout`.
-- Commit продукта: `37637528a` (`fix: lock operator activation to signed identity`).
+- Operator form снова принимает `name` и `telegram`, но `username`, `password`, `role` и другие лишние поля запрещены через `extra="forbid"`.
+- Login создаётся из `name`; password генерируется сервером после регистрации.
+- Для создания пользователя добавлен `utils/control_store.create_user()`: только INSERT, без overwrite.
+- Если login уже существует в `control_license_users` или `users`, регистрация возвращает `409`.
+- Activation key помечается использованным атомарно в той же PostgreSQL-транзакции: `control_activation_keys_used.fingerprint` и `license_short_keys.used_at/used_by`.
+- `license_server` сохраняет роль `operator`, а `license_short_keys` получил поля `used_at`, `used_by`.
+- Commit продукта: `b2d3725a4` (`fix: prevent operator activation account takeover`).
 
 ### Доказательство
 
-- `tests/test_operator_login_security.py` проверяет отказ `user`-ключу до активации, сохранение signed login и запрет extra-полей.
-- Точечный набор: `19 passed`.
-- Live smoke: signed `user`-ключ вернул HTTP 403 и не создал пользователя; операторский `TH3` вернул HTTP 200 с `role=operator`.
-- После `POST /auth/logout` live `/auth/session` вернул `authenticated=false`.
-- Техработы после deploy выключены; `/api/health` вернул `status=ok`.
+- `tests/test_operator_login_security.py` проверяет отказ `user`-ключу до активации, создание login из `name`, генерацию password и запрет privileged extra-полей.
+- `tests/test_license_key_security.py` проверяет create-only activation, fingerprint/short-code claim и 409 при занятом login.
+- Точечный набор: `22 passed`.
+- Расширенный auth/license/access набор: `49 passed`.
+- GitHub CI и Docker build для `b2d3725a4` завершились успешно.
+- После recreate `traffichub_app` и `traffichub_license_server` live `/api/health` вернул `status=ok`.
+- Deployed source внутри `traffichub_app` содержит `control_store.create_user`, `generated_password=True`, `_require_operator_key`; старый overwrite path через `_pg_update_user/_pg_set_role` в activation отсутствует.
 
 ## Следующий шаг
 
