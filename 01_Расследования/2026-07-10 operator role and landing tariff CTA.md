@@ -116,6 +116,40 @@
 - GitHub CI для commit завершился успешно.
 - После recreate `traffichub_app` публичная страница содержит новые labels и `tabular-nums`, старые значения `184`, `82`, `27`, `14` отсутствуют.
 
+## P0: подмена роли и логина при входе оператора 2026-07-11
+
+### Симптом
+
+`POST /auth/operator-login` принимал любой подписанный ключ. После проверки маршрут сам переписывал роль на `operator` и использовал `username` из формы вместо подписанного login.
+
+### Зона системы
+
+- `api/server.py::operator_login`
+- `api/server.py::_apply_activate_license_key`
+- `dashboard/operator.html`
+
+### Проверка
+
+- Подписанный `user`-ключ в live ранее мог дойти до активации оператора.
+- Поля `username` и `telegram` были частью request body, хотя Telegram сервером не хранился и не проверялся.
+
+### Исправление
+
+- Только payload с `role=operator` допускается к операторскому входу.
+- Login берётся только из подписанного payload; форма больше не принимает name/Telegram.
+- Pydantic-схема запрещает лишние поля (`extra="forbid"`).
+- Активация использует уже проверенный payload, без повторного разрешения `TH3`.
+- Добавлена кнопка `Выйти`, вызывающая `POST /auth/logout`.
+- Commit продукта: `37637528a` (`fix: lock operator activation to signed identity`).
+
+### Доказательство
+
+- `tests/test_operator_login_security.py` проверяет отказ `user`-ключу до активации, сохранение signed login и запрет extra-полей.
+- Точечный набор: `19 passed`.
+- Live smoke: signed `user`-ключ вернул HTTP 403 и не создал пользователя; операторский `TH3` вернул HTTP 200 с `role=operator`.
+- После `POST /auth/logout` live `/auth/session` вернул `authenticated=false`.
+- Техработы после deploy выключены; `/api/health` вернул `status=ok`.
+
 ## Следующий шаг
 
 Если потребуется расширять операторский функционал, добавлять точечные permissions, а не повышать роль до `user`.
