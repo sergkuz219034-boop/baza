@@ -70,6 +70,33 @@
 
 Роль `operator` стала отдельным минимальным рабочим режимом. Её нельзя снова маппить в `user`, иначе оператор получит доступ к настройкам и запуску jobs.
 
+## Регрессия авторизации 2026-07-11
+
+### Симптом
+
+Короткий `TH3`-ключ, созданный `KEY.exe` с ролью `operator`, проходил проверку подписи, но `operator.traffic-hub.pro` показывал `Operator access could not be confirmed` и не открывал рабочее пространство.
+
+### Проверка
+
+- `tools/license_key_security.py::verify_activation_key()` корректно раскрывал `TH3` через `license_server` и возвращал payload с `role=operator`.
+- В live-контейнере `utils/license.py::_normalize_license_role("operator")` возвращал `user`.
+- `api/server.py::operator_login()` создавал пользователя и сессию, но `api/authz.py::set_session_principal()` повторно читал роль из PostgreSQL через `utils/license.py`; нормализация превращала её в `user`, поэтому frontend отклонял ответ.
+
+### Исправление
+
+- В `_ROLE_ALIASES` значения `operator` и `оператор` сохраняются как `_ROLE_OPERATOR`.
+- Добавлен `tests/test_license_roles.py`, фиксирующий нормализацию для control store и PostgreSQL.
+- Fallback-ошибки в `dashboard/operator.html` и ошибки формата/разрешения ключа в `tools/license_key_security.py` переведены на русский.
+- Commit продукта: `7ca552f47` (`fix: restore operator key authorization`).
+
+### Доказательство
+
+- Точечные тесты: `16 passed`.
+- GitHub CI и Docker build для `7ca552f47` завершились успешно.
+- После recreate `traffichub_app` live `/api/health` вернул `status=ok`.
+- Боевой smoke через последний серверный `TH3`-ключ вернул HTTP 200, `authenticated=true`, `role=operator`; последующий `/auth/session` вернул ту же роль.
+- Тестовая учётная запись удалена, техработы после проверки выключены.
+
 ## Следующий шаг
 
 Если потребуется расширять операторский функционал, добавлять точечные permissions, а не повышать роль до `user`.
