@@ -120,3 +120,14 @@
 - API валидирует диапазон и сохраняет внутренние `business_connections`; существующему live binding `HR Виктория` записано значение `0,4`.
 - Regression: `10 passed`; GitHub CI, Extended checks и Docker build успешны.
 - После deploy `traffichub_app` и `traffichub_account_manager` healthy, `/api/health` возвращает `status=ok`; новый UI и runtime подтверждены внутри live-образов.
+
+## Дополнение: Markdown-база знаний
+
+- Commit `3207c7720` добавил `extra_config.knowledge_base_md`, API-лимит 30 000 символов, textarea и загрузку `.md` в create/edit modal.
+- Runtime передаёт Markdown только в system context текущего binding; regression проверяет отсутствие смешивания `KB-ALPHA` и `KB-BETA`.
+- Product template `/root/TrafficHub/docs/templates/hr_recruiter_knowledge_base.md` содержит 195 строк: вопросы, квалификацию, возражения, анкету, касания 24/72 часа, повторы и стоп-сигналы.
+- В live binding `HR Виктория` загружено 6 987 символов шаблона. Контрольное возражение обработано уточняющим вопросом без давления и повторной анкеты.
+- Regression: `14 passed`; GitHub CI, Extended checks и Docker build успешны.
+- После deploy оба контейнера healthy, `/api/health` возвращает `status=ok`.
+
+Связано: [[04 Сущности/HR Agent Markdown база знаний]]
