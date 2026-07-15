@@ -1,5 +1,6 @@
 # Changelog
 
+- В dashboard Telegram HR Agent добавлена bot-specific температура: ползунок `0,0–2,0`, API-валидация, хранение в `extra_config.temperature` и применение в LLM payload. Live значение `HR Виктория` инициализировано как `0,4`; product commit `51ed7d2c4`.
 - Исправлены повторяющиеся fallback-ответы Telegram HR Agent: устойчивый разбор JSON/fenced JSON/plain text, контекст предыдущих реплик, приоритет прямого ответа над повторным приветствием. Live prompt скорректирован, модель переключена с нестабильной `openrouter/free` на `openai/gpt-4.1-mini`; commits `eb39bdc1a`, `c3b6999d5`.
 - Telegram HR Agent теперь отмечает входящие Business-сообщения прочитанными через `readBusinessMessage` перед статусом `typing`; вызов использует исходные `business_connection_id`, `chat_id`, `message_id` и не блокирует ответ при ошибке. Live smoke успешен; product commit `16fe24448`.
 - В Telegram HR Agent добавлен естественный темп ответа: `typing` до и во время генерации с обновлением каждые 4 секунды, сохранение `business_connection_id`, задержка 0,8–4,0 секунды и non-blocking обработка ошибок chat action. Live Business smoke успешен; product commit `3765f4178`.

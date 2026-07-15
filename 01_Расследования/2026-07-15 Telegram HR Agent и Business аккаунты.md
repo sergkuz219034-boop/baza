@@ -112,3 +112,11 @@
 ### Следующий шаг
 
 Создать owner-scoped запись `hr_agent_vacancies` и назначить её `default_vacancy_id`, чтобы условия вакансии были структурированными данными, а не только частью длинного промта.
+
+## Дополнение: температура каждого бота
+
+- Commit `51ed7d2c4` добавил в create/edit modal ползунок `Вариативность ответов` от `0,0` до `2,0` с шагом `0,1`.
+- Значение сохраняется в owner-scoped `extra_config.temperature` конкретного Telegram binding и передаётся в OpenAI-compatible payload.
+- API валидирует диапазон и сохраняет внутренние `business_connections`; существующему live binding `HR Виктория` записано значение `0,4`.
+- Regression: `10 passed`; GitHub CI, Extended checks и Docker build успешны.
+- После deploy `traffichub_app` и `traffichub_account_manager` healthy, `/api/health` возвращает `status=ok`; новый UI и runtime подтверждены внутри live-образов.
