@@ -62,3 +62,13 @@
 - [[05_Решения/Telegram HR бот подключается по названию и токену]]
 - [[05_Решения/Системный промт HR Agent принадлежит binding бота]]
 - [[05_Эксплуатация/Развёртывание]]
+
+## Дополнение: естественный темп ответа
+
+- Telegram Bot API показывает статус `typing` через `sendChatAction`; статус действует не более пяти секунд и исчезает при отправке сообщения.
+- Commit `3765f4178` отправляет `typing` до обращения к LLM и обновляет его каждые четыре секунды, пока формируется ответ.
+- Для Business-чата в `sendChatAction` передаётся тот же `business_connection_id`, что и в последующий `sendMessage`; это проверено на live через сохранённую реальную Business-сессию без вывода токена и персональных данных.
+- После генерации применяется ограниченная задержка `0,8–4,0` секунды, зависящая от длины текста и небольшого jitter. Предел защищает webhook от чрезмерно долгого удержания запроса.
+- Ошибка chat action логируется как warning и не блокирует доставку ответа кандидату.
+- Regression-набор `tests/test_hr_agent_router.py` и `tests/test_account_manager_hr_prompt.py`: `7 passed`; GitHub CI, Extended checks и Docker build успешны.
+- После rebuild `traffichub_app` healthy, публичный `/api/health` возвращает `status=ok`, live smoke `sendChatAction` вернул `ok`.

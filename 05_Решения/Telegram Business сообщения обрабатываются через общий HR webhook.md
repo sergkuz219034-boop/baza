@@ -15,6 +15,8 @@ Telegram Business присылает `business_message` с `business_connection_
 - Читать `business_connection_id` из вложенного `business_message.business_connection_id`, затем сохранять его в owner-scoped состоянии кандидата.
 - Передавать идентификатор в `sendMessage` и follow-up доставку.
 - События `business_connection` сохранять в owner-scoped `HrAgentChannelBinding.extra_config.business_connections`; enabled/disabled состояние является каноническим признаком фактического подключения аккаунта, а не зелёный `getWebhookInfo` сам по себе.
+- Пока LLM формирует ответ, отправлять `sendChatAction(action=typing)` с тем же `business_connection_id`: сразу при получении сообщения и затем каждые четыре секунды.
+- Перед `sendMessage` выдерживать ограниченную паузу `0,8–4,0` секунды с поправкой на длину ответа и jitter. Ошибка chat action не должна прерывать основной ответ.
 
 ## Последствия
 
@@ -23,6 +25,7 @@ Telegram Business присылает `business_message` с `business_connection_
 - Подключение выполняется владельцем в Telegram Business для каждого аккаунта; сервер не может создать Business connection только по сохранённой Telethon session.
 - Потеря или дублирование user session не должно отключать основной webhook-контур.
 - Если `business_connection_id` потерян, Telegram примет обычный `sendMessage`, но ответ появится в личке с ботом, а не в чате бизнес-аккаунта.
+- Статус `typing` живёт не более пяти секунд, поэтому интервал обновления выбран короче этого окна; пауза ограничена, чтобы не увеличивать время webhook без верхней границы.
 
 ## Альтернативы
 
