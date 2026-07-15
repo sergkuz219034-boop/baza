@@ -1,5 +1,7 @@
 # Changelog
 
+- Исправлена наблюдаемость Telegram HR Agent: commit `39ec17913` сохраняет события `business_connection` в owner-scoped binding. Подтверждено, что `@Vectoria101_bot` и webhook исправны, но реальные Telegram Business-аккаунты ещё не подключены; legacy `hr_ai_worker` не считается multi-account runtime.
+
 # 2026-07-09
 
 - В `AccountManager` исправлен системный Telethon-bug для legacy Telegram `tdata`: `services/content_parser.py` больше не создаёт новый UUID `.session` на каждый check/read, а использует стабильный `legacy_account_{id}.session` с per-account lock и cleanup старых session-артефактов.

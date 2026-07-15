@@ -14,11 +14,13 @@ Telegram Business присылает `business_message` с `business_connection_
 - Явно подписывать webhook на `business_connection`, `business_message`, `edited_business_message`, `deleted_business_messages`.
 - Читать `business_connection_id` из вложенного `business_message.business_connection_id`, затем сохранять его в owner-scoped состоянии кандидата.
 - Передавать идентификатор в `sendMessage` и follow-up доставку.
+- События `business_connection` сохранять в owner-scoped `HrAgentChannelBinding.extra_config.business_connections`; enabled/disabled состояние является каноническим признаком фактического подключения аккаунта, а не зелёный `getWebhookInfo` сам по себе.
 
 ## Последствия
 
 - Один bot token обслуживает прямой диалог с ботом и автоматизацию аккаунта.
 - Пользовательская Telethon-сессия Виктории не нужна для Business-ответов.
+- Подключение выполняется владельцем в Telegram Business для каждого аккаунта; сервер не может создать Business connection только по сохранённой Telethon session.
 - Потеря или дублирование user session не должно отключать основной webhook-контур.
 - Если `business_connection_id` потерян, Telegram примет обычный `sendMessage`, но ответ появится в личке с ботом, а не в чате бизнес-аккаунта.
 
@@ -27,4 +29,4 @@ Telegram Business присылает `business_message` с `business_connection_
 - Telethon user session: отклонена как основной путь из-за `AuthKeyDuplicatedError` и зависимости от уникального IP/session usage.
 - Отдельный Business worker: пока не нужен, так как общий HR state machine уже реализует обработку и доставку.
 
-Связано: [[01_Расследования/2026-07-09 Город и Telegram Business Виктории]]
+Связано: [[01_Расследования/2026-07-09 Город и Telegram Business Виктории]], [[01_Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]]
