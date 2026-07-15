@@ -50,6 +50,8 @@
 2. Нет подтверждённого свежего полного backup PostgreSQL и регулярного backup schedule. Сбой диска/volume может привести к невосстановимой потере production data.
 3. `freellmapi.service` фактически не работает и перезапущен 14 888 раз; sensitive key хранится inline в unit. Если gateway нужен Telegram bridge, функция недоступна; если не нужен, stale unit создаёт шум и operational debt.
 
+   Устранено 2026-07-15 по явному решению удалить сервис: проверены live repo и host — product-код не использует `localhost:3001`, каталог `/root/freellmapi` и listener `:3001` отсутствуют. Удалены `/etc/systemd/system/freellmapi.service`, enable symlink и inline secret вместе с unit; `systemctl daemon-reload` выполнен. После проверки `LoadState=not-found`, `ActiveState=inactive`, новых restart events нет, public health `200`. Shared `/root/.hermes/node` сохранён, так как не принадлежит unit. Устаревшая запись удалена из product `CHANGELOG.md`, product commit `8119e1824`.
+
 ### Средний приоритет
 
 4. Worker частично теряет интеграционные циклы: Zarplata OAuth token expired; Google Sheets target имеет неверный формат/структуру.
