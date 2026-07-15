@@ -1,5 +1,6 @@
 # Changelog
 
+- В Telegram HR Agent добавлен редактируемый системный промт каждого bot binding: UI/API/runtime, лимит 12 000 символов, защита `business_connections`, regression на изоляцию промтов. Live HR LLM включён через OpenRouter env secret; product commit `b369dea66`.
 - Исправлена наблюдаемость Telegram HR Agent: commit `39ec17913` сохраняет события `business_connection` в owner-scoped binding. Подтверждено, что `@Vectoria101_bot` и webhook исправны, но реальные Telegram Business-аккаунты ещё не подключены; legacy `hr_ai_worker` не считается multi-account runtime.
 
 # 2026-07-09

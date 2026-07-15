@@ -1,0 +1,36 @@
+# Системный промт HR Agent принадлежит binding бота
+
+## Проблема
+
+Общий `HrAgentConfig.prompt_config` не позволяет двум Telegram HR-ботам одного owner работать с разными ролями, тоном и ограничениями.
+
+## Контекст
+
+- Telegram webhook разрешается в конкретный owner-scoped `HrAgentChannelBinding`.
+- Один owner может создать несколько bot bindings.
+- `extra_config` уже хранит binding-specific состояние, включая `business_connections`.
+- Пользовательский промт не должен заменять технический JSON-контракт, tenant scope или правила воронки.
+
+## Решение
+
+- Хранить редактируемый текст в `HrAgentChannelBinding.extra_config.system_prompt`.
+- Ограничить длину 12 000 символами на UI и API.
+- Передавать текущий binding в `traffic_hub/hr_agent/service.py::_llm_response()`.
+- Добавлять пользовательский текст внутрь неизменяемой системной обвязки с этапом, статусом кандидата, вакансией и JSON response contract.
+- При обновлении binding сохранять внутренний `extra_config.business_connections` независимо от входного payload UI.
+- Для OpenRouter читать credential из `OPENROUTER_API_KEY`; не копировать ключ в `hr_agent_configs.llm_config`.
+
+## Последствия
+
+- Каждый бот получает независимую роль и стиль ответов.
+- Пустой промт использует стандартный сценарий HR Agent.
+- Изменение промта не требует rebuild или restart: новое значение читается из binding при следующем сообщении.
+- UI не может подменить зафиксированные Telegram Business connections через поле `extra_config`.
+
+## Альтернативы
+
+- Общий `HrAgentConfig.prompt_config`: отклонён, потому что смешивает поведение нескольких ботов owner.
+- Отдельная колонка БД: пока не нужна; `extra_config` уже является binding-specific расширяемым контрактом.
+- Полная замена системного сообщения пользовательским текстом: отклонена, потому что ломает JSON response contract и guardrails воронки.
+
+Связано: [[01_Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]], [[05_Решения/Telegram Business сообщения обрабатываются через общий HR webhook]]

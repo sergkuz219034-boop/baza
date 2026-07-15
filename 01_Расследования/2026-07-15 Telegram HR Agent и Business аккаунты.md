@@ -46,8 +46,19 @@
 
 На нужном Telegram-аккаунте открыть `Настройки → Telegram Business → Чат-боты`, подключить `@Vectoria101_bot`, разрешить управление личными чатами и отправить тестовое входящее сообщение с другого аккаунта. После update `business_connection` проверить `extra_config.business_connections`, создание owner-scoped кандидата и исходящий ответ с тем же `business_connection_id`.
 
+## Дополнение: системный промт каждого бота
+
+- Commit `b369dea66` добавил поле `Системный промт` в create/edit modal `AccountManager/dashboard/index.html`.
+- Значение хранится в `HrAgentChannelBinding.extra_config.system_prompt`, поэтому принадлежит конкретному owner-scoped bot binding, а не общему `HrAgentConfig`.
+- `AccountManager/api/routers/hr_agent.py::_binding_extra_config()` ограничивает промт 12 000 символами и не разрешает UI перезаписать внутренний `extra_config.business_connections`.
+- `traffic_hub/hr_agent/service.py::_llm_response()` получает текущий binding и добавляет только его промт в защищённую системную обвязку этапа воронки и JSON-контракта.
+- Regression проверяет отсутствие смешивания `PROMPT-ALPHA` и `PROMPT-BETA` между двумя binding.
+- Live `hr_agent_configs` для `admin` переведён на `provider=openrouter`, `model=openrouter/free`, `enabled=true`; API key не хранится в БД и читается из `OPENROUTER_API_KEY` контейнера.
+- Проверены GitHub CI/Extended/Docker build, health `traffichub_app` и `traffichub_account_manager`, публичный cache-busted asset и ответ OpenRouter.
+
 ## Связанные заметки
 
 - [[05_Решения/Telegram Business сообщения обрабатываются через общий HR webhook]]
 - [[05_Решения/Telegram HR бот подключается по названию и токену]]
+- [[05_Решения/Системный промт HR Agent принадлежит binding бота]]
 - [[05_Эксплуатация/Развёртывание]]
