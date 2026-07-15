@@ -1,5 +1,6 @@
 # Changelog
 
+- Упрощён frontend `AccountManager`: `Аккаунты` объединены с функционалом `Обзора` и стали стартовой вкладкой; удалены UI-вкладки `Обзор`, `Очередь контента`, `Настройки`, столбец account usage и форма импорта Telegram `StringSession`. Backend API и данные сохранены. Добавлены DOM-regression тесты, live-контейнер healthy; product commit `49f9e7b99`.
 - Для каждого Telegram HR-бота добавлена Markdown-база знаний: dashboard textarea/import `.md`, owner-scoped хранение, API-лимит 30 000 символов и передача в LLM context. Подготовлен шаблон по вопросам, возражениям и касаниям; live `HR Виктория` заполнен. Product commit `3207c7720`.
 - В dashboard Telegram HR Agent добавлена bot-specific температура: ползунок `0,0–2,0`, API-валидация, хранение в `extra_config.temperature` и применение в LLM payload. Live значение `HR Виктория` инициализировано как `0,4`; product commit `51ed7d2c4`.
 - Исправлены повторяющиеся fallback-ответы Telegram HR Agent: устойчивый разбор JSON/fenced JSON/plain text, контекст предыдущих реплик, приоритет прямого ответа над повторным приветствием. Live prompt скорректирован, модель переключена с нестабильной `openrouter/free` на `openai/gpt-4.1-mini`; commits `eb39bdc1a`, `c3b6999d5`.
