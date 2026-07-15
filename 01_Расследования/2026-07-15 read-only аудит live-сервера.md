@@ -39,9 +39,11 @@
 
 ## Вывод
 
-### Критический риск
+### Критический риск — устранён 2026-07-15
 
-1. SSH открыт интернету с password auth, без host firewall и fail2ban, при интенсивном brute-force. Компрометация не подтверждена, но сочетание настроек создаёт прямой риск захвата password-enabled account.
+1. SSH был открыт интернету с password auth, без host firewall и fail2ban, при интенсивном brute-force. Компрометация не подтверждена, но сочетание настроек создавало прямой риск захвата password-enabled account.
+
+   Подтверждённый фикс: глобальный key-only policy до cloud-init `Include`; `PasswordAuthentication no`, `KbdInteractiveAuthentication no`, `AuthenticationMethods publickey`, `PermitRootLogin no`. Включён UFW: `22/tcp LIMIT`, `80/tcp ALLOW`, `443/tcp ALLOW` для IPv4 и IPv6; default incoming deny. До изменения создан backup SSH config на host. Новый SSH-сеанс по ключу `codex` успешен; password-only сеанс отклонён; `https://traffic-hub.pro/api/health` отвечает `200`.
 
 ### Высокий приоритет
 
@@ -64,7 +66,7 @@
 
 ## Следующий шаг
 
-1. В отдельное согласованное окно: отключить SSH password auth, ограничить ingress `22/80/443`, установить rate limiting/fail2ban и проверить доступ новым SSH-сеансом до закрытия текущего.
+1. Наблюдать UFW limit и SSH journal; при необходимости добавить fail2ban как дополнительный уровень защиты.
 2. Немедленно создать и проверить restore свежего PostgreSQL dump; затем добавить ежедневное расписание, retention и off-host copy.
 3. Решить судьбу `freellmapi`: восстановить рабочую директорию/артефакт либо disable/remove stale unit; вынести и ротировать inline secret.
 4. Обновить owner-scoped Zarplata token и исправить Google Sheets document/tab.
