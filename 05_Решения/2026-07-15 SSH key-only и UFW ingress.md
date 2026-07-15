@@ -13,11 +13,12 @@ Live host принимал password SSH authentication, не имел host firew
 - Разрешить SSH только через public key: `PasswordAuthentication no`, `KbdInteractiveAuthentication no`, `AuthenticationMethods publickey`, `PermitRootLogin no`.
 - Поместить policy в начало `/etc/ssh/sshd_config`, до cloud-init include.
 - Включить UFW: default incoming deny; limit SSH 22; allow HTTP 80 и HTTPS 443.
+- Добавить fail2ban jail `sshd` с backend `systemd`, `maxretry=5`, `findtime=10m`, `bantime=1h` и action `ufw`.
 
 ## Последствия
 
 - Password-only клиенты больше не могут подключаться; пользователю без рабочего private key требуется out-of-band восстановление доступа.
-- SSH brute-force ограничен firewall до передачи в sshd.
+- SSH brute-force сначала ограничен UFW, затем автоматически банится fail2ban по journal events.
 - Новые сервисы с inbound port требуют явного UFW rule и проверки exposure.
 
 ## Альтернативы
@@ -32,3 +33,4 @@ Live host принимал password SSH authentication, не имел host firew
 - Password-only SSH session отклонён.
 - `sshd -t` успешен, `ssh.service` active.
 - `https://traffic-hub.pro/api/health` вернул `200` после UFW enable.
+- `fail2ban.service` active; jail `sshd` читает systemd journal и уже забанил два IP с repeated SSH failures. Key-based SSH и public health остались доступны.

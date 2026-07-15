@@ -66,7 +66,7 @@
 
 ## Следующий шаг
 
-1. Наблюдать UFW limit и SSH journal; при необходимости добавить fail2ban как дополнительный уровень защиты.
+1. SSH remediation закрыта вторым слоем: установлен `fail2ban`; `sshd` jail использует systemd journal и UFW ban action (`maxretry=5`, `findtime=10m`, `bantime=1h`). Сервис active, на момент проверки уже были забанены два источника repeated failures. Следить только за ложными банами при работе с динамическими IP.
 2. Немедленно создать и проверить restore свежего PostgreSQL dump; затем добавить ежедневное расписание, retention и off-host copy.
 3. Решить судьбу `freellmapi`: восстановить рабочую директорию/артефакт либо disable/remove stale unit; вынести и ротировать inline secret.
 4. Обновить owner-scoped Zarplata token и исправить Google Sheets document/tab.
