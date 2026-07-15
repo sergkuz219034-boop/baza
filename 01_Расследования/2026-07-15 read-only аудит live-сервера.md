@@ -67,6 +67,12 @@
 ## Следующий шаг
 
 1. SSH remediation закрыта вторым слоем: установлен `fail2ban`; `sshd` jail использует systemd journal и UFW ban action (`maxretry=5`, `findtime=10m`, `bantime=1h`). Сервис active, на момент проверки уже были забанены два источника repeated failures. Следить только за ложными банами при работе с динамическими IP.
+
+### Уточнение источников SSH-атак 2026-07-15
+
+- Это массовый password-spray/credential scan, а не подтверждённая targeted атака: источники перебирают типовые логины `root`, `admin`, `ubuntu`, `postgres`, `nginx`, `ftpuser`, `hadoop` и другие несуществующие accounts.
+- За 24 часа наиболее активные IP: `91.92.47.123` (1493 события), `68.66.251.43` (1154), `91.92.40.46` (821), `195.178.110.26` (465), `43.128.101.247` (364). IP-адрес не доказывает личность или владельца атакующего.
+- Fail2ban jail `sshd` уже забанил `195.178.110.26` и `43.128.101.247`. Успешных password/keyboard-interactive SSH входов в проверенном журнале не найдено.
 2. Немедленно создать и проверить restore свежего PostgreSQL dump; затем добавить ежедневное расписание, retention и off-host copy.
 3. Решить судьбу `freellmapi`: восстановить рабочую директорию/артефакт либо disable/remove stale unit; вынести и ротировать inline secret.
 4. Обновить owner-scoped Zarplata token и исправить Google Sheets document/tab.
