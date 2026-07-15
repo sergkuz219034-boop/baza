@@ -72,3 +72,12 @@
 - Ошибка chat action логируется как warning и не блокирует доставку ответа кандидату.
 - Regression-набор `tests/test_hr_agent_router.py` и `tests/test_account_manager_hr_prompt.py`: `7 passed`; GitHub CI, Extended checks и Docker build успешны.
 - После rebuild `traffichub_app` healthy, публичный `/api/health` возвращает `status=ok`, live smoke `sendChatAction` вернул `ok`.
+
+## Дополнение: отметка прочтения
+
+- Telegram Bot API предоставляет `readBusinessMessage` для входящих Business-сообщений; запрос требует `business_connection_id`, `chat_id` и `message_id`.
+- Commit `16fe24448` сохраняет `message_id` при разборе webhook и вызывает отметку прочтения после записи входящего сообщения, до статуса `typing`.
+- Метод вызывается только для `business_message`: обычная переписка непосредственно с ботом не имеет Business connection и не имитирует receipt.
+- Ошибка Telegram API логируется как warning и не блокирует генерацию или доставку ответа.
+- Regression-набор: `7 passed`; GitHub CI, Extended checks и Docker build успешны.
+- После deploy `traffichub_app` healthy, `/api/health` возвращает `status=ok`; live smoke на сохранённом реальном Business-сообщении вернул `ok`.
