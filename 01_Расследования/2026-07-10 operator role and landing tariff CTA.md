@@ -162,3 +162,15 @@
 Если потребуется расширять операторский функционал, добавлять точечные permissions, а не повышать роль до `user`.
 
 Для обновления downloadable/local keygen использовать Windows release/build контур: source уже поддерживает `operator`, но физический `.exe` должен быть пересобран из актуального коммита.
+
+## Manager keygen 2026-07-16
+
+### Наблюдение
+
+- Роль `manager` уже поддерживалась каноническим source `tools/windows_launcher/LicenseKeygenLauncher.cs`, `license_server` и `POST /auth/manager-login`.
+- На `manager.traffic-hub.pro` `operator_crm/app.js` выбирает только endpoint `/auth/manager-login`; operator-домен использует `/auth/operator-login`.
+- Переданный дистрибутив `KEY.rar` содержал устаревший `KEY.exe`: в metadata была роль `operator`, но не `manager`.
+
+### Исправление
+
+`KEY.exe` пересобран из server-repo Windows C# compiler и заменён внутри `KEY.rar`. Проверка извлечённого нового exe подтвердила строки `manager` и `operator`. Исходный архив сохранён как `KEY.before-manager.rar` рядом с новым архивом.
