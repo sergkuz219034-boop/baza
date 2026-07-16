@@ -6,7 +6,7 @@ Bot-specific источник фактов и сценариев для отве
 
 ## Хранение
 
-- Канон шаблона в product repo: `/root/TrafficHub/docs/templates/hr_recruiter_knowledge_base.md`.
+- Канон актуального sales-playbook в product repo: `/root/TrafficHub/docs/templates/hr_recruiter_sales_playbook.md`.
 - Рабочее значение конкретного бота: `HrAgentChannelBinding.extra_config.knowledge_base_md`.
 - Scope: `tenant_id + owner_username + binding id`; база одного бота не должна попадать в контекст другого.
 - API-лимит: 30 000 символов.
@@ -19,7 +19,14 @@ AccountManager create/edit modal содержит textarea и импорт `.md`
 
 `traffic_hub/hr_agent/service.py::_llm_response()` помещает Markdown в защищённый system context после индивидуального промта. База управляет фактами, вопросами, возражениями и follow-up, но не отменяет JSON-контракт, этап воронки и запрет выдумывать неизвестные условия.
 
-## Стартовый шаблон
+## Разделение ответственности
+
+- `offer_catalog.py` и owner-scoped `hr_agent_vacancies` — единственный источник фактов, ссылок и routing-кодов вакансий.
+- `sales_engine.py` — этапы, извлечение ответов, выбор оффера, отправка анкеты и стоп-сигналы.
+- `knowledge_base_md` — техника консультативной продажи, вопросы и отработка возражений; база не должна дублировать или переопределять цифры каталога.
+- `system_prompt` — персона конкретного binding и ограничения ответа.
+
+## Актуальный шаблон
 
 Содержит:
 
@@ -34,6 +41,6 @@ AccountManager create/edit modal содержит textarea и импорт `.md`
 
 ## Live
 
-На 2026-07-15 шаблон загружен в binding `HR Виктория`: 6 987 символов, SHA-256 prefix `7e99a4eee7c4ced9`. Контрольное возражение `не хочу заполнять анкету` получило уточняющий вопрос о причине без давления и повторной отправки анкеты.
+На 2026-07-16 в binding `HR Виктория` загружен `hr_recruiter_sales_playbook.md` длиной 1 917 символов, температура `0,4`. Старый общий шаблон на 6 987 символов устарел: он смешивал сценарий и факты вакансий. Факты теперь нормализованы в шести owner-scoped карточках: три Onecta, две Тетрики и VOXYS.
 
-Связано: [[05_Решения/Системный промт HR Agent принадлежит binding бота]], [[01_Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]]
+Связано: [[05_Решения/Системный промт HR Agent принадлежит binding бота]], [[05_Решения/Структурированный каталог и sales-машина HR Agent]], [[01_Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]]
