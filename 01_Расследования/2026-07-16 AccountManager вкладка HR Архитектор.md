@@ -2,7 +2,7 @@
 
 ## Симптом
 
-В sidebar Account Manager рабочий HR-контур назывался `Telegram HR Agent`, тогда как продуктовая роль экрана — настройка HR-ботов, вакансий и воронки кандидатов.
+Первый вариант ошибочно переименовал существующую вкладку `Telegram HR Agent` в `HR Архитектор`. Требование состояло в добавлении новой самостоятельной вкладки без удаления или переименования рабочего Telegram-контура.
 
 ## Зона системы
 
@@ -13,29 +13,28 @@
 
 ## Гипотеза
 
-Для вкладки «HR Архитектор» не нужен второй экран: существующая панель `data-tab="hr-agent"` уже объединяет Telegram-ботов, каталог офферов и кандидатов. Дублирование навигации создало бы две точки входа к одному owner-scoped backend-контуру.
+Новая вкладка должна иметь собственный frontend-контракт `hr-architect`, а существующий `hr-agent` должен оставаться без изменений. Пока отдельный backend-контракт не определён, безопасная реализация — независимый workspace без ложной привязки к Telegram HR API.
 
 ## Проверка
 
 - По live-коду прослежены sidebar, `tab-hr-agent`, обработчик `refreshHrAgent()` и `/api/hr-agent/telegram/*`.
-- Подтверждено, что изменение ограничено UI-текстом и не меняет идентификаторы, API или данные.
-- Добавлен DOM-regression на единственную sidebar-кнопку, заголовок и сохранение ключевых элементов панели.
+- Добавлен отдельный маршрут `data-tab="hr-architect"` и панель `id="tab-hr-architect"`.
+- DOM-regression проверяет наличие двух разных sidebar-кнопок и двух разных панелей, а также сохранение controls Telegram HR Agent.
 - Выполнены изолированные DOM assertions, `node --check` и `git diff --check`.
 
 ## Наблюдение
 
-- Sidebar и заголовок экрана переименованы в `HR Архитектор`.
-- Описание экрана теперь явно перечисляет HR-ботов, вакансии и воронку кандидатов.
-- Внутренний идентификатор `hr-agent` сохранён ради обратной совместимости frontend и API.
-- Product commit: `c7ba86b57`.
+- Ошибочный product commit `c7ba86b57` переименовал существующий экран.
+- Исправляющий commit `95dc95344` вернул `Telegram HR Agent` и добавил рядом самостоятельную вкладку `HR Архитектор`.
+- `hr-agent` продолжает загружать ботов, вакансии и кандидатов; `hr-architect` не вызывает его API.
 - GitHub CI, Extended project checks и Docker build завершились успешно.
 - `account_manager` пересобран и пересоздан из server repo; контейнер `traffichub_account_manager` имеет статус `healthy`.
-- В `/app/dashboard/index.html` runtime-контейнера подтверждены sidebar и заголовок `HR Архитектор`; публичный `https://am.traffic-hub.pro/api/health` вернул `{"status":"ok"}`.
+- В `/app/dashboard/index.html` runtime-контейнера одновременно подтверждены `Telegram HR Agent`, `HR Архитектор` и отдельная панель `tab-hr-architect`; публичный `https://am.traffic-hub.pro/api/health` вернул `{"status":"ok"}`.
 - Незавершённые чужие изменения `.gitignore`, `AccountManager/api/routers/accounts.py` и `tests/test_account_manager_tdata_upload.py` были изолированы path-scoped stash на время build и полностью восстановлены.
 
 ## Вывод
 
-«HR Архитектор» является новым продуктовым названием существующего HR Agent workspace, а не отдельной дублирующей подсистемой. Изменение доставлено на live без изменения backend и данных.
+`HR Архитектор` — отдельный frontend workspace. `Telegram HR Agent` остаётся самостоятельным рабочим экраном с прежним DOM/API-контрактом. Изменение доставлено на live без изменения backend и данных.
 
 ## Следующий шаг
 
