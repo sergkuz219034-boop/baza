@@ -39,3 +39,34 @@
 ## Следующий шаг
 
 При дальнейшем развитии сохранять один `hr-agent` DOM/API-контракт и расширять этот workspace, а не создавать параллельную HR-вкладку.
+
+## Генерация креативов через OpenRouter
+
+### Симптом
+
+Отдельная вкладка `HR Архитектор` была только пустым workspace и не выполняла прикладную задачу.
+
+### Проверка
+
+- Добавлен независимый endpoint `POST /api/hr-architect/generate` в `AccountManager/api/routers/hr_architect.py`.
+- Ключ читается только из `OPENROUTER_API_KEY` внутри контейнера; браузер его не получает.
+- Вход ограничен Pydantic-контрактом: вакансия, аудитория, подтверждённые условия, канал, тон, цель и 1–5 вариантов.
+- OpenRouter обязан вернуть JSON с `title`, `text`, `cta`, `short_text`; невалидный или пустой ответ преобразуется в контролируемый `502`.
+- Выполнены mocked endpoint smoke, DOM/API assertions, GitHub CI, Extended checks и Docker build.
+- После deploy выполнена реальная генерация одного непубликуемого тестового креатива через `openai/gpt-4.1-mini`.
+
+### Наблюдение
+
+- UI поддерживает Telegram, VK, Avito, hh.ru и универсальный формат; четыре тона и до пяти вариантов.
+- Результаты отображаются карточками и копируются без сохранения в БД.
+- Модель настраивается через `HR_ARCHITECT_OPENROUTER_MODEL`, default — `openai/gpt-4.1-mini`.
+- Product commit: `17bb3167f`; контейнер `traffichub_account_manager` healthy, public health — `status=ok`.
+- Deploy image собран из committed `HEAD:AccountManager`, поэтому незавершённый merge `deploy/Caddyfile` и чужие Account Manager changes не попали в image.
+
+### Вывод
+
+`HR Архитектор` стал отдельным owner-authenticated генератором текстовых HR-креативов через серверный OpenRouter-контур. Он не меняет и не использует runtime Telegram HR Agent.
+
+### Следующий шаг
+
+Если потребуется история и повторное использование, добавить owner-scoped таблицу креативов; текущая версия намеренно не сохраняет введённые данные и результаты.
