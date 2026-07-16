@@ -174,3 +174,9 @@
 ### Исправление
 
 `KEY.exe` пересобран из server-repo Windows C# compiler и заменён внутри `KEY.rar`. Проверка извлечённого нового exe подтвердила строки `manager` и `operator`. Исходный архив сохранён как `KEY.before-manager.rar` рядом с новым архивом.
+
+## Visual refresh keygen 2026-07-16
+
+`tools/windows_launcher/LicenseKeygenLauncher.cs` приведён к стилю Access Key Studio: тёмный studio-shell, верхняя status-панель, отдельные карточки параметров и результата, акцентная кнопка генерации. Подпись RSA, PIN-защита, short-key fallback и набор ролей не изменены.
+
+Windows build выполнен `csc.exe`; обновлённый `KEY.exe` имеет SHA-256 `5f17e9eae89fdcaafdc687fcc811b417b0b731b4128acfbae25e47167e3f1670`. Этот же binary проверен внутри `Project/KEY.rar` и `Downloads/Telegram Desktop/KEY.rar`.
