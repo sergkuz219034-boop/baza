@@ -36,3 +36,10 @@
 ## Swap
 
 Заполненный swap без активного swap-out не является самостоятельной аварией. Warning/Critical допустимы только вместе с низким `MemAvailable` или ненулевым swap-out.
+
+## Immutable images и GHCR
+
+- Production `.env` явно задаёт `TRAFFICHUB_RUNTIME_IMAGE`, `TRAFFICHUB_ACCOUNT_MANAGER_IMAGE` и `TRAFFICHUB_CONTENT_BOT_IMAGE`.
+- Private GHCR требует credential со scope `read:packages`; scope `repo` недостаточен.
+- Перед promotion проверить label `org.opencontainers.image.revision`: он должен совпадать с целевым commit SHA.
+- Локальная сборка допустима только как аварийный fallback из чистого worktree. Никогда не собирать production image из dirty `/root/TrafficHub`.
