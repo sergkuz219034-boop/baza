@@ -36,4 +36,8 @@
 
 ## Следующий шаг
 
-После deploy: сравнить peak RSS/container memory во время полного цикла, убедиться что `ps` не содержит Chromium после завершения, проверить logs на absence новых teardown warnings. При необходимости отдельно исправлять AccountManager legacy Kwork proxy (`browser.new_context(proxy=...)` не поддерживает proxy semantics) без смешивания с TrafficHub form runner.
+Release 2026-08-11: GitHub Build, CI и Extended checks зелёные; app/worker переведены на `627de0fb51c896996a3cf204434fcb8752a744ab`. После restart оба healthy, `/api/health` возвращает `ok`, idle Chromium process count `0`.
+
+Обнаружен infrastructure debt: root deploy wrapper использовал устаревший GHCR credential, поэтому `docker compose pull` получил `unauthorized`. CI-published image существует; для этого release создан локальный image из exact checked SHA с тем же immutable tag и выполнен `docker compose up -d --no-build autolead_bot worker`. Не делать package публичным. Отдельно выдать root deploy credential только с `read:packages` и заменить `/home/github-runner/.docker/config.json` через защищённый секрет.
+
+Дальше: сравнить peak RSS/container memory во время полного цикла, убедиться в отсутствии новых teardown warnings. Отдельно исправлять AccountManager legacy Kwork proxy (`browser.new_context(proxy=...)` не поддерживает proxy semantics) без смешивания с TrafficHub form runner.
