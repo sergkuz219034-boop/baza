@@ -28,7 +28,9 @@
 
 ## Следующий шаг
 
-`f67e86803` уже добавил lifecycle-логи без секретов, status counters, cleanup частичного context и regression tests. В `codex/playwright-headless-shell` bootstrap изменён на `playwright install --only-shell chromium`; полный Chromium требует `PLAYWRIGHT_FULL_CHROMIUM=1`. Требуется CI, deploy и проверка live image/health.
+`f67e86803` добавил lifecycle-логи без секретов, status counters, cleanup частичного context и regression tests. `bfd358945` изменил bootstrap на `playwright install --only-shell chromium`; полный Chromium требует `PLAYWRIGHT_FULL_CHROMIUM=1`.
+
+CI, extended checks, build и production deploy для обоих SHA прошли успешно. На live `traffichub_worker` работает image `bfd358945`, `/api/health` отвечает `ok`, в idle нет Chromium/Playwright driver процессов.
 
 ## Связи
 
