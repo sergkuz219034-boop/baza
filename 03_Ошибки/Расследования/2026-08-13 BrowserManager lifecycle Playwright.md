@@ -20,6 +20,7 @@
 - До улучшения BrowserManager уже переиспользовал browser внутри совместимого Autolead job, но не давал полного lifecycle status/наблюдаемости.
 - При ошибке `new_page()` после `new_context()` мог остаться частично созданный context.
 - Runtime bootstrap и diagnostic probes используют Playwright только для поиска/проверки executable, не для бизнес-сессий.
+- `utils/playwright_runtime.py` по умолчанию ставил полный `chromium`, если browser отсутствовал; это противоречило цели использовать Headless Shell на сервере.
 
 ## Вывод
 
@@ -27,7 +28,7 @@
 
 ## Следующий шаг
 
-В `codex/browser-manager-complete`: lifecycle-логи без секретов, status counters, cleanup частичного context и regression tests. Требуется CI, deploy и проверка live image/health.
+`f67e86803` уже добавил lifecycle-логи без секретов, status counters, cleanup частичного context и regression tests. В `codex/playwright-headless-shell` bootstrap изменён на `playwright install --only-shell chromium`; полный Chromium требует `PLAYWRIGHT_FULL_CHROMIUM=1`. Требуется CI, deploy и проверка live image/health.
 
 ## Связи
 
