@@ -30,6 +30,11 @@ if ($ahead -gt 0 -or $behind -gt 0) {
 }
 
 $missing = New-Object System.Collections.Generic.List[string]
+$knownPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+Get-ChildItem -Recurse -File | ForEach-Object {
+    [void]$knownPaths.Add($_.FullName)
+}
+
 Get-ChildItem -Recurse -File -Filter '*.md' | ForEach-Object {
     $source = $_.FullName
     foreach ($match in [regex]::Matches((Get-Content -Raw -LiteralPath $source), '\[\[([^\]|#]+)')) {
@@ -39,7 +44,7 @@ Get-ChildItem -Recurse -File -Filter '*.md' | ForEach-Object {
             (Join-Path $vault "$target.md"),
             (Join-Path $vault "$target\README.md")
         )
-        if (-not ($candidates | Where-Object { Test-Path -LiteralPath $_ })) {
+        if (-not ($candidates | Where-Object { $knownPaths.Contains($_) })) {
             $missing.Add("$($_.FullName.Substring($vault.Length + 1)): $target")
         }
     }
