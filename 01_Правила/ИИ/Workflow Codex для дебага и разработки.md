@@ -14,9 +14,9 @@
 
 Перед работой назвать режим и риск.
 
-1. `Исследование`, `read-only`: чтение кода, runtime, БД и логов. Не менять данные, контейнеры, toggles или maintenance mode.
-2. `Разработка`, обычно `low-risk`: отдельная ветка; при параллельной работе — отдельный server worktree. Не подключать worktree к live Compose.
-3. `Релиз`, `runtime-risk` или `data-risk`: только после явного разрешения пользователя. Включает merge/push, обновление `/root/TrafficHub`, deploy и live smoke.
+1. `fix`, `read-only` или `low-risk`: подтвердить симптом, локализовать причину, сделать одну изолированную правку и целевую проверку. Не менять данные, контейнеры, toggles или maintenance mode без необходимости.
+2. `release`, `runtime-risk`: отдельная ветка и server worktree; после зелёных checks выполнить merge, deploy и live smoke. Если пользователь уже поручил исправление и релиз, обычные шаги release не требуют повторного вопроса.
+3. `incident`, `runtime-risk` или `data-risk`: сначала минимально ограничить impact, затем восстановить наблюдаемость, зафиксировать evidence и только потом исправлять. Массовая запись/удаление, миграция и остановка критичных сервисов требуют отдельного подтверждения.
 
 Если риск неясен, считать его `runtime-risk` до проверки.
 
@@ -31,6 +31,24 @@
 Основной агент координирует handoff `Исследование → Разработка → Релиз`, собирает доказательства и принимает финальное решение. Не создавать subagent для одношагового read-only ответа или правки без независимой подзадачи.
 
 Subagent не расширяет полномочия: режим, риск, production guardrails и явное release-разрешение обязательны для каждого.
+
+## Evidence-card
+
+Для каждой задачи, которая меняет код, runtime или данные, завести короткую evidence-card рядом с задачей или PR:
+
+```text
+Симптом:
+Scope и owner/tenant:
+Baseline SHA и runtime:
+Причина (доказательство):
+Изменение:
+Проверки:
+Live evidence:
+Rollback:
+Residual risks:
+```
+
+Graphify использовать только для навигации по актуальному snapshot. Доказательством служат code/runtime/DB/logs, а не граф.
 
 ## Рабочий цикл
 
@@ -60,6 +78,8 @@ Subagent не расширяет полномочия: режим, риск, pro
 - Deploy: ожидаемый commit, GitHub checks, Compose status, health, логи, smoke затронутого сценария.
 
 После изменения выполнить `git diff --check` и только релевантные проверки. Для UI сравнить с референсом; при отсутствии эффекта сначала доказать stale container, mount, build cache, CDN или cache-busting.
+
+До `release` и при `incident` запустить `deploy/doctor.sh`: SSH, Git, Docker/Compose, доступность Graphify, свободное место/inodes и health. `doctor` не заменяет release-status и smoke.
 
 ## Wiki
 
