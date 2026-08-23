@@ -8,11 +8,11 @@ RaytSystem Public OS, закреплённый на revision
 
 ## Live
 
-- merge SHA: `c0c668cb6d8532362c181ae050c6a45cb88da3fe`;
+- merge SHA: `7e85a8baf6c056b75a441262e156492a7cb2bef7`;
 - service: `traffichub-raytsystem.service`;
 - bind: только `127.0.0.1:8766`;
 - health: `curl -fsS http://127.0.0.1:8766/healthz`;
-- immutable release: `/opt/traffichub-raytsystem/c0c668cb6d8532362c181ae050c6a45cb88da3fe`;
+- immutable release: `/opt/traffichub-raytsystem/7e85a8baf6c056b75a441262e156492a7cb2bef7`;
 - canonical state: `/root/TrafficHub/state`.
 
 UI не содержит собственных SQLite/ledger и не запускает Codex, shell, Git,
@@ -21,13 +21,17 @@ Agent-OS lifecycle gates и записывают decisions/history в canonical 
 HTTP mutation требует loopback Host/Origin, same-origin session cookie, CSRF и
 `Idempotency-Key`; повтор ключа с другим payload отклоняется.
 
+Overlay сохраняет композицию официального Command Center: сгруппированную
+навигацию, hero с орбитой, панели внимания, активной работы, последних запусков
+и агентов. Raw JSON-представление и подмена upstream `main.tsx` не используются.
+
 ## Windows
 
-Клиент установлен в `%LOCALAPPDATA%\TrafficHub\RaytSystem\client-c0c668cb`.
+Клиент установлен в `%LOCALAPPDATA%\TrafficHub\RaytSystem\client-7e85a8ba`.
 Запуск туннеля:
 
 ```powershell
-& "$env:LOCALAPPDATA\TrafficHub\RaytSystem\client-c0c668cb\windows\Start-RaytSystem.ps1" `
+& "$env:LOCALAPPDATA\TrafficHub\RaytSystem\client-7e85a8ba\windows\Start-RaytSystem.ps1" `
   -Mode Tunnel -LocalPort 8766 `
   -SshConfig "C:\Users\admin\Desktop\Project\ssh\config"
 ```
@@ -35,7 +39,7 @@ HTTP mutation требует loopback Host/Origin, same-origin session cookie, C
 Открыть `http://127.0.0.1:8766/`. Остановка:
 
 ```powershell
-& "$env:LOCALAPPDATA\TrafficHub\RaytSystem\client-c0c668cb\windows\Stop-RaytSystem.ps1"
+& "$env:LOCALAPPDATA\TrafficHub\RaytSystem\client-7e85a8ba\windows\Stop-RaytSystem.ps1"
 ```
 
 Launcher использует native Windows `ssh.exe`; WSL не требуется. Tunnel намеренно
