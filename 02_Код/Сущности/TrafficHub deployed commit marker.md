@@ -33,6 +33,10 @@ docker cp /tmp/deploy_commit autolead_server_bot:/app/.deploy_commit
 
 Marker не заменяет git history. Источник истории остаётся server repo `/root/TrafficHub` и GitHub. Marker нужен только для корректной runtime-индикации после hotfix-deploy.
 
+## Текущий source baseline
+
+По состоянию на 2026-10-01 канонический GitHub baseline — `sergkuz219034-boop/TrafficHub`, ветка `main`, commit `1b7a2dbb`. Этот commit содержит текущий HH OAuth/import контур и защиту oversized negotiation identifiers. Runtime marker следует сравнивать с этим SHA только после фактического production deploy; наличие commit в GitHub само по себе не подтверждает, что он уже работает в контейнере.
+
 ## Связанные заметки
 
 - [[Runtime Inspector]]

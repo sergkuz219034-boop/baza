@@ -2,6 +2,10 @@
 
 ## Текущее состояние
 
+- Source baseline TrafficHub обновлён 2026-10-01: `sergkuz219034-boop/TrafficHub/main` = `1b7a2dbb`.
+- В source подтверждены HH employer OAuth, owner-scoped callback context, ручной обмен authorization code, импорт HH-ответов с job progress, runtime build trigger и защита oversized negotiation identifiers.
+- Source baseline не равен production runtime: deploy подтверждается только `.deploy_commit`, health и release-проверками.
+
 - `baza` остаётся Obsidian-vault, а не source repo приложения;
 - live `TrafficHub` repo по read-only проверке `2026-07-18`:
   - `HEAD = 17bb3167f33d5314daa227a4ad0f49b00d462506`

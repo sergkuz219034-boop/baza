@@ -58,3 +58,15 @@
 - router imports расходятся с доступным snapshot;
 - неполный локальный source coverage.
 - повторное смешивание `crm-*` с Autolead tab-pane приведёт к тому, что пользователь увидит не тот раздел при клике в sidebar.
+
+## Состояние репозитория на 2026-10-01
+
+Каноническая ветка `main` репозитория `sergkuz219034-boop/TrafficHub` указывает на commit `1b7a2dbb` (`Handle oversized HH negotiation identifiers`). Последняя серия изменений добавила:
+
+- официальный HH employer OAuth с сохранением owner-scoped контекста до callback;
+- ручной обмен HH authorization code и импорт ответов HH с отображением прогресса job;
+- запуск runtime build после HH-импорта;
+- защиту от слишком больших negotiation identifiers;
+- immutable deploy dashboard через production release-контур.
+
+Проверяемые файлы: `api/hh_oauth.py`, `services/hh_import.py`, `api/routers/jobs.py`, `docker-compose.override.yml`, тесты `tests/test_hh_oauth.py` и `tests/test_hh_import.py`.
