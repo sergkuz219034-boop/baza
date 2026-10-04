@@ -29,3 +29,14 @@ CRM-интерфейс TrafficHub показывает пользователю 
 
 Новые статусы интеграций нужно добавлять явно. Если UI показывает неизвестное английское значение, это не ошибка БД, а отсутствие нового правила отображения.
 
+
+
+## 2026-10-04 — меню полного цикла и единая авторизация
+
+По прямому запросу пользователя подготовлена production-реализация согласованного референса: стрелка рядом с «Запустить цикл» раскрывает «Выгрузка» и «Рассылка». Пункты вызывают существующие `runCmd('upload')` и `runCmd('send')`, основная кнопка — `runCmd('run')`. Сохранены ограничения по роли, allowed access и занятости задания; меню закрывается после выбора, с Escape и при уходе фокуса. Проверки команд выполнены только на локальном mock API, реальные рассылки не запускались.
+
+Вход, регистрация и публичные auth-result страницы используют общий `dashboard/auth.css` и `auth-theme.js`. Удалены отдельные старые login CSS, декоративная сетка, цветной autofill и старый inline stylesheet регистрации. Формы, ID, backend-функции авторизации и проверки ключей сохранены. Старые декоративные синие/лаймовые/фиолетовые значения в затронутых CSS и графиках заменены нейтральными токенами текущего интерфейса; семантические статусы сохранены. CSS-селекторы и layout исходных разделов отдельно проверены валидатором.
+
+Проверено 2026-10-04: 72 browser cases (14 вкладок, светлая/тёмная тема, desktop/mobile, auth 320/390/1440, формы, клавиатура, guards), 30 целевых source tests, JS syntax, backend AST equivalence, 353 прежних HTML ID и 30 role/route атрибутов; `git diff --check` PASS. Доказательства: `C:/Users/admin/Desktop/Project/outputs/ui-actions-auth-release-20261004/browser-checks.json`, `static-checks.json`, PNG login/register/overview-menu, server worktree `/home/codex/ui-actions-auth-20261004`. UI commit `a8338488d07f0e6638859d292373ffb1cade7a45`.
+
+Во время release Extended checks выявил ошибку selection policy: explicit pytest paths повторно выбирали retired Account Manager suite, хотя `tests/conftest.py` уже исключает её при отсутствии `AccountManager/api/main.py`. В `tools/test_scope.py` применены те же узкие исключения; тест проверяет absent/present legacy tree, зависимый и явный выбор, сохранение активного smoke и похожего имени. 7 scope tests PASS; commit `687c5ea7507f294adbda457507514ee9cb0c316d`. Исходное падение: GitHub Extended run `37198449450`, `test_account_manager_token_denied_for_user`, отсутствующий ранее удалённый `server.account_manager_token`; сам endpoint не возвращался.
