@@ -35,3 +35,10 @@ Offer presets — глобальный справочник готовых оф�
 - Полную готовность списка и трёхкратную стабилизацию не подтверждаем.
 
 Доказательства (скриншоты, проверки полей и delivery results; PII не копировать в wiki): `C:/Users/admin/Desktop/Project/outputs/ready-offers-20261007/REPORT.md`. Серверные receipts: `/root/TrafficHub/data/debug/ready-offers-verification-20261007-v3` и `...-v4`.
+
+
+## 2026-10-07 — явный подоффер Тетрики
+
+PR265, main `ccd9ba5a9ecc05d2c617198cb3788e1b6e867bdb`: редактор Тетрики содержит поле «Подоффер Тетрики» с тремя ролями. `tetrika_role`: sales → «Менеджер по продажам»; intro_sales → «Менеджер по продажам на вводном уроке»; recording → «Менеджер записи на вводный урок». API сохраняет/валидирует поле; обработчик использует его раньше эвристики названия. Старые офферы без поля сохраняют определение по названию. Невалидное явное значение блокируется до отправки. Выбор роли не меняет название, tracking URL или историю доставки. Для другого оффера UI отправляет null, очищая прежнюю роль.
+
+Проверено:60 targeted tests, независимый review, CUA save/reopen всех ролей, legacy inference, смена на Дикси, dark/light/mobile. Production app/worker ccd9 healthy, live API model+handler все3 true, health200. Новых внешних заявок не отправляли. Доказательства: `C:/Users/admin/Desktop/Project/outputs/offer-footer-20261007/EVIDENCE.md`.
