@@ -142,3 +142,14 @@ Draft PR содержит также 25 уже существующих live mai
 отката интерфейса/Тетрики/lease. Остальные MEDIUM/LOW не закрываются этим изменением.
 
 Доказательства: `C:/Users/admin/Desktop/Project/outputs/high-fixes-telegram-20261007/EVIDENCE.md`. PR: https://github.com/sergkuz219034-boop/TrafficHub/pull/257.
+
+
+### Продолжение проверки — 2026-10-07
+
+PR257 head `42f57f95b63bb68aa7cd600c86e4748ee07216de`: исправлены устаревшие
+Sheets cycle/upload test doubles без изменения production guards. CI-compatible
+affected scope: 428 PASS/10 SKIP до последней fixture-ошибки; после её исправления
+181 оставшийся тест PASS. Счётчики пересекаются, не складывать как уникальный итог.
+Cleanup helper завершает и fsync всей gzip-копии до первого удаления. Final GitHub
+checks ещё выполняются. Production без deploy/cleanup, health ok.
+Доказательство: `C:/Users/admin/Desktop/Project/outputs/high-fixes-telegram-20261007/EVIDENCE.md`.
