@@ -42,3 +42,10 @@ Offer presets — глобальный справочник готовых оф�
 PR265, main `ccd9ba5a9ecc05d2c617198cb3788e1b6e867bdb`: редактор Тетрики содержит поле «Подоффер Тетрики» с тремя ролями. `tetrika_role`: sales → «Менеджер по продажам»; intro_sales → «Менеджер по продажам на вводном уроке»; recording → «Менеджер записи на вводный урок». API сохраняет/валидирует поле; обработчик использует его раньше эвристики названия. Старые офферы без поля сохраняют определение по названию. Невалидное явное значение блокируется до отправки. Выбор роли не меняет название, tracking URL или историю доставки. Для другого оффера UI отправляет null, очищая прежнюю роль.
 
 Проверено:60 targeted tests, независимый review, CUA save/reopen всех ролей, legacy inference, смена на Дикси, dark/light/mobile. Production app/worker ccd9 healthy, live API model+handler все3 true, health200. Новых внешних заявок не отправляли. Доказательства: `C:/Users/admin/Desktop/Project/outputs/offer-footer-20261007/EVIDENCE.md`.
+
+
+## Проверено 2026-10-07 — восемь пресетов
+
+PR267/268/269 объединены; app и worker healthy на b49197211448c07648dc021e7c8eb87486e51459. Lovko preset-links получает реальные click-ссылки текущего owner через существующее подключение; при пустой profile-копии используется только owner/tenant DB connection, без глобальных credentials. X5 имеет явный выбор walking/bicycle; старые авто-ссылки без роли сохраняются. Я Еда: исправлен retired vanity-host с сохранением атрибуции. Самокат/Ozon используют фактический publisher подключённого пользователя.
+
+Онекта ведёт на VOXYS, Onecta#2/Четыре лапы Disabled, ВкусВилл требует доступа: UI показывает причину, не предлагает нерабочую ссылку как готовую. Получить успешную заявку для этих четырёх маршрутов пока невозможно; preview не является tracking. Источник: C:/Users/admin/Desktop/Project/outputs/remaining-presets-20261007/REPORT.md; deployed resolver подтвердил publisher4536, Ozon available и X5 роли auto/bicycle/walking.
