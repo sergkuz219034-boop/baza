@@ -16,7 +16,14 @@
       "consent": true
     },
     "screenshot": "accepted-2.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575191,
+      "lease_expires_at": 1791575250,
+      "claimed_at": 1791575191,
+      "completed_at": 1791575220
+    }
   },
   {
     "preset": "Тетрика — продажи",
@@ -36,7 +43,14 @@
       "role": true
     },
     "screenshot": "accepted-3.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791574509,
+      "lease_expires_at": 1791574562,
+      "claimed_at": 1791574509,
+      "completed_at": 1791574532
+    }
   },
   {
     "preset": "Тетрика — продажи на вводном уроке",
@@ -56,7 +70,14 @@
       "role": true
     },
     "screenshot": "accepted-11.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791574549,
+      "lease_expires_at": 1791574602,
+      "claimed_at": 1791574549,
+      "completed_at": 1791574572
+    }
   },
   {
     "preset": "Тетрика — запись на вводный урок",
@@ -76,7 +97,14 @@
       "role": true
     },
     "screenshot": "accepted-12.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575051,
+      "lease_expires_at": 1791575107,
+      "claimed_at": 1791575051,
+      "completed_at": 1791575077
+    }
   },
   {
     "preset": "Самокат",
@@ -95,7 +123,14 @@
       "consent": true
     },
     "screenshot": "accepted-4.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575695,
+      "lease_expires_at": 1791575770,
+      "claimed_at": 1791575695,
+      "completed_at": 1791575740
+    }
   },
   {
     "preset": "Яндекс Еда",
@@ -114,7 +149,14 @@
       "consent": true
     },
     "screenshot": "accepted-5.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575756,
+      "lease_expires_at": 1791575837,
+      "claimed_at": 1791575756,
+      "completed_at": 1791575808
+    }
   },
   {
     "preset": "Дикси",
@@ -133,7 +175,14 @@
       "consent": true
     },
     "screenshot": "accepted-6.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575235,
+      "lease_expires_at": 1791575300,
+      "claimed_at": 1791575235,
+      "completed_at": 1791575270
+    }
   },
   {
     "preset": "Ozon",
@@ -152,6 +201,13 @@
       "consent": true
     },
     "screenshot": "accepted-10.png",
-    "verified_date": "2026-10-09"
+    "verified_date": "2026-10-09",
+    "runtime_timestamps": {
+      "status": "completed",
+      "created_at": 1791575287,
+      "lease_expires_at": 1791575360,
+      "claimed_at": 1791575287,
+      "completed_at": 1791575330
+    }
   }
 ]

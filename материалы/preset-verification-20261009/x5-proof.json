@@ -1,0 +1,22 @@
+{
+  "checked": "2026-10-10",
+  "index": 9,
+  "preset": "X5 walking",
+  "endpoint": "https://x5-dostavka.ru/application",
+  "http_status": 200,
+  "sent": 1,
+  "errors": 0,
+  "uncertain": null,
+  "checks": {
+    "phone": true,
+    "last_name": true,
+    "first_name": true,
+    "required_valid": true,
+    "birth_or_age": true,
+    "city": true,
+    "consent": true,
+    "smz_yes": true,
+    "walking_landing": true
+  },
+  "screenshot": "accepted-9.png"
+}

@@ -95,3 +95,12 @@ Runtime: app/worker dcb52f0b6 healthy, RU-маршрут admin включён и
 В wiki/GitHub не публикуются имена, телефоны, email, резюме, credentials или private lease. Скриншоты проверены визуально, подтверждения не дорисовывались. Машиночитаемая проверка: [proof.json](../../материалы/preset-verification-20261009/proof.json).
 
 Evidence: C:/Users/admin/Desktop/Project/outputs/presets-final-20261009/catalog.json, form-0..11.json; outputs/presets-live-20261009/tests.log (132 PASS), 3/11 results; outputs/presets-live-20261009-recording-v3/12 results; outputs/presets-live-20261009-remaining/2/6/10 results; outputs/presets-live-20261009-couriers/4/5 results. Каждая группа содержит checks, form-result, delivery-result, post-responses и success screenshot. Канон: [[Каноническое правило заполнения анкет и офферов]].
+
+
+### X5 пеший — новая реальная проверка 2026-10-10
+
+Пеший X5 принят: выбран СМЗ YES по прямому правилу пользователя; точные ФИО, телефон, дата рождения и город кандидата, согласие, пеший landing проверены до отправки. Один `/application` HTTP200, thanks виден, delivery sent1/errors0/uncertain=null. Предыдущее ограничение неизвестного СМЗ для X5 отменено прямым указанием пользователя; ограничение велосипеда остаётся. Это девятая подтверждённая контрольная отправка, не девять новых независимых пресетов.
+
+![X5: Спасибо за отклик](../../материалы/preset-verification-20261009/accepted-9.png)
+
+Доказательства: `outputs/x5-smz-20261009/9-{checks,form-result,delivery-result}.json`, `9-post-responses.jsonl`; product `c5b988e77`, RU runtime `traffichub-ru-autolead:x5-smz-20261009`.
