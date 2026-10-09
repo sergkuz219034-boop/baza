@@ -1,0 +1,157 @@
+[
+  {
+    "preset": "Воксис",
+    "endpoint": "https://voxys-rabota.ru/send2.php",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true
+    },
+    "screenshot": "accepted-2.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Тетрика — продажи",
+    "endpoint": "https://tetrika-school.ru/marketing/api/v1/lead/mass_hiring",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true,
+      "role": true
+    },
+    "screenshot": "accepted-3.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Тетрика — продажи на вводном уроке",
+    "endpoint": "https://tetrika-school.ru/marketing/api/v1/lead/mass_hiring",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true,
+      "role": true
+    },
+    "screenshot": "accepted-11.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Тетрика — запись на вводный урок",
+    "endpoint": "https://tetrika-school.ru/marketing/api/v1/lead/mass_hiring",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true,
+      "role": true
+    },
+    "screenshot": "accepted-12.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Самокат",
+    "endpoint": "https://samokat-job.ru/application",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true
+    },
+    "screenshot": "accepted-4.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Яндекс Еда",
+    "endpoint": "https://you-courier.ru/application",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true
+    },
+    "screenshot": "accepted-5.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Дикси",
+    "endpoint": "https://anketa-dixy.ru/application",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true
+    },
+    "screenshot": "accepted-6.png",
+    "verified_date": "2026-10-09"
+  },
+  {
+    "preset": "Ozon",
+    "endpoint": "https://vakansii-ozon.ru/application",
+    "http_status": 200,
+    "sent": 1,
+    "errors": 0,
+    "uncertain": null,
+    "checks": {
+      "phone": true,
+      "last_name": true,
+      "first_name": true,
+      "required_valid": true,
+      "birth_or_age": true,
+      "city": true,
+      "consent": true
+    },
+    "screenshot": "accepted-10.png",
+    "verified_date": "2026-10-09"
+  }
+]
