@@ -8,11 +8,11 @@ RaytSystem Public OS, закреплённый на revision
 
 ## Live
 
-- merge SHA: `7e85a8baf6c056b75a441262e156492a7cb2bef7`;
+- текущий локальный server commit: `ceac9ac6a53a0637babdf3a77ecc94fbf674fdc2` (проверено 2026-10-08);
 - service: `traffichub-raytsystem.service`;
 - bind: только `127.0.0.1:8766`;
 - health: `curl -fsS http://127.0.0.1:8766/healthz`;
-- immutable release: `/opt/traffichub-raytsystem/7e85a8baf6c056b75a441262e156492a7cb2bef7`;
+- immutable release: `/opt/traffichub-raytsystem/ceac9ac6a53a0637babdf3a77ecc94fbf674fdc2`;
 - canonical state: `/root/TrafficHub/state`.
 
 UI не содержит собственных SQLite/ledger и не запускает Codex, shell, Git,
@@ -53,3 +53,26 @@ Launcher использует native Windows `ssh.exe`; WSL не требует�
 LOW_RISK workstream через Harness. Rollback —
 переключить systemd unit на предыдущий immutable release SHA и повторить health.
 Удалённый старый control center не восстанавливать как источник состояния.
+
+## Проверка gate — 2026-10-08
+
+Bridge импортируется относительно immutable release панели, а не server repo,
+переданного в `--root`. Новый release содержит актуальные bridge/server; прежний
+`1d4e1e11ec9980029c63ba5dfaad6ad54d231d26` сохранён для rollback. Переключение:
+`/etc/systemd/system/traffichub-raytsystem.service.d/10-harness-proof.conf`.
+Обновлён только сервис RaytSystem, product containers и maintenance не менялись.
+
+CLOSED перечитывает связанный proof manifest из `/root/TrafficHub`; отсутствующие
+или изменённые файлы блокируют закрытие. Live HTTP: stale proof → 409, актуальный
+proof → 202/CLOSED, replay → 202/replay, projection/health → 200. Product health
+`https://traffic-hubcrm.ru/api/health` → 200. 34 целевых unittest PASS, py_compile
+и diff check PASS. Полный product suite не запускался.
+
+Rollback: удалить только созданный override `10-harness-proof.conf`, выполнить
+`systemctl daemon-reload` и `systemctl restart traffichub-raytsystem.service`,
+проверить `/healthz`. Прежний unit и release сохранены. Исторические CLOSED
+записи не менялись; старым открытым задачам нужны bind и повторная проверка.
+
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/harness-fix-20261008/targeted-tests.txt`,
+`release.json`, `live-smoke.json`; серверный backup
+`/root/TrafficHub/data/backups/harness-fix-20261008/`.

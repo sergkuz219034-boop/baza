@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-16 — устойчивость полного цикла выгрузки
+
+- Независимо обрабатываются включённые источники; Google Sheets outbox подтверждается до отправки, а старый backlog доступен только отдельной команде send.
+- Исправлены пустые outcome-результаты для выключенных офферов; неизвестный RU итог теперь уходит в owner-scoped reconciliation/quarantine без автоматического повтора.
+- Origin и RU обновлены; admin smoke: 2 Rabota + 5 HH записей подтверждены в Sheets, повторный запуск не выбрал backlog. Один HH token revoked, активных offers admin нет.
+- Server commits: 4017d5335, 750e0ed63, 8868288a4, c0341c000, 215a85aca. Evidence: [[02_Код/Эксплуатация/Воркеры и расписание]], C:/Users/admin/Desktop/Project/outputs/resilient-cycle-20261016/EVIDENCE.md.
+
+
 - HR Agent переработан в LLM-first контур: OpenRouter стал единственным первичным планировщиком входящего диалога и касаний; Python выполняет только валидированные allow-list действия, safety policy, выбор owner-scoped вакансии и отправку анкеты. Ссылки анкет исключены из LLM-контекста и выдаются только серверным действием. Добавлены DB-режимы `bot/human/paused/approval_required`, observability LLM, миграция 0011 и настройки/проверка OpenRouter в AccountManager. До live-развёртывания: профильные container+PostgreSQL тесты 25/25 и миграция на `traffichub_test` успешны. См. [[HR Agent: переход на LLM-first]] и [[HR Agent LLM-first и серверные действия]].
 - Удалён legacy `hr_ai_worker`, который создавал второй потенциальный HR writer через Telethon `StringSession` и отдельную модель `openrouter/free`. Единственный production-контур: Telegram Business webhook → `traffic_hub/hr_agent/service.py` → OpenRouter `openai/gpt-4.1-mini`; Telethon AccountManager сохранён только для парсинга чатов, каналов и переписок. Касания 24/72 часа остаются в общей HR sales-машине. Product commit `fd392b408`.
 - OpenRouter назначен основным автором Telegram HR-диалогов и дожимов: модель формирует финальную реплику и тактику по bot-specific системному промту, Markdown-базе, temperature, dialog variability, выбранному офферу, истории и state. Sales-машина передаёт безопасный черновик и применяет guardrails: запрещённые данные, чужие ссылки, потеря обязательной анкеты и точный повтор отклоняются с fallback. `/clear` остаётся точной служебной командой. Product commit `9323d7a50`.
@@ -185,3 +193,11 @@
 - Полностью мигрированы legacy-таблицы `control.db` в `control_*` таблицы PostgreSQL.
 - Добавлен one-shot режим legacy import, чтобы старый `control.db` не перетирал новые данные после миграции.
 - `/api/health` теперь показывает backend control store и флаг `legacy_import_enabled`.
+
+## 2026-10-24 — аудит TrafficHub и исправление гонки заданий
+
+Server commits `2f6ea5e24`–`db06cc651`: восстановлены необходимые Compose overrides, исправлена проверка doctor, синхронизированы записи owner job в Redis. Выборочные тесты 218 passed, bridge 19 passed; production app/worker healthy. Подробности и ограничения: `C:/Users/admin/Desktop/Project/outputs/project-audit-20261024/EVIDENCE.md`.
+
+## 2026-10-24 — защита от перебора паролей
+
+Проверка SSH, Fail2Ban, Caddy и всех путей проверки пароля выявила обход веб-limiter через альтернативные маршруты и Basic auth. Исправление ещё не выпускалось. Доказательства и ограничения: `C:/Users/admin/Desktop/Project/outputs/password-bruteforce-audit-20261024/EVIDENCE.md`.

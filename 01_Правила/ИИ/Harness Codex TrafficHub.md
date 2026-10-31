@@ -1,6 +1,6 @@
 # Harness Codex TrafficHub
 
-Проверено: 2026-08-22. Harness — управляющий слой вокруг существующего TrafficHub, а не новый product runtime.
+Правила и bridge проверены: 2026-10-08. Harness — управляющий слой вокруг существующего TrafficHub, а не новый product runtime.
 
 ## Источники истины
 
@@ -10,7 +10,7 @@
 4. Agent-OS state текущей задачи.
 5. Git.
 
-Mission Control является проекцией и панелью. Он не заменяет state, Wiki или Git и не получает полномочий менять product-код.
+RaytSystem является проекцией и панелью. Он не заменяет state, Wiki или Git и не получает полномочий менять product-код.
 
 ## Размещение и владение
 
@@ -36,7 +36,7 @@ Mission Control является проекцией и панелью. Он не
 - Headroom и Caveman уменьшают контекст и ответы, но не меняют canonical evidence.
 - CodeBurn передаёт runs, tokens, cost, time, retries и outcomes.
 - Ponytail проверяет лишние файлы, зависимости, дублирование, dead code и рост LOC; при отсутствии skill работает встроенный checklist.
-- Mission Control v2.3.0 развёрнут отдельно на live-host как localhost-only optional service, с собственной SQLite и секретами вне Git. Agent-OS синхронизируется только в направлении панели; повторная синхронизация использует idempotency key. Offline read-only dashboard остаётся fallback.
+- Текущая панель — RaytSystem, stateless loopback projection и governed-command client. Исторический Mission Control не использовать как текущий runtime-контур; актуальный release см. [[02_Код/Эксплуатация/RaytSystem Harness Control Center]].
 
 Отсутствие любого optional tool не блокирует core workflow: capability получает статус `unavailable` или `degraded`, а доказательства продолжают храниться в Agent-OS.
 
@@ -44,18 +44,24 @@ Mission Control является проекцией и панелью. Он не
 
 - Harness worktree никогда не подключается к live Compose.
 - `/app` не редактируется.
-- Mission Control слушает только `127.0.0.1`; внешний доступ возможен только через управляемый SSH tunnel или отдельно согласованный authenticated TLS reverse proxy.
+- RaytSystem слушает только `127.0.0.1`; внешний доступ возможен только через управляемый SSH tunnel или отдельно согласованный authenticated TLS reverse proxy.
 - Секреты, ПДн, полные логи, `.env`, backup и runtime data не входят в context, graph, receipts или Wiki.
-- Mission Control не обходит Aegis review и не реализует mutation product-кода.
+- RaytSystem сохраняет lifecycle gates и не реализует mutation product-кода.
 
 ## Проверка и rollback
 
-Core gate: targeted unittest, `py_compile`, JSON validation, dashboard browser smoke, `git diff --check`, independent validator. Runtime evidence: maintenance `off`, healthy TrafficHub и Mission Control containers, API task count `1` при повторном sync.
+Core gate: targeted unittest, `py_compile`, JSON validation, dashboard browser smoke, `git diff --check`, independent validator. Runtime evidence: health TrafficHub и RaytSystem, актуальный immutable release и безопасный smoke lifecycle gates; maintenance не включать для обычной правки правил.
 
-Rollback: отключить/остановить optional Mission Control, удалить его projection/cache и продолжить по filesystem state; product harness откатывается отдельными Git-коммитами. Удаление canonical workstreams, receipts, handoffs или curated memory не является штатным rollback.
+Rollback: переключить только RaytSystem на предыдущий immutable release и проверить health; продолжить по filesystem state; product harness откатывается отдельными Git-коммитами. Удаление canonical workstreams, receipts, handoffs или curated memory не является штатным rollback.
 
 ## Связанные правила
 
 - [[Workflow Codex для дебага и разработки]]
 - [[02_Код/Эксплуатация/Доступ и подключения]]
 - [[01_Правила/Плейбуки/Graphify architecture scan]]
+
+## Усиление proof — 2026-10-08
+
+CLOSED требует привязку receipts к SHA-256 manifest фактических релевантных файлов и перечитывает их через proof_repo. Старые открытые задачи должны получить новую привязку и проверки; закрытые не мигрируются. Порядок стадий сохранён, неприменимые FIX/SHIP — no-op. Hash не аттестует запуск команд. Bridge в работающей панели импортируется из immutable release, поэтому обновление server repo должно сопровождаться выпуском панели. Доказательства: C:/Users/admin/Desktop/Project/outputs/harness-fix-20261008/.
+
+

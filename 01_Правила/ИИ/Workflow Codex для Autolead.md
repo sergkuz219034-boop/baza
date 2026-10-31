@@ -1,5 +1,13 @@
 # Workflow Codex для Autolead
 
+## Проверка полного пути исполнения — уточнение 2026-10-16
+
+Проверять origin enqueue → RU claim → фактическое выполнение → terminal state. Измерять ожидание отдельно от обработки: время между созданием и claim нельзя называть временем выгрузки лидов. Проверка параллельности должна доходить до RU; текущий режим `per-task` проверен безопасным барьером на шести синтетических owners без отправок. Четыре общих слота — исторический промежуточный вариант, не требуемое поведение.
+
+При остановке проверять stop flag вместе с идентичностью job_id; отдельно проверять replaced/foreign job и реальные исключения. После сборки из overlay сверять содержимое затронутых файлов с каноническим репозиторием, а также сохранность недавних релизов: healthy не доказывает наличие нужной версии отчёта.
+
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/elastic-users-20261016/EVIDENCE.md`, `C:/Users/admin/Desktop/Project/outputs/parallel-stop-20261016/EVIDENCE.md`, `C:/Users/admin/Desktop/Project/outputs/baza-reconcile-20261016/runtime-files.txt`.
+
 Короткий канонический маршрут для задач, где основной объект работы: `Autolead`.
 
 Используется вместе с `[[01_Правила/ИИ/Workflow Codex для дебага и разработки]]`, а не вместо него.
@@ -29,7 +37,7 @@
    - конкретный контейнер
    - один targeted test
 5. После фикса проверять не только `admin`, но и обычный user-контур.
-6. После нового знания обновлять wiki и синхронизировать `baza`.
+6. После нового знания обновлять каноническую `baza`; GitHub-синхронизация — по отдельному запросу.
 
 ## Инварианты Autolead
 
@@ -72,11 +80,11 @@
 
 - первопричина локализована;
 - исправление проверено на общем owner-контуре;
-- server repo commit/push выполнен;
-- GitHub checks зелёные;
+- локальный server repo commit выполнен при изменении кода;
+- push и GitHub checks подтверждены только при отдельно выбранном GitHub-контуре;
 - live runtime healthy;
 - wiki обновлена;
-- `baza` синхронизирована.
+- GitHub-синхронизация `baza` выполнена только при отдельном запросе.
 
 ## Связанные заметки
 
@@ -115,3 +123,37 @@
 Инварианты подтверждены целевыми тестами patch b4d6ea169; live deploy ещё pending.
 
 Доказательства: `C:/Users/admin/Desktop/Project/outputs/high-fixes-telegram-20261007/EVIDENCE.md`. PR: https://github.com/sergkuz219034-boop/TrafficHub/pull/257.
+
+## Согласование production-контура — 2026-10-08
+
+Обычная порученная правка следует прямому production-контуру общего workflow.
+Полный suite — только по явному запросу; проверки выбираются по изменённому
+поведению и зависимостям. Доказательства: C:/Users/admin/Desktop/Project/outputs/harness-fix-20261008/completion-check.md.
+
+
+## Проверка нового аккаунта и границ владельца — 2026-10-13
+
+- Для личных данных проверять owner и tenant также у роли Admin; роль сама по себе не разрешает чтение чужого кабинета.
+- При совпадении логина со старыми runtime-записями проверять дату регистрации текущего `users` identity. Записи до неё не должны автоматически переходить новому аккаунту. Для legacy Autolead действует `utils/owner_epoch.py`; для Telegram — `utils/telegram_ownership.py`.
+- Новый профиль явно начинает с `enabled=false` для Работа.ру, HH.ru, SuperJob и Avito; расписание и Google Sheets выключены. Существующие явные настройки сохранять.
+- Проверять списки, прямые ID, экспорт, агрегаты и запоздавшие ответы UI. Персональные API-ответы имеют `Cache-Control: private, no-store`.
+
+Проверено 2026-10-13, app `be8bacc15f75b677480b6ecc95b9c93ff73caa36`. Источники: `/root/TrafficHub/{services/leads_service.py,traffic_hub/api/ownership.py,utils/owner_epoch.py,utils/telegram_ownership.py,api/server.py}`; доказательства `C:/Users/admin/Desktop/Project/outputs/messenger-isolation-20261013/` (`tests.log`, `epoch-pg.log`, `live-smoke.json`, `export-safety.json`). Worker обновлён 2026-10-13 после явно разрешённой штатной остановки alex и admin; healthy, worker-isolation-smoke.json PASS. Связано: [[02_Код/Код/Бэкенд]], [[03_Ошибки/Отладка/Каталог ошибок]].
+
+## RU — канонический исполнитель анкет для всех пользователей — 2026-10-13
+
+Прямое требование пользователя: исполнение анкет должно идти через RU у всех текущих и будущих пользователей. Production использует `REMOTE_AUTOLEAD_ENABLED=true`, `REMOTE_AUTOLEAD_OWNERS=*`; ограничения двумя логинами отменены. При восстановлении конфигурации и выпуске новых образов сохранять wildcard и проверять общий owner-контур. Owner/tenant, подпись, lease, остановка и защита повторной отправки обязательны.
+
+Проверено в app и worker: admin, обычный и будущий owner разрешены; пустой owner запрещён. RU offer worker running, публичный health ok, app/worker healthy. Обнаружено и исправлено расхождение: прежний worker не поддерживал wildcard. Узкий производный образ сохраняет его baseline и меняет только `enabled_for`. Коммиты `2df5c0c95`, `13bda344f38192b30f61a963e998a8527758e03f`. При проверке анкеты не отправлялись.
+
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/ru-forms-all-users-20261013/live-smoke.txt`; сервер `/root/TrafficHub/deploy/ru-all-users-20261013/`. Связано: [[02_Код/Эксплуатация/Конфигурация]].
+
+## Удаление отдельной ежедневной проверки HH — 2026-10-13
+
+Пользователь уточнил: «HH.ru · ежедневная проверку мы убирали». Этот отдельный daily/resume механизм не возвращать под новым названием. Сохранять обычный owner-scoped импорт HH и полный цикл. Проверка2026-10-13 выявила расхождение требования и runtime: admin flag всё ещё true, callbacks daily/resume остаются. Удаление не считать завершённым; H-01 в [[03_Ошибки/Расследования/2026-10-13 Аудит TrafficHub и прогрев на эмуляторе]]. Доказательство: C:/Users/admin/Desktop/Project/outputs/project-audit-emulator-20261013/hh-retired-check.txt.
+
+## Параллельная работа пользователей — 2026-10-14
+Прямое требование пользователя в текущем чате: все существующие и новые пользователи должны работать одновременно с другими. Общий worker запускает независимые owner subprocesses (`WORKER_MAX_PARALLEL_OWNERS=0`), RU routing использует `REMOTE_AUTOLEAD_OWNERS=*`, без ручного добавления логинов. Это не отменяет owner isolation, один job на owner, quota/rate limits, bounded внешние consumer ресурсы и защиту одинакового HH менеджера. Restart recovery не должен возвращать в очередь/сбрасывать задачу со свежим heartbeat другого worker. Подтверждение runtime и 13 целевых tests: `C:/Users/admin/Desktop/Project/outputs/hh-one-second-20261014/EVIDENCE.md`; commit187a79324. Legacydispatcher с текущимAlex пока сохранён; единый физический контейнер не является требованием пользователя.
+
+## Каноническая дата собранных лидов — 2026-10-14
+По прямому указанию пользователя «должна быть везде только Текущая дата сбора» новые HH и Работа.ру строки (отклики и автофит) должны получать в колонке «Дата» текущий день сбора по Москве. Дата отклика/создания резюме и выбранный исторический период не заменяют этот день. Исходные timestamps сохраняются в служебных данных; период запроса источников остаётся отдельным параметром. Это не поручение массово переписать исторические строки. Реализация: общий `utils/data_processor.py::collection_date`, HH `_lead_from_resume`; commit1a5876217. Проверено81targetedtests иorigin/RURabotaruntime. Evidence `C:/Users/admin/Desktop/Project/outputs/collection-date-20261014/EVIDENCE.md`.

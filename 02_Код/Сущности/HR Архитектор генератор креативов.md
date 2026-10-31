@@ -1,50 +1,26 @@
-# HR Архитектор — генератор креативов
+# HR Архитектор — Creative Creator
 
-## Назначение
-
-Отдельный workspace Account Manager для генерации текстов вакансий через OpenRouter. Не является частью `Telegram HR Agent`.
+Проверено 2026-10-11. В TrafficHub восстановлена вкладка «Автоматизация» (`#automation`) с Creative Creator, адаптированным из проекта hr-architect. Старый Content Bot в этой вкладке заменён.
 
 ## Точки входа
 
-- UI: `/root/TrafficHub/AccountManager/dashboard/index.html`, `data-tab="hr-architect"`.
-- Frontend: `/root/TrafficHub/AccountManager/dashboard/app.js::generateHrCreatives()`.
-- API: `POST /api/hr-architect/generate`.
-- Router: `/root/TrafficHub/AccountManager/api/routers/hr_architect.py`.
+- UI: `/root/TrafficHub/dashboard/index.html`, `#tab-automation`.
+- Frontend: `/root/TrafficHub/dashboard/app.js::generateCreative()`.
+- Стили: `/root/TrafficHub/dashboard/creative-creator.css`.
+- API: `POST /api/creative-creator/generate`, `/root/TrafficHub/api/routers/creative_creator.py`.
 
-## Контракт
+## Возможности
 
-Вход:
+Рекламный креатив, вакансия, аудит текста, сравнение A/B. Бриф, аудитория, география, площадка, тон, цель и 1–5 вариантов. Для рекламы: угол, хук, заголовок, текст, короткая версия, CTA, идея визуала и сценарий видео. Это текстовый генератор; изображения и видео не создаются.
 
-- вакансия;
-- целевая аудитория;
-- только подтверждённые условия и преимущества;
-- канал: Telegram, VK, Avito, hh.ru или универсальный;
-- тон: дружелюбный, экспертный, энергичный или лаконичный;
-- цель и количество вариантов от 1 до 5.
+Промпт запрещает выдуманные условия, зарплаты, отзывы, скидки и гарантии. Аудит и A/B дают редакционные гипотезы, а не измеренные результаты кампании. Старые инструкции hr-architect по маскировке условий не перенесены.
 
-Выход каждого варианта:
+## Провайдер и безопасность
 
-- `title`;
-- `text`;
-- `cta`;
-- `short_text`.
+По умолчанию используется настроенный серверный Codex Gateway, если есть его credential; иначе OpenRouter. `CREATIVE_CREATOR_PROVIDER` и `CREATIVE_CREATOR_MODEL` переопределяют выбор. Общий resolver `/root/TrafficHub/traffic_hub/hr_agent/providers.py`. Ответ ограничен 2000 токенами — контракт gateway; большие брифы/пять вариантов могут давать более краткий результат.
 
-## OpenRouter
+Требуется авторизованная роль user/admin; operator запрещён, анонимный запрос получает 401. Ключи только на сервере. Текст выводится через textContent. Бриф и результат не записываются в БД, сохраняются в текущем DOM до перезагрузки. Публикация вручную после проверки фактов.
 
-- Credential: env `OPENROUTER_API_KEY`, только server-side.
-- Model env: `HR_ARCHITECT_OPENROUTER_MODEL`.
-- Default model: `openai/gpt-4.1-mini`.
-- Endpoint: `https://openrouter.ai/api/v1/chat/completions`.
-- JSON response обязателен; пустой/невалидный ответ возвращает `502`.
+## Доказательства
 
-## Безопасность и хранение
-
-- Endpoint требует `request.state.username`, установленный auth middleware Account Manager.
-- Ключ не попадает в HTML/JS/API response.
-- Промт запрещает выдумывать зарплату, график, оформление и обязанности, но результат всё равно требует человеческой проверки перед публикацией.
-- Вход и результаты не сохраняются в БД; история существует только в текущем DOM до перезагрузки страницы.
-
-## Связи
-
-- [[03_Ошибки/Расследования/2026-07-16 AccountManager вкладка HR Архитектор]]
-- [[03_Ошибки/Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]]
+`C:/Users/admin/Desktop/Project/outputs/creative-creator-20261011/EVIDENCE.md`; сервер `/home/codex/creative-creator-20261011/`. 7 целевых тестов, реальные браузерные проверки тем и ширин 390/1440, живая генерация рекламного текста. Исходные резервные копии и app image.before в серверном evidence. Worker не перезапускался.

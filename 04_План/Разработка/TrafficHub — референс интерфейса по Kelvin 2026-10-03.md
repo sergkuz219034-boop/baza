@@ -101,6 +101,88 @@ keep: logo-checks.json, 88 screen/theme cases — 0 overflow, missingassets, geo
 Live browser: меню действительно раскрывает «Выгрузка»/«Рассылка», Escape возвращает фокус, overflow отсутствует, console errors нет. Публичная регистрация проверена в обеих темах; формы активации и реальные задания на проде не отправлялись. Доказательства: `C:/Users/admin/Desktop/Project/outputs/ui-actions-auth-release-20261004/runtime-proof.txt`, `public-proof.txt`, `production-menu.jpg`, `production-register-light.jpg`, `production-register-dark.jpg`; команды `verify-runtime.sh`, `verify-public.py`. Server outbound TLS probe однажды завершился timeout; публичная проверка выполнена с клиентского компьютера и реальным браузером. Локальный screenshot login соответствует тем же проверенным auth файлам.
 
 
+## 2026-10-07 — спокойная полоска полного цикла (готово к релизу)
+
+Проверен серверный baseline `ccd9ba5a9ecc05d2c617198cb3788e1b6e867bdb`: `dashboard/brand-theme.css:47` использует `job-progress-travel 1.8s`. Подготовлена изолированная локальная правка до 6s с сохранением ease-in-out и reduced-motion. Chromium smoke CSS: dark/light, 390/1920 px — 6s; reduced-motion — animation none. Production не изменён; требуется разрешение на release по workflow. Доказательства: `C:/Users/admin/Desktop/Project/TrafficHub/dashboard/brand-theme.css:66`, `TrafficHub/harness/state/receipts/progress-calm-20261007-verify.json`.
+
+2026-10-07: пользователь разрешил release, затем явно потребовал сохранить текущий полный цикл. Правка commit `f7efbc411da70f8e85ca0580dad532ebe333e859` запушена; актуальный кандидат `fb5e91358a0c921b99b046ef22b45c2e1d8b74ae` содержит её. Build success. Deploy run `37666253337` отменён на стадии Verify release candidate до перезапусков. App/worker сохраняют StartedAt `2026-10-07T14:59:52Z` и image `ccd9ba5a9ecc05d2c617198cb3788e1b6e867bdb`; maintenance off; Redis admin status running. Выпуск отложен ради сохранения активных циклов.
+
+## 2026-10-08 — очередь текущего чата и проверка выполнения
+
+Пользователь потребовал сохранять предыдущие задачи в очереди. Read-only сверка текущего `/root/TrafficHub` HEAD `2c7ea0ce52b9ffdf7c4687eedddcd383e55e7a36` и evidence: favicon двухдоменов совпадает, общий landingstyle/moonrotation/textengravingspreserved, SVGv2 applied, equalcollapsedgap/settingsinflowlast, APKalphanumeric8/hintКод/Остановить inherited126, AIagentreference+currentcreate/sessionmanagement, Zvonokownerintegration. Доказательства находятся в существующих [[02_Код/Код/Фронтенд]], [[02_Код/Код/Бэкенд]] и `C:/Users/admin/Desktop/Project/outputs/{landing-unification-20261008,traffic-ui-20261008,zvonok-integration-20261008,android-preparation-20261008,telegram-mailing-login-20261008}/`.
+
+Завершён текущий выпуск: автоматическая проверка аккаунта доAndroidwarmup, softdeviceDELETE, APK126Назад+publicupdates, notificationprefs, alignedgrid/devicepanel, visibleTelegramlogin/headerdeviceCTA. Apphealthyworkerunchanged. РеальныйadminSM-G998B на последнейreadonlyпроверкеoffline; не считатьphysicalwarmup/delivery/install проверенными.
+
+Открыто: SMSadapter SMS.RU готовится, выборпровайдера заданпользователю; ключнепредоставлен, realpaidSMS не запускать. Уведомления обответах сейчас покрываютHRinbound (personalTelegram/Android), не отслеживаниеответов именноTelethonmailing. ПолнаяfeatureparityKelvin не доказана; не объявлятьеёдостигнутой. ФизическийAndroidQA остаётсяневыполненным (ADBinstallclosed). Новые usersteering сохранятьвэтойочереди, не заменятьими предыдущуюавторизованнуюработу.
+
+
+## Проверено 2026-10-08 — СМС и Android 127
+
+В production выпущен commit `cb2ca35d9f80fa41b6c6b240b54d10c58f06ae68`.
+Раздел «Рассылка → СМС» подключён к owner-scoped SMS.RU API: зашифрованное
+подключение, черновики до 100 получателей, расчёт стоимости с ограниченным
+сроком действия, явное подтверждение одной отправки, обновление статусов.
+При неизвестном результате повторная отправка блокируется. Реальные СМС
+не отправлялись; без пользовательского ключа подключение не настроено.
+Лимит проверяется перед отправкой, но API провайдера не гарантирует
+транзакционный потолок цены. APK 127 сохраняет сертификат APK 126 и заменяет
+векторный знак рабочего состояния на ракету. Установка в BlueStacks не проверена.
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/sms-integration-20261008/`
+(`deploy.log`, `tests.txt`, `ui-edge-verification.json`, `live-smoke.txt`,
+`live-sms-dark.png`, `live-sms-light.png`),
+`C:/Users/admin/Desktop/Project/outputs/android-rocket-20261008/verification.json`.
+
+Осталось подтвердить на физическом устройстве запуск прогрева, установку и переход назад. Полный паритет Kelvin не подтверждён. Уведомления об ответах пока относятся к HR-агенту, отдельное отслеживание ответов Telethon-рассылки остаётся открытым пунктом.
+
+
+## Проверено 2026-10-08 — общий проход вкладок
+
+Production `f6178e7ca3393b81da0cb60ac75736a6ccc2d096` добавляет
+`dashboard/dashboard-polish.css`: общий размер заголовков, пояснений, полей и
+кнопок, перенос панели действий, читаемые пустые состояния, прокрутку таблиц,
+видимый клавиатурный фокус и мобильную компоновку. Автоматизация получила SVG
+вместо текстовых значков и одноколоночную форму публикации. Настройки сохраняют
+один заголовок и компактную панель действий. Функции и обработчики сохранены.
+Проверены статические каркасы 21 панели в обеих темах на 1440/390 px и переходы
+по всем 14 пунктам меню на проде: desktop dark, mobile light 390 px; переполнение
+страницы отсутствует. Это UI-проверка, а не полный прогон бизнес-сценариев.
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/all-tabs-polish-20261008/`
+(`inspection.json`, `live-tabs.json`, `live-mobile.json`, `deploy.log`,
+`confirmation-deploy.log`, `live-settings-desktop.png`). Inter сохранён по
+утверждённой системе TrafficHub; предупреждение детектора о популярности шрифта
+не является дефектом текущего визуального контракта.
+
+
+## Android: подготовленный редизайн — 2026-10-08
+
+Подготовлен кандидат APK128 и нативный слой оформления TrafficHub: адаптивная ширина, семантическая тёмная тема, читаемые переключатели и компактный знак состояния. Сборка, прежняя подпись, кириллица и неизменность существующих обработчиков проверены. Канал обновления остаётся на APK127: установка в BlueStacks через ADB завершается closed, нативные screenshots128 отсутствуют. Следующий обязательный шаг — установка и visual QA телефона/широкого окна, обеих тем и font scale1.3; затем прямой production release. Это открытая задача, не завершённый редизайн.
+
+Доказательства: C:/Users/admin/Desktop/Project/outputs/android-redesign-20261008/EVIDENCE.md, RESEARCH.md, verification.json, targeted-checks.json. Серверный draft commit cda3c6384ccd10a921430cb70344ff9ca00c533b; worktree /home/codex/android-redesign-20261008/worktree. Предыдущая очередь задач сохраняется.
+
+
+### Android: явный выбор темы — 2026-10-08
+
+Опубликован APK129: вверху Настроек появился пункт «Тема приложения» с вариантами «Как в системе», «Светлая», «Тёмная». Предпочтение хранится отдельно в traffic_ui/theme и применяется сразу через нативный UI слой. Оформление логотипа и системных панелей учитывает выбранную тему. Подпись прежняя, существующие обработчики подключения/работы не менялись. Компиляция/декодирование APK и public manifest/hash/health обоих доменов проверены; native visual QA129 остаётся pending (ADB transfer closed). Production commit080432090; доказательства C:/Users/admin/Desktop/Project/outputs/android-theme-20261008/{verification.json,targeted-checks.json,live-checks.json}; rollback /home/codex/android-theme-20261008/rollback.
+
+
+## Android-прогрев: расписание и подтверждение аккаунта — проверено 2026-10-09
+
+Production commit `7cf45fe5d6de7559f2254424061fec42defff04c` (функциональная правка `64cc37044564564243331ed98d650dc91b90a28d`) опубликован напрямую из `/root/TrafficHub` без GitHub. В Рассылке длительность заменена на дни недели, время начала/окончания и IANA timezone. Расписание по умолчанию выключено; действует только после явного сохранения пользователем. При ready device материализуется на polling `/api/device/warmup/claim`, без новой миграции/демона; хранится owner-scoped в Binding.extra_config.android_warmup_schedules по device ID. Для длинного окна внутренние reading-only сессии до600с, по одному slot; queued/leased, завершённый slot и needs_review/failed/cancelled в данном окне исключают повторный автоматический запуск. Выключение останавливает только scheduled warmup, рассылки не затрагивает. Lease timeout scheduled job становится needs_review. Overnight учитывает день начала окна. Claim-time deadline больше не расходует бюджет на ожидание в очереди. Unsaved form fields не сбрасываются polling каждые5с.
+
+Подтверждённый симптом admin/device3: jobs1/2 закончились account_menu_requested_account_not_present, senderVerified=false, accountCandidates1; actual accountPhone в heartbeat отсутствует. Это отказ проверки аккаунта, но НЕ доказательство причины несовпадения. Пользователь сообщил, что не знает выбранный Telegram-аккаунт. APK130 расширяет парсер для строгих phone labels и accessibility descriptions; Settings capture требует ожидаемый Telegram package, все три Settings-маркера и единственный номер, неоднозначность отклоняется. Требование actual sender proof не снято. Сохранён native UI129, включая ручной выбор темы; прежняя signing identity. На момент smoke устройство online с APK129, sender_detected=false, schedule_enabled=false. Фактический запуск прогрева после установки130 НЕ подтверждён; требуется установка обновления и проверка номера/расписания на телефоне.
+
+Проверки:35 targeted tests PASS, включая собственный временный PostgreSQL16 контейнер для race regression (удалён после проверки; production DB не использовалась);16 identity JVM fixtures PASS, включая known labels, descriptions, wrong phone, wrong package и ambiguity;4 dark/light 1440/390 browser fixtures PASS, save/disable, no overflow, unsaved polling preservation. JS/Python syntax, APK decode/version130/signature, public manifest/hash/size838952 на обоих доменах, both healthok; source/runtime hashes match, worker unchanged. Native installation/visual execution130 не проверены из-за недоступного локального ADB transfer. CUA подтвердил в public HTML7 day inputs, отсутствие duration selector и app.js20261009; приватный экран в новом browser session требует login. Обычный reload сначала показывал cached HTML; URL с version query получил новую версию.
+
+Доказательства: `C:/Users/admin/Desktop/Project/outputs/android-warmup-schedule-20261009/` — observe.log, identity-observe.log, device-smoke.log, test.log, ui-checks.json, native-checks.json, apk-proof.json, decode.log, live-checks.json, live-runtime.log, deploy.log, formatting-deploy.log. APK SHA256 `adec6cc96822897642e9f963dd984cd99f2ab4a60b6aaf5bd95dec80a62133eb`. Rollback `/home/codex/android-warmup-schedule-20261009/rollback`, исходный image90f85e01 retained; повторный deploy менял только сохранение исходных line endings HTML. Финальный curl второго deploy timed out один раз, независимые public проверки прошли. Никакие production расписания не включались, задания/сообщения/звонки/SMS не отправлялись. Старые задачи очереди, включая Telethon reply tracking и physical Kelvin parity, остаются в плане.
+
+
+### Дополнение: DST и безусловное выключение — проверено 2026-10-09
+
+Финальный production commit `b37e03fdfd0fc150eb5e025b9b37ad0953591f16` сравнивает границы расписания как UTC instants: gap/fold в IANA timezone не создают отрицательные slots и не прерывают активное окно при повторении часа. Выключить расписание можно даже при пустом списке дней и одинаковом времени в редактируемой форме; такие значения по-прежнему запрещены при enabled=true. Новая версия JS cache key20261009-warmup-schedule-v2. 38 scoped tests PASS (включая PostgreSQL concurrency, DST gap/fold и disabled incomplete form),4 browser theme/width checks и disable interaction PASS. CUA live DOM:7 day inputs, start/end type=time, duration отсутствует, scriptv2; приватная визуальная проверка требует browser login. APK130 не менялся; оба домена подтверждают hash/size, healthok, source/runtime hashes match, worker unchanged. Независимый public smoke после одного локального SSL EOF повторился успешно с обычной TLS проверкой.
+
+Device3 в последней проверке по-прежнему online/APK129, sender_detected=false, schedule_enabled=false. Нативный запуск после установки130 остаётся открытым, основная workstream `android-warmup-schedule-20261009` остаётся REVIEW. Workstream точечных server/UI edge cases `android-warmup-schedule-edges-20261009` завершена. Доказательства: `C:/Users/admin/Desktop/Project/outputs/android-warmup-schedule-20261009/{test.log,ui-checks.json,live-dom-check.json,live-checks.json,live-runtime.log,device-smoke.log,edges-deploy.log}`; rollback edge release `/home/codex/android-warmup-schedule-edges-20261009/rollback`, image7cf45fe retained. Общий исходный rollback90f85e сохранён отдельно.
+
+
 ## Сохранённая очередь пользователя — 2026-10-10
 
 Не считать всю очередь закрытой по завершении отдельного исправления. Текущие подтверждения: Rabota network route исправлен (`7bfc969c2`), настоящий OAuth токен требует свежего кода. X5 walking принят, СМЗ YES правило выпущено (`c5b988e77`), screenshot опубликован. Ручной прогон 9 заявок не доказывает массовую стабильность каждого пресета.
@@ -116,3 +198,28 @@ Live browser: меню действительно раскрывает «Выг�
 - Визуальные требования лендингов/вкладок, favicon, темы, sidebar/icons/fonts, скрытие переменных/Черновик и play/restart сверить по live smoke существующих выпусков; не переписывать подтверждённое без нового дефекта. Focus Group dark исправлен ранее.
 
 Источники текущих фактов: `outputs/rabota-token-20261009/`, `outputs/x5-smz-20261009/`, ранее существующие доказательства в этой странице. Не запрашивать SSH реквизиты повторно: использовать канонический приватный файл, не копировать секреты в wiki.
+
+## 2026-10-11 — визуальные референсы 13 вкладок
+Подготовлены 13 imagegen-концептов: `C:/Users/admin/Desktop/Project/outputs/tab-references-20261011/index.html`; исходные промпты и manifest находятся в той же папке, архив `TrafficHub-13-references.zip`. Это визуальные варианты с примерными данными, не утверждённый интерфейс и не доказательство функциональной полноты. Production не изменялся.
+Уточнение пользователя: улучшать расположение каждого существующего элемента без потери функционала. При реализации сохранять текущие поля, действия, обработчики и состояния; картинки не использовать как полный функциональный контракт. Проверка исходника `outputs/device-pairing-ui-20261011/index.html` выявляет обязательные элементы, которые могут отсутствовать на концептах: импорт/экспорт офферов, подключение Telegram и устройств, прогрев, транспорт рассылки, спинтакс, пауза, Codex Gateway/DeepSeek/OpenRouter и ключи. Эти элементы нельзя удалять ради компоновки.
+
+## 2026-10-11 — исправление направления: доработка существующего интерфейса
+По уточнению пользователя референсы должны основываться на существующем интерфейсе, улучшать расположение каждого элемента без потери функционала. Первые самостоятельные концепты не использовать как направление замены визуального мира.
+Новый комплект: `C:/Users/admin/Desktop/Project/outputs/tab-refinements-20261011/index.html`, 13 пар «реальный экран → imagegen-доработка», `manifest.json` содержит edit-target и задания, `controls-inventory.json` — исходные элементы. Снимки сняты из authenticated кабинета 2026-10-11; production не изменялся. Семь экранов прошли дополнительное исправление пропущенных кнопок и выдуманных данных/действий. Доказательства ограничены компоновкой видимой области: картинки не доказывают работоспособность функций и точность всех мелких надписей. При реализации сохранять реальные обработчики, маршруты, поля и состояния из исходников; не копировать выдуманные элементы imagegen.
+
+### Пул рассылки и физическая проверка прогрева — 2026-10-13
+
+Добавлен пул проверенных телефонов на выбранных собственных устройствах для обычной Android-рассылки; отдельный accountPhone в каждой задаче, сохранение в owner-scoped schedule JSON без миграции. Дневные резервации и фактическая проверка отправителя сохраняются. Пустые галочки не восстанавливаются при обновлении UI. Серверные коммиты e238fb4b1/9e2ff0017; 31 целевой тест PASS, browser interaction/theme/mobile smoke PASS.
+
+Физическая проверка admin на APK144/Telegram13.0.2: job24 подтвердил аккаунт, но завершился за18сек needs_review/channels_folder_tab_missing без чтения каналов. APK146 fb7e30100 добавляет ограниченный fallback поиска верхней вкладки и семантические Back/scroll с конечными лимитами; 8 JVM fixtures PASS, прежняя подпись. Работа146 на телефоне пока не подтверждена. Полная эквивалентность Kelvin, client_roster и work profiles пока не реализованы.
+
+Доказательства: C:/Users/admin/Desktop/Project/outputs/kelvin-pool-20261013/{EVIDENCE.md,tests-final.txt,warmup-status.txt,pool-mobile-light.png,proof146.json}; точный референс ../account-selection-20261013/kelvin-reference.
+
+## Перенос Kelvin142 — кандидат159, 2026-10-26
+
+По запросу «добавь все полезные новшества» подготовлен и установлен только на тестовый TrafficHub_TG_02 APK159 с текущей production-подписью. Готовые кандидаты: durable claimId + серверный receipt patch, bounded connecting recovery, структурная проверка пустого чата, retiming входящих Telegram notifications, read-only resume с lease/stop/arm/scope guards. 57 Android assertions PASS;13backend fixture tests PASS. Кандидат не опубликован, canonical server source не изменён, server commit/deploy отсутствуют: SSH/HTTPS relay/direct перестали подключаться. Блокер не означает доказанный outage приложения. Прежний TrafficHub_API30 имеет156 с другой подписью; данные сохранены, он выключен; используется один TG_02.
+
+Задача не завершена. После восстановления SSH: сверить baseline /root/TrafficHub, применить и проверить server patch; завершить comments job/authorization/exact thread proof/client/UI, connection diagnostics и alias/accountName changes; проверить реальное read-only process resume/claim loss на изолированном стенде; затем commit/deploy/internal+public smoke и закрытие Harness kelvin-port-20261026. Не выдавать fixture tests/кандидат159 за production релиз. Доказательства и воспроизводимые исходники: C:/Users/admin/Desktop/Project/outputs/kelvin-port-20261026/EVIDENCE.md.
+
+2026-10-26 14:48 MSK — Повтор доступа неуспешен: RU SSH работает, direct/relay/WG jump до DE не получают banner; последний WG handshake03:11, public health502, reverse listeners отсутствуют. Текущее состояние VPS в панели не подтверждено. Подробности outputs/kelvin-port-20261026/EVIDENCE.md. Перенос159 остаётся неопубликованным; production не изменён.
+

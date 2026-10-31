@@ -159,3 +159,34 @@ checks ещё выполняются. Production без deploy/cleanup, health o
 Проверено: immutable production main `1b7306ee1dbef0ca075f53f331e860913fc71442`, PR257/258 merged, app/worker healthy, публичный health200, worker heartbeat ok, maintenance off. Android подключается кодом и необязательным названием, номер в форме отсутствует; APK120 сообщает аккаунт из собственных настроек Telegram, проверка отправителя сохранена. После подключения открыть настройки Telegram один раз. Физическая отправка с Android не проверена. Целевые API12 и APK identity11 проверок прошли; CI обеих PR green. RU image `traffichub-ru-autolead:high-fixes-20261007` running/notpaused.
 Очищены6632 завершённых HH результата только после полного gzip backup; Redis329MB/512MB noeviction, container768MB, worker concurrency1. Старый AOF при загрузке требовал временного увеличения памяти; BGREWRITEAOF успешно завершён, лимит восстановлен. Disk92→84%; активные volumes, данные, сессии и rollback images сохранены.
 Доказательства: `C:/Users/admin/Desktop/Project/outputs/high-fixes-telegram-20261007/EVIDENCE.md`, `outputs/android-code-pairing-20261007/RELEASE.md`, `verification.json`, `code-pairing-mobile.jpg`; сервер backup `/root/TrafficHub/data/backups/high-fixes-telegram-20261007/`, RU `/root/high-fixes-20261007/`. Medium/low аудит и общая типографика остаются отдельным объёмом.
+
+
+## Повторная проверка всех серверных проектов — 2026-10-12
+
+Проверены текущие origin TrafficHub и RU проекты, исходники и runtime. Baseline TrafficHub1f26d940c990031c77e7e75deea03f4311aca601,787tracked. Полный suite не запускался. Итог всего доступного контура: critical0, high5 (Kwork локализован остановкой), medium11, low5; детали и границы `C:/Users/admin/Desktop/Project/outputs/all-server-audit-20261012/AUDIT.md`. Legacy Reg.ru не проверен: SSH закрывается до входа, реквизитов в canonical private file нет.
+
+Старые H1–H4 имеют auth/stop/daily/history guards и не повторяются как прежние дефекты. Новый high: uncertain отправки не записываются автоматически в quarantine; новые задачи могут повторить анкету, если внешняя отправка произошла без записанного journal. Dummy actual-function reproduction подтверждает eligibility; реальные дубли не установлены. Ранее ручной quarantine25 анкет защищает старую выборку, но не новые uncertain результаты. Source/runtime mapping проверен: auth/config6файлов совпадают с app, remote queue app имеет более старый код с теми же terminal-race/uncertain проблемами.
+
+Runtime high: Kwork24OOM за24h/77restarts; origin backup timer disabled/inactive и полного dump в предусмотренном каталоге нет; Focus latest found DB backup2026-09-28; RU2403HTTP502 за24h. Причины всех502/роста памяти не установлены; external backup неизвестен. JWT/multi-tenant/lost updates/owner fallback/integration split-store перепроверены и остаются открытыми. Terminal completion race воспроизведена на dummy Redis.
+
+Пользователь «Kwork-парсер выключай»: clean stopexit0,restart=no; compose profilekwork/default excluded,scheduler=false. Server commitff513fbd0d39caab4adb1ba6752fe829c3f93925,repo clean,APIhealth200,основные serviceshealthy. Данные не удалены, другие приложения не пересоздавались. Отключение локализует нагрузку, не чинит memory-growth причину.
+
+Проверки:470PythonAST,23JS,13shell clean;pipcheck3PASS;Harness19PASS;diffcheck/ComposePASS;publicTLS/HTTP и выборочный browserSmoke. Доказательства `C:/Users/admin/Desktop/Project/outputs/all-server-audit-20261012/origin-source/FINDINGS.md`, `repro.txt`, `source-runtime-map.txt`, `app-remote-check.txt`, `stop-kwork.txt`, `disable-kwork.txt`, `origin-final-runtime.txt`, `ru/REPORT.md`, `browser-checks.md`.
+
+
+## 2026-10-12 — порученные HIGH исправления опубликованы
+
+H1локализованKworkoff(причинаmemorygrowthнечинилась);H2recoverabilitydump/globals+actualPGrestore78tables+encryptedRUcopy, ONLYbefore-risk по прямомуответуuser безdaily;H3Focusdaily03:45+actualSQLite61tables+encryptedorigin;H4исправленkeepalive2mvsupstream5s→2s/10sна4routes,61/61health200/10min. Неутверждатьединуюпричинувсехисторических2403: были48backendrefusals/возможныкраткиеразрывыdeploy. H5новыеuncertainавтоматическиquarantineatomicCAS;claimafterqueueholdзащищён,terminalraceисправлена. Source4863b465d,liveappworkerhealthy/sourcehashmatch;60checksPASSpostrelease. Поuserapprovalостановленactivecycle;старые25heldсохранены. OriginHEAD365bef307clean;низкие/прочиесредниеостаютсяотдельными. Disk90%≈12ГБfree,doctorcapacityflagсохранён,cleanupнесогласован/невыполнен. Подробныйstatus/rollback/proof `C:/Users/admin/Desktop/Project/outputs/high-server-fixes-20261012/EVIDENCE.md`.
+
+
+## 2026-10-12 — MEDIUM результат
+
+10из11пунктовисправлены/проверены. M-C1 ужеHIGHfixed/queuechecksповторены;M-C2/3JWTrevocablepurpose+tenantchoice,M-C4changedpatchtransactionlocks,M-C5ownerfailclosed,M-C6profilecanonicalcredentialwriter/legacyclear-safe. M-R1RUkeyonly,M-R3Telegramreauth,M-R4privacylogging,M-R5allactivecontainerrotation. M-R2backend/TLShealthy,publicDNSзависитотuserAfinance77.91.115.22 (добавляетсам). Combinedimage130PASS6skip,actualPG/Redis,functionalscan,19Harness,sourcehash/livehealthy. HEAD6962ddf65clean/runtime2ab91d494. Старыеcopy/holds/dataсохранены; cyclesstoppedсразрешением. PendingDNSnotclosed. Details/rollback `C:/Users/admin/Desktop/Project/outputs/medium-server-fixes-20261012/EVIDENCE.md`.
+
+## Дополнение 2026-10-24: Compose и очередь заданий
+
+Предыдущая чистка незакоммиченных файлов ошибочно архивировала 15 Compose override файлов, на которые продолжал ссылаться production `COMPOSE_FILE`. 24.10.2026 они восстановлены из архива и внесены в `/root/TrafficHub` (`2f6ea5e24`); `docker compose config --quiet` снова успешен. `deploy/doctor.sh` ранее скрывал ошибку Compose из-за pipeline, исправлен (`3d278cbb4`). Межпроцессная гонка обновления Redis-состояния owner job исправлена lock в `traffic_hub/services/job_queue.py` и `traffic_hub/services/job_runner.py` (`b6826979f`). App/worker выпущены вместе, smoke healthy. Доказательства: `C:/Users/admin/Desktop/Project/outputs/project-audit-20261024/EVIDENCE.md`.
+
+## Проверка защиты от перебора — 2026-10-24
+
+SSH на production допускает только publickey, root/password/keyboard-interactive отключены, Fail2Ban `sshd` активен. За 24 часа видны многочисленные неуспешные/незавершённые SSH соединения, успешных password входов не найдено. Веб-защита неполна: limiter 5 ошибок/60с действует только на `/auth/login` и `/api/auth/login`; альтернативные проверки пароля в `/traffic-api/auth/login`, HTTP Basic и license auth gateway обходят его. Отдельный gateway принимает TLS Host/SNI через Caddy, хотя DNS-имя из текущих точек не разрешилось. Исправление требует единого Redis-лимита и согласованного выпуска app/gateway; до него считать веб-перебор возможным. Read-only evidence: `C:/Users/admin/Desktop/Project/outputs/password-bruteforce-audit-20261024/EVIDENCE.md`.

@@ -70,3 +70,9 @@
 - immutable deploy dashboard через production release-контур.
 
 Проверяемые файлы: `api/hh_oauth.py`, `services/hh_import.py`, `api/routers/jobs.py`, `docker-compose.override.yml`, тесты `tests/test_hh_oauth.py` и `tests/test_hh_import.py`.
+
+## Google Sheets на 2026-10-08
+
+У каждого подключённого владельца используется один workbook: `Все лиды` для очереди и `Выгрузка` для Telegram-результатов с колонками `Телефон`, `Юзернейм ТГ`, `Дата онлайна`. Удалённые дополнительные листы сначала архивируются в gzip JSON в `/root/TrafficHub/data/runtime/backups/legacy-processed-tabs/`; отдельные старые workbook ID не удаляются. После полного цикла запускается owner-scoped фоновый Check-All, только если владелец сохранил API credentials. Запрос к платному API в рамках release-smoke не запускался.
+
+Проверка 2026-10-08: 4 профиля с настроенным workbook мигрированы и сверены по двум именам листов и заголовкам; 2 профиля без основной таблицы пропущены. Runtime `autolead_bot` и `worker` healthy, локальный и публичный `/api/health` — 200, maintenance off. Изменение в server repo: commits `d90f71551fc3bf5ae7ca4c45945a01410021b8bd`, `d2155357768276e757c8830caca13e45fcdf1c09`. Evidence: `C:/Users/admin/Desktop/Project/outputs/traffichub-sheets-single-book-20261008/EVIDENCE.md`.

@@ -51,6 +51,10 @@ PR267/268/269 объединены; app и worker healthy на b49197211448c0764
 Онекта ведёт на VOXYS, Onecta#2/Четыре лапы Disabled, ВкусВилл требует доступа: UI показывает причину, не предлагает нерабочую ссылку как готовую. Получить успешную заявку для этих четырёх маршрутов пока невозможно; preview не является tracking. Источник: C:/Users/admin/Desktop/Project/outputs/remaining-presets-20261007/REPORT.md; deployed resolver подтвердил publisher4536, Ozon available и X5 роли auto/bicycle/walking.
 
 
+## 2026-10-09 runtime verification
+Cycles stopped by user instruction; app/worker dcb52f0b696bbed33617c64775f6384990d36e9b healthy, /api/health OK. Admin RU route applied. 85 targeted preset/handler tests passed. Read-only RU probes found forms for VOXYS, Tetrika (all three role options), Samokat, Yandex Food, Dixy, Ozon, X5 walking and bicycle. Onecta destination remains VOXYS; Onecta #2 and Four Paws Disabled; Vkusvill Lovko 43/149 requires_access. No new applicant POST. Historical thank-you screenshots dated 2026-10-07 are separated from current form checks. Fresh submissions await control candidate details. Evidence: C:/Users/admin/Desktop/Project/outputs/presets-final-20261009/REPORT.md, catalog.json, form-0..11.json/png, tests.log, runtime.log.
+
+
 ## Контроль всех пресетов — 2026-10-09
 
 По прямому указанию пользователя выполнены ограниченные контрольные заявки на разных ещё не отправленных лидах из таблицы admin. Сначала использован подбор по исходной вакансии; по последующему указанию «проверь любым кандидатом» для контроля выбраны другие полные лиды. Фактические города и данные сохранены. Постоянные настройки и включённость офферов пользователя не менялись. Это контроль работоспособности формы, а не доказательство соответствия тестового кандидата вакансии.

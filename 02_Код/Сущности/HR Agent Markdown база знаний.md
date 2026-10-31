@@ -44,3 +44,10 @@ AccountManager create/edit modal содержит textarea и импорт `.md`
 На 2026-07-16 в binding `HR Виктория` загружен `hr_recruiter_sales_playbook.md` длиной 1 917 символов, температура `0,4`. Старый общий шаблон на 6 987 символов устарел: он смешивал сценарий и факты вакансий. Факты теперь нормализованы в шести owner-scoped карточках: три Onecta, две Тетрики и VOXYS.
 
 Связано: [[01_Правила/Решения/Системный промт HR Agent принадлежит binding бота]], [[01_Правила/Решения/Структурированный каталог и sales-машина HR Agent]], [[03_Ошибки/Расследования/2026-07-15 Telegram HR Agent и Business аккаунты]]
+
+## Удаление персонального агента — проверено 2026-10-16
+
+Удаление из настроек помечает конкретный owner/tenant binding как удалённый, выключает его и исключает из списков агентов, каналов и занятости Telegram-аккаунта. Строки binding, диалоги и сохранённая Telegram-сессия остаются; повторное подключение того же аккаунта очищает маркер и восстанавливает binding. Endpoint `DELETE /traffic-api/hr/agents/{binding_id}` защищён `require_admin` и owner/tenant lookup. Проверено тестом owner isolation/history и production browser confirmation/cancel; никакой реальный агент тестом не удалялся. Commit `5d22bf982`; evidence `C:/Users/admin/Desktop/Project/outputs/ai-agent-offers-20261016/EVIDENCE.md`.
+## Согласившиеся кандидаты в CRM-воронке — 2026-10-20
+
+После явного согласия кандидата на выбранную активную вакансию Telegram HR Agent создаёт owner/tenant-scoped лид в статусе «Новый». Идемпотентный ключ привязан к кандидату; воронка администратора получает отдельный список этих лидов с источником Telegram HR и названием вакансии. Старые анкеты автоматически не переносились: их статус не доказывает согласие. Реализация: `traffic_hub/hr_agent/service.py`, `traffic_hub/api/routers/funnels.py`, `dashboard/app.js`; live image/commit `8aaf7d34f2a8afab3145b3e85a0b13bdc342e78e`. Проверка: production health OK, маршрут и клиентский запрос присутствуют в работающем контейнере. Evidence: `C:/Users/admin/Desktop/Project/outputs/consent-funnel-20261020/EVIDENCE.md`.

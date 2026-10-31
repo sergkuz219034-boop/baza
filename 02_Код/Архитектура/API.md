@@ -53,3 +53,23 @@
 - [[02_Код/Код/Бэкенд|Бэкенд]]
 - [[02_Код/Код/Фронтенд|Фронтенд]]
 - [[04_План/Материалы/сырьё/документы/TrafficHub-obsidian/03-API|Архивный API-слой]]
+
+## 2026-10-12 — local JWT sessions и tenant context (source, до deploy)
+
+Server commit `1c7a491e4dbabc280e6b27b7f56fe0ca4c7ef109` разделяет local JWT
+access/refresh через purpose, sid/jti и Redis-backed sessions. Refresh jti
+ротируется CAS; повтор401, logout отзывает session обоих token types,
+store outage503 fail-closed. Legacy typeless local JWT требует повторного входа
+после публикации. External/license authentication paths сохранены.
+Источник: `/root/TrafficHub/traffic_hub/services/local_auth_sessions.py`,
+`traffic_hub/api/routers/auth.py`, `traffic_hub/api/deps.py`.
+
+Membership query использует существующую сортировку personal desc/id asc с
+limit1, сохраняя membership restriction; несколько memberships не приводят
+к scalar_one_or_none500. Выбор чужого tenant не разрешён.
+
+Проверки source:12 auth тестов с настоящим isolated Redis refresh CAS и29
+связанных role/embedded/tenant tests PASS. Deploy этой записи **не подтверждён**:
+основной release выполняется отдельно. Доказательства и границы:
+`C:/Users/admin/Desktop/Project/outputs/medium-server-fixes-20261012/auth/REPORT.md`,
+`integration.txt`, `related-tests.txt`, `commit.txt`.
