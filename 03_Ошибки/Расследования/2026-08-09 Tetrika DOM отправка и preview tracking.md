@@ -55,4 +55,3 @@ Runtime подтвердил: текущий цикл использует RU, �
 
 
 Публикация 10.10: app запущен на 46b68424d626c3dc9845994ee8e5fc4a6feaf191, healthy, публичный /api/health HTTP 200. Patch image собран поверх проверенного 5a8401ab7 без смены зависимостей (Dockerfile.patch сохранён на сервере /home/codex/tetrika-cycle-20261010/). Live browser admin подтвердил отсутствие зависшего прогресс-бара и console errors; история ошибок сохранена. Worker всё ещё предыдущий image из-за активного alex job; подготовлен автоматический recreate только worker после zero active owners: /home/codex/tetrika-cycle-20261010/update-worker-idle.sh, PID 3192869. Это отложенная публикация wait_result, не утверждать её завершённой до проверки image. Rollback app: прежний 5a8401ab7 image и env.before в указанной папке; production данные не удалялись, uncertainty не переигрывалась.
-
